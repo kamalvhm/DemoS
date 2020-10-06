@@ -5,7 +5,7 @@ public class MyLinkList<T> {
 	private int size;
 	
 
-	MyLinkList(){
+	public MyLinkList(){
 		st_node=new Node<T>();
 		size=0;
 	}

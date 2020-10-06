@@ -1,10 +1,8 @@
-package com.datastructure;
+package com.intquetions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 
-import scala.collection.mutable.ArrayLike;
+import com.datastructure.MyLinkList;
 
 public class Test {
 
