@@ -149,5 +149,26 @@ public class MyLinkList<T> {
 
 	    }
 	
+	 
+	 
+	 public ListNode reverseList(ListNode head) {
+			if(head==null)return head;
+			return reverse(head,null);
+
+		}
+		public ListNode reverse(ListNode iter,ListNode prev){
+		   ListNode curr = iter.next;
+			iter.next = prev;
+			if(curr!= null) return reverse(curr,iter);
+			return iter;
+		}
 
 }
+
+ class ListNode {
+	      int val;
+	      ListNode next;
+	      ListNode() {}
+	      ListNode(int val) { this.val = val; }
+	      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+	  }
