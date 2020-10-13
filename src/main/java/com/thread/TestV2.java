@@ -3,7 +3,7 @@ package com.thread;
 import java.util.Scanner;
 
 class Processor extends Thread {
-	
+	//volatile keyword make sure another thread gets correct value of running not the cached one 
 	private volatile boolean running =true;
 	
 	public void run() {
