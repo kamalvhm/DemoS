@@ -155,7 +155,7 @@ public int numOfIcelands(int[][] grids)	{
     
     
     
-    
+    //BFS Solution
     public int numIslands2(char[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
          int counter = 0;
@@ -225,6 +225,8 @@ public int numOfIcelands(int[][] grids)	{
              } 
         }
     }
+    
+    ///DFS solution of 559. Maximum Depth of N-ary Tree
     
      
 }

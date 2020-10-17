@@ -1,8 +1,9 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 class TreeNode {
     int val;
@@ -29,7 +30,11 @@ class TreeNode {
 public class Ex {
 
 	public static void main(String[] args) throws Exception{
-		// TODO Auto-generated method stub
+	
+		
+		int x=1,y=4;
+		System.out.println("XOR "+(x^y));
+		
 //		Path lib = Files.createTempDirectory("hello world");
 //		Path filePath = Paths.get(lib.toString(),  "ct.sym");
 //		URI t = filePath.toUri();
@@ -80,7 +85,7 @@ public class Ex {
 			}
 			int arr1[]= {1,2,1,3,5,6,4};
 			
-			System.out.println(findPeakElement(arr1));
+			//System.out.println(findPeakElement(arr1));
 			/*Arrays.sort(s2);
 			
 			for(String s:s2) {
@@ -92,11 +97,26 @@ public class Ex {
 			//int arr[]= {2,2,1};
 		
 			
-			
 			//System.out.println(singleNumber(arr));
-
 			
+			judgeCircle("RRDD");
 	}
+	
+	public static boolean judgeCircle(String moves) {
+        int R=0,L=0,U=0,D=0;
+        for(char c:moves.toCharArray()){
+            if(c=='R')
+               R++;
+             if(c=='L')
+               L++;
+             if(c=='U')
+               U++;
+             if(c=='D')
+               D++;
+            
+        }
+        return (Math.abs((R-L))+Math.abs((U-D)))==0;
+    }
 	
     public static int singleNumber(int[] nums) {
         Arrays.sort(nums);
