@@ -8,7 +8,9 @@ import java.util.Objects;
 
 public class SlidingWindow {
 	/**
-	 * BOTH SLIDING WINDOWS HAVE THREE OPRATIONS -1.Raise THe window to the size 2.CHECK if meets target 3.THen finally reduce or increament
+	 * BOTH SLIDING WINDOWS HAVE THREE OPRATIONS -1.Raise THe window to the size 
+	 * 2.CHECK if meets target 
+	 * 3.THen finally reduce or increament
 	 * @param args
 	 */
 	//https://tinyfool.org/2019/04/the-sliding-window-algorithm/
@@ -30,7 +32,7 @@ public class SlidingWindow {
 		List<int[]> list=new ArrayList<>();
 		for(int i=0;i<=n.length-winS;i++) {
 			right=i+winS-1;
-			
+			//runs for fist sum then we just need to add one pos;
 			if(sum==0) {
 				int count=i;
 				while(count<=right) {
@@ -104,7 +106,7 @@ public class SlidingWindow {
 	        }
 	        return (ans==n+1)?0:ans;
 	    }
-	 
+	 //The question of sliding window
 	 //Minimum Window Substring get substring from s which contains all char from t min length ###WINDOW SIZE NOT KNOWN###
 	 public String minWindow(String s, String t) {
 		    Map<Character, Integer> countMap = new HashMap<>();
@@ -177,7 +179,7 @@ public class SlidingWindow {
 	                    res = s.substring(left, right + 1);
 	                    len = right - left + 1; 
 	                }
-
+	                
 	                char jChar = s.charAt(left);
 	                if (map.containsKey(jChar)) {
 	                    int numJChar = map.get(jChar) + 1;

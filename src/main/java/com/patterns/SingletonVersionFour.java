@@ -1,4 +1,4 @@
-package com.trash.t2;
+package com.patterns;
 public class SingletonVersionFour {
 
 	private static SingletonVersionFour singletonInstance;

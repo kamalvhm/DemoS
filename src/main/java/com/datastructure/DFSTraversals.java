@@ -31,7 +31,9 @@ public class DFSTraversals {
 		System.out.println("IN");
 		inorder(tree);
 		System.out.println("");
-		inorderWithout(tree);
+		//inorderWithout(tree);
+		System.out.println("THIS:---->"+inorder2(tree));
+
 		
 		System.out.println("PRE");
 		preorder(tree);
@@ -52,6 +54,21 @@ public class DFSTraversals {
 		System.out.print(root.val + ", ");
 		inorder(root.right);
 
+	}
+	
+	public static String inorder2(Nodee root) {
+		if (root == null)
+			return "";
+			String leftS; String rightS;
+		
+		   if (root.left != null)
+		   leftS=inorder2(root.left);
+		   else leftS="";
+		   
+		   if (root.right != null)
+		   rightS=inorder2(root.right);
+		   else rightS="";
+		return leftS+root.val+rightS;
 	}
 
 	public static void preorder(Nodee root) {
@@ -77,12 +94,12 @@ public class DFSTraversals {
 		st.push(current);
 
 		while (!st.isEmpty()) {
-
+			//go to left most and insert all
 			while (current.left != null) {
 				current = current.left;
 				st.push(current);
 			}
-
+			//now current is back to first as we need to insert right of this
 			current = st.pop();
 			System.out.print(current.val + ", ");
 
@@ -96,8 +113,11 @@ public class DFSTraversals {
 	}
 
 	/*
-	 * // Push root in our stack // While stack is not empty // Pop current node //
-	 * Visit current node // Push right child, then left child to stack
+	 * // Push root in our stack 
+	 * // While stack is not empty 
+	 * // Pop current node 
+	 * //Visit current node 
+	 * // Push right child, then left child to stack
 	 */
 	public static void preorderWithout(Nodee root) {
 		Stack<Nodee> st = new Stack<>();
@@ -129,13 +149,13 @@ public class DFSTraversals {
 		nodes.push(root);
 		while (!nodes.isEmpty()) {
 			Nodee current = nodes.peek();
+			//print if its a leaf node
 			if (current.left == null && current.right == null) {
-				Nodee node = nodes.pop();
-				System.out.printf(node.val+", ");
+				System.out.printf(nodes.pop().val+", ");
 			} else {
 				if (current.right != null) {
 					nodes.push(current.right);
-					//we are deleting links from current just 
+					//we are deleting links from current just to avoid this use below algo
 					current.right = null;
 				}
 				if (current.left != null) {
@@ -145,5 +165,38 @@ public class DFSTraversals {
 			}
 		}
 	}
+	//https://www.baeldung.com/java-depth-first-search
+	//Expaination:-  https://www.youtube.com/watch?v=kcTcfOWFizA
+	public void traversePostOrderWithoutRecursion(Nodee root) {
+	    Stack<Nodee> stack = new Stack<Nodee>();
+	    //This is to keep last printed/poped node
+	    Nodee prev = root;
+	    Nodee current = root;
+	    stack.push(root);
+	 
+	    while (!stack.isEmpty()) {
+	        current = stack.peek();
+	        //checking if having any child if not then can be printed
+	        boolean hasChild = (current.left != null || current.right != null);
+	        //This boolean is to check if last poped node is either null (previous is left and right is null) or right of current node because we can print root node after right node is printed or its null
+	        boolean isPrevLastChild = (prev == current.right || 
+	          (prev == current.left && current.right == null));
+	 
+	        if (!hasChild || isPrevLastChild) {
+	            current = stack.pop();
+				System.out.printf(current.val+", ");
+	            prev = current;
+	        } else {
+	            if (current.right != null) {
+	                stack.push(current.right);
+	            }
+	            if (current.left != null) {
+	                stack.push(current.left);
+	            }
+	        }
+	    }   
+	}
+	
+
 
 }

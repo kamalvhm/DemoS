@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
@@ -35,6 +36,12 @@ public class Example {
 			System.out.println(list_of_date);
 
 		}*/
+		ZonedDateTime start = ZonedDateTime.parse("2016-01-01T08:20:10+05:30[Asia/Kolkata]");
+
+		ZonedDateTime end = ZonedDateTime.parse("2016-01-02T08:20:10+05:30[Asia/Kolkata]");
+		
+		IntStream.iterate(0, i -> i + 1).limit(ChronoUnit.DAYS.between(start, end))
+		.mapToObj(i -> start.plusDays(i)).forEach(r->System.out.print(r+" "));
 		
 		List<Integer> inputData=new ArrayList<>();
 		inputData.add(35);
