@@ -1,4 +1,4 @@
-package com.intquetions;
+package com.datastructure;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ class TreeNode {
         this.right = right;
     }
 }
+//https://www.includehelp.com/algorithms/variants-of-binary-search.aspx
 public class BinarySearch {
 	public static void main(String args[]) {
 		int [] a= {5,7,7,8,8,10};

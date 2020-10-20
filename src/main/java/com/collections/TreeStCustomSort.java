@@ -7,14 +7,16 @@ public class TreeStCustomSort {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TreeSet<Integer> t1=new TreeSet<>(new MyComparator());
+		//TreeSet<Integer> t1=new TreeSet<>(new MyComparator());
+		TreeSet<Integer> t1=new TreeSet<>();
 		t1.add(10);
 		t1.add(0);
 		t1.add(15);
 		t1.add(20);
 		t1.add(20);
 		
-		//System.out.println(t1);
+		System.out.println(t1);
+
 		
 		
 		TreeSet<String> t2=new TreeSet<String>(new MyComp());

@@ -67,7 +67,9 @@ public class Ex {
     
     System.out.println("ZonedDateTime** : " + lt.minusHours(1)); */
 
-			String s1="ABRACADABRA";  
+			String s1="ABRACADABRA";
+	        String str=s1.replace(" ","");
+
 		   /*String s2="Sachin";  
 		   String s3=new String("Sachin");  
 		   String s4="Saurav";  
@@ -99,7 +101,8 @@ public class Ex {
 			
 			//System.out.println(singleNumber(arr));
 			
-			judgeCircle("RRDD");
+			//judgeCircle("RRDD");
+			
 	}
 	
 	public static boolean judgeCircle(String moves) {
@@ -173,6 +176,9 @@ public class Ex {
 	        }
 	        return left;
 	    }
+	  
+	  
+	 
 
 
 }
