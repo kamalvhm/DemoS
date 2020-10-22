@@ -3,7 +3,7 @@ public class InsertionSort implements InplaceSort {
 
   @Override
   public void sort(int[] values) {
-    InsertionSort.insertionSort(values);
+    InsertionSort.insertionSort2(values);
   }
 
   // Sort the given array using insertion sort. The idea behind
@@ -21,6 +21,22 @@ public class InsertionSort implements InplaceSort {
       }
     }
   }
+  //https://www.youtube.com/watch?v=i-SKeOcBwko&t=526s
+  private static void insertionSort2(int[] ar) {
+	    if (ar == null) {
+	      return;
+	    }
+
+	    for (int i = 1; i < ar.length; i++) {
+	     int value=ar[i];
+	     int hole=i;
+	     while(hole>0 && ar[hole-1]>value) {
+	    	 ar[hole]=ar[hole-1];
+	    	 hole--;
+	     }
+	     ar[hole]=value;
+	    }
+	  }
 
   private static void swap(int[] ar, int i, int j) {
     int tmp = ar[i];

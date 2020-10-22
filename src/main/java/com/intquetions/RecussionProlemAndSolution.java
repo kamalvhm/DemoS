@@ -74,9 +74,22 @@ public class RecussionProlemAndSolution {
          else return hasPathSum(root.left,sum-root.val) || hasPathSum(root.right,sum-root.val);
      }
      
-   
+   //98. Validate Binary Search Tree CALL:-validate(root,null,null);
+     public static boolean validate(TreeNode root ,Integer max,Integer min){
+         if(root==null) return true;
+         if(max!=null && root.val>=max || min!=null && root.val<=min) return false;
+         else return validate(root.left,root.val,min) && validate(root.right,max,root.val);
+     }
      
-     
-     
+     //404. Sum of Left Leaves
+     public static int leftSum(TreeNode root,int sum,boolean isleft){
+         if(root==null) return 0;
+         if(root.left==null && root.right==null && isleft) return root.val;
+         if(root.left!=null)
+             sum+=leftSum(root.left,0,true);
+         if(root!=null)
+             sum+=leftSum(root.right,0,false);
+         return sum;
+     }     
      
 }

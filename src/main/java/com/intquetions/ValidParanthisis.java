@@ -3,7 +3,7 @@ package com.intquetions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Snippet {
+public class ValidParanthisis {
   static List<String> valid_par=new ArrayList<>();
 
    public static List<String> generateParenthesis(int n) {

@@ -1,12 +1,13 @@
 package com.datastructure;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Stack;
+import java.util.List;
 import java.util.Queue;
 
 
-
+//Hint in quetion:- top to bottom.
 public class BFSTraversals {
 
 	public static void main(String args[]) {
@@ -86,5 +87,28 @@ public class BFSTraversals {
         } 
     } 
       
-
+    //199. Binary Tree Right Side View
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> visibleValues=new ArrayList<>();
+        if(root==null) return visibleValues;
+        Queue<TreeNode> q=new LinkedList<>();
+        q.offer(root); 
+        
+        while(!q.isEmpty()){
+            int qSize=q.size();
+            for(int i=0;i<qSize;i++)
+            {
+                TreeNode current=q.poll();
+                if(i==qSize-1)
+                    visibleValues.add(current.val);
+                
+                if(current.left!=null)
+                    q.offer(current.left);
+                     
+                if(current.right!=null)
+                    q.offer(current.right);
+            }
+        }
+        return visibleValues;
+    }
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Stack;
 
 
-class Solution2 {
+class PhoneCombination {
     static Map<Character,String> m ;
     static List<String > ans ;
     // if digit is '23' in phone then provide all combination of letters ["ad","ae","af","bd","be","bf","cd","ce","cf"]

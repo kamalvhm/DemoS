@@ -2,7 +2,7 @@ package com.intquetions;
 
 import java.util.HashMap;
 
-class Solution {
+class TwoSum {
 	
 	public static void main(String args[]) {
 		twoSum(new int[] {2, 7,11,15},9);

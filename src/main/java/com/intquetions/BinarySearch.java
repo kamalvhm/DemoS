@@ -21,8 +21,9 @@ class TreeNode {
 public class BinarySearch {
 	public static void main(String args[]) {
 		int [] a= {5,7,7,8,8,10};
-		searchRange(a,8);
-		
+		int b[]=searchRange(a,8);
+		for(int i:b)
+			System.out.println(i);
         
 				
 	}
@@ -229,7 +230,7 @@ public class BinarySearch {
 	          return left;
 	      }
 	    //          *first  *secound-1 will be 8's last
-	    //1 2 3 4 5 8 8 8 8 9 5 6
+	    //1 2 3 4 5 8 8 8 8 9 15 16
 	    //34. Find First and Last Position of Element in Sorted Array
 	    public static int[] searchRange(int[] nums, int target) {
 	        int[] bad = new int [] {-1,-1};

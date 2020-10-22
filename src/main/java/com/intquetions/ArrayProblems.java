@@ -1,6 +1,7 @@
 package com.intquetions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -10,6 +11,11 @@ public class ArrayProblems {
 		// TODO Auto-generated method stub
         
        int [] a= {4,3,2,7,8,2,3,1};
+       
+    	int n = a.length;
+    	   
+    	int[] left =Arrays.copyOfRange(a, 0, n / 2);
+    	int j=Arrays.binarySearch(a, 4);
        System.out.println(findDisappearedNumbers(a));
 	}
 	
@@ -51,5 +57,15 @@ public class ArrayProblems {
 	        return maxArea;
 	        
 	    }
-
+		
+		//26. Remove Duplicates from Sorted Array #*
+		 public int removeDuplicates(int[] nums) {
+		       int index=1;
+		        for(int i=0;i<nums.length-1;i++){
+		            if(nums[i]!=nums[i+1]){
+		                nums[index++]=nums[i+1];
+		            }
+		        }
+		        return index;
+		    }
 }
