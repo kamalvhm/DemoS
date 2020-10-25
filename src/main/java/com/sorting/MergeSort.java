@@ -2,7 +2,7 @@ package com.sorting;
 
 import java.util.Arrays;
 
-// Mergesort implements InplaceSort for ease of testings, but in reality
+// Mergesort implements InplaceSort for ease of testings, but in reality  !!!!!!!!!!!NOT A INPLACE ALGO!!!!!!!!!!!!
 // it is not really a good fit for an inplace sorting algorithm.
 public class MergeSort implements InplaceSort {
 

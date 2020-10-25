@@ -2,12 +2,13 @@ package com.intquetions;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//22. Generate Parentheses    Medium   
 public class ValidParanthisis {
   static List<String> valid_par=new ArrayList<>();
 
    public static List<String> generateParenthesis(int n) {
-          add_par("", n, 0);
+          //add_par("", n, 0);
+	   	  add_par2("", n, n);
           return valid_par;
       }
       
@@ -27,9 +28,26 @@ public class ValidParanthisis {
       return;
   }
       
+      //https://www.youtube.com/watch?v=eyCj_u3PoJE
+      public static void add_par2(String string_par, int open, int close){
+          
+          if(open == 0 && close == 0){
+             valid_par.add(string_par);
+              return;
+          }
+          
+          if(open > 0)
+        	  add_par2(string_par+"(", open-1, close);
+          
+          if(close>open)
+        	  add_par2(string_par + ")", open, close - 1);
+          
+          return;
+      }
+       
       
       public static void main(String args[]) {
-        generateParenthesis(2);
+        System.out.print(generateParenthesis(3));
       }
       
 }

@@ -103,7 +103,7 @@ public int numOfIcelands(int[][] grids)	{
                 {'1', '1', '0', '0', '0'},
                 {'0', '0', '1', '0', '0'},
                 {'0', '0', '0', '1', '1'}};
-       // System.out.println("No of Islands: " + noOfIslands.numIslands(islandGrid));
+        System.out.println("No of Islands: " + noOfIslands.numIslands(islandGrid));
         
         
        int[][] islandGrid2 = new int[][] {

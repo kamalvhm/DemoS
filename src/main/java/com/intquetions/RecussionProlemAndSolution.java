@@ -1,17 +1,21 @@
 package com.intquetions;
 
-class Nodee {
-	int val;
-	Nodee left, right;
+import java.util.ArrayList;
+import java.util.List;
 
-	Nodee(int item) {
+class TreeNode {
+	int val;
+	TreeNode left, right;
+
+	TreeNode(int item) {
 		val = item;
 		left = right = null;
 	}
 }
+//STUDY:-https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
 public class RecussionProlemAndSolution {
 	//	100	Same Tree
-	 public boolean isSameTree(Nodee p, Nodee q) {
+	 public boolean isSameTree(TreeNode p, TreeNode q) {
 	        if(p == null && q == null) {
 	            return true;
 	        }
@@ -90,6 +94,32 @@ public class RecussionProlemAndSolution {
          if(root!=null)
              sum+=leftSum(root.right,0,false);
          return sum;
-     }     
+     } 
+     
+     
+     //894. All Possible Full Binary Trees       (check DS NOTES)                    ##Medium##   #*
+     public List<TreeNode> allPossibleFBT(int N) {
+ 		List<TreeNode> ans=new ArrayList<>();
+ 		if(N%2==0){
+ 			return ans;            
+ 		}if(N==1){
+ 			TreeNode root=new TreeNode(0);
+ 			ans.add(root);
+ 		}
+ 		//for odd loop
+ 		for(int i=1;i<N;i+=2){
+ 			//in left we are assigning 1,3,5
+ 			for(TreeNode left : allPossibleFBT(i)){
+ 				//we are assigning same in reverse order for right
+ 				for(TreeNode right : allPossibleFBT(N-i-1)){
+ 					TreeNode root=new TreeNode(0);
+ 					root.left=left;
+ 					root.right=right;
+ 					ans.add(root);                    
+ 				}
+ 			}
+ 		}
+ 		return ans;        
+ 	}
      
 }
