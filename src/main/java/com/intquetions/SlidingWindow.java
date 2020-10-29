@@ -41,7 +41,7 @@ public class SlidingWindow {
 			}else {
 				sum+=n[right];
 			}
-			
+			//if sum equals target add it to list
 			if(sum==target) {
 				int c=0;
 				int[] a=new int[winS];
@@ -152,8 +152,8 @@ public class SlidingWindow {
 				}
 				return minWindow != Integer.MAX_VALUE ? s.substring(minleft, minleft+minWindow) : "";  
 		    }
-	 
-	 
+	 //76. Minimum Window Substring
+	// https://leetcode.com/problems/minimum-window-substring/
 	 //Minimum Window Substring get substring from s which contains all char from t min length ###WINDOW SIZE NOT KNOWN###
 	 public String minWindow2(String s, String t) {
 	        HashMap<Character, Integer> map = new HashMap<>();
@@ -173,13 +173,13 @@ public class SlidingWindow {
 	                if (numChar >= 0)
 	                    totalFnd--;
 	            }
-	            
+	            //reduce left while total ==0 its matching
 	            while (totalFnd == 0) {
 	                if (right- left + 1 < len) {
 	                    res = s.substring(left, right + 1);
 	                    len = right - left + 1; 
 	                }
-	                
+	                //reduing widow from left
 	                char jChar = s.charAt(left);
 	                if (map.containsKey(jChar)) {
 	                    int numJChar = map.get(jChar) + 1;

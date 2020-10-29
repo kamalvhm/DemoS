@@ -4,11 +4,11 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Stack;
 
+//Related-463. Island Perimeter	
 
 
 class Islands  {
 
-	
 public int numOfIcelands(int[][] grids)	{
 	int h=grids.length;
 	if(h==0)return 0;
@@ -228,5 +228,22 @@ public int numOfIcelands(int[][] grids)	{
     
     ///DFS solution of 559. Maximum Depth of N-ary Tree
     
+    //695. Max Area of Island
+    public static int DFS(int[][] grid, int row,int col)
+    {
+        int h=grid.length;
+        int l=grid[0].length;
+        
+        if(row<0 || col<0 || row>=h || col>=l || grid[row][col]!=1) return 0;
+        int count=1;
+        grid[row][col]=0;
+         count+=DFS(grid,row-1,col);
+         count+=DFS(grid,row+1,col);
+         count+=DFS(grid,row,col-1);
+         count+=DFS(grid,row,col+1);
+        
+        return count;
+        
+    }
      
 }

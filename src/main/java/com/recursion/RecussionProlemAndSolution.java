@@ -1,4 +1,4 @@
-package com.intquetions;
+package com.recursion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ class TreeNode {
 	}
 }
 //STUDY:-https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
+//https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
 public class RecussionProlemAndSolution {
 	//	100	Same Tree
 	 public boolean isSameTree(TreeNode p, TreeNode q) {

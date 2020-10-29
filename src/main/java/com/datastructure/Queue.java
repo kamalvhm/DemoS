@@ -3,7 +3,8 @@ package com.datastructure;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-
+import java.util.HashMap;
+//215. Kth Largest Element in an Array  check in arrayProblems
 public class Queue<T> implements Iterable{
 	
 	private LinkedList<T> list =new LinkedList<>();
@@ -47,7 +48,7 @@ public class Queue<T> implements Iterable{
 	        pQueue.add(10); 
 	        pQueue.add(20); 
 	        pQueue.add(15); 
-	  
+	       
 	        // Printing the top element of PriorityQueue 
 	       // System.out.println(pQueue.peek()); 
 	  
@@ -65,5 +66,44 @@ public class Queue<T> implements Iterable{
 		
 		
 	}
+	//451. Sort Characters By Frequency
+	 public String frequencySort(String s) {
+	        HashMap<Character,Integer> map=new HashMap<>();
+	        for(char c:s.toCharArray())
+	            map.put(c,map.getOrDefault(c,0)+1) ;
+	        
+	        PriorityQueue<Character> maxHeap=new PriorityQueue<>((a,b)->map.get(b)-map.get(a));
+	        maxHeap.addAll(map.keySet());
+	        
+	        StringBuilder result=new StringBuilder();
+	        
+	        while(!maxHeap.isEmpty()){
+	            char c=maxHeap.poll();
+	            for(int i=0;i<map.get(c);i++){
+	                result.append(c);
+	            }
+	            
+	        }
+	        
+	        return result.toString();
+	    }
+	 //Before this check in arrayProblems /215. Kth Largest Element in an Array 
+	 //973. K Closest Points to Origin
+	 public int[][] kClosest(int[][] points, int K) {
+	        //configuring maxHeap with euclidean distance  sqrt of(x)
+	        PriorityQueue<int[]> maxHeap=new PriorityQueue<>((a,b)->(b[0]*b[0]+b[1]*b[1])-(a[0]*a[0]+a[1]*a[1]));
+	                                                         
+	        for(int[] a:points){
+	            maxHeap.offer(a);
+	            if(maxHeap.size()>K)
+	                maxHeap.poll();
+	        }
+	                                                         
+	        int[][] result=new int[K][2];
+	        while(K-- > 0){
+	            result[K]=maxHeap.poll();
+	        }                                                 
+	        return result;
+	    }
 
 }

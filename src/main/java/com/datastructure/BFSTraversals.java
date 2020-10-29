@@ -87,7 +87,7 @@ public class BFSTraversals {
         } 
     } 
       
-    //199. Binary Tree Right Side View
+    //199. Binary Tree Right Side View   #*
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> visibleValues=new ArrayList<>();
         if(root==null) return visibleValues;
@@ -110,5 +110,32 @@ public class BFSTraversals {
             }
         }
         return visibleValues;
+    }
+    
+    //102. Binary Tree Level Order Traversal  !!!MEDIUM!!!  #*
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result=new ArrayList<>();
+        if(root==null) return result;
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int qSize=queue.size();
+            List<Integer> currentLevel=new ArrayList<>();
+            
+          for(int i=0;i<qSize;i++){
+                  TreeNode  current =queue.poll();
+                  currentLevel.add(current.val);
+                
+            if(current.left!=null){
+                queue.offer(current.left);
+                }
+            if(current.right!=null){
+                queue.offer(current.right);
+                }
+            }
+            
+            result.add(currentLevel);
+        }
+        return result;
     }
 }

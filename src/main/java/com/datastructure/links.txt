@@ -1,1 +1,8 @@
 DIVIDE AND CONQUER :- THink like a Progamer https://www.youtube.com/watch?v=11V7Ik0IBHU
+IMP for RECURSSION AND GENERAL:-https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
+FOR DS AND ALGO:-https://www.youtube.com/watch?v=09_LlHjoEiY&t=25s
+FOR PROBLEMS:-https://www.youtube.com/watch?v=XZnWETlZZ14&list=PLi9RQVmJD2fYXgBAUfaN5MXgYPUTbzqeb&index=55
+
+
+
+LOCKED_PROBLEMS:-252 Meeting room ,253 Meeting room 2 (56) ,
