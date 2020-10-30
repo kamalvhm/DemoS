@@ -162,6 +162,23 @@ public class MyLinkList<T> {
 			if(curr!= null) return reverse(curr,iter);
 			return iter;
 		}
+		
+		//83. Remove Duplicates from Sorted List
+		 public ListNode deleteDuplicates(ListNode head) {
+	         if (head == null) {
+	            return null;
+	        }
+	        
+	        ListNode finger = head;
+	        while (finger.next != null){
+	            if (finger.val == finger.next.val){
+	                finger.next = finger.next.next;
+	            } else{
+	                finger = finger.next;
+	            }
+	        }
+	        return head;
+	    }
 
 }
 

@@ -1,7 +1,9 @@
 package com.intquetions;
 
 import java.util.ArrayDeque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Stack;
 
 //https://www.baeldung.com/java-depth-first-search
 
@@ -60,6 +62,42 @@ public class TraversalBFSDFS {
 	        return max+1;
 	    }
 	  
-	 
+	  //403. Frog Jump  HARD  *#
+	  public boolean canCross(int[] stones) {
+	        //checking if any tow stones are really two far then return false
+	        for(int i=3;i<stones.length;i++){
+	            if(stones[i]>stones[i-1]*2)
+	                return false;
+	        }
+	        HashSet<Integer> stonePositions=new HashSet<>();
+	        for(int i:stones)
+	            stonePositions.add(i);
+	        int laststone=stones[stones.length-1];
+	        Stack<Integer> positions=new Stack<>();
+	        Stack<Integer> jumps=new Stack<>();
+	        positions.add(0);
+	        jumps.add(0);
+	        while(!positions.isEmpty()){
+	            int curPos=positions.pop();
+	            int jumpdistance=jumps.pop();
+	            
+	            for(int i=jumpdistance-1;i<=jumpdistance+1;i++){
+	                if(i<=0)
+	                    continue;
+	                
+	                int nextPosition=curPos+i;
+	                if(nextPosition==laststone){
+	                     return true;
+	                }else if(stonePositions.contains(nextPosition)){
+	                    positions.add(nextPosition);
+	                    jumps.add(i);
+	                }
+	                   
+	                
+	                
+	            }
+	        }
+	        return false;
+	    }
 	    
 }

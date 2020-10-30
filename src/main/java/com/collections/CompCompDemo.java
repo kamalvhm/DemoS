@@ -1,10 +1,14 @@
 package com.collections;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class CompCompDemo {
 
 	public static void main(String[] args) {
+        Set<Employee> set=new HashSet<Employee>();
+        
 		// TODO Auto-generated method stub
 		TreeSet<Employee> t1=new TreeSet<Employee>();
 		 t1.add(new Employee("Ram", 1));

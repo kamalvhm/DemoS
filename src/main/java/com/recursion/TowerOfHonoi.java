@@ -3,7 +3,7 @@ package com.recursion;
 public class TowerOfHonoi {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//do not larger values then 10 exponential function
 		int numberOfDiskOnsource=3;
 		//source ,helper ,destination
 		String s="X";
