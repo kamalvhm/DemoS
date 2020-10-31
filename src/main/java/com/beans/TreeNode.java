@@ -3,12 +3,12 @@ package com.beans;
 import com.datastructure.TreePrinter.PrintableNode;
 
 public class TreeNode<T> implements PrintableNode{
-    T val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(T val) { this.val = val; }
-    TreeNode(T val, TreeNode left, TreeNode right) {
+    public T val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode() {}
+    public TreeNode(T val) { this.val = val; }
+    public TreeNode(T val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
         this.right = right;

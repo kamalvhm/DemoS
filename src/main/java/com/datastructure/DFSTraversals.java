@@ -31,7 +31,7 @@ public class DFSTraversals {
 		System.out.println("IN");
 		inorder(tree);
 		System.out.println("");
-		//inorderWithout(tree);
+		inorderWithout(tree);
 		System.out.println("THIS:---->"+inorder2(tree));
 
 		
