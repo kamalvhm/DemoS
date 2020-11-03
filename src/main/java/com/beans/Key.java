@@ -1,4 +1,4 @@
-package com.practice;
+package com.beans;
 
 import java.io.Serializable;
 

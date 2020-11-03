@@ -30,4 +30,26 @@ public class DP {
        }
       return dp[s.length()];
    }
+	 
+	 //62. Unique Paths  #RECURSION
+	    public int uniquePaths(int m, int n) {
+	        int[][] dp = new int[m][n]; //dp 2-D memoization array to store the no of unique paths for each block
+	        return uniquePaths(m-1, n-1, dp); //passing the (row, col) of the target block       
+	    }
+	    
+	    public int uniquePaths(int row, int col, int[][] dp){   //overloaded function to make recursive calls to
+	        if(row == 0 || col == 0){   //for blocks in the first row or the first column, no. of paths = 1
+	            dp[row][col] = 1;
+	            return dp[row][col];
+	        }
+	        if(dp[row][col] != 0){  //if already calculated, return the no. of paths here
+	            return dp[row][col];
+	        }
+	        /* Recurrent relation, noOfPaths(i,j) = noOfpaths(i-1, j) + noOfPaths(i, j-1)
+	        This is explained by the fact that a particular block can only be reached 
+	        from the block above it or from the block to its left.*/
+	        dp[row][col] = uniquePaths(row - 1, col, dp) + uniquePaths(row, col - 1, dp);  //recursive calls to the overloaded method
+	        return dp[row][col];
+	    }
+	 
 }

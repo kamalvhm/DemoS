@@ -1,8 +1,15 @@
-DIVIDE AND CONQUER :- THink like a Progamer https://www.youtube.com/watch?v=11V7Ik0IBHU
-IMP Aditya Verma for RECURSSION AND GENERAL:-https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
-FOR DS AND ALGO:-https://www.youtube.com/watch?v=09_LlHjoEiY&t=25s
-FOR PROBLEMS:-https://www.youtube.com/watch?v=XZnWETlZZ14&list=PLi9RQVmJD2fYXgBAUfaN5MXgYPUTbzqeb&index=55
+					DIVIDE AND CONQUER 
+THink like a Progamer https://www.youtube.com/watch?v=11V7Ik0IBHU
+					RECURSSION
+IMP Aditya Verma for AND GENERAL:-https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
+UniquePath:-https://www.youtube.com/watch?v=ngCos392W4w&t=818s
+Knowledge Center (UniquePath):-https://www.youtube.com/watch?v=cin-DjbKUok&t=2591s
+					DS AND ALGO
+Wiliam fiset :-https://www.youtube.com/watch?v=09_LlHjoEiY&t=25s
+					PROBLEMS
+Kevin :-https://www.youtube.com/watch?v=XZnWETlZZ14&list=PLi9RQVmJD2fYXgBAUfaN5MXgYPUTbzqeb&index=55
 
-
-
-LOCKED_PROBLEMS:-252 Meeting room ,253 Meeting room 2 (56) ,
+					DP
+					
+					LOCKED_PROBLEMS
+:-252 Meeting room ,253 Meeting room 2 (56) ,

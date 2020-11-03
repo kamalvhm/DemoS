@@ -1,31 +1,11 @@
 package com.practice;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    public void left(TreeNode treeNode) {
-		// TODO Auto-generated method stub
-    	left=treeNode;
-		
-	}
-	public void rigth(TreeNode treeNode) {
-		// TODO Auto-generated method stub
-		right=treeNode;
-	}
-	TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+import com.beans.TreeNode;
+
+
 
 public class Ex {
 

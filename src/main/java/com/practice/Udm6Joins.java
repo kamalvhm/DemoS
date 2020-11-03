@@ -11,8 +11,9 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.Optional;
 
+import com.beans.Key;
+
 import scala.Tuple2;
-import scala.Tuple3;
 import scala.Tuple4;
 
 //flatMap in map for one input we had one output 24 and sqrt(24) but in flat map we can have

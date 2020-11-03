@@ -11,10 +11,9 @@ class GfG {
     	System.out.println(id==id2);
 
   
-       /* // Consider the hashmap containing 
+      // Consider the hashmap containing 
         // student name and their marks 
-        HashMap<String, Integer> hm =  
-                     new HashMap<String, Integer>(); 
+        HashMap<String, Integer> hm =   new HashMap<String, Integer>(); 
   
         // Adding mappings to HashMap 
         hm.put("GeeksforGeeks", 54); 
@@ -36,6 +35,15 @@ class GfG {
             int value = ((int)mapElement.getValue() + 10); 
   
             System.out.println(key + " : " + value); 
-        } */
+        } 
+        //another way
+        for (String key : hm.keySet()) { 
+  
+            // Add some bonus marks 
+            // to all the students and print it 
+            int value = ((int)hm.get(key) + 10); 
+  
+            System.out.println(key + " ::: " + value); 
+        }
     } 
 } 

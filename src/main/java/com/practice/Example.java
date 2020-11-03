@@ -18,7 +18,7 @@ public class Example {
 		// TODO Auto-generated method stub
 		/*ZonedDateTime zone1 = ZonedDateTime.parse("2016-01-05T08:20:10+05:30[Asia/Kolkata]");
 
-		ZonedDateTime zone2 = ZonedDateTime.parse("2016-10-05T08:20:10+05:30[Asia/Kolkata]");
+		ZonedDateTime zone2 = ZonedDateTime.parse("2015-05-02T08:20:10+05:30[Asia/Kolkata]");
 
 		List<ZonedDateTime> list_of_date = new ArrayList<ZonedDateTime>();
 

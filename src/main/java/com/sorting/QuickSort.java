@@ -15,13 +15,13 @@ public class QuickSort implements InplaceSort {
   //https://www.youtube.com/watch?v=COk73cpQbFQ&list=PL2_aWCzGMAwKedT2KfDMB9YA5DgASZb3U&index=7
   private static void quicksort(int[] ar, int start, int end) {
 	    if (start < end) {
-	      int splitPoint = pertition2(ar, start, end);
+	      int splitPoint = pertition(ar, start, end);
 	      quicksort(ar, start, splitPoint-1);
 	      quicksort(ar, splitPoint + 1, end);
 	    }
 	  }
   
-  public static int pertition2(int[] ar, int start, int end) {
+  public static int pertition(int[] ar, int start, int end) {
 	  int pivot =ar[end];
 	  //partitionIndex
 	  int pIndex=start;

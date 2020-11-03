@@ -1,4 +1,4 @@
-package com.datastructure;
+package com.beans;
 
 public class Node<T> {
 	private T t;

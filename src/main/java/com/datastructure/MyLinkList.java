@@ -1,5 +1,7 @@
 package com.datastructure;
 
+import com.beans.Node;
+
 public class MyLinkList<T> {
 	private Node<T> st_node;
 	private int size;
