@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class SlidingWindow {
-	/**
+	/**https://www.youtube.com/watch?v=MW4lJ8Y0xXk  Aditya verma
 	 * BOTH SLIDING WINDOWS HAVE THREE OPRATIONS -1.Raise THe window to the size 
 	 * 2.CHECK if meets target 
 	 * 3.THen finally reduce or increament

@@ -1,8 +1,11 @@
 package com.recursion;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Stack;
 
-import com.datastructure.TreePrinter;
 import com.datastructure.TreePrinter.PrintableNode;
 
 class Node implements PrintableNode{
@@ -147,4 +150,61 @@ public class RecurssionStudy {
 	               return kthGrammar(N-1,K-mid)==1?0:1;
 	        }
 	    }
+	  
+	  
+	//113. Path Sum II   #*Medium  IMP   -APPLY IBH VARIATION
+  //	Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+		 public List<List<Integer>> pathSum(TreeNode root, int sum) {
+		        List<List<Integer>> paths=new ArrayList<>();
+		        findpath(root,sum,new ArrayList<Integer>(),paths);
+		        return paths;
+		        
+		    }
+		    
+		    public  void findpath(TreeNode root,int sum,ArrayList<Integer> current , List<List<Integer>> paths){
+		        if(root==null) return;
+		        
+		        current.add(root.val);
+		        if(root.val==sum && root.left==null && root.right==null){
+		            paths.add(current);
+		        }
+		        
+		        findpath(root.left,sum-root.val,new ArrayList<Integer>(current),paths);
+		        findpath(root.right,sum-root.val,new ArrayList<Integer>(current),paths);
+
+		        return;
+		    }
+		    
+		    
+		    //437. Path Sum III
+		    public int pathSum2(TreeNode root, int sum) {
+		        List<Integer> currentPath = new LinkedList<>();
+		          return countPathSum(root, sum, currentPath);
+		      }
+		      
+		      private int countPathSum(TreeNode currentNode, int sum, List<Integer> currentPath) {
+		          if (currentNode == null) {
+		              return 0;
+		          }
+		          
+		          currentPath.add(currentNode.val);
+		          
+		          int pathSum = 0;
+		          int pathCount = 0;
+		          
+		          ListIterator<Integer> pathIterator = currentPath.listIterator(currentPath.size());
+		          while (pathIterator.hasPrevious()) {
+		              pathSum += pathIterator.previous();
+		              
+		              if (pathSum == sum) {
+		                  pathCount++;
+		              }
+		                  
+		          } 
+		          
+		          pathCount += countPathSum(currentNode.left, sum, currentPath);
+		          pathCount += countPathSum(currentNode.right, sum, currentPath);
+		          currentPath.remove(currentPath.size() - 1);
+		          return pathCount;
+		      }
 }

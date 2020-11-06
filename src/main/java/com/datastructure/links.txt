@@ -9,7 +9,11 @@ Wiliam fiset :-https://www.youtube.com/watch?v=09_LlHjoEiY&t=25s
 					PROBLEMS
 Kevin :-https://www.youtube.com/watch?v=XZnWETlZZ14&list=PLi9RQVmJD2fYXgBAUfaN5MXgYPUTbzqeb&index=55
 
+					BINARY SEARCH
+https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7
+
 					DP
 					
 					LOCKED_PROBLEMS
 :-252 Meeting room ,253 Meeting room 2 (56) ,
+https://www.techiedelight.com/recursion-practice-problems-with-solutions/
