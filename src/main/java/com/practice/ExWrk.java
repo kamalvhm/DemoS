@@ -1,5 +1,6 @@
 package com.practice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ public class ExWrk {
 		// Displaying the distinct elements in the list
 		// using Stream.distinct() method
 		// list.stream().distinct().forEach(System.out::println);
+		System.out.println(getPhone("23"));
 
 		HashMap<Integer, String> hash_map = new HashMap<Integer, String>();
 
@@ -46,6 +48,38 @@ public class ExWrk {
 		System.out.println(measTypeIdStr);
 
 
+	}
+	
+	
+	public static List<String>  getPhone(String a) {
+		HashMap<Character,String> m=new HashMap<>();
+		 	m.put('2',"abc");
+	        m.put('3',"def");
+	        m.put('4',"ghi");
+	        m.put('5',"jkl");
+	        m.put('6',"mno");
+	        m.put('7',"pqrs");
+	        m.put('8',"tuv");
+	        m.put('9',"wxyz");
+
+		List<String> out=new ArrayList<>();
+		while(a.length()>0) {
+			
+			
+			char[] firstdigit=m.get(a.charAt(0)).toCharArray();
+			a=a.substring(1);
+			if(a.length()<=0) break;
+			char[] secoundDigit=m.get(a.charAt(0)).toCharArray();
+			a=a.substring(1);
+			
+			for(int i=0;i<firstdigit.length;i++) {
+				char firstChar=firstdigit[i];
+				for(char c:secoundDigit)
+					out.add(firstChar+""+c);
+			}
+			
+		}
+		return out;
 	}
 
 	public String getUniqueAggrMeasTypeUdcIds2(HashMap<Integer, String> hash_map) {

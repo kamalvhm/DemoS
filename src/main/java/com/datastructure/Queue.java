@@ -1,9 +1,11 @@
 package com.datastructure;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.HashMap;
+import java.util.concurrent.BlockingQueue;
 //215. Kth Largest Element in an Array  check in arrayProblems
 public class Queue<T> implements Iterable{
 	
@@ -39,10 +41,19 @@ public class Queue<T> implements Iterable{
 		return list.iterator();
 	}
 	
-	
+	//STUDY:-https://www.geeksforgeeks.org/queue-interface-java/
 	public static void main(String args[]) {
+		//Method 1:
+		PriorityQueue<Integer> maxPQ = new PriorityQueue<>(Collections.reverseOrder()); 
+		//Method 2:
+		PriorityQueue<Integer> maxPQ1 = new PriorityQueue<>((a,b) -> b - a); 
+		//Method 3:
+		PriorityQueue<Integer> maxPQ2 = new PriorityQueue<>((a,b) -> b.compareTo(a)); 
+		
+		
 		//Max heap by deafult it min heap
 		 PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>((a,b)->b-a); 
+		 
 		  
 	        // Adding items to the pQueue using add() 
 	        pQueue.add(10); 
@@ -50,15 +61,16 @@ public class Queue<T> implements Iterable{
 	        pQueue.add(15); 
 	       
 	        // Printing the top element of PriorityQueue 
-	       // System.out.println(pQueue.peek()); 
+	        System.out.println(pQueue.peek()); 
 	  
 	        // Printing the top element and removing it 
 	        // from the PriorityQueue container 
-	        //System.out.println(pQueue.poll()); 
+	        System.out.println(pQueue.poll()); 
 	  
 	        // Printing the top element again 
-	        //System.out.println(pQueue.peek()); 
+	        System.out.println(pQueue.peek()); 
 	        int size=pQueue.size();
+	        
         for(int i=0;i<size;i++) {
             System.out.println("Elements in Queue:"+pQueue.poll());
 
@@ -105,5 +117,25 @@ public class Queue<T> implements Iterable{
 	        }                                                 
 	        return result;
 	    }
-
+	 //1046. Last Stone Weight
+	  public int lastStoneWeight(int[] stones) {
+	        if(stones==null) return 0;
+	        if(stones.length==1) return stones[0]; 
+	       PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+	        for(int i:stones)
+	            pq.offer(i);
+	        
+	        while(!pq.isEmpty()){
+	            int val1=pq.poll();
+	            int val2=pq.poll();
+	            
+	            pq.offer(val1-val2);
+	            
+	            if(pq.size()==1)
+	                return pq.poll();
+	        }
+	        
+	        return 0;
+	       
+	    }
 }
