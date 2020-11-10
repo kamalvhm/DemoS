@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.curator.CuratorConnectionLossException;
+
 import com.beans.ListNode;
 
 
@@ -20,10 +22,35 @@ public class Dummy2 {
 		/*int[] a= {3,4,5,6};
 		triplet(a,3,15).stream().forEach(r->System.out.print("["+r[0]+","+r[1]+","+r[2]+"]"));*/
 		int[] a= {2,5,1,8,2,9,1};
-		Maxtriplet(a,3).stream().forEach(r->System.out.print("["+r[0]+","+r[1]+","+r[2]+"]"));
+		//Maxtriplet(a,3).stream().forEach(r->System.out.print("["+r[0]+","+r[1]+","+r[2]+"]"));
+		
+		int[] A = { 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 };
+		int sum = 15;
+		findSubarray(A,sum);
 	}
 	
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	public static void findSubarray(int[] a, int sum)
+	{
+		int left=0,right=0;
+		int currentSum=0;
+		while(right<a.length) {
+			currentSum+=a[right];
+			
+			while(currentSum>=sum) { 
+				if(currentSum==sum)
+				System.out.printf("Subarray found [%d-%d]", left, right );
+				
+				currentSum-=a[left];
+				left++;
+				
+			}
+			right++;
+		}
+	}
+
+	
+	
+	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if(l1==null) return l2;
         if(l2==null) return l1;
         

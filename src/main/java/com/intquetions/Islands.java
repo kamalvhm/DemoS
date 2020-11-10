@@ -228,7 +228,7 @@ public int numOfIcelands(int[][] grids)	{
     
     ///DFS solution of 559. Maximum Depth of N-ary Tree
     
-    //695. Max Area of Island
+    //695. Max Area of Island   (ALSO 286 walls and gates similiar)
     public static int DFS(int[][] grid, int row,int col)
     {
         int h=grid.length;
@@ -243,6 +243,25 @@ public int numOfIcelands(int[][] grids)	{
          count+=DFS(grid,row,col+1);
         
         return count;
+        
+    }
+    
+    
+    //LOCKED 286 walls and gates similiar) call DFS_WALLS(grids,i,j,0);
+    public static void DFS_WALLS(int[][] grid, int row,int col,int count)
+    {
+        int h=grid.length;
+        int l=grid[0].length;
+        
+        if(row<0 || col<0 || row>=h || col>=l || grid[row][col]<count) return ;
+        
+        grid[row][col]=count;
+         DFS_WALLS(grid,row-1,col,count+1);
+         DFS_WALLS(grid,row+1,col,count+1);
+         DFS_WALLS(grid,row,col-1,count+1);
+         DFS_WALLS(grid,row,col+1,count+1);
+        
+        return ;
         
     }
      

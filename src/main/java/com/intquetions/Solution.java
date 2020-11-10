@@ -1,8 +1,9 @@
-package com.datastructure;
+package com.intquetions;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 
 class Solution {
     public static String removeDuplicates(String s, int k) {
