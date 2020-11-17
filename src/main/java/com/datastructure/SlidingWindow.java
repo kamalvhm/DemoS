@@ -280,4 +280,6 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 			
 			return list;
 		}
-}
+	/* 239. Sliding Window Maximum
+	 https://leetcode.com/problems/sliding-window-maximum/discuss/725910/3-Java-solutions%3A-PriorityQueue%2BDeque%2BDP
+*/}

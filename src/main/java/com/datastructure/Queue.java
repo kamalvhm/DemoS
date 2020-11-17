@@ -1,11 +1,15 @@
 package com.datastructure;
 
+import java.util.ArrayDeque;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.concurrent.BlockingQueue;
+//STUDY:-https://www.geeksforgeeks.org/queue-interface-java/
+//https://www.geeksforgeeks.org/arraydeque-in-java/
+//https://leetcode.com/problems/sliding-window-maximum/discuss/864529/Java-Deque-Visualization-with-code
 //215. Kth Largest Element in an Array  check in arrayProblems
 public class Queue<T> implements Iterable{
 	
@@ -41,7 +45,7 @@ public class Queue<T> implements Iterable{
 		return list.iterator();
 	}
 	
-	//STUDY:-https://www.geeksforgeeks.org/queue-interface-java/
+
 	public static void main(String args[]) {
 		//Method 1:
 		PriorityQueue<Integer> maxPQ = new PriorityQueue<>(Collections.reverseOrder()); 
@@ -137,5 +141,26 @@ public class Queue<T> implements Iterable{
 	        
 	        return 0;
 	       
+	    }
+	  
+	  //239. Sliding Window Maximum
+	  public int[] maxSlidingWindow(int[] nums, int k) {
+	        if (k == 0) return nums;
+	    
+	        int[] ans = new int[nums.length - k + 1];
+	        Deque<Integer> q = new ArrayDeque<>();
+	    
+	        for (int i = 0; i < nums.length; i++) {
+	            while (q.size() > 0 && nums[i] >= nums[q.getLast()]){
+				    q.removeLast();
+				}
+	            q.addLast(i);
+	            if (i - k + 1 >= 0) ans[i - k + 1] = nums[q.getFirst()];
+	        
+	            //finally remove max which is out of range
+	            if (i - k + 1 == q.getFirst()) q.removeFirst();
+	        }
+	             
+	        return ans;
 	    }
 }

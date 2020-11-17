@@ -1,10 +1,9 @@
 package com.practice;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Deque;
 import java.util.List;
-
-import org.apache.curator.CuratorConnectionLossException;
 
 import com.beans.ListNode;
 
@@ -26,7 +25,12 @@ public class Dummy2 {
 		
 		int[] A = { 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 };
 		int sum = 15;
-		findSubarray(A,sum);
+		//findSubarray(A,sum);
+		
+		int b[]= {1,2,3,4};
+		maxSlidingWindow(b,2);
+		
+		
 	}
 	
 	public static void findSubarray(int[] a, int sum)
@@ -153,7 +157,47 @@ public class Dummy2 {
 		return list;
 	}
     
+/*    public static int[] maxSlidingWindow(int[] nums, int k) {
+        int right=0,left=0;
+        PriorityQueue<Integer> q=new PriorityQueue<>((a,b)->b-a);
+         int [] out =new int [nums.length-(k-1)];
+         int index=0;
+          while(right<nums.length){
+             q.add(nums[right]);
+             if(right-left+1<k){
+                 right++;
+             }else if(right-left+1==k){
+                 out[index++]=q.peek();
+                 q.remove(nums[left]);
+                 left++;
+                 right++;
+             }
+         }
+         
+         return out;
+     }
+    */
+   
+    //https://www.youtube.com/watch?v=5VDQxLAlfu0
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        if (k == 0) return nums;
     
+        int[] ans = new int[nums.length - k + 1];
+        Deque<Integer> q = new ArrayDeque<>();
+    
+        for (int i = 0; i < nums.length; i++) {
+            while (q.size() > 0 && nums[i] >= nums[q.getLast()]){
+			    q.removeLast();
+			}
+            q.addLast(i);
+            if (i - k + 1 >= 0) ans[i - k + 1] = nums[q.getFirst()];
+        
+            //finally remove max which is out of range
+            if (i - k + 1 == q.getFirst()) q.removeFirst();
+        }
+             
+        return ans;
+    }
     
    
 }
