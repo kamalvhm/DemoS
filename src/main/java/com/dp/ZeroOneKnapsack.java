@@ -1,7 +1,7 @@
 package com.dp;
 
 import java.util.Arrays;
-
+//https://www.youtube.com/watch?v=iBnWHZmlIyY&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=6
 /**Related Problems
  * 1)subset sum
  * 2)equal sum partition
@@ -12,7 +12,7 @@ import java.util.Arrays;
  * 
  */
 
-public class ZeroOneKnapsack {
+public class ZeroOneKnapsack extends DynamicPrograming{
 	//STEP 1: created a dp array to memoize for chanigning variable where size<=100 (taken 102 for safty) and capacity<=1000;
 	static int[][] t=new int [102][1000];
 	

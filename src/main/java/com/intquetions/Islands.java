@@ -264,5 +264,36 @@ public int numOfIcelands(int[][] grids)	{
         return ;
         
     }
-     
+    
+    //79. Word Search  Bit DIFFICULT   *********************************AWESOME QUESTION*************************************
+    public boolean exist(char[][] board, String word) {
+        int h =board.length;
+        int l = board[0].length;
+          for (int i=0; i<board.length; i++){
+            for (int j=0; j<board[0].length; j++){
+                if (board[i][j] == word.charAt(0) && DFS(board, i, j,  word,0))
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean DFS(char[][] board, int row,int col,String word,int len){
+        if(len==word.length()) { return  true; }
+    
+        if(row<0 || col<0 || row>=board.length || col>=board[row].length || board[row][col]!=word.charAt(len)) { return false; }
+        
+        char temp=board[row][col];
+        board[row][col]=' '; //setting empty space for visited
+        
+        boolean found=
+        DFS(board,row+1,col,word,len+1) ||
+        DFS(board,row-1,col,word,len+1) ||
+        DFS(board,row,col+1,word,len+1) ||
+        DFS(board,row,col-1,word,len+1);
+        
+        board[row][col]=temp; //re-setting value  after recursive calls
+
+       return found; 
+    }
 }

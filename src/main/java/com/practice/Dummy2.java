@@ -3,7 +3,9 @@ package com.practice;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.beans.ListNode;
 
@@ -30,6 +32,12 @@ public class Dummy2 {
 		int b[]= {1,2,3,4};
 		maxSlidingWindow(b,2);
 		
+		char[][] board=	{{'A','B','C','E'},
+						 {'S','F','C','S'},
+						 {'A','D','E','E'}};
+		
+		Set<Integer> set=new HashSet<Integer>();
+		new ArrayList(set);
 		
 	}
 	

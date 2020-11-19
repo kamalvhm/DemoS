@@ -2,10 +2,13 @@
 
 
    KEY WORD GIVEN IN STMNT          |          POSSIBLE STRATEGY
-   ----------------------------------------------------------------
+   ----------------------------------------------------------------------------------------
 1	IF SORTED ARRAY GIVEN 			|    	BINEARY SEARCH 
 2.  IF LARGER OR SMALLER 			| 		MIN OR MAX HEAP       ArrayProblems.java 215
-3.		
+3.	IF PERMUTATION AND COMBINATION	|       THINK OF RECURSION TAKING AND NOT TAKING INPUTS
+	ASKED 							|
+4.									|
+									|
 
 
 
