@@ -39,7 +39,10 @@ public class Dummy2 {
 		Set<Integer> set=new HashSet<Integer>();
 		new ArrayList(set);
 		
+		
 	}
+	
+	  
 	
 	public static void findSubarray(int[] a, int sum)
 	{

@@ -88,7 +88,7 @@ public class ZeroOneKnapsackRelatedProblems {
 			for(int j=0;j<sum+1;j++) {
 				if(i==0) //No subset available
 					top[i][j]=0;
-				if(j==0)  //Null subset count is 1 
+				if(j==0)  //Null subset {} count is 1 
 					top[i][j]=1;
 			}
 		}
