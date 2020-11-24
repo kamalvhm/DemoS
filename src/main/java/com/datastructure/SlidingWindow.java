@@ -1,10 +1,13 @@
 package com.datastructure;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.PriorityQueue;
 
 import com.cleanup.SlidingOlder;
 //Normally Array or  String Questions and sasking for sub-array or sub-string 
@@ -26,13 +29,15 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 				int[] A = { 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 };
 				int sum = 15;
 
-				findSubarray(A, sum);
+				//findSubarray(A, sum);
 				
 				int B[]= {12,-1,-7,8,-15,30,16,28};
 				
 				//printFirstNeg(B,3);
 				
 				//System.out.print(findAnagrams2("cbaeabc", "abc"));
+				int c[]= {1,3,-1,-3,5,3,6,7};
+				maximumInwindow(c, c.length,3);
 				
 	}
 	
@@ -145,7 +150,7 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 	        return ans;
 	    }
 	 /*****************************************ADITYA BELOW*********************************/
-	 //438. Find All Anagrams in a String
+	 // 438. Find All Anagrams in a String
 	 public List<Integer> findAnagrams(String s, String p) {
 	        int[] map = new int[26];
 	        List<Integer> ans = new ArrayList<>();
@@ -171,7 +176,7 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 	        return ans;
 	    }
 	 
-	 //COMMON PATTERN FOR ALL FIXED SIZE WINDOW PROBLEMS CHECK STEPS 
+	 //V-4 COMMON PATTERN FOR ALL FIXED SIZE WINDOW PROBLEMS CHECK STEPS 
 	 //print first -Ve no in every window size k  in given array |  https://www.youtube.com/watch?v=uUXXEgK2Jh8      ADITYA 
 	 public static void printFirstNeg(int[] arr, int window) {
 		int left=0;
@@ -280,6 +285,52 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 			
 			return list;
 		}
-	/* 239. Sliding Window Maximum
-	 https://leetcode.com/problems/sliding-window-maximum/discuss/725910/3-Java-solutions%3A-PriorityQueue%2BDeque%2BDP
-*/}
+	/* 239. Sliding Window Maximum int K size window  (NOTE BOOK)
+		https://leetcode.com/problems/sliding-window-maximum/
+	 */
+	 
+	  //https://www.youtube.com/watch?v=5VDQxLAlfu0
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        if (k == 0) return nums;
+    
+        int[] ans = new int[nums.length - k + 1];
+        Deque<Integer> q = new ArrayDeque<>();
+    
+        for (int i = 0; i < nums.length; i++) {
+            while (q.size() > 0 && nums[i] >= nums[q.getLast()]){
+			    q.removeLast();
+			}
+            q.addLast(i);
+            if (i - k + 1 >= 0) ans[i - k + 1] = nums[q.getFirst()];
+        
+            //finally remove max which is out of range
+            if (i - k + 1 == q.getFirst()) q.removeFirst();
+        }
+             
+        return ans;
+    }
+	//SAME AS ABOVE  https://www.youtube.com/watch?v=xFJXtB5vSmM&list=PL_z_8CaSLPWeM8BDJmIYDaoQ5zuwyxnfj&index=6
+	public static void maximumInwindow(int [] arr,int size,int k) {
+		int left=0,right=0;
+		int maximum=0;
+		PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b.compareTo(a));
+		while(right<size) {
+			pq.add(arr[right]);
+			
+			if(right-left+1<k) {
+				right++;
+			}else if(right-left+1==k) {
+				if(!pq.isEmpty())
+					System.out.print(pq.peek()+", ");
+				int leftVal=arr[left];
+				if(pq.contains(leftVal))
+					pq.remove(leftVal);
+				
+				left++;
+				right++;
+			}
+		}
+	}
+	
+
+}

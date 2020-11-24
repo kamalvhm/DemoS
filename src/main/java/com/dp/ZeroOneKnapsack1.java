@@ -12,7 +12,7 @@ import java.util.Arrays;
  * 
  */
 
-public class ZeroOneKnapsack extends DynamicPrograming{
+public class ZeroOneKnapsack1 extends DynamicPrograming{
 	//STEP 1: created a dp array to memoize for chanigning variable where size<=100 (taken 102 for safty) and capacity<=1000;
 	static int[][] t=new int [102][1000];
 	

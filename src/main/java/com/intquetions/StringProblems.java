@@ -8,6 +8,7 @@ import java.util.List;
 public class StringProblems {
 	public static void main(String[] args) {
 		String s="ABRACADABRA";
+		s.replace("A", "");
 		//all sub strings
 		for(int i=0;i<s.length();i++) {
 			 for (int j =s.length(); j > i; j--) {
@@ -22,6 +23,9 @@ public class StringProblems {
 		Character.toUpperCase(s.charAt(0));
 		
 		StringBuffer sb=new StringBuffer();
+		//to append in front of String 
+		sb.insert(0, "ABC");
+		
 	}
 	
 	//125. Valid Palindrome

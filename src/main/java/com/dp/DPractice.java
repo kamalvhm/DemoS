@@ -33,6 +33,11 @@ public class DPractice {
 		int [] price= {1,5,8,9,10,17,17,20};
 		int n=8;
 		System.out.println("1)Rod Cutting :-"+unboundedKnapsack(length,price,n,length.length));
+		int [] coin= {1,2,3};
+		//returns total No of ways a given sum can be formed by these coins
+		System.out.println("2)coin change I :-"+coinChangeI(coin,5,coin.length));
+		//Return Min no of coin to create given sum
+		System.out.println("3)coin change II :-"+coinChangeII(coin,5,coin.length));
 	}
 
 	private static String knapsack_TOP_DOWN(int[] wt, int[] val, int i, int length) {
@@ -68,5 +73,17 @@ public class DPractice {
 		return -1;
 		
 	} 
+	public static int coinChangeI(int[] coin,int sum ,int n) {
+		int t[][]=new int[n+1][sum+1];
+		
+		return t[n][sum];
+	}
+	//return min no of coins to form :-https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
+	private static int coinChangeII(int[] coin, int sum, int n) {
+		int t[][] =new int [n+1][sum+1];
+		
+		
+		return t[n][sum];
+	}
 
 }

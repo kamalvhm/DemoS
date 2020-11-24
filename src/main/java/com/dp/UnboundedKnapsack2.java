@@ -6,7 +6,7 @@ package com.dp;
  * 3)coin change 2 (Min No of coins)|  (322. Coin Change) https://leetcode.com/problems/coin-change/submissions/
  * 4)Maximum Ribbon cut |
  */
-public class UnboundedKnapsack {
+public class UnboundedKnapsack2 {
 	//If selected then multiple Occurences are allowed of same item and if not selected
 	//then its processed then we can't select again 
 	public static void main(String args[]) {
@@ -80,7 +80,7 @@ public class UnboundedKnapsack {
 				if(j==0) //where sum is 0 so no coin needed
 					t[i][j]=0;
 				if(i==0) //where coin is null and sum is given setting MAX-1
-					t[i][j]=Integer.MAX_VALUE-1;
+					t[i][j]=Integer.MAX_VALUE-1; // -1 is Because we are adding 1 later in code so to avoid overflow for boundry
 			}
 		}
 		
@@ -104,5 +104,28 @@ public class UnboundedKnapsack {
 		
 		return t[n][sum];
 	}
+	
+	//Variation without secound row initailization
+	  public int coinChangeII(int[] coin, int sum) {  
+	        int n=coin.length;
+	        int t[][] =new int[n+1][sum+1];
+	        
+	        for(int i=0;i<n+1;i++)  //where sum is 0 so no coin needed
+	            t[i][0]=0;
+	        for(int j=0;j<sum+1;j++)  //where coin is null and sum is given setting MAX-1
+	            t[0][j]=Integer.MAX_VALUE-1;
+	        
+	        for(int i=1;i<n+1;i++){
+	            for(int j=1;j<sum+1;j++){
+	                if(coin[i-1]<=j){
+	                    t[i][j]=Math.min(t[i-1][j],1+t[i][j-coin[i-1]]); //Adding 1 in case of selection to count coins
+	                }else 
+	                    t[i][j]=t[i-1][j];
+	            }
+	        }
+	        
+	     return t[n][sum]!=Integer.MAX_VALUE-1 ? t[n][sum]:-1; 
+
+	    }
 
 }
