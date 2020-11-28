@@ -3,7 +3,7 @@ package com.dp;
 import java.util.Arrays;
 //https://www.youtube.com/watch?v=iBnWHZmlIyY&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=6
 /**Related Problems
- * 1)subset sum
+ * 1)subset sum PS:-Given one array and sum return if sum can be formed with elemnt or not 
  * 2)equal sum partition
  * 3)count of subset sum
  * 4)Minimum subset sum difference
@@ -24,6 +24,7 @@ public class ZeroOneKnapsack1 extends DynamicPrograming{
 	}
 	
 	public static void main(String[] args) {
+		//input : two arrays wt, val and one capacity is given OutPut:-return maximum profit which satisfy this capacity 
 		int [] wt= {1,3,4,5};
 		int [] val= {1,4,5,7};
 		

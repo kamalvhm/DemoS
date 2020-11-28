@@ -55,7 +55,7 @@ public class BinarySearch {
             int v = nums[m];
             if((m == 0 || target > nums[m - 1]) && nums[m] == target) {
                 return m; 
-            }else if(v < target) {
+            }else if(v < target) { //In this case left condition will be up because we need to check first in left size we in else case r will move if target is equal but not first 
                 l = m + 1;
             }else{
                 r = m - 1;

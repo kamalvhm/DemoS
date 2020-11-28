@@ -6,7 +6,7 @@ import java.util.Arrays;
  * 1)Longest common subString [v-22] |
  * 2)print  LCS [v-23]|
  * 3)Shortest common superSequence [v-24]
- * 4)print SCS [v-24] | 1092. https://leetcode.com/problems/shortest-common-supersequence/
+ * 4)print SCS [v-29] | 1092. https://leetcode.com/problems/shortest-common-supersequence/
  * 5)Min # insertion and deletion a->b
  * 6)Longest repeating subSequence
  * 7)Length of longest subsequence of a which is substring in b
@@ -46,6 +46,15 @@ public class LongestCommanSubSequece3 {
 		StringBuffer sb1=new StringBuffer(s);
 		int lps=LCS_TopDown(s1,sb1.reverse().toString(),s1.length(),sb1.length()); //No of deletion is inversely  proportion to LPS so computing LPS
 		System.out.println("13)Min no of deletion in a string to make it palindrom  ANS:-"+(s1.length()-lps)); //return longest palindromic subsequnce length 
+		String s2="AABEBCDD"; //Pass same string twice and compute LCS where i!=j
+		System.out.println("6)Longest repeating subSequence ANS:-"+LongestRepeatingSubSequence(s2, s2)); //print length of subsequence which repeat it self in string ip=aabebdd for this return 3 (abd appear twice in subsequence)
+		String a3="AXY",b3="ADXCPY";//return true if string a3 is subsequence of string b3 (compute lcs and compare length with string a)
+		System.out.println("8)subsequence pattern Matching ANS:-"+(a3.length()==LCS_TopDown(a3, b3,a3.length(),b3.length()))); 
+		String s3="aebcbda";
+		StringBuffer sb3=new StringBuffer(s3);
+		lps=LCS_TopDown(s3,sb3.reverse().toString(),s3.length(),sb3.length()); //Same as No of deletion because if we insert same deleted chars we can make them pairs in this case D and E
+		System.out.println("14)Min no of insertion in a string to make it palindromic  ANS:-"+(s3.length()-lps)); //return Min no of insersion count to make it palindrom
+
 
 		
 	}
@@ -204,5 +213,30 @@ public class LongestCommanSubSequece3 {
 	        result.reverse();
 	        return result.toString();
 	    }
+	 
+	 public static int LongestRepeatingSubSequence(String x,String y) {
+		    int m=x.length(),n=y.length();
+			int t[][]=new int [m+1][n+1]; 
+			
+			for(int i=0;i<m+1;i++) {
+				for(int j=0;j<n+1;j++) {
+					if(i==0 || j==0)
+						t[i][j]=0;
+				}
+			}
+			
+			for(int i=1;i<m+1;i++) {
+				for(int j=1;j<n+1;j++) {
+					//Only CHANGE FROM LCS i!=j
+					if(y.charAt(i-1)==x.charAt(j-1) && i!=j) {   
+						t[i][j]=1+t[i-1][j-1];
+					}else {
+						t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+					}
+				}
+			}
+			
+			return t[m][n];
+		}
 	
 }

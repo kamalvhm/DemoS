@@ -7,6 +7,8 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.spi.CurrencyNameProvider;
 
+import org.apache.commons.math3.ode.nonstiff.GillIntegrator;
+
 import com.beans.TreeNode;
 import com.datastructure.TreePrinter;
 
@@ -32,7 +34,8 @@ public class Dummy {
 		inorder(tree);
 		System.out.println("");
 		inorderWithout(tree);
-		System.out.println("THIS:---->" + inorder2(tree));
+		System.out.println("");
+		System.out.println("T>" + inorder2(tree));
 
 		System.out.println("PRE");
 		preorder(tree);
@@ -65,19 +68,8 @@ public class Dummy {
 	}
 	
 	private static String inorder2(TreeNode tree) {
-		if(tree==null) {
-			return "";
-		}
-			String left="",right="";
-			if(tree.left!=null)
-			left=inorder2(tree.left);
-			else left="";
-			if(tree.right!=null)
-			right=inorder2(tree.right);
-			else right="";
-			return left+", "+tree.val+", "+right;
-		
-		
+	return "";
+	
 	}
 //50. Pow(x, n)
 	private static int Pow(int base, int pow) {
@@ -105,16 +97,43 @@ public class Dummy {
 			}
 		}
 		return count;
+		
 	}
     private static void DFS(char[][] grid, int row, int col) {
-
+    	
 
 
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count=0;
+		Stack<int[]> st=new Stack<>();
+		int h=grid.length;
+		int l=grid[0].length;
+		for(int i=0;i<h;i++) {
+			for(int j=0;j<l;j++) {
+				if(grid[i][j]=='1') {
+					st.push(new int[]{i,j});
+					grid[i][j]='0';
+					
+					while(!st.isEmpty()) {
+						int[] cur=st.pop();
+						for(int [] dir:direction) {
+							int r=cur[0]+dir[0];
+							int c=cur[1]+dir[1];
+							
+							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1') {
+								st.push(new int[] {r,c});
+								grid[r][c]='0';
+							}
 
+						}
+					}
+					count++;
+				}
+			}
+		}
+			
 		return count;
 
 	}
@@ -123,7 +142,6 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
-		
 		
 	}
 	
@@ -134,6 +152,7 @@ public class Dummy {
 	 }
 
 	private static void inorderWithout(TreeNode tree) {
+		
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
@@ -145,15 +164,27 @@ public class Dummy {
 	}
 
 	private static void postorder(TreeNode tree) {
-		
+		if(tree!=null) {
+			postorder(tree.left);
+			postorder(tree.right);
+			System.out.print(tree.val+", ");
+		}
 	}
 
 	private static void preorder(TreeNode tree) {
-		
+		if(tree!=null) {
+			System.out.print(tree.val+", ");
+			preorder(tree.left);
+			preorder(tree.right);
+		}
 	}
 
 	private static void inorder(TreeNode tree) {
-		
+		if(tree!=null) {
+			inorder(tree.left);
+			System.out.print(tree.val+", ");
+			inorder(tree.right);
+		}
 	}
 
 
