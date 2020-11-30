@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.cleanup.Utils;
+
 //STUDY:-https://www.youtube.com/watch?v=nqowUJzG-iM&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go
 public class DynamicPrograming {
 
@@ -40,5 +42,64 @@ public class DynamicPrograming {
 
 	        return new ArrayList<>(dp[target]);
 	    }
+	 
+	 //132. Palindrome Partitioning II
+	 class Solution {
+		    public int minCut(String s) {
+		        
+		        int n = s.length();
+		        int[][] dp = new int[n+1][n+1];
+		        
+		        for(int[] row : dp)
+		            Arrays.fill(row,-1);
+		        
+		        return solve(s,0,n-1,dp);
+		    }
+		    
+		    private int solve(String s, int i , int j, int[][] dp){
+		        
+		        if(dp[i][j] != -1)
+		            return dp[i][j];
+		        
+		        if(i >= j)
+		            return 0;
+		        
+		        if(Utils.isPalindrome(s,i,j)){
+		            dp[i][j] = 0;
+		            return 0;
+		        }
+		        
+		        int ans = Integer.MAX_VALUE;
+		        
+		        for(int k = i; k < j; k++){
+		            
+		            int l,r;
+		            
+		            if(dp[i][k] != -1)
+		                l = dp[i][k];
+		            else
+		            {
+		                l = solve(s,i,k,dp);
+		                dp[i][k]=l;
+		            }
+		           
+		            
+		            if(dp[k+1][j] != -1)
+		                r = dp[k+1][j];
+		            
+		            else{
+		                r = solve(s, k+1,j, dp);
+		                 dp[k+1][j]=r;
+		             }
+		            
+		            ans = Math.min(ans, 1+l+r);
+		        }
+		        
+		        dp[i][j] = ans;
+		        return ans;
+		        
+		    }
+		    
+		}
 	    
 }

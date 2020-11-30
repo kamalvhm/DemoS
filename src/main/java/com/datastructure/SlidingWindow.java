@@ -21,27 +21,31 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 	 */
 	//https://tinyfool.org/2019/04/the-sliding-window-algorithm/
 	public static void main(String[] args) {
-		int[] a= {1,2,3,4,5,6,7,8,1,1,13};
-		
-	//	System.out.print(triplet(a,3,15));
-		
-				// array of positive integers  find consucutive positions which is having sum
-				int[] A = { 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 };
-				int sum = 15;
+		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 1, 1, 13 };
+		System.out.println(triplet(a, 3, 15));
 
-				//findSubarray(A, sum);
-				
-				int B[]= {12,-1,-7,8,-15,30,16,28};
-				
-				//printFirstNeg(B,3);
-				
-				//System.out.print(findAnagrams2("cbaeabc", "abc"));
-				int c[]= {1,3,-1,-3,5,3,6,7};
-				maximumInwindow(c, c.length,3);
-				
+		// array of positive integers find consucutive positions which is having sum
+		int[] A = { 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 };
+		int sum = 15;
+		findSubarray(A, sum);
+
+		int B[] = { 12, -1, -7, 8, -15, 30, 16, 28 };
+		printFirstNeg(B,3);
+		
+		System.out.println(findAnagrams2("cbaeabc", "abc"));
+		
+		int c[] = { 1, 3, -1, -3, 5, 3, 6, 7 };
+		maximumInwindow(c, c.length, 3);
+		System.out.println("");
+
+		int d[] = { 4, 1,1,1,2,3,5 }; // given a array and sum k return max length of sub array which is having sum
+		int e[] = {-5,8,-14,2,4,12 };									// k;
+		System.out.println("V-7 Max sub array length :--> " + maxSubArrayLength(e, -5));
 	}
 	
-	  public static List<int[]> triplet(int[] n,int winS,int target) {   //## #WINDOW SIZE  KNOWN ###
+	
+
+	public static List<int[]> triplet(int[] n,int winS,int target) {   //## #WINDOW SIZE  KNOWN ###
 			int right=0,left=0;
 			int sum =0;
 			List<int[]> list=new ArrayList<>();
@@ -50,7 +54,7 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 				
 				currentSum+=n[right];    //STEP 1:CALCULATION
 				
-				if(right-left+1<winS) {  //STEP 2:
+				if(right-left+1<winS) {  //STEP 2:Raise window
 					right++;
 				}
 				
@@ -206,7 +210,7 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 			}
 		}
 	 }
-	 //Count Occurrences Of Anagrams | Sliding Window | https://www.youtube.com/watch?v=MW4lJ8Y0xXk
+	 //v-5 Count Occurrences Of Anagrams | Sliding Window | https://www.youtube.com/watch?v=MW4lJ8Y0xXk
 	 public static List<Integer> findAnagrams2(String s, String p) {     //## #WINDOW SIZE  KNOWN ###
 	        List<Integer> ans = new ArrayList<>();
 	        if(s.length() < p.length()) return ans;
@@ -332,5 +336,32 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 		}
 	}
 	
+	//(V-7)##############VARIABLE SIZE SLINDING WINDOW############################### 
+	  private static int maxSubArrayLength(int[] arr, int k) {
+		  int left=0,right=0;
+		  int sum=0;
+		  int maximum_size=0;
+		  while(right<arr.length) {
+			  sum+=arr[right];   //Step 1 :add sum
+			  
+			  if(sum<k)  //Step 2 : when inflate window until sum condition not satisfy 
+				  right++;
+			  else if(sum==k) //Step 3 :if sum equal exatract answer
+			  { 
+				  if(right-left+1>maximum_size)
+					  maximum_size=right-left+1;
+				  right++;
+			  }
+			  else if(sum>k) {//step 4 : if sum is greater then shink from left until its not (This condition we don't have in fixed size as we are always eithr less or equal never greater)
+				  while(sum>k) {
+					  sum-=arr[left++]; 
+				  }
+				  right++;// at end we have to move window 
+			  }
+			  
+			  
+		  }
+			return maximum_size;
+		}
 
 }

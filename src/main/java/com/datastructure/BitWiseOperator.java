@@ -7,12 +7,12 @@ public class BitWiseOperator {
 		int b=27;  //0001 1011
 		
 		
-		//Binary AnD Operator (&)
+		//Binary AnD Operator (&) 
 		int and = a&b;
 		//Binary OR Operator (|)
 		int or =a|b;
 
-		//Binary XOR (^)
+		//Binary XOR (^) 
 		int xor=a^b;
 
 		//Binary One compliment(~)

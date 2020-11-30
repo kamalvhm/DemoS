@@ -1,17 +1,20 @@
 package com.dp;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.cleanup.Utils;
 
 import scala.Array;
+import com.dp.BooleanParenthesization;
 
 /** ##{@link #MatrixChainMultiplication()}
- * 1)MCM
- * 2)Printing MCM
- * 3)Evaluate Exp to true / boolean Pranter
+ * 1)MCM ##{@link #solveMCM()}
+ * 2)Printing MCM 
+ * 3)Evaluate Expression to true / boolean parenthesization
  * 4)Min/Max value of an Expr.
- * 5)Palindrom Partitioning
+ * 5)Palindrom Partitioning |132. Palindrome Partitioning II, https://leetcode.com/problems/palindrome-partitioning-ii/
  * 6)Scramble String
  * 7)Egg Dropping Problem
  * ---------------------------GENERAL FORMAT CODE------------------
@@ -33,10 +36,16 @@ import scala.Array;
  *
  */
 
-public class MatrixChainMultiplication {
-	static int dp[][]=new int [10][10];//size depends on max constraints 
+public class MatrixChainMultiplication extends DynamicPrograming{
+	static int dp[][]=new int [100][100];//size depends on max constraints 
+	static int p[][]=new int [100][100];
 	static {for(int []t:dp)
-			Arrays.fill(t, -1);}
+			Arrays.fill(t, -1);
+			for(int []t:p)
+				Arrays.fill(t, -1);}
+	
+	static Map<String,Integer> map=new HashMap<>(); 
+    private static final String EMPTY_STRING = "";
 
 	public static void main(String[] args) {
 			//We are given a array which contains a matrix dimension we have to return minimum cost(multiplication) of these matrix 
@@ -49,11 +58,13 @@ public class MatrixChainMultiplication {
 			//so i is 1 and j =size-1;
 			System.out.println("1)MCM ans "+solveMCM_BottomUp(arr,1,arr.length-1));
 			
-			String s="nitin"; //PS:-we are given a string we need to partition it such that all resultant Strings are palindrom and minimize no. of partion
-			System.out.println("5)Palindrom Partitioning ans:- "+palindrom_partitioning_recursive(s,0,arr.length-1)); //in this case we can place i at 0 because no dimetios are here 
+			String s="coder"; //PS:-we are given a string we need to partition it such that all resultant Strings are palindrom and minimize no. of partion
+			System.out.println("5)Palindrom Partitioning ans:- "+palindrom_partitioningBottomUpOptimized(s,0,s.length()-1)); //in this case we can place i at 0 because no dimetios are here 
+			String s1="T^F&T";
+			//PS:-Input String given Output -No. of ways it eval to true, add bracket to string such that it evaluate to true  eg: ((T^F)&T) 
+			//String may consist of T=True ,F=False, | =Or, & =And ,^=XOR
+			System.out.println("3)Evaluate Expression to true ans:- "+evalExTBottomUp(s1,0,s1.length()-1,true)); 
 
-
-			
 	}
 
 	//https://www.youtube.com/watch?v=kMK148J9qEE&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=34
@@ -93,14 +104,154 @@ public class MatrixChainMultiplication {
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
 		if(i>=j)return 0; //if single char then no partion needed
-		if(Utils.isPalindrom(s))return 0; //if already palindrom then also no partion needed
+		if(Utils.isPalindrom(s,i,j))return 0; //if already palindrom then also no partion needed
 		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<=j-1;k++) {
 			int temp=palindrom_partitioning_recursive(s,i,k)+palindrom_partitioning_recursive(s, k+1, j)+1;//solve(i to k) and solve(k+1,j) both will give min partions and as wedone already one so +1
 			
-			ans=Math.min(ans, temp);
+			 if(temp<ans)
+				 ans=temp;
 		}
 		return ans;
 	}
 
+	//V-37
+	private static int palindrom_partitioningBottomUp(String s, int i, int j) {
+		if(i>=j)return 0; //if single char then no partion needed
+		if(Utils.isPalindrom(s,i,j))return 0; //if already palindrom then also no partion needed
+		if(p[i][j]!=-1)return p[i][j]; //CHANGE 1
+		int ans=Integer.MAX_VALUE;
+		for(int k=i;k<=j-1;k++) {
+			int temp=1+palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);//solve(i to k) and solve(k+1,j) both will give min partions and as wedone already one so +1
+			
+			ans=Math.min(ans, temp);
+		}
+		//CHANGE 2
+		return p[i][j]=ans;
+	}
+	//CHECK PROBLEM SOLUTION IN PARENT CLASS
+	//V-38 To optimize further we can check "palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);" function in the matrix 
+	private static int palindrom_partitioningBottomUpOptimized(String s, int i, int j) {
+		if(i>=j)return 0; //if single char then no partion needed
+		if(Utils.isPalindrom(s,i,j))return 0; //if already palindrom then also no partion needed
+		if(p[i][j]!=-1)return p[i][j]; //CHANGE 1
+		int ans=Integer.MAX_VALUE;
+		for(int k=i;k<=j-1;k++) {
+			
+			int left=0;   //check left and right first in the table if not exist then hit and put it in table
+			if(p[i][k]!=-1)
+				left=p[i][k];
+			else {
+				left=palindrom_partitioningBottomUp(s,i,k);
+				p[i][k]=left;
+			}
+			
+			int right=0;
+			if(p[k+1][j]!=-1)
+				right=p[k+1][j];
+			else {
+				right=palindrom_partitioningBottomUp(s, k+1, j);
+				p[k+1][j]=right;
+			}
+			
+			int temp=1+left+right; 
+			
+			ans=Math.min(ans, temp);
+		}
+		//CHANGE 2
+		return p[i][j]=ans;
+	}
+	/**V-39 (CHECK ##BooleanParenthesization()) :-https://www.youtube.com/watch?v=pGVguAcWX4g&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=39
+	 * 
+	 */
+	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
+		 if(i>j)return 0; //if its empty string 
+		 if(i==j) { //is i and j at same char 
+			 if(isTrue)  //if we are looking for true
+				 return s.charAt(i) == 'T' ? 1 : 0; //if we isTrue(we are looking for true) and character at i is also true then return true else false; 
+			 else  return s.charAt(i)== 'F' ? 1 : 0;
+		 }
+		 int ans=0;
+		 //looping k from i+1 to j-1 with increament k+2 as k will be at any operator any time and i and j will be at T or F;
+		 for(int k=i+1;k<j;k += 2) {
+			 int leftTrue=evalExTRecursive(s,i,k-1,true); //This will return no. of ways we get left expression as true
+			 int leftfalse=evalExTRecursive(s,i,k-1,false); //This will return no. of ways we get left expression as false
+			 int rightTrue=evalExTRecursive(s,k+1,j,true);
+			 int rightFalse=evalExTRecursive(s,k+1,j,false);
+			 char c=s.charAt(k);
+			 if(c=='&') { //now add ans according to operator
+				 if(isTrue)
+					 ans+=leftTrue*rightTrue;
+				 else
+					 ans+=leftTrue*rightFalse + leftfalse*rightTrue + leftfalse*rightFalse;
+			 }
+			 else if(c=='|') {
+				 if(isTrue)
+					 ans+=leftTrue*rightTrue + leftTrue*rightFalse + leftfalse*rightTrue;
+				 else
+					 ans+=leftfalse*rightFalse;
+			 }
+			 else if(c=='^') {
+				 if(isTrue)
+					 ans+=leftTrue*rightFalse + leftfalse*rightTrue;
+				 else
+					 ans+=leftTrue*rightTrue + leftfalse*rightFalse;
+			 }
+
+		 }
+		 return ans;
+	} 
+	
+	public static int evalExTBottomUp(String s ,int i,int j,boolean isTrue) {
+		String key=EMPTY_STRING+i+j+isTrue;//Making a key for map with i j and isTrue
+		 if(i>j) {
+			  map.put(key, 0); //CHANGE
+			 return 0; }
+		 if(i==j) { 
+			 if(isTrue)  {
+				 map.put(key, s.charAt(i) == 'T' ? 1 : 0); //CHANGE
+				 return s.charAt(i) == 'T' ? 1 : 0; 
+			 }
+				 
+			 else {
+				 map.put(key, s.charAt(i) == 'F' ? 1 : 0); //CHANGE
+				 return s.charAt(i)== 'F' ? 1 : 0;
+			 } 
+		 }
+		 int ans=0;
+		 for(int k=i+1;k<j;k += 2) {
+			 	String partialLeftKeyTrue = EMPTY_STRING + i + (k - 1) + "true";  //CHANGE
+	            String partialLeftKeyFalse = EMPTY_STRING + i + (k - 1) + "false";
+	            String partialRightKeyTrue = EMPTY_STRING + (k + 1) + j + "true";
+	            String partialRightKeyFalse = EMPTY_STRING + (k + 1) + j + "false";
+			 
+			 int leftTrue=map.containsKey(partialLeftKeyTrue) ? map.get(partialLeftKeyTrue) :evalExTRecursive(s,i,k-1,true);//3 variable changing i ,j and isTrue
+			 int leftfalse=map.containsKey(partialLeftKeyFalse) ? map.get(partialLeftKeyFalse) :evalExTRecursive(s,i,k-1,false); 
+			 int rightTrue=map.containsKey(partialRightKeyTrue) ? map.get(partialRightKeyTrue) :evalExTRecursive(s,k+1,j,true);
+			 int rightFalse=map.containsKey(partialRightKeyFalse) ? map.get(partialRightKeyFalse) :evalExTRecursive(s,k+1,j,false); //CHANGE
+			 
+			 char c=s.charAt(k);
+			 if(c=='&') { 
+				 if(isTrue)
+					 ans+=leftTrue*rightTrue;
+				 else
+					 ans+=leftTrue*rightFalse + leftfalse*rightTrue + leftfalse*rightFalse;
+			 }
+			 else if(c=='|') {
+				 if(isTrue)
+					 ans+=leftTrue*rightTrue + leftTrue*rightFalse + leftfalse*rightTrue;
+				 else
+					 ans+=leftfalse*rightFalse;
+			 }
+			 else if(c=='^') {
+				 if(isTrue)
+					 ans+=leftTrue*rightFalse + leftfalse*rightTrue;
+				 else
+					 ans+=leftTrue*rightTrue + leftfalse*rightFalse;
+			 }
+
+		 }
+	      map.put(key, ans); //CHANGE
+		 return ans;
+	} 
 }

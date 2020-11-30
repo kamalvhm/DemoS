@@ -8,7 +8,7 @@ public class BsPractice {
 		System.out.println(searchRange(h,8));
 		
 		int [] f= {1,2,3,4,5,6,1,2,3,4,5};
-		System.out.println(findPeakElement(f));
+		System.out.println("PEAK-> "+findPeakElement(f));
 				
 		//Binary search in 2D array
 		
@@ -240,21 +240,18 @@ public class BsPractice {
 	      }
 	 
 	 public static int findPeakElement(int[] a) {
-	        int left=0;
-	        int right=a.length-1;
-	          
-	          while(left<right){
-	              int mid=left+(right-left)/2;
-	              
-	              if((mid==0 || a[mid-1]<a[mid]) && (mid==right || a[mid+1]<a[mid])) {
-	            	  return mid;
-	              }
-	               if(a[mid]<a[mid+1])
-	                  left=mid+1;
-	              else 
-	                  right=mid-1;
-	          }
-	          return left;
+	        int left=0,right=a.length-1;
+	        while(left<=right) {
+	        	int mid=left+(right-left)/2;
+	        	
+	        	if((mid==0 || a[mid-1]<a[mid]) && (mid==right || a[mid+1]<a[mid]))
+	        		return a[mid];
+	        	else if(a[mid]<a[mid+1])
+	        		left=mid+1;
+	        	else
+	        		right=mid-1;
+	        }
+	        return -1;
 	      }
 	 
 
