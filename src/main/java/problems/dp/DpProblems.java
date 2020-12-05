@@ -53,4 +53,26 @@ public class DpProblems {
         map.put(n,(val1+val2));
         return map.get(n);
     }
+    
+    //32. Longest Valid Parentheses | https://www.youtube.com/watch?v=Y70Vtbf2A-U
+    public int longestValidParentheses(String s) {
+        int maxans = 0;
+       int dp[] = new int[s.length()];  //Step 1:-Create a dp array of same size where we will keep value pairs until that index mean at index 4 how many pars are there 
+       //from 0 to 4 
+       for (int i = 1; i < s.length(); i++) {
+           if (s.charAt(i) == ')') { //Step 2:if its closing then only we can check for pairs so ignore ( (for this we need to check below two condition)
+               if (s.charAt(i - 1) == '(') { //Step 3:if its closing above then check if i-1 just before is (
+                   dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+               } else if (i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '(') { //if just before is not opening then check before pairs 
+                   dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
+               }
+               maxans = Math.max(maxans, dp[i]);
+           }
+       }
+       return maxans;
+   }
+    
+    
+	
+    
 }

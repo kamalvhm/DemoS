@@ -101,5 +101,50 @@ public class DynamicPrograming {
 		    }
 		    
 		}
+	 //TLE TOP DOWN
+	 public int superEggDrop(int e, int f) {
+	        int [][] dp = new int [e+1][f+1];
+	        int result;
+	        for (int i=1; i<=e; i++) {
+	            dp[i][1] = 1;
+	            dp[i][0] = 0;
+	        }
+	        for (int j=1; j<=f; j++) {
+	            dp[1][j] = j;
+	        }
+	        for (int i=2; i<=e; i++) {
+	            for (int j=2; j<=f; j++) {
+	                dp[i][j] = Integer.MAX_VALUE;
+	                for (int floors=1; floors<=j; floors++) {
+	                    result = 1 + Math.max(dp[i-1][floors-1], dp[i][j-floors]);
+	                    dp[i][j] = Math.min(result, dp[i][j]);
+	                }
+	            }
+	        }
+	        return dp[e][f];
+	    }
+	 
+	 
+	public int superEggDrop2(int e, int f) {
+		int[][] dp = new int[e + 1][f + 1];
+
+		for (int i = 0; i <= e; i++) {   
+			for (int j = 0; j <= f; j++) {
+				if (i == 1 || j == 1)
+					dp[i][j] = j; //remember this j 
+			}
+		}
+		for (int i = 2; i <= e; i++) {
+			for (int j = 2; j <= f; j++) {
+
+				for (int k = 1; k <= j; k++) {
+					int temp = 1 + dp[i - 1][k - 1] + dp[i][j - k];
+					dp[i][j] = Math.min(dp[i][j], temp);
+				}
+			}
+		}
+
+		return dp[e][f];
+	}
 	    
 }

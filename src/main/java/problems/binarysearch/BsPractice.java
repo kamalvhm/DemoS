@@ -4,7 +4,7 @@ public class BsPractice {
 
 	public static void main(String[] args) {
 		//Simple binary search + variation of first and last 
-		int [] h= {5,7,7,8,8,8,8,8,10};
+		int [] h= {5,7,7,7,7,8,8,8,10};
 		System.out.println(searchRange(h,8));
 		
 		int [] f= {1,2,3,4,5,6,1,2,3,4,5};
@@ -17,14 +17,15 @@ public class BsPractice {
 					  {27,29,37,48},
 					  {32,33,39,50}};
 		//1-2 should be retured;
-		System.out.print(Search2DArray(arr,29));
+		System.out.println("2D--> "+Search2DArray(arr,29));
 		
 		int [] a= {20,17,15,14,12,10,8,2,1};
 		System.out.print(searchBsInDescArray(a,2));
 		//order agnostic array;
 		int [] b= {1,2,3,4,5,5,5,6,7,8};
-		System.out.print(bslast(b,6)-bsfirst(b,5));
-		
+		System.out.println("Last-"+(bslast(b,6)-bsfirst(b,5)));
+		//System.out.println("Last"+bsfirst(b,5));
+
 		//Problem 1:- how many times a sorted array is rotated  ANS to below is 4
 		//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
 		int [] c= {11,12,15,18,2,5,6,8};
@@ -48,13 +49,14 @@ public class BsPractice {
 	}
 
 	private static int searchRange(int[] a, int i) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if((mid==r || a[mid+1]>i) && a[mid]==i)return mid;
-			else if(i>a[mid])
-				l=mid+1;
-			else r=mid-1;
+		int left =0, right=a.length-1;
+		
+		while(left<=right) {
+			int mid=left+(right-left)/2;
+			if(a[mid]==i)return mid;
+			else if(i>a[mid]) {
+				left=mid+1;
+			}else right=mid-1;
 		}
 		return -1;
 	}
@@ -70,48 +72,33 @@ public class BsPractice {
 	
 	public static int searchBsInDescArray(int [] a,int target) {
 		int left=0,right=a.length-1;
-		while(left<right) {
-			int mid =left+(right-left)/2;
-			
-			if(a[mid]==target) {
-				return mid;
-			}else if(target>a[mid]) {
-				right=mid-1;
-			}else {
-				left=mid+1;
-			}
-		}
+		
 		return -1;
 	}
 	
 	public static int bsfirst(int [] a,int target) {
 		int left=0,right=a.length-1;
 		while(left<=right) {
-			int mid =left+(right-left)/2;
-			
-			if((mid==0 || a[mid-1]<target) && a[mid]==target) {
+			int mid=left+(right-left)/2;
+			if((mid==0 || a[mid-1]<a[mid]) && a[mid]==target)
 				return mid;
-			}else if(target>a[mid]) {
+			else if(target>a[mid])
 				left=mid+1;
-			}else {
-				right=mid-1;
-			}
+			else right=mid-1;
 		}
+		
 		return -1;
 	}
 	
 	public static int bslast(int [] a,int target) {
 		int left=0,right=a.length-1;
 		while(left<=right) {
-			int mid =left+right-left/2;
-			int v =a[mid];
-			if((mid==right || target<a[mid+1]) && v==target) {
+			int mid=left+(right-left)/2;
+			if((mid==right|| a[mid+1]>a[mid]) && a[mid]==target)
 				return mid;
-			}else if(target<v) {
+			else if(a[mid]>target)
 				right=mid-1;
-			}else {
-				left=mid+1;
-			}
+			else left=mid+1;
 		}
 		return -1;
 	}
@@ -221,35 +208,33 @@ public class BsPractice {
 	 public static String Search2DArray(int[][] a,int target) {
 		 	int h=a.length;
 		 	int l=a[0].length;
-		 	int res=-1;
-		 	int j=l-1;
-		 	int i=0;  
-		 	
-		 	while(j<l && j>=0 && i>=0 && i<h) {
+		 	int i=0,j=a[0].length-1;
+		 
+		 	while(j<l && j>=0  && i<h &&  i>=0  ) {
 		 		int val=a[i][j];
-		 		if(target==val) return i+"-"+j;
-		 		else if(val>target) {
+		 		if(val==target)return i+"-"+j;
+		 		else if(target<val) {
 		 			j--;
-		 		}else if(val<target) {
+		 		}else {
 		 			i++;
 		 		}
+		 		
 		 	}
 		 	
-		 	return res+"";
+		 	return -1+"";
 		 	
 	      }
 	 
 	 public static int findPeakElement(int[] a) {
 	        int left=0,right=a.length-1;
+	       
 	        while(left<=right) {
 	        	int mid=left+(right-left)/2;
-	        	
 	        	if((mid==0 || a[mid-1]<a[mid]) && (mid==right || a[mid+1]<a[mid]))
-	        		return a[mid];
+	        		return mid;
 	        	else if(a[mid]<a[mid+1])
 	        		left=mid+1;
-	        	else
-	        		right=mid-1;
+	        	else right=mid-1;
 	        }
 	        return -1;
 	      }

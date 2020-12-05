@@ -39,8 +39,46 @@ public class Dummy2 {
 		Set<Integer> set=new HashSet<Integer>();
 		new ArrayList(set);
 		
+		int [] arr= {3,2,2,4,1,4};
+		shipWithinDays(arr,3);
 		
 	}
+	
+	 public static int shipWithinDays(int[] weights, int D) {
+        int l=weights.length;
+        int start =weights[l-1];
+        int end =0;
+        int result = Integer.MAX_VALUE;
+        for(int i:weights)
+            end+=i;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            
+            if(isValid(weights,mid,D)){
+               result=Math.min(mid,result);
+                end=mid-1;
+            }else {
+                start=mid+1;
+            }
+        }
+        return result;
+    }
+    
+    public static boolean isValid(int[] w,int m,int d){
+        int sum=0;
+        int current=0;
+        for(int i:w){
+            sum+=i;
+            
+            if(sum>=m) {
+            	sum=sum%m;
+                current++;
+            }
+            if(current>d)
+                return false;
+        }
+        return true;
+    }
 	
 	  
 	

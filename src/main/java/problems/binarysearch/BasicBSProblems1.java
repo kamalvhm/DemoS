@@ -1,6 +1,6 @@
 package problems.binarysearch;
 
-public class BasicBSProblems {
+public class BasicBSProblems1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

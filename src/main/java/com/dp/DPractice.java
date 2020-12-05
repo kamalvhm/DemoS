@@ -15,28 +15,32 @@ public class DPractice {
 		int [] val= {1,4,5,7};
 		//ANS:- 9  //Return Maximum Profit
 		System.out.println("ANS:- "+knapsack(wt,val,7,val.length));
-		/**
-		ANS:- 9
-		1)subset sum  ANS:- true
-		2)equal sum partition  ANS:- true
-		3)count of subset sum  ANS:- 3
-		4)Minimum subset sum difference  ANS:- 4
-		6)No of subset for given d/f  ANS:- 3
-		5)Target sum  ANS:- 3
-		1)Rod Cutting :-22
-		*/
-		int [] arr= {2,3,7,8,10};//PS:-Given one array and sum return if sum can be formed with elemnt or not 
+		
+		int [] arr= {2,3,7,8,10};
+		//return true if given sum can be formed by subset
 		System.out.println("1)subset sum  ANS:- "+subsetSum(arr,11,arr.length));
+		
 		int [] arr2= {1,5,11,5};
-		System.out.println("2)equal sum partition  ANS:- "+equalSum(arr2,arr2.length));//return true if can be divided into two equal partitions 
+		//return true if two equal sum subset is there 
+		System.out.println("2)equal sum partition  ANS:- "+equalSum(arr2,arr2.length));
+		
 		int [] arr3= {2,3,5,6,8,10};
+		//return count of subset which having same sum Ans will be 3
 		System.out.println("3)count of subset sum  ANS:- "+countSubsetSum(arr3,10,arr3.length));
+		
 		int [] arr4= {1,2,7};
-		System.out.println("4)Minimum subset sum difference  ANS:- "+minimumSubsetSumDiff(arr4,arr4.length));//will give 4
+		//return min diffrence of two subsets from given array will give 4 {1,2} sum is 3 and {7} sum is 7 (7-3=4)
+		System.out.println("4)Minimum subset sum difference  ANS:- "+minimumSubsetSumDiff(arr4,arr4.length));//--->>>>
+		
+
 		int [] arr5= {1,1,2,3};
+		//return count of subset which is having given diffrence when sum is subtracted (check V-11 in notes) ANS :-3
 		System.out.println("6)No of subset for given d/f  ANS:- "+noOfSubsetforGivenDiff(arr5,1,arr5.length));
+		//This problem is SAME as 6)No of subset for given d/f diffrently so same method call
 		int [] arr6= {1,1,2,3};
+		//return count of subset which is having given diffrence when adding +ve and -ve signs to each value
 		System.out.println("5)Target sum  ANS:- "+noOfSubsetforGivenDiff(arr6,1,arr6.length));
+		
 		int [] length= {1,2,3,4,5,6,7,8}; //some time legth[] array not given so loop from 1 to n to create 
 		int [] price= {1,5,8,9,10,17,17,20};
 		int n=8;
@@ -49,57 +53,40 @@ public class DPractice {
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
-		int t[][]=new int[n+1][w+1];
+		int t[][] =new int [n+1][w+1];
 		
-		for(int i=0;i<n+1;i++) {
-			for(int j=0;j<w+1;j++) {
-				if(i==0 || j==0 )
-					t[i][j]=0;
-			}
-		}
 		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<w+1;j++) {
-				if(wt[i-1]<=j) {
-					t[i][j]=Math.max(val[i-1]+t[i-1][j-wt[i-1]],t[i-1][j]);
-				}else {
-					t[i][j]=t[i-1][j];
-				}
-			}
-		}
 		return t[n][w];
 	}
 	
-	public static boolean subsetSum(int[] arr , int sum, int n) {
+	public static boolean[][] subsetSum(int[] arr , int sum, int n) {
 		boolean t[][] =new boolean [n+1][sum+1];
+		
 		for(int i=0;i<n+1;i++) {
 			for(int j=0;j<sum+1;j++) {
-				if(i==0 )
+				if(i==0)
 					t[i][j]=false;
-				if(j==0)
+				  if(j==0)
 					t[i][j]=true;
 			}
 		}
 		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
-				if(arr[i-1]<=j) {
+				 if(arr[i-1]<=j) {
 					t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
-				}else {
+				}else 
 					t[i][j]=t[i-1][j];
-				}
 			}
 		}
-		return t[n][sum];
+		return t;
 	}
 	
 	
 	public static boolean equalSum(int[] arr , int n) {
-		int totalSum =0;
-		for(int i:arr)
-			totalSum+=i;
-		if(totalSum%2!=0)return false;
-		else return subsetSum(arr, totalSum/2, n);
+		int sum=0;
+		
+		return true;
 	}
 	
 	public static int countSubsetSum(int[] arr , int sum, int n) {
@@ -109,65 +96,55 @@ public class DPractice {
 			for(int j=0;j<sum+1;j++) {
 				if(i==0)
 					t[i][j]=0;
-				 if(j==0)
+				if(j==0)
 					t[i][j]=1;
 			}
 		}
+		
 		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
 				if(arr[i-1]<=j) {
 					t[i][j]=t[i-1][j-arr[i-1]]+t[i-1][j];
-				}
-				else t[i][j]=t[i-1][j];
-
+				}else t[i][j]=t[i-1][j];
 			}
 		}
+		
 		return t[n][sum];
 	}
 	
 	
 	public static int minimumSubsetSumDiff(int[] arr , int n) {
-		int sum=0;
-		for(int i:arr) {
-			sum+=i;
+		int range=0;
+		for(int i:arr)
+			range+=i;
+		
+		boolean [][]t=subsetSum(arr, range, n);
+		
+		int min=Integer.MAX_VALUE;
+		for(int i=0;i<range/2;i++) {
+			if(t[arr.length-1][i])
+				min=Math.min(min, (range-2*i));
+				
 		}
 		
-		boolean t[][]=subsetSumToReturnTable(arr, sum, n);
-		int minimum =Integer.MAX_VALUE;
-		for(int i=0;i<sum/2;i++) {
-			if(t[arr.length-1][i]) {
-				minimum=Math.min(minimum, sum-2*i);
-			}
-		}
 		
-		return minimum;
+		return min;
 	}
 	public static boolean[][] subsetSumToReturnTable(int[] arr,int sum,int n){
 		boolean t[][] =new boolean [n+1][sum+1];
-		for(int i=0;i<n+1;i++) {
-			for(int j=0;j<sum+1;j++) {
-				if(i==0 )
-					t[i][j]=false;
-				if(j==0)
-					t[i][j]=true;
-			}
-		}
 		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<sum+1;j++) {
-				if(arr[i-1]<=j) {
-					t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
-				}else {
-					t[i][j]=t[i-1][j];
-				}
-			}
-		}
 		return t;
 	}
 	
 	public static int noOfSubsetforGivenDiff(int[] arr ,int diff, int n) {
-		return -1;
+		int sum =0;
+		for(int a:arr)
+			sum+=a;
+		
+		int s1=sum+diff/2;
+		
+		return countSubsetSum(arr, s1, n);
 	}
 	
 	public static int unboundedKnapsack(int [] wt,int [] val,int w,int n) {

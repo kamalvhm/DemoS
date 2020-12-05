@@ -3,10 +3,14 @@ package com.recursion;
 import java.util.ArrayList;
 
 public class JosePhusProblem {
-
+	  // Suppose there are n people in a circle and person
+	  // 0 kill the k'th person, then the k'th person kills
+	  // the 2k'th person and so on until only one person remains.
+	  // The question is who lives?
+	  // Let n be the number of people and k the hop size
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int number_of_person=40;
+		int number_of_person=40; //40 persons in circle counting one by one 7 person will die 
 		int die_index=7;
 		
 		ArrayList<Integer> list=new ArrayList<Integer>();

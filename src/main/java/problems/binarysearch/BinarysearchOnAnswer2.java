@@ -7,7 +7,7 @@ package problems.binarysearch;
  * Problems where we can apply binary search on unsorted array also !!!! for example findPeak problem
  *
  */
-public class BinarysearchOnAnswer {
+public class BinarysearchOnAnswer2 {
 
 	/**
 	 * @param args
