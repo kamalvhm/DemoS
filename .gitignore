@@ -1,1 +1,11 @@
 /target/
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# ignoring practice classes
+*Practice*.java
+
+Dummy*.java
