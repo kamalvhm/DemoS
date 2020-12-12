@@ -2,6 +2,17 @@ package com.dp;
 
 import java.util.Arrays;
 
+/**1)subset sum  ANS:- true
+2)equal sum partition  ANS:- true
+3)count of subset sum  ANS:- 3
+4)Minimum subset sum difference  ANS:- 4
+6)No of subset for given d/f  ANS:- 3
+5)Target sum  ANS:- 3
+1)Rod Cutting :-22
+2)coin change I :-5
+3)coin change II :-2
+*/
+
 public class DPractice {
 	static int dp[][]=new int[10][10];
 	static {
@@ -142,23 +153,72 @@ public class DPractice {
 		for(int a:arr)
 			sum+=a;
 		
-		int s1=sum+diff/2;
+		int s1=(sum+diff)/2;
 		
 		return countSubsetSum(arr, s1, n);
 	}
 	
 	public static int unboundedKnapsack(int [] wt,int [] val,int w,int n) {
-		return -1;
+		int t[][] =new int [n+1][w+1];
+		
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<w+1;j++) {
+				if(i==0 || j==0)
+					t[i][j]=0;
+				else if(wt[i-1]<=j) {
+					t[i][j]=Math.max(val[i-1]+t[i][j-wt[i-1]],t[i-1][j]);
+				}else t[i][j]=t[i-1][j];
+			}
+		}
+		return t[n][w];
 		
 	} 
 	public static int coinChangeI(int[] coin,int sum ,int n) {
 		int t[][]=new int[n+1][sum+1];
 		
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=0;
+				if(j==0)
+					t[i][j]=1;
+			}
+		}
+		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(coin[i-1]<=j) {
+					t[i][j]=t[i-1][j] + t[i][j-coin[i-1]];
+				}else 
+					t[i][j]=t[i-1][j];
+			}
+		}
+		
+		
 		return t[n][sum];
 	}
 	//return min no of coins to form :-https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
 	private static int coinChangeII(int[] coin, int sum, int n) {
-		int t[][] =new int [n+1][sum+1];
+		int t[][]=new int[n+1][sum+1];
+		
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=Integer.MAX_VALUE-1;
+				if(j==0)
+					t[i][j]=0;
+			}
+		}
+		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(coin[i-1]<=j) {
+					t[i][j]=Math.min(t[i-1][j] ,t[i][j-coin[i-1]]+1);
+				}else 
+					t[i][j]=t[i-1][j];
+			}
+		}
+		
 		
 		return t[n][sum];
 	}

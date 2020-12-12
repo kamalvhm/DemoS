@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 5)Min # insertion and deletion a->b
  * 6)Longest repeating subSequence
  * 7)Length of longest subsequence of a which is substring in b
- * 8)subsequence pattern Matching
+ * 8)subsequence pattern Matching | 392. Is Subsequence
  * 9)count how many times a appear as subsequence in b
  * 10)Longest palindromic sub sequence [v-26] |516. Longest Palindromic Subsequence https://leetcode.com/problems/longest-palindromic-subsequence/
  * 11)Longest palindromic substring

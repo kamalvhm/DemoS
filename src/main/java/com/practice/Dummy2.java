@@ -3,6 +3,7 @@ package com.practice;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +31,7 @@ public class Dummy2 {
 		//findSubarray(A,sum);
 		
 		int b[]= {1,2,3,4};
-		maxSlidingWindow(b,2);
+		//maxSlidingWindow(b,2);
 		
 		char[][] board=	{{'A','B','C','E'},
 						 {'S','F','C','S'},
@@ -40,9 +41,13 @@ public class Dummy2 {
 		new ArrayList(set);
 		
 		int [] arr= {3,2,2,4,1,4};
-		shipWithinDays(arr,3);
+		//shipWithinDays(arr,3);
+		
 		
 	}
+	
+    	
+	
 	
 	 public static int shipWithinDays(int[] weights, int D) {
         int l=weights.length;

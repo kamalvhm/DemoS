@@ -2,7 +2,7 @@ package com.dp;
 
 import com.beans.TreeNode;
 
-public class DpOnTrees {
+public class DpOnTrees4 {
 	/**
 	 * General Syntax
 	 * How Dp can be appilied on trees (Identification)

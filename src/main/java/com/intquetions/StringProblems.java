@@ -145,4 +145,25 @@ public class StringProblems {
 	        return result;
 	        
 	    }
+	    //1163. Last Substring in Lexicographical Order Also check in SUFIX ARRAY SOLUTION
+	    public String lastSubstring(String s) {
+	        int len=s.length();
+	        int i=1,j=0,k=0;
+	        
+	        while(i+k<len){
+	            //k means the same letters, the longer, the better.
+	            if(s.charAt(i+k)==s.charAt(j+k)){
+	                k++;
+	                continue;
+	            }            
+	            //if we find a larger one, replace j by current i.
+	            if(s.charAt(i+k)>=s.charAt(j+k)){
+	                j=i;
+	            }            
+	            i++;
+	            //every time, we should initiate k by 0.
+	            k=0;
+	        }
+	        return s.substring(j);
+	    }
 }

@@ -1,6 +1,6 @@
 package com.recursion;
 
-public class IBHPrintN {
+public class IBHPrintN1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -14,6 +14,7 @@ public class IBHPrintN {
 			return;
 		}
 		else {
+			
 			//hypo step 2
 			print(n-1);
 			//Induction

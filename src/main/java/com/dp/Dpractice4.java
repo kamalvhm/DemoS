@@ -28,15 +28,16 @@ import com.dp.BooleanParenthesization;
 		}
 		return finalAns;
 	}
-	###########GENERQAL STEPS#############
- * STEPs 1) find where to place i and j (generally i at left end and j at right)
- * 2)find Base Condi.
- * 3)find where K loop will move (To find it place k at smallest and largest pos and check if partions are valid)
- * 4)find final ANS from temporary
+	###########ANS#############
+1)MCM ans 26000
+5)Palindrom Partitioning ans:- 4
+3)Evaluate Expression to true ans:- 2
+6)Scramble String ans:- true
+7)Egg Dropping Problem ans:- 3
  *
  */
 
-public class MatrixChainMultiplication extends DynamicPrograming{
+public class Dpractice4 extends DynamicPrograming{
 	static int dp[][]=new int [100][100];//size depends on max constraints 
 	static int p[][]=new int [100][100];
 	static int egg[][]=new int [100][100];
@@ -81,65 +82,64 @@ public class MatrixChainMultiplication extends DynamicPrograming{
 
 	//https://www.youtube.com/watch?v=kMK148J9qEE&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=34
 	public static int solveMCM(int arr[],int i,int j) {
-		if(i>=j)return 0; // STEP 2 (find Base cond):as we need min 2 element in array to find dimension
-		int min=Integer.MAX_VALUE;
-		//Step 3:-Move k from i to j :-first decide from and upto k will move by breaking matrixs on k samllest and larget value
-		//after analysis k will move from i to j-1 it will not move upto k=j because in that case we will (K+1 to j) as empty and whole array 
-		//will be in (i to k) 
-		//Note :- To select k movement for smallest and largest value of k extract dimension with Ai=arr[i-1]*arr[i];  and check if valid 
-		for(int k=i;k<=j-1;k++) {
-			//check notes for this formula 
-			int tempAns=solveMCM(arr,i,k)+solveMCM(arr,k+1,j)+arr[i-1]*arr[k]*arr[j];
+		if(i>=j)return 0;
+		int min =Integer.MAX_VALUE;
+		for(int k=i;k<j;k++) {
+			int temp=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
 			
-			//Step 4:-calculate ans from temporary ans;
-			if(tempAns<min)
-				min=tempAns;
+			min =Math.min(temp, min);
 		}
 		return min;
 	}
 	
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
-		if(i>=j)return 0; 
-		if(dp[i][j]!=-1)return dp[i][j]; //CHANGE ONE 
-		
-		int min=Integer.MAX_VALUE;
-		for(int k=i;k<=j-1;k++) {
-			int tempAns=solveMCM_BottomUp(arr,i,k)+solveMCM_BottomUp(arr,k+1,j)+arr[i-1]*arr[k]*arr[j];
+		if(i>=j)return 0;
+		if(dp[i][j]!=-1)return dp[i][j];
+		int min =Integer.MAX_VALUE;
+		for(int k=i;k<j;k++) {
+			int temp=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
 			
-			//Step 4:-calculate ans from temporary ans;
-			if(tempAns<min)
-				min=tempAns;
+			min =Math.min(temp, min);
 		}
-		//CHANGE TWO
 		return dp[i][j]=min;
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
-		if(i>=j)return 0; //if single char then no partion needed
-		if(Utils.isPalindrom(s,i,j))return 0; //if already palindrom then also no partion needed
-		int ans=Integer.MAX_VALUE;
-		for(int k=i;k<=j-1;k++) {
-			int temp=palindrom_partitioning_recursive(s,i,k)+palindrom_partitioning_recursive(s, k+1, j)+1;//solve(i to k) and solve(k+1,j) both will give min partions and as wedone already one so +1
+		if(i>=j)return 0;
+		if(isPalindrom(s,i,j))return 0;
+		int min=Integer.MAX_VALUE;
+		for(int k=i;k<j;k++) {
+			int temp =palindrom_partitioning_recursive(s,i,k) +palindrom_partitioning_recursive(s,k+1,j)+1;
+			min =Math.max(min, temp);
 			
-			 if(temp<ans)
-				 ans=temp;
 		}
-		return ans;
+		return min;
+	}
+
+	private static boolean isPalindrom(String s, int i, int j) {
+		if(i==j)return true;
+		if(i>j)return false;
+		while(i<j) {
+			if(s.charAt(i)!=s.charAt(j))
+				return false;
+			i++;
+			j--;
+		}
+		return true;
 	}
 
 	//V-37
 	private static int palindrom_partitioningBottomUp(String s, int i, int j) {
-		if(i>=j)return 0; //if single char then no partion needed
-		if(Utils.isPalindrom(s,i,j))return 0; //if already palindrom then also no partion needed
-		if(p[i][j]!=-1)return p[i][j]; //CHANGE 1
-		int ans=Integer.MAX_VALUE;
-		for(int k=i;k<=j-1;k++) {
-			int temp=1+palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);//solve(i to k) and solve(k+1,j) both will give min partions and as wedone already one so +1
+		if(i>=j)return 0;
+		if(isPalindrom(s,i,j))return 0;
+		if(p[i][j]!=-1)return p[i][j];
+		int min=Integer.MAX_VALUE;
+		for(int k=i;k<j;k++) {
+			int temp =palindrom_partitioning_recursive(s,i,k) +palindrom_partitioning_recursive(s,k+1,j)+1;
+			min =Math.max(min, temp);
 			
-			ans=Math.min(ans, temp);
 		}
-		//CHANGE 2
-		return p[i][j]=ans;
+		return p[i][j]= min;
 	}
 	//CHECK PROBLEM SOLUTION IN PARENT CLASS
 	//V-38 To optimize further we can check "palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);" function in the matrix 
@@ -280,7 +280,7 @@ public class MatrixChainMultiplication extends DynamicPrograming{
 		int n=a.length();//both are equal by now
 		boolean flag=false;
 		for(int i=1;i<=n-1;i++) {
-			if(scrambledSolve(a.substring(0, i), b.substring(n - i, n))  //Condition 1 where there is swapping //n - i is because we need to compare same count
+			if(scrambledSolve(a.substring(0, i), b.substring(n - i, n))  //Condition 1 where there is swapping
 					&& scrambledSolve(a.substring(i, n), b.substring(0, n - i)) || 
 							scrambledSolve(a.substring(0,i),b.substring(0,i)) //Condition 2 where No swapping
 							&& scrambledSolve(a.substring(i,n),b.substring(i,n))) {

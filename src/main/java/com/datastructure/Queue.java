@@ -47,6 +47,7 @@ public class Queue<T> implements Iterable{
 	
 
 	public static void main(String args[]) {
+		//######################MAX HEAP IMLEMENTATION##############################
 		//Method 1:
 		PriorityQueue<Integer> maxPQ = new PriorityQueue<>(Collections.reverseOrder()); 
 		//Method 2:
@@ -163,4 +164,15 @@ public class Queue<T> implements Iterable{
 	             
 	        return ans;
 	    }
+	  
+	  //215. Kth Largest Element in an Array          !!!MEDIUM!!!    #*        HINT:- if Largest or smallest mentioned in problem use heaps
+	    public int findKthLargest(int[] nums, int k) {
+	        PriorityQueue<Integer> q=new PriorityQueue<Integer>();//min heap only kth lagest will remian at root rest mins will be removed as its min heap
+	         for(int i:nums){
+	             q.add(i);
+	             if(q.size()>k)
+	                 q.remove();
+	         }
+	         return q.remove();
+	     }
 }

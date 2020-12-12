@@ -35,7 +35,7 @@ class Node implements PrintableNode{
 }
 
 //https://www.youtube.com/watch?v=oCcUNRMl7dA&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY&index=8
-public class RecurssionStudy {
+public class RecurssionStudy3 {
 
 
 	public static void main(String[] args) {

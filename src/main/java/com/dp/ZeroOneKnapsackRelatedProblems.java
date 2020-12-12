@@ -7,7 +7,7 @@ import java.util.Arrays;
  * 2)equal sum partition | 416. Partition Equal Subset Sum (https://leetcode.com/problems/partition-equal-subset-sum/)
  * 3)count of subset sum |
  * 4)Minimum subset sum difference |
- * 5)Target sum |
+ * 5)Target sum | 494. Target Sum (https://leetcode.com/problems/target-sum/)
  * 6) No of subset for given d/f |
  * 
  */

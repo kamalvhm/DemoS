@@ -26,6 +26,16 @@ public class ArrayProblems {
       				   ,{4,5,6}
       				   ,{7,8,9}};
       System.out.println(spiralOrder(matrix));//Printing matrix in a spiral
+      
+      
+      //Find MISSIN and DUPLICATE nos in array;SWAP SORT NEED https://www.youtube.com/watch?v=KOsS5-1q9rU&list=PL_z_8CaSLPWdJfdZHiNYYM46tYQUjbBJx&index=2
+      int ar[]= {1,4,3,4,5}; //4 is duplicate and 2 is missing
+      // we need to equation here to find two variable ex .arr {a,e,b,c,d,e} and 1 to N is {a ,b ,c ,d ,e} so 1 st is 
+      // sum of 1to N minus array sum that will give us b-e ,secound is Now same equal minus with squares 
+      // a2 b2 c2 d2 e2 - a2 e2 b2 c2 d2 e2 will give b2-e2 by solving math of both we can solve this but here we will discuss 
+      //swap sort where we will arrange array such that i index contains i+1 value  so start from 0 nd check if its on correct spot if not swap this 
+      //with correct spot https://leetcode.com/problems/find-the-duplicate-number/
+      System.out.print(findDupUsingSlowFast(ar));
 	}
 	
 		//448. Find All Numbers Disappeared in an Array
@@ -118,16 +128,7 @@ public class ArrayProblems {
 		    	
 		    } 
 		    
-		    //215. Kth Largest Element in an Array          !!!MEDIUM!!!    #*        HINT:- if Largest or smallest mentioned in problem use heaps
-		    public int findKthLargest(int[] nums, int k) {
-		        PriorityQueue<Integer> q=new PriorityQueue<Integer>();//min heap only kth lagest will remian at root rest mins will be removed as its min heap
-		         for(int i:nums){
-		             q.add(i);
-		             if(q.size()>k)
-		                 q.remove();
-		         }
-		         return q.remove();
-		     }
+		   
 		    
 		    //54. Spiral Matrix ||| ALSO 59. Spiral Matrix II Check :-https://leetcode.com/problems/spiral-matrix-ii/
 		    public static List<Integer> spiralOrder(int[][] matrix) {
@@ -160,5 +161,39 @@ public class ArrayProblems {
 		        }
 		        return nums;
 		    }
+		    
+// Keep note of the index being visited and then return if already visited
+	public static int findDuplicate(int[] nums) {
+		int n = nums.length;
+		int duplicate = n;
+		for (int i = 0; i < n; i++) {
+			int x = (nums[i] > n) ? nums[i] - n : nums[i];
+			if (nums[x] > n) {
+				duplicate = x;
+				break;
+			} else
+				nums[x] += n;
+		}
+		return duplicate;
+
+	}
+	
+	 public static int findDupUsingSlowFast(int[] nums) {
+	        if (nums == null || nums.length ==0) return -1;
+	        
+	        int slow = nums[0];
+	        int fast = nums[slow];
+	        while(slow != fast ) {
+	            slow = nums[slow];
+	            fast = nums[nums[fast]];
+	        }
+	        
+	        slow = 0;
+	        while(slow != fast) {
+	            slow = nums[slow];
+	            fast = nums[fast];
+	        }
+	        return slow;
+	    }
 		    
 }
