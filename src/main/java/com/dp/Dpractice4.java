@@ -85,9 +85,8 @@ public class Dpractice4 extends DynamicPrograming{
 		if(i>=j)return 0;
 		int min =Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int temp=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
-			
-			min =Math.min(temp, min);
+			int tmp=solveMCM(arr,i,k)+solveMCM(arr,k+1,j)+arr[i-1]*arr[k]*arr[j];
+			min =Math.min(min, tmp);
 		}
 		return min;
 	}
@@ -106,12 +105,11 @@ public class Dpractice4 extends DynamicPrograming{
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
 		if(i>=j)return 0;
-		if(isPalindrom(s,i,j))return 0;
-		int min=Integer.MAX_VALUE;
+		if(isPalindrom(s, i, j))return 0;
+		int min =Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int temp =palindrom_partitioning_recursive(s,i,k) +palindrom_partitioning_recursive(s,k+1,j)+1;
-			min =Math.max(min, temp);
-			
+			int tmp=palindrom_partitioning_recursive(s,i,k)+palindrom_partitioning_recursive(s,k+1,j)+1;
+			min=Math.min(min, tmp);
 		}
 		return min;
 	}
@@ -136,7 +134,7 @@ public class Dpractice4 extends DynamicPrograming{
 		int min=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
 			int temp =palindrom_partitioning_recursive(s,i,k) +palindrom_partitioning_recursive(s,k+1,j)+1;
-			min =Math.max(min, temp);
+			min =Math.min(min, temp);
 			
 		}
 		return p[i][j]= min;
@@ -270,8 +268,8 @@ public class Dpractice4 extends DynamicPrograming{
 	public static boolean scrambledStringRecursie(String a ,String b) {
 		if(a.length()!=b.length()) return false;
 		if(a.isEmpty() && b.isEmpty())return true;
-		 return scrambledMemoized(a,b);
-		//return scrambledSolve(a,b);
+		// return scrambledMemoized(a,b);
+		return scrambledSolve(a,b);
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {

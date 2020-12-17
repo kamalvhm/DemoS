@@ -6,11 +6,11 @@ import java.util.Random;
 
 
 
-public class TestV11 {
+public class TestV10Reentrant {
 
 	
 	public static void main(String args[]) throws InterruptedException {
-		Runner2 r=new Runner2();
+		Runner r=new Runner();
 		
 		Thread t1 =new Thread(()->{
 			try {

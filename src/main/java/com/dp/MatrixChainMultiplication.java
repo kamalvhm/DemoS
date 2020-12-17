@@ -8,7 +8,7 @@ import com.cleanup.Utils;
 
 import scala.Array;
 import com.dp.BooleanParenthesization;
-
+//SAME PATTERN QUETION :-https://leetcode.com/problems/word-break/submissions/
 /** ##{@link #MatrixChainMultiplication()}
  * 1)MCM ##{@link #solveMCM()}
  * 2)Printing MCM 

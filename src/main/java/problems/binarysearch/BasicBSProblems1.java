@@ -1,5 +1,7 @@
 package problems.binarysearch;
 
+import java.util.Arrays;
+
 public class BasicBSProblems1 {
 
 	public static void main(String[] args) {
@@ -28,6 +30,8 @@ public class BasicBSProblems1 {
 		//find element in infinite array  consider below as infinate 
 		int [] f= {1,2,3,4,5,6,7,8,9,10,11};
 		System.out.print(bsInfiniteArray(f, 7));
+		
+		
 
 	}
 	
@@ -101,11 +105,13 @@ public class BasicBSProblems1 {
 		}
 		return -1;
 	}
-	
+	//https://leetcode.com/problems/search-in-rotated-sorted-array/ |33. Search in Rotated Sorted Array
 	public static int findElemntinRotatedArray(int [] a,int target) {
 		int left=0,right=a.length-1;
 		int n=a.length-1;
 		while(left<=right) {
+			if (a[left] <= a[right]) // array is sorted -> so return first ele.
+				return a[left];
 			int mid =left+(right-left)/2;
 			int v =a[mid];
 			//this % is for rotation
@@ -186,6 +192,8 @@ public class BasicBSProblems1 {
 		return -1;
 		
 	} 
+	
+	
 	
 	
 

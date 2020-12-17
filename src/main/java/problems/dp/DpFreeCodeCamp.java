@@ -3,6 +3,7 @@ package problems.dp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 //https://www.youtube.com/watch?v=oBt53YbR9Kk&t=224s
 public class DpFreeCodeCamp {
 	// Memorization
@@ -12,7 +13,7 @@ public class DpFreeCodeCamp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub 102334155
 		long start = System.currentTimeMillis();
-		System.out.println(fib3(30));
+		System.out.println(fib2(30));
 		//System.out.println("Grid travler :-" + gridTraveler(4, 4));
 		long end = System.currentTimeMillis();
 		System.out.println("total time :-" + (end - start));
@@ -20,7 +21,40 @@ public class DpFreeCodeCamp {
 		//System.out.println("Grid travler :-" + gridTraveler1(3, 3));// how many way to travel grid with down and right
 																	// move only 4924
 		int a[]= {2,3,5};
-		System.out.print("CAN SUM:-"+howSum(8,a));
+		System.out.println("How SUM--->>"+ howSum(7,a));
+		
+		ArrayList<String> list=new ArrayList<>();
+		list.add("purp");
+		list.add("p");
+		list.add("ur");
+		list.add("le");
+		list.add("purpl");
+		
+		System.out.print("CAN SUM:-"+allConstruct("purple",list));
+	}
+	
+	public static boolean canSUM(int sum,int a[]) {
+		int n=a.length;
+		boolean t[][]=new boolean [n+1][sum+1];
+		
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=false;
+				if(j==0)
+					t[i][j]=true;
+			}
+		}
+		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(a[i-1]<=j) {
+					t[i][j]=t[i-1][j-a[i-1]] || t[i-1][j];
+				}else 
+					t[i][j]=t[i-1][j];
+			}
+		}
+		return t[n][sum];
 	}
 
 	private static int fib(int n) {
@@ -33,9 +67,8 @@ public class DpFreeCodeCamp {
 	private static int fib2(int n) {
 		int[] a = new int[n + 1];
 		a[1] = 1;
-		a[2] = 1;
 
-		for (int i = 3; i <= n; i++) {
+		for (int i = 2; i <= n; i++) {
 			a[i] = a[i - 1] + a[i - 2];
 		}
 
@@ -94,39 +127,74 @@ public class DpFreeCodeCamp {
 	
 	public static List<Integer>  howSum(int t,int [] a) {
 		int n =a.length;
-		int dp[][]=new int [n+1][t+1];
+		List<List<Integer>> dp=new ArrayList<>(t+1);
 		
-		for(int i=0;i<n+1;i++) {
-			for(int j=0;j<t+1;j++) {
-				if(i==0)
-					dp[i][j]=Integer.MAX_VALUE-1;
-				if(j==0)
-					dp[i][j]=0;
-				
-			}
+		dp.add(0, new ArrayList<>()); //adding empty [] array at 0 as 0 sum is possible without any values
+		for(int i=1;i<=t;i++) {
+			dp.add(i,null);
 		}
-		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<t+1;j++) {
-				if(a[i-1]<=j) {
-					dp[i][j]=Math.min(1+dp[i][j-a[i-1]], dp[i-1][j]);
-				}else {
-					dp[i][j]=dp[i-1][j];
+		for(int i=0;i<=t;i++) {
+			if(dp.get(i)!=null) {//if currant pos in not null then we can generate next ammounts 
+				for(int num:a) {
+					List<Integer> currntPosList=dp.get(i);
+					currntPosList.add(num); //adding num in current position and putting it to next pos 
+					if((i+num)>(t+1))break;
+					dp.add((i+num),currntPosList);
 				}
-				
-			}
+			} 
+			
 		}
-		List<Integer> list=new ArrayList<>();
-		for(int i:dp[n])
-			list.add(i);
-		return list;
+		
+		return dp.get(t);
 		
 	}
-	
+	//139. Word Break | https://leetcode.com/problems/word-break/
 	public boolean canConstruct(String target,ArrayList<String> list) {
 		if (target.length()==0)return true;
 		return false ;
 		
 	}
+	
+	public static int countConstruct(String target,ArrayList<String> list) {
+		if(map2.containsKey(target))return map2.get(target);
+		if (target.length()==0)return 1;
+		int totalcount=0;
+		for(String s:list) {
+			if(target.startsWith(s)) {
+				int numWaysForReast=countConstruct(target.replace(s, ""),list);
+				totalcount+=numWaysForReast;
+			}
+		}
+		map2.put(target, totalcount);
+		return totalcount;
+	}
+	
+	public static List<List<String>> allConstruct(String target,ArrayList<String> list) {
+		if (target.length()==0) {
+			List<String> l=new ArrayList();
+			l.add("");
+			 List<List<String>> l2=new ArrayList<>();
+			 l2.add(l);
+			return l2;
+		}
+		List<List<String>> result=new ArrayList<>();
+		for(String s:list) {
+			if(target.startsWith(s)) {
+				String suffix=target.replace(s, "");
+				List<List<String>> suffixWays=allConstruct(suffix,list);
+				List<List<String>> suffi=new ArrayList<>();
+				for(List<String> l: suffixWays) {
+					l.add(0,suffix);
+					suffi.add(l);
+				}
+					
+				
+				result.addAll(suffi);
+				
+			}
+		}
+		return result;
+	}
+
 
 }

@@ -1,13 +1,15 @@
 package problems.binarysearch;
 
+import java.util.Arrays;
+
 public class BsPractice {
 
 	public static void main(String[] args) {
 		//Simple binary search + variation of first and last 
-		int [] h= {5,7,7,7,7,8,8,8,10};
-		System.out.println(searchRange(h,8));
-		
-		int [] f= {1,2,3,4,5,6,1,2,3,4,5};
+		int [] h= {5,7,7,8,8,8,8,9,10};
+		System.out.println(bsfirst(h,8));
+		//ANS:-5
+		int [] f= {1,2,3,4,5,6,7,2,3,4,5};
 		System.out.println("PEAK-> "+findPeakElement(f));
 				
 		//Binary search in 2D array
@@ -16,11 +18,11 @@ public class BsPractice {
 					  {15,25,35,45},
 					  {27,29,37,48},
 					  {32,33,39,50}};
-		//1-2 should be retured;
+		//2-1 should be retured;
 		System.out.println("2D--> "+Search2DArray(arr,29));
 		
 		int [] a= {20,17,15,14,12,10,8,2,1};
-		System.out.print(searchBsInDescArray(a,2));
+		System.out.println("Desc "+searchBsInDescArray(a,2));
 		//order agnostic array;
 		int [] b= {1,2,3,4,5,5,5,6,7,8};
 		System.out.println("Last-"+(bslast(b,6)-bsfirst(b,5)));
@@ -45,18 +47,20 @@ public class BsPractice {
 		int [] k= {1,2,3,4,5,6,7,8,9,10,11};
 		System.out.print(bsInfiniteArray(k, 7));
 		
+		int []l={4,5,6,7,0,1,2};
+		
 		
 	}
 
 	private static int searchRange(int[] a, int i) {
-		int left =0, right=a.length-1;
-		
-		while(left<=right) {
-			int mid=left+(right-left)/2;
+		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid =l+((r-l)/2);
 			if(a[mid]==i)return mid;
-			else if(i>a[mid]) {
-				left=mid+1;
-			}else right=mid-1;
+			else if(a[mid]<i)
+				l=mid+1;
+			else r=mid-1;
+			
 		}
 		return -1;
 	}
@@ -65,6 +69,10 @@ public class BsPractice {
 	
 	public static int bsInfiniteArray(int[] a, int target) {
 		int start=0,end=1;
+		while(a[end]<target && end<a.length) {
+			start=end;
+			 end*=2; 
+		}
 		
 		return -1;
 		
@@ -72,34 +80,34 @@ public class BsPractice {
 	
 	public static int searchBsInDescArray(int [] a,int target) {
 		int left=0,right=a.length-1;
-		
+		while(left<=right) {
+			int mid =left+(right-left)/2;
+			if(a[mid]==target)
+				return mid;
+			if(target>a[mid])
+				right=mid-1;
+			else left=mid+1;
+			
+		}
 		return -1;
 	}
 	
 	public static int bsfirst(int [] a,int target) {
-		int left=0,right=a.length-1;
-		while(left<=right) {
-			int mid=left+(right-left)/2;
-			if((mid==0 || a[mid-1]<a[mid]) && a[mid]==target)
-				return mid;
-			else if(target>a[mid])
-				left=mid+1;
-			else right=mid-1;
+		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid =l+((r-l)/2);
+			if((mid==0 || a[mid-1]<a[mid]) &&a[mid]==target)return mid;
+			else if(a[mid]<target)
+				l=mid+1;
+			else r=mid-1;
+			
 		}
-		
 		return -1;
+		
 	}
 	
 	public static int bslast(int [] a,int target) {
-		int left=0,right=a.length-1;
-		while(left<=right) {
-			int mid=left+(right-left)/2;
-			if((mid==right|| a[mid+1]>a[mid]) && a[mid]==target)
-				return mid;
-			else if(a[mid]>target)
-				right=mid-1;
-			else left=mid+1;
-		}
+		
 		return -1;
 	}
 	
@@ -188,56 +196,67 @@ public class BsPractice {
 	
 	 public static int findSearchInBiotonicArray(int[] a,int target) {
 	        int left=0;
-	        int right=a.length-1;
-	          
-	          while(left<right){
-	              int mid=left+(right-left)/2;
-	              
-	              if((mid==0 || a[mid-1]<a[mid]) && (mid==right || a[mid+1]<a[mid])) {
-	            	  return mid;
-	              }
-	               if(a[mid]<a[mid+1])
-	                  left=mid+1;
-	              else 
-	                  right=mid-1;
-	          }
+	      
 	          return left;
 	      }
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {
-		 	int h=a.length;
-		 	int l=a[0].length;
-		 	int i=0,j=a[0].length-1;
-		 
-		 	while(j<l && j>=0  && i<h &&  i>=0  ) {
+		 int h=a.length;
+		 int l=a[0].length;
+		 int i=0,j=l-1;
+		 	while(i>=0 && j>=0 && i<h && j<l) {
 		 		int val=a[i][j];
-		 		if(val==target)return i+"-"+j;
-		 		else if(target<val) {
+		 		if(val==target)return i+" "+j;
+		 		else if(target<val)
 		 			j--;
-		 		}else {
-		 			i++;
-		 		}
+		 		else if(target>val) i++;
 		 		
 		 	}
-		 	
-		 	return -1+"";
+		 	return "";
 		 	
 	      }
 	 
 	 public static int findPeakElement(int[] a) {
-	        int left=0,right=a.length-1;
-	       
-	        while(left<=right) {
-	        	int mid=left+(right-left)/2;
-	        	if((mid==0 || a[mid-1]<a[mid]) && (mid==right || a[mid+1]<a[mid]))
+	        int l =0,r=a.length-1;
+	        while(l<r) {
+	        	int mid=l+((r-l)/2);
+	        	if((mid==0 || a[mid-1]<a[mid]) && (mid==r || a[mid+1]<a[mid]))
 	        		return mid;
-	        	else if(a[mid]<a[mid+1])
-	        		left=mid+1;
-	        	else right=mid-1;
+	        	if(a[mid]<a[mid+1])
+	        		l=mid+1;
+	        	else
+	        		r=mid-1;
 	        }
-	        return -1;
+	        return l;
 	      }
+	 
+	public int findMin(int[] nums) {
+		int n = nums.length;
+		if (n == 1)
+			return nums[0];
+		if (nums[0] <= nums[n - 1])
+			return nums[0];
+		int l = 0, r = n - 1;
+		while (l <= r) {
+			if (nums[l] <= nums[r]) // array is sorted -> so return first ele.
+				return nums[l];
+			int mid = l + (r - l) / 2;
+
+			int next = (mid + 1) % n;
+			int prev = (mid + n - 1) % n;
+
+			if ((nums[mid] <= nums[next]) && (nums[mid] <= nums[prev]))
+				return nums[mid];
+			else if (nums[l] <= nums[mid])
+				l = mid + 1;
+			else if (nums[mid] <= nums[r])
+				r = mid - 1;
+		}
+		return -1;
+	}
+	
+
 	 
 
 }

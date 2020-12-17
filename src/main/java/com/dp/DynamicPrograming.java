@@ -2,8 +2,10 @@ package com.dp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.cleanup.Utils;
@@ -13,6 +15,11 @@ public class DynamicPrograming {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		String s="catsanddog";
+		String[] dictionary=	{"cat","cats","and","sand","dog"};
+		
+		wordBreak(s,Arrays.asList(dictionary));
 
 	}
 	//40. Combination Sum II //https://leetcode.com/problems/combination-sum-ii/discuss/934838/DP-solution-in-Java-(with-explanation)
@@ -146,5 +153,66 @@ public class DynamicPrograming {
 
 		return dp[e][f];
 	}
+	
+	
+	//139. Word Break
+	 HashMap<String,Boolean> map;
+	 public boolean possible(String s, List<String> list)
+	   {
+	       if(list.contains(s))
+	           return true;
+	           
+	       if(s.length()==1)
+	         return false;
+	   
+	       if(map.containsKey(s))
+	         return map.get(s);
+	   
+	       boolean ans=false;
+	       for(int i=0;i<s.length()-1;i++)
+	       {
+	          String s1=s.substring(0,i+1);
+	          String s2=s.substring(i+1,s.length());
+	           
+	          boolean b1=possible(s1,list); 
+	          boolean b2=possible(s2,list);
+	           
+	          if(b1 && b2)
+	          { ans=true;
+	             break;
+	          }               
+	        }
+	   
+	     map.put(s,ans);
+	     return ans;
+	}
+	 
+	 //140. Word Break II
+	 public static List<String> wordBreak(String s, List<String> wordDict) {
+	        Map<Integer, List<String>> memo = new HashMap();
+	        return backtracking(0, s, wordDict, memo);
+	    }
+	 private static final String SPACE = " ";
+	 public static List<String> backtracking(int index, String s, List<String> wordDict, Map<Integer, List<String>> memo){
+	        if(index == s.length())
+	            return Arrays.asList("");
+	        
+	        if(memo.containsKey(index)) 
+	            return memo.get(index);
+	        
+	        List<String> res = new ArrayList();
+	        
+	        for(String word : wordDict){
+	            if(s.indexOf(word, index) == index){
+	                List<String> rest = backtracking(index + word.length(), s, wordDict, memo);
+	                for(String restSentence : rest){
+	                    if(restSentence.equals("")) res.add(word);
+	                    else res.add(word + SPACE + restSentence);
+	                }
+	            }
+	        }
+	        memo.put(index, res);
+	        return res;
+	    }
 	    
 }

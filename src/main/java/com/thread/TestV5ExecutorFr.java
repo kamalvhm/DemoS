@@ -27,7 +27,7 @@ class Processor2 implements Runnable{
 }
 
 
-public class TestV5 {
+public class TestV5ExecutorFr {
 
 	
 	public static void main(String args[]) {

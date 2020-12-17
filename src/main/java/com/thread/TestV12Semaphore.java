@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
-public class TestV12 {
+public class TestV12Semaphore {
 
 	
 	public static void main(String args[]) throws InterruptedException {

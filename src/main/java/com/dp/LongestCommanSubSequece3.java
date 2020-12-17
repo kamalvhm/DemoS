@@ -41,7 +41,7 @@ public class LongestCommanSubSequece3 {
 		String s="agbcba";
 		StringBuffer sb=new StringBuffer(s); //We are using b string as reverse of a to find palindromic string {In ip only one string given}
 		System.out.println("10)Longest palindromic sub sequence ANS:-"+LCS_TopDown(s,sb.reverse().toString(),s.length(),s.length())); //return longest palindromic subsequnce length 
-		// No of deletion will be 1 of g  that will make abcba 
+		// No of deletion will be 1 of g  that will make abcba ( to make it palindromic)
 		String s1="agbcba";
 		StringBuffer sb1=new StringBuffer(s);
 		int lps=LCS_TopDown(s1,sb1.reverse().toString(),s1.length(),sb1.length()); //No of deletion is inversely  proportion to LPS so computing LPS

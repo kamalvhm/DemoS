@@ -31,7 +31,7 @@ class Processor3 implements Runnable{
 	
 }
 
-public class TestV6 {
+public class TestV6CountDown {
 
 	
 	public static void main(String args[]) {

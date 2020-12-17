@@ -1,4 +1,4 @@
-package com.intquetions;
+package problems.dp;
 
 public class DP {
 

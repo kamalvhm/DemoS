@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-public class TestV13 {
+public class TestV13CallableFuture {
 
 	public static void main(String args[]) throws InterruptedException {
 

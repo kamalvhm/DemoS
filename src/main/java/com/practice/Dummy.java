@@ -9,6 +9,7 @@ import java.util.spi.CurrencyNameProvider;
 
 import org.apache.commons.math3.ode.nonstiff.GillIntegrator;
 import org.apache.spark.sql.catalyst.expressions.CurrentRow;
+import org.apache.spark.sql.streaming.StreamingQueryListener.QueryStartedEvent;
 
 import com.beans.TreeNode;
 import com.datastructure.TreePrinter;
@@ -50,7 +51,7 @@ public class Dummy {
 		System.out.println("");
 		postOrderWithoutRecursion(tree);
 
-		System.out.println("");
+		System.out.println("BFS");
 		bfs(tree);
 		System.out.print(levelOrder(tree));
 	
@@ -91,6 +92,7 @@ public class Dummy {
 		int count =0;
 		int h=grid.length;
 		int l=grid[0].length;
+		
 		for(int i=0;i<h;i++) {
 			for(int j=0;j<l;j++) {
 				if(grid[i][j]=='1') {
@@ -99,38 +101,27 @@ public class Dummy {
 				}
 			}
 		}
+		
 		return count;
 		
 	}
     private static void DFS(char[][] grid, int row, int col) {
-    	
+    	int h=grid.length;
+		int l=grid[0].length;
+		
+		if(row<0 || col<0 || row >=h || col>=l || grid[row][col]!='1')return;
+		grid[row][col]='0';
+		DFS(grid,row+1,col);
+		DFS(grid,row-1,col);
+		DFS(grid,row,col+1);
+		DFS(grid,row,col-1);
+
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;
-		Stack<int[]> st=new Stack<>();
-		int h=grid.length;
-		int l=grid[0].length;
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<l;j++) {
-				if(grid[i][j]=='1') {
-					st.push(new int[] {i,j});
-					grid[i][j]='0';
-					while(!st.isEmpty()) {
-						int [] cur=st.pop();
-						for(int [] dir:direction) {
-							int r=cur[0]+dir[0];
-							int c=cur[1]+dir[1];
-							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1') {
-								st.push(new int[] {r,c});
-								grid[r][c]='0';
-							}
-						}
-					}
-					count++;
-				}
-			}
-			}
+		
+		
 
 		return count;
 
@@ -140,7 +131,7 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
-	
+		
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
@@ -154,10 +145,11 @@ public class Dummy {
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
-		
+	
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
+		
 		
 	}
 

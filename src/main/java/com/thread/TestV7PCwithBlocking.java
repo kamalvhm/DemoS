@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class TestV7 {
+public class TestV7PCwithBlocking {
 
 	private static BlockingQueue<Integer> queue=new ArrayBlockingQueue<>(10);
 	
