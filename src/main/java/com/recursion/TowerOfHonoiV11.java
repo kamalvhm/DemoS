@@ -1,6 +1,6 @@
 package com.recursion;
 
-public class TowerOfHonoi {
+public class TowerOfHonoiV11 {
 
 	public static void main(String[] args) {
 		//do not larger values then 10 exponential function
@@ -29,5 +29,7 @@ public class TowerOfHonoi {
 		return;
 		
 	}
+		
+		
 
 }

@@ -67,7 +67,7 @@ public class Dpractice4 extends DynamicPrograming{
 			System.out.println("1)MCM ans "+solveMCM_BottomUp(arr,1,arr.length-1));
 			
 			String s="coder"; //PS:-we are given a string we need to partition it such that all resultant Strings are palindrom and minimize no. of partion
-			System.out.println("5)Palindrom Partitioning ans:- "+palindrom_partitioningBottomUpOptimized(s,0,s.length()-1)); //in this case we can place i at 0 because no dimetios are here 
+			System.out.println("5)Palindrom Partitioning ans:- "+palindrom_partitioning_recursive(s,0,s.length()-1)); //in this case we can place i at 0 because no dimetios are here 
 			String s1="T^F&T";
 			//PS:-Input String given Output -No. of ways it eval to true, add bracket to string such that it evaluate to true  eg: ((T^F)&T) 
 			//String may consist of T=True ,F=False, | =Or, & =And ,^=XOR
@@ -94,87 +94,53 @@ public class Dpractice4 extends DynamicPrograming{
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
 		if(i>=j)return 0;
 		if(dp[i][j]!=-1)return dp[i][j];
-		int min =Integer.MAX_VALUE;
+		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int temp=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
-			
-			min =Math.min(temp, min);
+			int tmp=solveMCM_BottomUp(arr,i,k)+solveMCM_BottomUp(arr,k+1,j)+arr[i-1]*arr[k]*arr[j];
+			ans=Math.min(ans, tmp);
 		}
-		return dp[i][j]=min;
+		dp[i][j]=ans;
+	return ans;
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
 		if(i>=j)return 0;
 		if(isPalindrom(s, i, j))return 0;
-		int min =Integer.MAX_VALUE;
+		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
 			int tmp=palindrom_partitioning_recursive(s,i,k)+palindrom_partitioning_recursive(s,k+1,j)+1;
-			min=Math.min(min, tmp);
+			ans=Math.min(ans, tmp);
 		}
-		return min;
+		return ans;
 	}
 
 	private static boolean isPalindrom(String s, int i, int j) {
 		if(i==j)return true;
-		if(i>j)return false;
 		while(i<j) {
-			if(s.charAt(i)!=s.charAt(j))
+			if(s.charAt(i++)!=s.charAt(j--))
 				return false;
-			i++;
-			j--;
 		}
 		return true;
 	}
 
 	//V-37
 	private static int palindrom_partitioningBottomUp(String s, int i, int j) {
-		if(i>=j)return 0;
-		if(isPalindrom(s,i,j))return 0;
-		if(p[i][j]!=-1)return p[i][j];
-		int min=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-			int temp =palindrom_partitioning_recursive(s,i,k) +palindrom_partitioning_recursive(s,k+1,j)+1;
-			min =Math.min(min, temp);
-			
-		}
-		return p[i][j]= min;
+		return -1;
 	}
 	//CHECK PROBLEM SOLUTION IN PARENT CLASS
 	//V-38 To optimize further we can check "palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);" function in the matrix 
 	private static int palindrom_partitioningBottomUpOptimized(String s, int i, int j) {
-		if(i>=j)return 0; //if single char then no partion needed
-		if(Utils.isPalindrom(s,i,j))return 0; //if already palindrom then also no partion needed
-		if(p[i][j]!=-1)return p[i][j]; //CHANGE 1
-		int ans=Integer.MAX_VALUE;
-		for(int k=i;k<=j-1;k++) {
-			
-			int left=0;   //check left and right first in the table if not exist then hit and put it in table
-			if(p[i][k]!=-1)
-				left=p[i][k];
-			else {
-				left=palindrom_partitioningBottomUp(s,i,k);
-				p[i][k]=left;
-			}
-			
-			int right=0;
-			if(p[k+1][j]!=-1)
-				right=p[k+1][j];
-			else {
-				right=palindrom_partitioningBottomUp(s, k+1, j);
-				p[k+1][j]=right;
-			}
-			
-			int temp=1+left+right; 
-			
-			ans=Math.min(ans, temp);
-		}
-		//CHANGE 2
-		return p[i][j]=ans;
+		return -1;
 	}
 	/**V-39 (CHECK ##BooleanParenthesization()) :-https://www.youtube.com/watch?v=pGVguAcWX4g&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=39
 	 * 
 	 */
 	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
+		
+		return -1;
+	} 
+	
+	public static int evalExTBottomUp(String s ,int i,int j,boolean isTrue) {
 		 if(i>j)return 0; //if its empty string 
 		 if(i==j) { //is i and j at same char 
 			 if(isTrue)  //if we are looking for true
@@ -182,7 +148,7 @@ public class Dpractice4 extends DynamicPrograming{
 			 else  return s.charAt(i)== 'F' ? 1 : 0;
 		 }
 		 int ans=0;
-		 //looping k from i+1 to j-1 with increament k+2 as k will be at any operator any time and i and j will be at T or F;
+		 //looping k from i+1 to j-1 with increment k+2 as k will be at any operator any time and i and j will be at T or F;
 		 for(int k=i+1;k<j;k += 2) {
 			 int leftTrue=evalExTRecursive(s,i,k-1,true); //This will return no. of ways we get left expression as true
 			 int leftfalse=evalExTRecursive(s,i,k-1,false); //This will return no. of ways we get left expression as false
@@ -212,59 +178,6 @@ public class Dpractice4 extends DynamicPrograming{
 		 return ans;
 	} 
 	
-	public static int evalExTBottomUp(String s ,int i,int j,boolean isTrue) {
-		String key=EMPTY_STRING+i+j+isTrue;//Making a key for map with i j and isTrue
-		 if(i>j) {
-			  map.put(key, 0); //CHANGE
-			 return 0; }
-		 if(i==j) { 
-			 if(isTrue)  {
-				 map.put(key, s.charAt(i) == 'T' ? 1 : 0); //CHANGE
-				 return s.charAt(i) == 'T' ? 1 : 0; 
-			 }
-				 
-			 else {
-				 map.put(key, s.charAt(i) == 'F' ? 1 : 0); //CHANGE
-				 return s.charAt(i)== 'F' ? 1 : 0;
-			 } 
-		 }
-		 int ans=0;
-		 for(int k=i+1;k<j;k += 2) {
-			 	String partialLeftKeyTrue = EMPTY_STRING + i + (k - 1) + "true";  //CHANGE
-	            String partialLeftKeyFalse = EMPTY_STRING + i + (k - 1) + "false";
-	            String partialRightKeyTrue = EMPTY_STRING + (k + 1) + j + "true";
-	            String partialRightKeyFalse = EMPTY_STRING + (k + 1) + j + "false";
-			 
-			 int leftTrue=map.containsKey(partialLeftKeyTrue) ? map.get(partialLeftKeyTrue) :evalExTRecursive(s,i,k-1,true);//3 variable changing i ,j and isTrue
-			 int leftfalse=map.containsKey(partialLeftKeyFalse) ? map.get(partialLeftKeyFalse) :evalExTRecursive(s,i,k-1,false); 
-			 int rightTrue=map.containsKey(partialRightKeyTrue) ? map.get(partialRightKeyTrue) :evalExTRecursive(s,k+1,j,true);
-			 int rightFalse=map.containsKey(partialRightKeyFalse) ? map.get(partialRightKeyFalse) :evalExTRecursive(s,k+1,j,false); //CHANGE
-			 
-			 char c=s.charAt(k);
-			 if(c=='&') { 
-				 if(isTrue)
-					 ans+=leftTrue*rightTrue;
-				 else
-					 ans+=leftTrue*rightFalse + leftfalse*rightTrue + leftfalse*rightFalse;
-			 }
-			 else if(c=='|') {
-				 if(isTrue)
-					 ans+=leftTrue*rightTrue + leftTrue*rightFalse + leftfalse*rightTrue;
-				 else
-					 ans+=leftfalse*rightFalse;
-			 }
-			 else if(c=='^') {
-				 if(isTrue)
-					 ans+=leftTrue*rightFalse + leftfalse*rightTrue;
-				 else
-					 ans+=leftTrue*rightTrue + leftfalse*rightFalse;
-			 }
-
-		 }
-	      map.put(key, ans); //CHANGE
-		 return ans;
-	} 
-	
 	public static boolean scrambledStringRecursie(String a ,String b) {
 		if(a.length()!=b.length()) return false;
 		if(a.isEmpty() && b.isEmpty())return true;
@@ -273,59 +186,17 @@ public class Dpractice4 extends DynamicPrograming{
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {
-		if(a.compareTo(b)==0)return true;//This mean there is 0 swap in string and both are equal a&b
-		if(a.length()<=1)return false;//if both are not equal above ,if Empty String is there in any a or b then return false
-		int n=a.length();//both are equal by now
-		boolean flag=false;
-		for(int i=1;i<=n-1;i++) {
-			if(scrambledSolve(a.substring(0, i), b.substring(n - i, n))  //Condition 1 where there is swapping
-					&& scrambledSolve(a.substring(i, n), b.substring(0, n - i)) || 
-							scrambledSolve(a.substring(0,i),b.substring(0,i)) //Condition 2 where No swapping
-							&& scrambledSolve(a.substring(i,n),b.substring(i,n))) {
-				flag=true;
-				break;
-			}
-		}
-		 return flag;
+	return false;
 	} 
 	
 	 public static boolean scrambledMemoized(String a, String b) {
-	        String key =a+"-"+b;
-	        if (a.compareTo(b) == 0) return true;
-	        int n = a.length();
-	        if (scramblemap.containsKey(key)) {
-	             return scramblemap.get(key);
-	        }
-	        if (n <= 1) return false;
-	        for (int i = 1; i < n; i++) {
-	           
-	           if( scrambledMemoized(a.substring(0, i), b.substring(n - i, n)) //n - i is because we need to compare same count for both if 2 chars left then 2 chars right
-	                && scrambledMemoized(a.substring(i, n), b.substring(0, n - i)) ||
-	              scrambledMemoized(a.substring(0, i), b.substring(0, i)) 
-	                && scrambledMemoized(a.substring(i, n), b.substring(i, n)))
-	            {
-	                scramblemap.put(key, true);
-	                return true;
-	            }
-	        }
-	      
-	        scramblemap.put(key, false);
+	       
 	        return false;
 	    }
 	 
 	 
 		private static int eggDropRecursive(int e, int f) {
-			if(f==0 || f==1)return f;//if no floor or single then attempts equal to floor
-			if(e==1)return f; //if single egg then we start dropping from first floor until it breaks or f ;
-			int min=Integer.MAX_VALUE;
-			
-			for(int k=1;k<=f;k++) {
-				int temp=Math.max(eggDropRecursive(e-1, k-1),eggDropRecursive(e,f-k))+1;  //+1 is for one attempt over Max is because we need to select for worst case ,One condition for break and one for not
-			
-				min=Math.min(min, temp);
-			}
-			
-			return min;
+			return -1;
 		}
 		
 		private static int eggDropMemoized(int e, int f) {

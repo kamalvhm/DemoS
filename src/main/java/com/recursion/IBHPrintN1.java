@@ -6,7 +6,7 @@ public class IBHPrintN1 {
 		// TODO Auto-generated method stub
 		print(7);
 	}
-	//Hypo step 1
+	//Hypothesis step 1 :-design what a function will do whats its input and output will be 
 	public static void print(int n) {
 		//Base cond.
 		if(n==1) {

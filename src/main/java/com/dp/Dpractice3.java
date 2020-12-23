@@ -4,23 +4,19 @@ import java.util.Arrays;
 
 import io.netty.handler.codec.http.HttpContentEncoder.Result;
 
-/**RELATED Preblems LCS | https://www.youtube.com/watch?v=HrybPYpOvz0&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=22
- * 1)Longest common subString [v-22] |
- * 2)print  LCS [v-23]|
- * 3)Shortest common superSequence [v-24]
- * 4)print SCS [v-29] | 1092. https://leetcode.com/problems/shortest-common-supersequence/
- * 5)Min # insertion and deletion a->b
- * 6)Longest repeating subSequence
- * 7)Length of longest subsequence of a which is substring in b
- * 8)subsequence pattern Matching
- * 9)count how many times a appear as subsequence in b
- * 10)Longest palindromic sub sequence [v-26] |516. Longest Palindromic Subsequence https://leetcode.com/problems/longest-palindromic-subsequence/
- * 11)Longest palindromic substring
- * 12)count of palindromic substring
- * 13)Min no of deletion in a string to make it palindromic 
- * 14)Min no of insertion in a string to make it palindromic
+/** 
+ LCS Length ANS:-4
+1) Longest common subString ANS:-2
+2)print  LCS ANS :-abdh
+3)Shortest common super sequence ANS :-9
+4)print SCS ANS :-cabac
+5) Min # insertion and deletion a->b ANS Deletion:-2 Insertion 1
+10)Longest palindromic sub sequence ANS:-5
+13)Min no of deletion in a string to make it palindrom  ANS:-1
+6)Longest repeating subSequence ANS:-3
+8)subsequence pattern Matching ANS:-true
+14)Min no of insertion in a string to make it palindromic  ANS:-2
  */
-
 public class Dpractice3 {
 	static int dp[][]=new int[20][20];//m+1 n+1
 	static {
@@ -31,9 +27,11 @@ public class Dpractice3 {
 	public static void main(String[] args) {
 		String x="abcdgh",y="abedfhr"; //common in both is abdh so 4 is ans
 		System.out.println("LCS Length ANS:-"+LCS_TopDown(x,y,x.length(),y.length())); //1143. Longest Common Subsequence
-		String a="abcde",b="abfce";  //ANS 2 longest countinues common string is 'ab' so 2
+		String a="abcde",b="abfce";  /**ANS  2 */ // 2 longest countinues common string is 'ab' so 2
 		System.out.println("1) Longest common subString ANS:-"+LongestCommonSubString(a,b,a.length(),b.length()));
-		System.out.println("2)print  LCS ANS :-"+printLCS_String(x,y,x.length(),y.length())); //ANS abdh
+		/*String a10="intention",b10="execution"; 
+		System.out.println("2)print  LCS ANS :-"+printLCS_String(a10,b10,a10.length(),b10.length())); //ANS abdh
+*/		System.out.println("2)print  LCS ANS :-"+printLCS_String(x,y,x.length(),y.length())); //ANS abdh
 		String a1="AGGTAB" ,b1="GXTXAVB"; //Merged Sortest will be AGGXTXAYB to find length = (length of a1 + length of b1) - LCS of both strings (ANS :-(6+7)-4=9)
 		System.out.println("3)Shortest common super sequence ANS :-"+((a1.length()+b1.length())-LCS_TopDown(a1, b1, a1.length(), b1.length()))); //return length of shortest string which contains both string sequence 
 		System.out.println("4)print SCS ANS :-"+shortestCommonSupersequence("abac","cab")); //return  shortest string which contains both string sequence  ANS :-"cabac"
@@ -57,137 +55,69 @@ public class Dpractice3 {
 		lps=LCS_TopDown(s3,sb3.reverse().toString(),s3.length(),sb3.length()); //Same as No of deletion because if we insert same deleted chars we can make them pairs in this case D and E
 		System.out.println("14)Min no of insertion in a string to make it palindromic  ANS:-"+(s3.length()-lps)); //return Min no of insersion count to make it palindrom
 
-
+				//print cost of converting string e1 to e2 by considering insert ,delete,and replace operations  ||72. Edit Distance
+				String e1="intention";
+				String e2="execution";//Ans will be 5
+				System.out.println("15) Edit Distance :-"+editDistance(e1,e2,e1.length(),e2.length()));
 		
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
-		if(m==0 || n==0) return 0;
-		else if(x.charAt(n-1)==y.charAt(m-1)) {
-			return 1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
-		}else return Math.max(LCS_Simple_recursive_Code(x, y, n-1, m), LCS_Simple_recursive_Code(x, y, n, m-1));
+		return 1;
 	}
 	//SECOUND STEP
 	public static int LCS_BottomUp_Memoized(String x,String y,int n,int m) {
-		if(m==0 || n==0 )return 0;
-		if(dp[n][m]!=-1)return dp[n][m];
-		if(x.charAt(n-1)==y.charAt(m-1))
-			return dp[n][m]=1+LCS_Simple_recursive_Code(x,y,n-1,m-1);
-		else return dp[n][m]=Math.max(LCS_Simple_recursive_Code(x, y,n-1,m),LCS_Simple_recursive_Code(x,y,n,m-1));
+		return 1;
 	}
 	
 	//THIRD STEP
 	public static int LCS_TopDown(String x,String y,int n,int m) {
-		int t[][]=new int [m+1][n+1];  //Make n and then m to make similar with KS  
+		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
+	
 		
-		for(int i=1;i<m+1;i++) {
-			for(int j=1;j<n+1;j++) {
-				if(y.charAt(i-1)==x.charAt(j-1))
-					t[i][j]=1+t[i-1][j-1];
-				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-			}
-		}
-		
-		return t[m][n];
+		return t[n][m];
 	}
 	
 	public static int LongestCommonSubString(String x,String y,int n,int m) {
-		int t[][]=new int [m+1][n+1];  //Make n and then m to make similar with KS  
-		int max=0;
-		for(int i=1;i<m+1;i++) {
-			for(int j=1;j<n+1;j++) {
-				if(y.charAt(i-1)==x.charAt(j-1)) {
-					t[i][j]=1+t[i-1][j-1];
-					max=Math.max(t[i][j],max);
-				}
-				else t[i][j]=0;
-			}
-		}
+		int t[][]=new int [n+1][m+1];  
 		
-		return max;
+		
+		return -1;
 	}
 	
 	
-	public static String printLCS_String(String x,String y,int n, int m) {
-		int t[][]=new int [m+1][n+1];  //Make n and then m to make similar with KS  
+	public static String printLCS_String(String x,String y,int n, int m) {		
+		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		
-		for(int i=1;i<m+1;i++) {
-			for(int j=1;j<n+1;j++) {
-				if(y.charAt(i-1)==x.charAt(j-1))
-					t[i][j]=1+t[i-1][j-1];
-				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-			}
-		}
 		
 		StringBuffer sb=new StringBuffer();
-		int i=m,j=n;
-		while(i>0 && j>0) {
-			if(y.charAt(i-1)==x.charAt(j-1)) {
-				sb.append(y.charAt(i-1));
-				i--;
-				j--;
-			}else if(t[i-1][j]>t[i][j-1]) {
-				i--;
-			}else j--;
-		}
+	
 		
-		return sb.reverse().toString();
+		return sb.toString();
 	}
 	
 	
 	 public static String shortestCommonSupersequence(String x, String y) {
 		 int m=y.length(),n=x.length();
-		 int t[][]=new int [m+1][n+1];  //Make n and then m to make similar with KS  
-			
-			for(int i=1;i<m+1;i++) {
-				for(int j=1;j<n+1;j++) {
-					if(y.charAt(i-1)==x.charAt(j-1))
-						t[i][j]=1+t[i-1][j-1];
-					else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-				}
-			}
+		 int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 			
 			StringBuffer sb=new StringBuffer();
-			int i=m,j=n;
-			while(i>0 && j>0) {
-				if(y.charAt(i-1)==x.charAt(j-1)) {
-					sb.append(y.charAt(i-1));
-					i--;
-					j--;
-				}else if(t[i-1][j]>t[i][j-1]) {
-					sb.append(y.charAt(i-1));
-					i--;
-				}else {
-					sb.append(x.charAt(j-1));
-					j--;
-				} 
-			}
-			
-			while(i>0) {
-				sb.append(y.charAt(i-1));
-				i--;
-			}
-			while(j>0) {
-				sb.append(x.charAt(j-1));
-				j--;
-			}
-			return sb.reverse().toString();
+
+			return sb.toString();
 	    }
 	 
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int m=x.length(),n=y.length();
-			int t[][]=new int [m+1][n+1]; 
-			
-			for(int i=1;i<m+1;i++) {
-				for(int j=1;j<n+1;j++) {
-					if(x.charAt(i-1)==y.charAt(j-1) && i!=j) {
-						t[i][j]=1+t[i-1][j-1];
-					}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-				}
-			}
+		    int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 			
 			
-			return t[m][n];
+			
+			return t[n][m];
 		}
 	
+	 public static int editDistance(String x,String y,int n,int m){
+	        int t[][]=new int [n+1][m+1];
+	        
+	        return t[n][m];
+	    }
 }

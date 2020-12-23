@@ -2,7 +2,7 @@ package com.recursion;
 
 import java.util.ArrayList;
 
-public class JosePhusProblem {
+public class JosePhusProblemV19 {
 	  // Suppose there are n people in a circle and person
 	  // 0 kill the k'th person, then the k'th person kills
 	  // the 2k'th person and so on until only one person remains.
@@ -30,6 +30,8 @@ public class JosePhusProblem {
 			return solve(list,k,index);		
 		}
 	}
+	
+	
 	
 
 }

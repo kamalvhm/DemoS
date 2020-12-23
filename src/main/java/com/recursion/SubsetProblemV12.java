@@ -1,11 +1,9 @@
 package com.recursion;
 
-public class SubsetProblem {
+public class SubsetProblemV12 {
 //78. Subsets | https://leetcode.com/problems/subsets/
 	public static void main(String[] args) {
 		//print all subsets of given string 
-		
-
 		
 		printSubsets("abcd","");
 
@@ -28,7 +26,6 @@ public class SubsetProblem {
 			
 			
 	}
-	
 	
 
 }

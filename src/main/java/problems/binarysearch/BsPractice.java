@@ -53,55 +53,25 @@ public class BsPractice {
 	}
 
 	private static int searchRange(int[] a, int i) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid =l+((r-l)/2);
-			if(a[mid]==i)return mid;
-			else if(a[mid]<i)
-				l=mid+1;
-			else r=mid-1;
-			
-		}
+		
 		return -1;
 	}
 	
 	
 	
 	public static int bsInfiniteArray(int[] a, int target) {
-		int start=0,end=1;
-		while(a[end]<target && end<a.length) {
-			start=end;
-			 end*=2; 
-		}
 		
 		return -1;
 		
 	} 
 	
 	public static int searchBsInDescArray(int [] a,int target) {
-		int left=0,right=a.length-1;
-		while(left<=right) {
-			int mid =left+(right-left)/2;
-			if(a[mid]==target)
-				return mid;
-			if(target>a[mid])
-				right=mid-1;
-			else left=mid+1;
-			
-		}
+		
 		return -1;
 	}
 	
 	public static int bsfirst(int [] a,int target) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid =l+((r-l)/2);
-			if((mid==0 || a[mid-1]<a[mid]) &&a[mid]==target)return mid;
-			else if(a[mid]<target)
-				l=mid+1;
-			else r=mid-1;
-			
-		}
+		
 		return -1;
 		
 	}
@@ -113,46 +83,12 @@ public class BsPractice {
 	
 	
 	public static int arrayRotatedcount(int [] a) {
-		int left=0,right=a.length-1;
-		int n=a.length-1;
-		while(left<=right) {
-			int mid =left+(right-left)/2;
-			int v =a[mid];
-			//this % is for rotation
-			int next=(mid+1)%n;
-			//to avoid out of bound
-			int pre=(mid+n-1)%n;
-			
-			if(a[mid]<=a[next] && a[mid]<=a[pre]) {
-				return mid;
-			}else if(a[left]<=a[mid]) {
-				left=mid+1;
-			}else if(a[mid]<=a[right]){
-				right=mid-1;
-			}
-		}
+		
 		return -1;
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) {
-		int left=0,right=a.length-1;
-		int n=a.length-1;
-		while(left<=right) {
-			int mid =left+(right-left)/2;
-			int v =a[mid];
-			//this % is for rotation
-			int next=(mid+1)%n;
-			//to avoid out of bound
-			int pre=(mid+n-1)%n;
-			
-			if(a[mid]<=a[next] && a[mid]<=a[pre]) {
-				return mid;
-			}else if(a[left]<=a[mid]) {
-				left=mid+1;
-			}else if(a[mid]<=a[right]){
-				right=mid-1;
-			}
-		}
+		
 		return -1;
 	}
 	
@@ -202,33 +138,14 @@ public class BsPractice {
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {
-		 int h=a.length;
-		 int l=a[0].length;
-		 int i=0,j=l-1;
-		 	while(i>=0 && j>=0 && i<h && j<l) {
-		 		int val=a[i][j];
-		 		if(val==target)return i+" "+j;
-		 		else if(target<val)
-		 			j--;
-		 		else if(target>val) i++;
-		 		
-		 	}
+		
 		 	return "";
 		 	
 	      }
 	 
 	 public static int findPeakElement(int[] a) {
-	        int l =0,r=a.length-1;
-	        while(l<r) {
-	        	int mid=l+((r-l)/2);
-	        	if((mid==0 || a[mid-1]<a[mid]) && (mid==r || a[mid+1]<a[mid]))
-	        		return mid;
-	        	if(a[mid]<a[mid+1])
-	        		l=mid+1;
-	        	else
-	        		r=mid-1;
-	        }
-	        return l;
+	       
+	        return 1;
 	      }
 	 
 	public int findMin(int[] nums) {

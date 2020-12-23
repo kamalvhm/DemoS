@@ -22,7 +22,7 @@ public class DPractice {
 		int[] wt = { 1, 3, 4, 5 };
 		int[] val = { 1, 4, 5, 7 };
 		// ANS:- 9 //Return Maximum Profit
-		System.out.println("ANS:- " + knapsack(wt, val, 7, val.length));
+		System.out.println("KnapSack ANS:- " + knapsack(wt, val, 7, val.length));
 
 		int[] arr = { 2, 3, 7, 8, 10 };
 		// return true if given sum can be formed by subset
@@ -37,7 +37,7 @@ public class DPractice {
 		System.out.println("3)count of subset sum  ANS:- " + countSubsetSum(arr3, 10, arr3.length));
 
 		int[] arr4 = { 1, 2, 7 };
-		// return min diffrence of two subsets from given array will give 4 {1,2} sum is
+		// return min difference of two subsets from given array will give 4 {1,2} sum is
 		// 3 and {7} sum is 7 (7-3=4)
 		System.out.println("4)Minimum subset sum difference  ANS:- " + minimumSubsetSumDiff(arr4, arr4.length));// --->>>>
 
@@ -62,47 +62,48 @@ public class DPractice {
 		// Return Min no of coin to create given sum
 		System.out.println("3)coin change II :-" + coinChangeII(coin, 5, coin.length));
 	}
+	
+	private static int knapsack1(int[] wt, int[] val, int w, int n) {
+		return -1;
+	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
+	
+		
 		return t[n][w];
 	}
 
-	public static boolean[][] subsetSum(int[] arr, int sum, int n) {
+	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean t[][] = new boolean[n + 1][sum + 1];
-
-		return t;
+	
+		return t[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
-	
 		return false;
 	}
 
 	public static int countSubsetSum(int[] arr, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-
 		
-
 		return t[n][sum];
 	}
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
-		int range = 0;
-		
-		return range;
+	
+		return 0;
 	}
 
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
 		boolean t[][] = new boolean[n + 1][sum + 1];
-
+		
 		return t;
 	}
 
 	public static int noOfSubsetforGivenDiff(int[] arr, int diff, int n) {
 		int sum = 0;
 		
-
 		return sum;
 	}
 
@@ -116,7 +117,7 @@ public class DPractice {
 	public static int coinChangeI(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
 
-	
+		
 
 		return t[n][sum];
 	}
@@ -127,7 +128,6 @@ public class DPractice {
 		int t[][] = new int[n + 1][sum + 1];
 
 		
-
 		return t[n][sum];
 	}
 

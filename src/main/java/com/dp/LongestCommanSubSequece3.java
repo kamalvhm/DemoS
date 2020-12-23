@@ -2,7 +2,7 @@ package com.dp;
 
 import java.util.Arrays;
 
-/**RELATED Preblems LCS | https://www.youtube.com/watch?v=HrybPYpOvz0&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=22
+/**RELATED Problems LCS | https://www.youtube.com/watch?v=HrybPYpOvz0&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=22
  * 1)Longest common subString [v-22] |
  * 2)print  LCS [v-23]|
  * 3)Shortest common superSequence [v-24]
@@ -17,6 +17,7 @@ import java.util.Arrays;
  * 12)count of palindromic substring
  * 13)Min no of deletion in a string to make it palindromic 
  * 14)Min no of insertion in a string to make it palindromic
+ * 15)Edit Distance
  */
 
 public class LongestCommanSubSequece3 {
@@ -54,8 +55,10 @@ public class LongestCommanSubSequece3 {
 		StringBuffer sb3=new StringBuffer(s3);
 		lps=LCS_TopDown(s3,sb3.reverse().toString(),s3.length(),sb3.length()); //Same as No of deletion because if we insert same deleted chars we can make them pairs in this case D and E
 		System.out.println("14)Min no of insertion in a string to make it palindromic  ANS:-"+(s3.length()-lps)); //return Min no of insersion count to make it palindrom
-
-
+		//print cost of converting string e1 to e2 by considering insert ,delete,and replace operations  ||72. Edit Distance
+		String e1="intention";
+		String e2="execution";//Ans will be 5
+		System.out.println("15) Edit Distance :-"+editDistance(e1,e2,e1.length(),e2.length()));
 		
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
@@ -238,5 +241,28 @@ public class LongestCommanSubSequece3 {
 			
 			return t[m][n];
 		}
+	 //https://www.youtube.com/watch?v=XJ6e4BQYJ24
+	 public static int editDistance(String x,String y,int n,int m){
+	        int t[][]=new int [n+1][m+1];
+	        
+	          for(int i=0;i<n+1;i++){
+	            for(int j=0;j<m+1;j++){
+	                if(i==0)
+	                    t[i][j]=j;  //if any string is empty then cost will be to add all other chars
+	                if(j==0)
+	                    t[i][j]=i;
+	               
+	            }
+	        }
+	        
+	        for(int i=1;i<n+1;i++){
+	            for(int j=1;j<m+1;j++){
+	                if(x.charAt(i-1)!=y.charAt(j-1)){ //if both are not equal then choose min from add + delete and replace
+	                    t[i][j]=1+Math.min(Math.min(t[i][j-1],t[i-1][j]),t[i-1][j-1]);//+1 is constant cost of add replace and delete
+	                }else t[i][j]=t[i-1][j-1]; //if both are equal then no cost 
+	            }
+	        }
+	        return t[n][m];
+	    }
 	
 }

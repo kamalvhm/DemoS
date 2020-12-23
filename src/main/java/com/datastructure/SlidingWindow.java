@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.PriorityQueue;
 
 import com.cleanup.SlidingOlder;
-//Normally Array or  String Questions and sasking for sub-array or sub-string 
+//Normally Array or  String Questions and asking for sub-array or sub-string 
 public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARENT CLASS******/
 	/** Aditya verma  https://www.youtube.com/watch?v=EHCGAZBbB88&t=3s |
 	 *  FOR BASIC PATTERN WITH CODE:-https://www.youtube.com/watch?v=KtpqeN0Goro&t=915s
@@ -40,10 +40,14 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 
 		int d[] = { 4, 1,1,1,2,3,5 }; // given a array and sum k return max length of sub array which is having sum
 		int e[] = {-5,8,-14,2,4,12 };									// k;
-		System.out.println("V-7 Max sub array length :--> " + maxSubArrayLength(e, -5));
+	//	System.out.println("V-7 Max sub array length :--> " + maxSubArrayLength(e, -5));
+		
+		//Return size of longest substring of S which is having exactly K unique character
+		String s="aabacbebebe"; //longest with 3 unique char will be cbebebe so ans will be 7
+		System.out.print("K unique char subString:--"+kUniqueSubString(s,3));
 	}
 	
-	
+
 
 	public static List<int[]> triplet(int[] n,int winS,int target) {   //## #WINDOW SIZE  KNOWN ###
 			int right=0,left=0;
@@ -364,4 +368,37 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 			return maximum_size;
 		}
 
+	  //V-10 | https://www.youtube.com/watch?v=Lav6St0W_pQ
+		private static int kUniqueSubString(String s, int k) {
+			int i=0,j=0;
+			HashMap<Character,Integer> map=new HashMap<>();
+			int max=0;
+			while(j<s.length()) {
+				char c=s.charAt(j);
+				map.put(c, map.getOrDefault(c, 0)+1);
+				
+				if(map.size()<k)
+					j++;
+				else if(map.size()==k) {
+					max=Math.max(max, (j-i+1));
+					j++;
+				}else if(map.size()>k) {
+					while(map.size()>k) {
+						char l=s.charAt(i);
+							if(map.containsKey(l))
+							{
+								int val=map.get(l);
+								if(val>1) //remove if count turns to 0;
+									map.put(l, --val);
+								else map.remove(l);
+								i++;
+
+							}
+						}
+					j++;
+				}
+			}
+			
+		return max;
+	}
 }

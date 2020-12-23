@@ -35,7 +35,7 @@ class Node implements PrintableNode{
 }
 
 //https://www.youtube.com/watch?v=oCcUNRMl7dA&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY&index=8
-public class RecurssionStudy3 {
+public class RecurssionStudy3KthPathSum {
 
 
 	public static void main(String[] args) {
@@ -139,7 +139,7 @@ public class RecurssionStudy3 {
 		
 	}
 	
-	//779. K-th Symbol in Grammar
+	//V10 ||| 779. K-th Symbol in Grammar
 	  public int kthGrammar(int N, int K) {
 	        if(N==1 && K==1) return 0;
 	        else{

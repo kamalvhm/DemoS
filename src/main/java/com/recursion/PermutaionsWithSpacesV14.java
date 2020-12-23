@@ -1,10 +1,11 @@
 package com.recursion;
 
-public class PermutaionsWithSpaces {
+public class PermutaionsWithSpacesV14 {
 
 	public static void main(String[] args) {
-		solve("AB", "");
+		solve("ABC", "");
 		//solve2("BC", "A");
+		
 
 	}
 	
@@ -40,5 +41,6 @@ public class PermutaionsWithSpaces {
 		
 		
 	}
+		
 
 }

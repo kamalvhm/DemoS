@@ -90,31 +90,13 @@ public class Dummy {
 
 	public static int numIslands(char[][] grid) {
 		int count =0;
-		int h=grid.length;
-		int l=grid[0].length;
 		
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<l;j++) {
-				if(grid[i][j]=='1') {
-					DFS(grid,i,j);
-					count++;
-				}
-			}
-		}
 		
 		return count;
 		
 	}
     private static void DFS(char[][] grid, int row, int col) {
-    	int h=grid.length;
-		int l=grid[0].length;
-		
-		if(row<0 || col<0 || row >=h || col>=l || grid[row][col]!='1')return;
-		grid[row][col]='0';
-		DFS(grid,row+1,col);
-		DFS(grid,row-1,col);
-		DFS(grid,row,col+1);
-		DFS(grid,row,col-1);
+    	
 
 	}
 

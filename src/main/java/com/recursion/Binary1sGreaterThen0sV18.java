@@ -1,6 +1,6 @@
 package com.recursion;
 
-public class Binary1sGreaterThen0s {
+public class Binary1sGreaterThen0sV18 {
 
 	public static void main(String[] args) {
 		solve(3,0,0,"");

@@ -1,6 +1,6 @@
 package com.recursion;
 
-public class PermutationsWithCaseChange {
+public class PermutationsWithCaseChangeV15 {
 
 	public static void main(String[] args) {
 		//printPermutations("abc","");

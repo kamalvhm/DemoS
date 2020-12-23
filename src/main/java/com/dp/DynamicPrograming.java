@@ -20,6 +20,10 @@ public class DynamicPrograming {
 		String[] dictionary=	{"cat","cats","and","sand","dog"};
 		
 		wordBreak(s,Arrays.asList(dictionary));
+		
+		int a[]= {5,8,7,1,9};// longest will be of size 3 5,8,9 or 5,7,9 all values in increasing order
+		int b[]= {1,2,3,6};
+		System.out.print(largestDivisibleSubset(b));
 
 	}
 	//40. Combination Sum II //https://leetcode.com/problems/combination-sum-ii/discuss/934838/DP-solution-in-Java-(with-explanation)
@@ -214,5 +218,68 @@ public class DynamicPrograming {
 	        memo.put(index, res);
 	        return res;
 	    }
+	 //300. Longest Increasing Subsequence https://leetcode.com/problems/longest-increasing-subsequence/ ||https://www.youtube.com/watch?v=mouCn3CFpgg
+	 public static List<Integer> longestIncreasingSubSequence(int a[]){
+		 int dp[] =new int [a.length];
+		 int max_index =0,max_value=0; //to store max subsequence last position 
+		 
+		 /* Initialize LIS values for all indexes  as by defaul one digit is increasing itself*/
+         for ( int i = 0; i < a.length; i++ ) 
+            dp[i] = 1; 
+		 
+		 for(int i=1;i<a.length;i++) {
+			 for(int j=0;j<i;j++) {
+				 if(a[i]>a[j] && dp[i]<=dp[j]) //in current is greater then previous and have less value in dp array
+				 {
+					 dp[i]=1+dp[j];
+					 if(dp[i]>max_value) {// max is not necessarily at end so capture map position and value to extract all values 
+						 max_value=dp[i];
+						 max_index=i;
+					 }
+				 }
+			 }
+		 }
+		 List<Integer> l=new ArrayList<>();
+		 // now we have count of max then we can back track and add value then decrease value of max then check dp again for that value 
+		 int i=max_index;
+		 int cur=dp[i];
+		 while(i>=0) {
+			 if(dp[i]==cur) {
+				l.add(a[i--]);
+				cur--;
+			 }else {i--;}
+		 }
+		 
+		 return l;
+	 }
+	 
+	 
+	 //368. Largest Divisible Subset (NOT WORKING IN LEET)| https://leetcode.com/problems/largest-divisible-subset/
+	 public static List<Integer> largestDivisibleSubset(int[] nums) {
+	        List<Integer> result = new ArrayList<>();
+	        Arrays.sort(nums);
+	    
+	        int[] dp = new int[nums.length];
+	        
+	        for (int i = 0; i < nums.length; i++) {
+	            List<Integer> list = new ArrayList<>();
+	            dp[i] = 1;
+	            for (int j = 0; j < i; j++) {
+	                if (nums[i] % nums[j] == 0) {
+	                    if (dp[i] < dp[j]+1) {
+	                        dp[i] = dp[j]+1;
+	                        list.add(nums[j]);
+	                    }
+	                }
+	            }
+	            
+	            if (result.size() <= list.size()) {
+	                list.add(nums[i]);
+	                result = new ArrayList<>(list);
+	            }
+	        }
+	        
+	        return result;
+	        }
 	    
 }
