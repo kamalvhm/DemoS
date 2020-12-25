@@ -1,6 +1,7 @@
 package com.intquetions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -8,7 +9,8 @@ import java.util.PriorityQueue;
 public class ArrayProblems {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		int[] nums={4,3,2,7,8,2,3,1};
+		  List ip= Arrays.asList(nums);
         
        int [] a= {4,3,2,7,8,2,3,1};
        System.out.println(largestValueInArrayWITHDEVIDEANDCONQUER(a,0,a.length-1));
@@ -139,8 +141,8 @@ public class ArrayProblems {
 		        int left=0;
 		        int right=matrix[0].length-1;
 		        
-		        int size=matrix.length*matrix[0].length;
-		        
+		        int size=matrix.length*matrix[0].length;//total element in matrix
+		        //when added element is less then totalelement
 		        while(nums.size()<size){
 		            for(int i=left;i<=right && nums.size()<size;i++){
 		                nums.add(matrix[top][i]);

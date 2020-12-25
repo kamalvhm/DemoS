@@ -28,7 +28,7 @@ public class BinarysearchOnAnswer2 {
 		//1-2 should be retured;
 		System.out.print(Search2DArray(arr,29));
 	}
-	//Also known as max in BITONIC ARRAY (monotonically increaing then decreasing so only one peek in array )
+	//Also known as max in BITONIC ARRAY (monotonically increaing then decreasing so only one peek in array 162. Find Peak Element)
 	 public static int findPeakElement(int[] a) {
 	        int left=0;
 	        int right=a.length-1;

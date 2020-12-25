@@ -75,7 +75,7 @@ public class BinarySearch {
                 return m; 
             }else if(target < v) {
                 r = m - 1;
-            }else{
+            }else{ //this else condition is toggeled from first for same reason mentioned above
                 l = m + 1;
             }
         } 

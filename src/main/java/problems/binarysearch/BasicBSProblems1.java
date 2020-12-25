@@ -7,29 +7,29 @@ public class BasicBSProblems1 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int [] a= {20,17,15,14,12,10,8,2,1};
-		System.out.print(searchBsInDescArray(a,2));
+		System.out.println(searchBsInDescArray(a,2));
 		//order agnostic array;
 		int [] b= {1,2,3,4,5,5,5,6,7,8};
-		System.out.print(bslast(b,6)-bsfirst(b,5));
+		System.out.println(bslast(b,6)-bsfirst(b,5));
 		
 		//Problem 1:- how many times a sorted array is rotated  ANS to below is 4
 		//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
 		int [] c= {11,12,15,18,2,5,6,8};
-		System.out.print(arrayRotatedcount(c));
+		System.out.println(arrayRotatedcount(c));
 
 		//Problem 2:- find element in rotated array after we get min index from below we can apply binary search with 
 		//index to get result
 		//int minIndex=arrayRotatedcount(c);
 		//floor of 5
 		int [] d= {1,2,3,4,8,9,10,10,12};
-		System.out.print(bsfloorofTarget(d,5));
+		System.out.println(bsfloorofTarget(d,5));
 		//NEXT Greater elemtn than target
 		char [] e= {'a','b','e','g'};
-		System.out.print(nextGreaterElement(e,'f'));
+		System.out.println(nextGreaterElement(e,'f'));
 		
 		//find element in infinite array  consider below as infinate 
 		int [] f= {1,2,3,4,5,6,7,8,9,10,11};
-		System.out.print(bsInfiniteArray(f, 7));
+		System.out.println(bsInfiniteArray(f, 7));
 		
 		
 
@@ -82,29 +82,29 @@ public class BasicBSProblems1 {
 		}
 		return -1;
 	}
-	
-	
-	public static int arrayRotatedcount(int [] a) {
-		int left=0,right=a.length-1;
-		int n=a.length-1;
-		while(left<=right) {
-			int mid =left+(right-left)/2;
-			int v =a[mid];
-			//this % is for rotation
-			int next=(mid+1)%n;
-			//to avoid out of bound
-			int pre=(mid+n-1)%n;
+	//153. Find Minimum in Rotated Sorted Array
+	 public static int arrayRotatedcount(int[] nums) {
+			int n = nums.length;
 			
-			if(a[mid]<=a[next] && a[mid]<=a[pre]) {
-				return mid;
-			}else if(a[left]<=a[mid]) {
-				left=mid+1;
-			}else if(a[mid]<=a[right]){
-				right=mid-1;
+			int l = 0, r = n - 1;
+			while (l <= r) {
+				if (nums[l] <= nums[r]) // array is sorted -> so return first ele.
+					return nums[l];
+				int mid = l + (r - l) / 2;
+
+				int next = (mid + 1) % n;
+				int prev = (mid + n - 1) % n;
+
+				if ((nums[mid] <= nums[next]) && (nums[mid] <= nums[prev]))
+					return mid;
+				else if (nums[l] <= nums[mid])
+					l = mid + 1;
+				else if (nums[mid] <= nums[r])
+					r = mid - 1;
 			}
+			return -1;
 		}
-		return -1;
-	}
+	
 	//https://leetcode.com/problems/search-in-rotated-sorted-array/ |33. Search in Rotated Sorted Array
 	public static int findElemntinRotatedArray(int [] a,int target) {
 		int left=0,right=a.length-1;

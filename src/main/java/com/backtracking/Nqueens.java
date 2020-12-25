@@ -2,7 +2,7 @@ package com.backtracking;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//52. N-Queens II https://leetcode.com/problems/n-queens-ii/submissions/
 public class Nqueens {
 	//https://www.youtube.com/watch?v=05y82cP3bJo
 	public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class Nqueens {
 	        printNqueens(matrix,0,result);
 	        System.out.println(result);
 		
-		
+
 	}
 	//this how to place queens on chess 
 	private static void printNqueens(char[][] chess, int row, List<List<String>> result) {
@@ -37,6 +37,7 @@ public class Nqueens {
 		}
 
 	}
+	// A bounding function for back tracking 
 	private static boolean isSafePlaceforQueen(char chess[][],int row,int col) {
 		 for(int i=row-1,j=col;i>=0;i--){  //checking in upper(vertically) Plus where col will remain same 
 	            if(chess[i][j]=='Q')

@@ -90,31 +90,26 @@ public class DFSTraversals {
 		System.out.print(root.val + ", ");
 	}
 
+	//https://leetcode.com/problems/binary-tree-inorder-traversal/submissions/ Tested!!!
 	public static void inorderWithout(Nodee root) {
 		Stack<Nodee> st = new Stack<>();
 		Nodee current = root;
-		st.push(current);
 
-		while (!st.isEmpty()) {
-			//go to left most and insert all
-			while (current.left != null) {
+		while (!st.isEmpty() || current != null) {
+			if (current != null) {
+				st.push(current);
 				current = current.left;
-				st.push(current);
-			}
-			//now current is back to first as we need to insert right of this
-			current = st.pop();
-			System.out.print(current.val + ", ");
-
-			while (current.right != null) {
-				current = current.right;
-				st.push(current);
+			} else {
+				Nodee node = st.pop();
+				System.out.printf("%s ", node.val);
+				current = node.right;
 			}
 
 		}
-
 	}
 
-	/*
+
+	/*144. Binary Tree Preorder Traversal || https://leetcode.com/problems/binary-tree-preorder-traversal/
 	 * // Push root in our stack 
 	 * // While stack is not empty 
 	 * // Pop current node 
@@ -141,6 +136,7 @@ public class DFSTraversals {
 		}
 
 	}
+	//https://leetcode.com/problems/binary-tree-postorder-traversal/submissions/
 //https://www.java67.com/2017/05/binary-tree-post-order-traversal-in-java-without-recursion.html	
 //We first insert the right node because Stack is a LIFO (last in first out) data structure and as per post-order traversal 
 //we need to explore the left subtree before the right subtree. If you are not familiar with Stack (LIFO) and Queue (FIFO) data

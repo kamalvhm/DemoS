@@ -72,8 +72,7 @@ public class Dummy {
 	}
 	
 	private static String inorder2(TreeNode tree) {
-		
-		return "";
+		return ", ";
 	}
 //50. Pow(x, n)
 	private static int Pow(int base, int pow) {
@@ -102,9 +101,7 @@ public class Dummy {
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;
-		
-		
-
+	
 		return count;
 
 	}
@@ -123,11 +120,23 @@ public class Dummy {
 	 }
 
 	private static void inorderWithout(TreeNode tree) {
+		Stack<TreeNode> st=new Stack<>();
+		TreeNode current=tree;
 		
+		while(!st.isEmpty() || current!=null) {
+			if(current!=null) {
+				st.push(current);
+				current=current.left;
+			}else {
+				TreeNode node=st.pop();
+				System.out.print(node.val+", ");
+				current=node.right;
+			}
+		}
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
-	
+		
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
