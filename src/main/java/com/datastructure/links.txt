@@ -1,3 +1,4 @@
+CP Progammer HandBook :-https://cses.fi/book/book.pdf
 					DIVIDE AND CONQUER  (https://leetcode.com/)
 THink like a Progamer https://www.youtube.com/watch?v=11V7Ik0IBHU
 
@@ -14,7 +15,9 @@ WILLIAM FISET :-https://www.youtube.com/watch?v=RBSGKlAvoiM&t=9349s (DS AND ALGo
 KEVIN :-https://www.youtube.com/watch?v=XZnWETlZZ14&list=PLi9RQVmJD2fYXgBAUfaN5MXgYPUTbzqeb&index=55
 
 					BINARY SEARCH
-https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7
+					https://www.youtube.com/watch?v=GU7DpgHINWQ
+					https://www.youtube.com/watch?v=ykfxiqKZzWQ  (Templet)
+https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7 (aditya verma)
 
 					DP
 FREECODECAMP:-https://www.youtube.com/watch?v=oBt53YbR9Kk&t=224s

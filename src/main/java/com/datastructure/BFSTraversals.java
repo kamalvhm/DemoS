@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import com.beans.TreeNode;
+
 
 //Hint in quetion:- top to bottom.
 public class BFSTraversals {
@@ -100,7 +102,7 @@ public class BFSTraversals {
             {
                 TreeNode current=q.poll();
                 if(i==qSize-1)
-                    visibleValues.add(current.val);
+                    visibleValues.add((int)current.val);
                 
                 if(current.left!=null)
                     q.offer(current.left);
@@ -124,7 +126,7 @@ public class BFSTraversals {
             
           for(int i=0;i<qSize;i++){
                   TreeNode  current =queue.poll();
-                  currentLevel.add(current.val);
+                  currentLevel.add((int)current.val);
                 
             if(current.left!=null){
                 queue.offer(current.left);

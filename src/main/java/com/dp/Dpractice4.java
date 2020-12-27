@@ -8,6 +8,7 @@ import com.cleanup.Utils;
 
 import scala.Array;
 import com.dp.BooleanParenthesization;
+import com.dp.DpOnTrees4.In;
 
 /** ##{@link #MatrixChainMultiplication()}
  * 1)MCM ##{@link #solveMCM()}
@@ -71,7 +72,7 @@ public class Dpractice4 extends DynamicPrograming{
 			String s1="T^F&T";
 			//PS:-Input String given Output -No. of ways it eval to true, add bracket to string such that it evaluate to true  eg: ((T^F)&T) 
 			//String may consist of T=True ,F=False, | =Or, & =And ,^=XOR
-			System.out.println("3)Evaluate Expression to true ans:- "+evalExTBottomUp(s1,0,s1.length()-1,true)); 
+			System.out.println("3)Evaluate Expression to true ans:- "+evalExTRecursive(s1,0,s1.length()-1,true)); 
 			String a="great",b="rgeat"; //two String given you can create binary tree and swap non leaf nodes child if by doing this its equal to secound string it return true else false
 			System.out.println("6)Scramble String ans:- "+scrambledStringRecursie(a,b)); 
 			int eggs=3,floor=5; //IP:-Eggs and floor given we need to identify threshold floor from which if we throw egg it will not break 
@@ -83,12 +84,12 @@ public class Dpractice4 extends DynamicPrograming{
 	//https://www.youtube.com/watch?v=kMK148J9qEE&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=34
 	public static int solveMCM(int arr[],int i,int j) {
 		if(i>=j)return 0;
-		int min =Integer.MAX_VALUE;
+		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int tmp=solveMCM(arr,i,k)+solveMCM(arr,k+1,j)+arr[i-1]*arr[k]*arr[j];
-			min =Math.min(min, tmp);
+			int tmp=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
+			ans=Math.min(ans, tmp);
 		}
-		return min;
+		return ans;
 	}
 	
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
@@ -96,28 +97,27 @@ public class Dpractice4 extends DynamicPrograming{
 		if(dp[i][j]!=-1)return dp[i][j];
 		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int tmp=solveMCM_BottomUp(arr,i,k)+solveMCM_BottomUp(arr,k+1,j)+arr[i-1]*arr[k]*arr[j];
+			int tmp=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
 			ans=Math.min(ans, tmp);
 		}
-		dp[i][j]=ans;
-	return ans;
+		return dp[i][j]=ans;
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
 		if(i>=j)return 0;
 		if(isPalindrom(s, i, j))return 0;
-		int ans=Integer.MAX_VALUE;
+		int min=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int tmp=palindrom_partitioning_recursive(s,i,k)+palindrom_partitioning_recursive(s,k+1,j)+1;
-			ans=Math.min(ans, tmp);
+			int tmp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
+			min=Math.min(min, tmp);
 		}
-		return ans;
+		return min;
 	}
 
 	private static boolean isPalindrom(String s, int i, int j) {
 		if(i==j)return true;
 		while(i<j) {
-			if(s.charAt(i++)!=s.charAt(j--))
+			if(s.charAt(i)!=s.charAt(j))
 				return false;
 		}
 		return true;
@@ -125,7 +125,15 @@ public class Dpractice4 extends DynamicPrograming{
 
 	//V-37
 	private static int palindrom_partitioningBottomUp(String s, int i, int j) {
-		return -1;
+		if(i>=j)return 0;
+		if(dp[i][j]!=-1) return dp[i][j];
+		if(isPalindrom(s, i, j))return 0;
+		int min=Integer.MAX_VALUE;
+		for(int k=i;k<j;k++) {
+			int tmp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
+			min=Math.min(min, tmp);
+		}
+		return dp[i][j]=min;
 	}
 	//CHECK PROBLEM SOLUTION IN PARENT CLASS
 	//V-38 To optimize further we can check "palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);" function in the matrix 
@@ -136,8 +144,37 @@ public class Dpractice4 extends DynamicPrograming{
 	 * 
 	 */
 	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
+		if(i>j)return 0;
+		if(i==j) {
+			if(isTrue) {
+				return s.charAt(i)=='T'?1:0;
+			}else return s.charAt(i)=='F'?1:0;
+		}
+		int ans=0;
 		
-		return -1;
+		for(int k=i+1;k<j;k+=2) {
+			int leftTrue=evalExTRecursive(s, i, k-1, true);
+			int leftFalse=evalExTRecursive(s, i, k-1, false);
+			int rightTrue=evalExTRecursive(s, k+1, j, true);
+			int rightFalse=evalExTRecursive(s, k+1, j, false);
+
+			char c=s.charAt(k);
+			
+			if(c=='&') {
+				if(isTrue)
+					ans+=leftTrue*rightTrue;
+				else ans+=leftFalse*rightTrue+leftTrue*rightFalse+leftFalse*rightFalse;
+			}else if(c=='|') {
+				if(isTrue)
+					ans+=leftTrue*rightTrue+leftFalse*rightTrue+leftTrue*rightFalse;
+				else ans+=leftFalse*rightFalse;
+			} else if(c=='^') {
+				if(isTrue)
+					ans+=leftFalse*rightTrue+leftTrue*rightFalse;
+				else ans+=leftTrue*rightTrue+leftFalse*rightFalse;
+			}
+		}
+		return ans;
 	} 
 	
 	public static int evalExTBottomUp(String s ,int i,int j,boolean isTrue) {
@@ -186,6 +223,19 @@ public class Dpractice4 extends DynamicPrograming{
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {
+		
+		if(a.compareTo(b)==0)return true;
+		if(a.length()<=1)return false;
+		
+		boolean flag=false;
+		int n=a.length();
+		for(int i=1;i<n;i++) {
+			if(scrambledSolve(a.substring(0, i),b.substring(n-i,n)) && scrambledSolve(a.substring(i, n),b.substring(0,n-i)) ||
+					scrambledSolve(a.substring(0, i),b.substring(0,i)) && scrambledSolve(a.substring(i, n),b.substring(i,n))) {
+				flag=true;
+				break;
+			}
+		}
 	return false;
 	} 
 	
@@ -196,6 +246,9 @@ public class Dpractice4 extends DynamicPrograming{
 	 
 	 
 		private static int eggDropRecursive(int e, int f) {
+			if(f==0 || f==1 )return f;
+			if(e==1)return f;
+			
 			return -1;
 		}
 		

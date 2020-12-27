@@ -275,7 +275,8 @@ public class MatrixChainMultiplication extends DynamicPrograming{
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {
-		if(a.compareTo(b)==0)return true;//This mean there is 0 swap in string and both are equal a&b
+		if(a.compareTo(b)==0)return true;//This mean there is 0 swap in string and both are equal a&b gr|eat and gr|ate   for first part gr gr is eqaual so we return true and for secound we 
+		//partition again  e|at and at|e then we can return 
 		if(a.length()<=1)return false;//if both are not equal above ,if Empty String is there in any a or b then return false
 		int n=a.length();//both are equal by now
 		boolean flag=false;

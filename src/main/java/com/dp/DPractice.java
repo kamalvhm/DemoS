@@ -2,10 +2,20 @@ package com.dp;
 
 import java.util.Arrays;
 
+import org.apache.hadoop.fs.shell.Count;
+
+import scala.math.Integral;
+
 /**
- * 1)subset sum ANS:- true 2)equal sum partition ANS:- true 3)count of subset
- * sum ANS:- 3 4)Minimum subset sum difference ANS:- 4 6)No of subset for given
- * d/f ANS:- 3 5)Target sum ANS:- 3 1)Rod Cutting :-22 2)coin change I :-5
+ * 1)subset sum ANS:- true 
+ * 2)equal sum partition ANS:- true 
+ * 3)count of subset
+ * sum ANS:- 3 
+ * 4)Minimum subset sum difference ANS:- 4 
+ * 6)No of subset for given d/f ANS:- 3 
+ * 5)Target sum ANS:- 3 
+ * 1)Rod Cutting :-22 
+ * 2)coin change I :-5
  * 3)coin change II :-2
  */
 
@@ -64,23 +74,24 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		return -1;
+		return 1;
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
-	
+		
 		
 		return t[n][w];
 	}
 
 	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean t[][] = new boolean[n + 1][sum + 1];
-	
+		
 		return t[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
+		
 		return false;
 	}
 
@@ -91,8 +102,8 @@ public class DPractice {
 	}
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
-	
-		return 0;
+		
+		return 1;
 	}
 
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
@@ -102,9 +113,9 @@ public class DPractice {
 	}
 
 	public static int noOfSubsetforGivenDiff(int[] arr, int diff, int n) {
-		int sum = 0;
 		
-		return sum;
+		
+		return 1;
 	}
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
@@ -117,8 +128,7 @@ public class DPractice {
 	public static int coinChangeI(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
 
-		
-
+	
 		return t[n][sum];
 	}
 
@@ -126,7 +136,8 @@ public class DPractice {
 	// :-https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-
+		
+		
 		
 		return t[n][sum];
 	}

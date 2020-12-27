@@ -32,6 +32,7 @@ public class BsPractice {
 		//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
 		int [] c= {11,12,15,18,2,5,6,8};
 		System.out.println("Rotated---->>> "+arrayRotatedcount(c));
+		
 
 		//Problem 2:- find element in rotated array after we get min index from below we can apply binary search with 
 		//index to get result
@@ -39,13 +40,13 @@ public class BsPractice {
 		//floor of 5
 		int [] d= {1,2,3,4,8,9,10,10,12};
 		System.out.print(bsfloorofTarget(d,5));
-		//NEXT Greater elemtn than target
+		//NEXT Greater element than target
 		char [] e= {'a','b','e','g'};
 		System.out.print(nextGreaterElement(e,'f'));
 		
 		//find element in infinite array  consider below as infinate 
 		int [] k= {1,2,3,4,5,6,7,8,9,10,11};
-		System.out.print(bsInfiniteArray(k, 7));
+		System.out.print("Infinite--->>"+bsInfiniteArray(k, 7));
 		
 		int []l={4,5,6,7,0,1,2};
 		
@@ -67,7 +68,20 @@ public class BsPractice {
 	
 	
 	public static int bsInfiniteArray(int[] a, int target) {
-		
+		int start=0;
+		int end=1;
+		while(a[end]<target && end<a.length)
+		{
+			start=end;
+			end=end*2;
+		}
+		while(start<=end) {
+			int mid=start+(end-start)/2;
+			if(a[mid]==target)return mid;
+			else if(target>a[mid])
+				start=mid+1;
+			else end=mid-1;
+		}
 		return -1;
 		
 	} 
@@ -116,21 +130,13 @@ public class BsPractice {
 	
 	public static int arrayRotatedcount(int [] a) {
 		int l=0,r=a.length-1;
-		int n=a.length-1;
-		while(l<=r) {
-			if(a[l]<=a[r])
-				return l;
-			int mid = l+(r-l)/2;
-			int next=(mid+1)%n;
-			int prev=(mid+n-1)%n;
-			if(a[mid]<=a[next] && a[mid]<=a[prev])
-				return mid;
-			else if(a[l]<=a[mid])
-				l=mid+1;
-			else if(a[mid]<=a[r])
-				r=mid-1;
-		}
-		return -1;
+		while(l<r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]<a[a.length-1])
+				r=mid;
+			else l=mid+1;
+		} 
+		return l;
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) {
@@ -201,13 +207,11 @@ public class BsPractice {
 	       int l=0,r=a.length-1;
 	       while(l<r) {
 	    	   int mid=l+(r-l)/2;
-	    	   if((mid==0 || a[mid-1]<a[mid]) && (mid==r || a[mid+1]<a[mid]))
-	    		   return mid;
-	    	   else if(a[mid]<a[mid+1])
+	    	   if(a[mid]<a[mid+1])
 	    		   l=mid+1;
-	    	   else r=mid-1;
+	    	   else r=mid;
 	       }
-	        return l;
+	       return l;
 	      }
 	 
 	public int findMin(int[] nums) {

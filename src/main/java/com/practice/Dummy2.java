@@ -19,8 +19,7 @@ public class Dummy2 {
 		
 		//addTwoNumbers2(l1,l2);
 		//maxLengthBetweenEqualCharacters("cbzxy");
-		//findAnagrams("cbaeabc", "abc");
-		//int[] a= {1,2,3,4,5,6,7,8,1,1,13};
+		//findAnagrams("cbaeabc", "abc"); Last 10 first 7
 		/*int[] a= {3,4,5,6};
 		triplet(a,3,15).stream().forEach(r->System.out.print("["+r[0]+","+r[1]+","+r[2]+"]"));*/
 		int[] a= {2,5,1,8,2,9,1};
@@ -252,6 +251,6 @@ public class Dummy2 {
              
         return ans;
     }
-    
+   
    
 }

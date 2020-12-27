@@ -82,8 +82,8 @@ public class BasicBSProblems1 {
 		}
 		return -1;
 	}
-	//153. Find Minimum in Rotated Sorted Array
-	 public static int arrayRotatedcount(int[] nums) {
+	//153. Find Minimum in Rotated Sorted Array || also check for different solution for hard 154.
+	/* public static int arrayRotatedcount(int[] nums) {
 			int n = nums.length;
 			
 			int l = 0, r = n - 1;
@@ -103,7 +103,21 @@ public class BasicBSProblems1 {
 					r = mid - 1;
 			}
 			return -1;
-		}
+		}*/
+	 
+	 //Templet 2 
+	 public static int arrayRotatedcount(int[] nums) {
+		 int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left)/2;
+            if (nums[mid] < nums[nums.length - 1]) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return nums[left];
+	}
 	
 	//https://leetcode.com/problems/search-in-rotated-sorted-array/ |33. Search in Rotated Sorted Array
 	public static int findElemntinRotatedArray(int [] a,int target) {

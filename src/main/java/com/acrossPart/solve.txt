@@ -1,0 +1,28 @@
+                            ArrayProblems
+1) 54. Spiral Matrix ||| ALSO 59. Spiral Matrix II Check :-https://leetcode.com/problems/spiral-matrix-ii/
+2) 11. Container With Most Water
+3)
+4)
+5)
+6)
+7)
+8)
+9)
+10)
+11)
+12)
+13)
+14)
+15)
+16)
+17)
+18)
+19)
+
+CHECK PACKAGE Previous quetions for parctice
+com.datastruture>MyLinkList.java
+com.datastruture>Queue.java
+com.datastruture>SlidingWindow.java
+ 
+ 
+ 

@@ -29,7 +29,7 @@ public class BinarysearchOnAnswer2 {
 		System.out.print(Search2DArray(arr,29));
 	}
 	//Also known as max in BITONIC ARRAY (monotonically increaing then decreasing so only one peek in array 162. Find Peak Element)
-	 public static int findPeakElement(int[] a) {
+/*	CHECK BELOW SOLUTION public static int findPeakElement(int[] a) {
 	        int left=0;
 	        int right=a.length-1;
 	          
@@ -45,7 +45,21 @@ public class BinarysearchOnAnswer2 {
 	                  right=mid-1;
 	          }
 	          return left;
-	      }
+	      }*/
+	
+    public static int findPeakElement(int[] nums) {
+        int left=0;
+        int right=nums.length-1;
+        
+         while(left<right){
+              int mid=left+(right-left)/2;
+              if(nums[mid]<nums[mid+1])
+                  left=mid+1;
+              else 
+                  right=mid;
+          }
+          return left;
+      }
 	 
 	 
 	 public static int findSearchInBiotonicArray(int[] a,int target) {

@@ -59,9 +59,36 @@ public class BitWiseOperator {
 
 	 
 	 public static boolean hasAlternatingBits2(int n) {
+		 //1101
          while(n != 0 && (n >> 1) != 0){
-            if(((n & 1) ^ ((n >> 1) & 1)) == 0) return false;
+            if(((n & 1) ^ ((n >> 1) & 1)) == 0) return false;  // (n & 1) this means 110(1) this bit and after this(n >> 1) 110 will left
             n = n >> 1;
         } return true;
     }
+	 //Sudo code ONLY
+	 public static boolean hasAlternatingBits3(int n) {
+         //1101
+		//to check the previous bit first bit from right 110(1)this we can & it with one so and will give 1 if only its one 
+		 
+		 //to check previousbit =1 (num&1)
+		 //num >> =1 after this shift bit will become 110
+		// no check present bit 110 & 1 is 0 then is ok because previous was 1 and this was 0 so shift no 
+		 //other wise return false 
+		return false ;
+		 
+    }
+	 
+	 boolean hasAlternatingBits4(int n){
+		    while(n != 0) //while(n)
+		    {
+		        if((n & 3) == 0 || (n & 3) == 3)
+		        {
+		            return false;
+		        }
+		        
+		        n >>= 1; //to check one bit at time shifting to right for example after shift 1101 will become 110
+		    }
+		    
+		    return true;
+		}
 }

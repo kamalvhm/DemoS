@@ -1,30 +1,24 @@
-package com.datastructure;
+package problems.binarysearch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.beans.TreeNode;
 //https://www.bigocheatsheet.com/
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+
 //https://www.includehelp.com/algorithms/variants-of-binary-search.aspx
 public class BinarySearch {
 	public static void main(String args[]) {
-		int [] a= {5,7,7,8,8,10};
-		searchRange(a,8);
 		
-        
+		
+		
+		int[] a= {1,2,3,4,5,6,7,8,8,8,8,13};
+		searchRange(a,8);
+		System.out.println(find_first_occurrence(a, 8));
+		System.out.println(find_last_occurrence(a, 8));
 				
 	}
     //CLASSIC BINEARY SEARCH													ONE
@@ -45,46 +39,53 @@ public class BinarySearch {
     	}
     	return -1;
     }
-    //Find first position of an element in a sorted array  						TWO
-    private int first(int[] nums, int target) { 
-        int l = 0;
-        int r = nums.length - 1;
-        
-        while(l <= r){
-            int m = l + (r - l) / 2;
-            int v = nums[m];
-            if((m == 0 || target > nums[m - 1]) && nums[m] == target) {
-                return m; 
-            }else if(v < target) { //In this case left condition will be up because we need to check first in left size we in else case r will move if target is equal but not first 
-                l = m + 1;
-            }else{
-                r = m - 1;
-            }
-        } 
-        return -1; 
-    } 
-    //Find last positions of an element in a sorted array				  		THREE
-    private int last(int[] nums, int target) { 
-        int l = 0;
-        int r = nums.length - 1;
+   
+    static int find_first_occurrence(int [] nums, int target)
+	{	
+		int N=nums.length;
+        int left = 0, right =  N - 1;
 
-        while(l <= r){
-            int m = l + (r - l) / 2;
-            int v = nums[m];
-            if(( m == r || target < nums[m + 1]) && v == target) {
-                return m; 
-            }else if(target < v) {
-                r = m - 1;
-            }else{ //this else condition is toggeled from first for same reason mentioned above
-                l = m + 1;
-            }
-        } 
-        return -1; 
-    } 
+	    int index =  N;
+	    while (left <= right) {
+
+	        int mid = left + (right - left) / 2;
+
+	         if (nums[mid] >= target) {
+	        	index=mid;
+	            right = mid - 1;
+	        }
+	        else {
+	            left = mid + 1;
+	        }
+	    }
+
+	    return index;
+	}
 	
+	static int find_last_occurrence(int [] nums, int target)
+	{
+		int N=nums.length;
+        int left = 0, right =  N - 1;
+
+	    int index =  N;
+	    while (left <= right) {
+
+	        int mid = left + (right - left) / 2;
+
+	         if (nums[mid] <= target) {
+	        	index=mid;
+	        	left = mid + 1;
+	           
+	        }
+	        else {
+	        	 right = mid - 1;
+	        }
+	    }
+
+	    return index;
+	}
 	
-	
-	//00000011111 first one is bad version so its sorted applying binary search;
+	//00000011111 first one is bad version so its sorted applying binary search;  ||||| Secound templet !!!!!!!!!!!
 	 public int firstBadVersion(int n) {
 		 //can be started with 0 also in some cases;
 	      int left =1;
@@ -105,7 +106,21 @@ public class BinarySearch {
 		return false; 
 	 }
 	 
-	 
+	//TEMPLET 2 162. Find Peak Element    ||||| Secound templet !!!!!!!!!!!
+	    public int findPeakElement(int[] nums) {
+	        int left=0;
+	        int right=nums.length-1;
+	          
+	          while(left<right){
+	              int mid=left+(right-left)/2;
+	              if(nums[mid]<nums[mid+1])
+	                  left=mid+1;
+	              else 
+	                  right=mid;
+	          }
+	          return left;
+	      }
+	// <------------------------------------Questions from Now on----------------------------------------------->
 	 /**
 	  * Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 		Output: [9,4]
@@ -171,7 +186,7 @@ public class BinarySearch {
 	    }
 	  
 	  /**
-	   * 744. Find Smallest Letter Greater Than Target
+	   * 744. Find Smallest Letter Greater Than Target   !!!!Lower bound templete!!!!!
 	   *letters = ["c", "f", "j"]
 		target = "a"
 		Output: "c"
@@ -215,21 +230,8 @@ public class BinarySearch {
 	    }
 	    
 	    
-	    //TEMPLET 2 162. Find Peak Element
-	    public int findPeakElement(int[] nums) {
-	        int left=0;
-	        int right=nums.length-1;
-	          
-	          while(left<right){
-	              int mid=left+(right-left)/2;
-	              if(nums[mid]<nums[mid+1])
-	                  left=mid+1;
-	              else 
-	                  right=mid;
-	          }
-	          return left;
-	      }
-	    //          *first  *secound-1 will be 8's last
+	    
+	    //          *first  *secound-1 will be 8's last    
 	    //1 2 3 4 5 8 8 8 8 9 5 6
 	    //34. Find First and Last Position of Element in Sorted Array
 	    public static int[] searchRange(int[] nums, int target) {
@@ -275,6 +277,8 @@ public class BinarySearch {
 	        current.right=bstRecurse(nums,mid+1,end);
 	        return current;
 	    }
+	   
+	   //Leetcode templetes
 	   
 
 }
