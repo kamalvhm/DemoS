@@ -9,8 +9,7 @@ import scala.math.Integral;
 /**
  * 1)subset sum ANS:- true 
  * 2)equal sum partition ANS:- true 
- * 3)count of subset
- * sum ANS:- 3 
+ * 3)count of subset sum ANS:- 3 
  * 4)Minimum subset sum difference ANS:- 4 
  * 6)No of subset for given d/f ANS:- 3 
  * 5)Target sum ANS:- 3 
@@ -32,7 +31,7 @@ public class DPractice {
 		int[] wt = { 1, 3, 4, 5 };
 		int[] val = { 1, 4, 5, 7 };
 		// ANS:- 9 //Return Maximum Profit
-		System.out.println("KnapSack ANS:- " + knapsack(wt, val, 7, val.length));
+		System.out.println("KnapSack ANS:- " + knapsack1(wt, val, 7, val.length));
 
 		int[] arr = { 2, 3, 7, 8, 10 };
 		// return true if given sum can be formed by subset
@@ -74,60 +73,178 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		return 1;
+		if(n==0 || w==0)return 0;
+		if(dp[n][w]!=-1)return dp[n][w];
+		else if(wt[n-1]<=w) {
+			return dp[n][w]=Math.max(val[n-1]+knapsack1(wt, val, w-wt[n-1], n-1), knapsack1(wt, val, w, n-1));
+
+		}
+		else 
+		return dp[n][w]=knapsack1(wt, val, w, n-1);
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<w+1;j++) {
+				if(i==0)
+					t[i][j]=0;
+				if(j==0)
+					t[i][j]=0;
+			}
+		}
 		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<w+1;j++) {
+				if(wt[i-1]<=j)
+					t[i][j]=Math.max(val[i-1]+t[i-1][j-wt[i-1]],t[i-1][j]);
+				else 
+					t[i][j]=t[i-1][j];
+			}
+		}
 		
 		return t[n][w];
 	}
 
 	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean t[][] = new boolean[n + 1][sum + 1];
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=false;
+				if(j==0)
+					t[i][j]=true;
+			}
+		}
 		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(arr[i-1]<=j)
+					t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
+				else 
+					t[i][j]=t[i-1][j];
+			}
+		}
 		return t[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
-		
-		return false;
+		int total=0;
+		for(int i:arr)
+			total+=i;
+		if(total%2!=0)return false;
+		return subsetSum(arr, total/2, n);
 	}
 
 	public static int countSubsetSum(int[] arr, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(j==0)
+					t[i][j]=1;
+			}
+		}
+		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(arr[i-1]<=j) {
+					t[i][j]=t[i-1][j-arr[i-1]]+t[i-1][j];
+				}else t[i][j]=t[i-1][j];
+			}
+		}
 		
 		return t[n][sum];
 	}
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
-		
-		return 1;
+	    int	sum=0;
+		for(int i:arr)
+			sum+=i;
+		boolean t[][]=subsetSumToReturnTable(arr, sum, n);
+		int min=Integer.MAX_VALUE;
+		for(int i=0;i<sum/2;i++)
+		{
+			if(t[n-1][i]) {
+				min=Math.min(min, sum-2*i);
+			}
+		}
+		return min;
 	}
 
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
 		boolean t[][] = new boolean[n + 1][sum + 1];
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=false;
+				if(j==0)
+					t[i][j]=true;
+			}
+		}
 		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(arr[i-1]<=j)
+					t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
+				else 
+					t[i][j]=t[i-1][j];
+			}
+		}
 		return t;
 	}
 
 	public static int noOfSubsetforGivenDiff(int[] arr, int diff, int n) {
+		 int	sum=0;
+		for(int i:arr)
+			sum+=i;
+		int s1=(diff+sum)/2;
 		
 		
-		return 1;
+		return countSubsetSum(arr, s1, n);
 	}
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<w+1;j++) {
+				if(i==0)
+					t[i][j]=0;
+				if(j==0)
+					t[i][j]=0;
+			}
+		}
 		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<w+1;j++) {
+				if(wt[i-1]<=j)
+					t[i][j]=Math.max(val[i-1]+t[i][j-wt[i-1]],t[i-1][j]);
+				else 
+					t[i][j]=t[i-1][j];
+			}
+		}
 		return t[n][w];
 
 	}
 
 	public static int coinChangeI(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=0;
+				if(j==0)
+					t[i][j]=1;
+			}
+		}
+		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(coin[i-1]<=j)
+					t[i][j]=t[i][j-coin[i-1]]+t[i-1][j];
+				else 
+					t[i][j]=t[i-1][j];
+			}
+		}
 	
 		return t[n][sum];
 	}
@@ -137,7 +254,23 @@ public class DPractice {
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
 		
+		for(int i=0;i<n+1;i++) {
+			for(int j=0;j<sum+1;j++) {
+				if(i==0)
+					t[i][j]=Integer.MAX_VALUE-1;
+				if(j==0)
+					t[i][j]=0;
+			}
+		}
 		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<sum+1;j++) {
+				if(coin[i-1]<=j)
+					t[i][j]=Math.min(t[i][j-coin[i-1]]+1,t[i-1][j]);
+				else 
+					t[i][j]=t[i-1][j];
+			}
+		}
 		
 		return t[n][sum];
 	}

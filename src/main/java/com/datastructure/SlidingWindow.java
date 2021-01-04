@@ -6,6 +6,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.PriorityQueue;
 
@@ -44,7 +45,15 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 		
 		//Return size of longest substring of S which is having exactly K unique character
 		String s="aabacbebebe"; //longest with 3 unique char will be cbebebe so ans will be 7
-		System.out.print("K unique char subString:--"+kUniqueSubString(s,3));
+		System.out.println("10)K unique char subString:--"+kUniqueSubString(s,3));
+		
+		String s1="bwwkew";  //return max string length with unique characters 
+		System.out.println("11) LongestSubStringWithAllUnique:--"+LongestSubStringWithAllUnique(s));
+		
+		String s2="abaccab";
+		System.out.println("12) Pick Toys :--"+pickToys(s2));
+
+
 	}
 	
 
@@ -399,6 +408,72 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 				}
 			}
 			
+		return max;
+	}
+		
+	//V-11 | https://www.youtube.com/watch?v=L6cffskouPQ  SAME as previous ||3. Longest Substring Without Repeating Characters TESTED
+	public static int LongestSubStringWithAllUnique(String s) {
+			int i=0,j=0;
+			HashMap<Character,Integer> map=new HashMap<>();
+			int max=0;
+			while(j<s.length()) {
+				char c=s.charAt(j);
+				map.put(c, map.getOrDefault(c, 0)+1);
+				if(map.size()>(j-i+1))//comparing map size with window size as all window characters should be unique !!!!THIS CAN BE IGNORED NOT VALID !!!!
+				{
+					j++;
+				}else if(map.size()==(j-i+1)) {
+					max =Math.max(max, map.size());
+					j++;
+				}else if(map.size()<(j-i+1)) { // < change from last ** suppose window contains pww then map size 2 window size 3 this mean we have w repeating in map so pop from behind
+					while (map.size()<(j-i+1)) {
+						char l=s.charAt(i);
+						if(map.containsKey(l)) {
+							int val=map.get(l);
+							if(val>1)
+								map.put(l, --val);
+							else 
+								map.remove(l);
+							i++;
+						}
+					}
+					j++;
+				}
+				
+			}
+			return max;
+	}
+	//THIS QUETION IS ALSO CAN BE SOLVED BY CALLING "kUniqueSubString(s,2);"
+	public static int pickToys(String s) {
+		//USE CODE OR CALL COMMENTED METHOD
+		//return kUniqueSubString(s,2);
+		int i=0,j=0;
+		final int MAX_TYPE=2;//types of toys allowed 
+		HashMap<Character,Integer> map=new HashMap<>();
+		int max=0;
+		while(j<s.length()) {
+			char c=s.charAt(j);
+			map.put(c, map.getOrDefault(c, 0)+1);
+			
+			if(map.size()<MAX_TYPE) {
+				j++;
+			}else if(map.size()==MAX_TYPE) {
+				max=Math.max(max, j-i+1);
+				j++;
+			}else if(map.size()>MAX_TYPE) {
+				while(map.size()>MAX_TYPE) {
+					char l=s.charAt(i);
+					if(map.containsKey(l)) {
+						int v=map.get(l);
+						if(v>1)
+							map.put(l, --v);
+						else map.remove(l);
+						i++;
+					}
+				}
+				j++;
+			}
+		}
 		return max;
 	}
 }

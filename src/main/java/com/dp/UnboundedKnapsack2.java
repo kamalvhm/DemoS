@@ -84,7 +84,7 @@ public class UnboundedKnapsack2 {
 			}
 		}
 		
-		//To fill/Initailize secound row 
+		//To fill/Initialize second row 
 		for(int j=1;j<sum+1;j++) {
 			if(j%coin[0]==0) //if we can create sum from first coin for example we can't create sum=4 from coin value 3 even if we choose multiple 
 				t[1][j]=j/coin[0]; 

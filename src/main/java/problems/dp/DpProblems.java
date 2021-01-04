@@ -72,7 +72,7 @@ public class DpProblems {
        return maxans;
    }
     
-    //53. Maximum Subarray  Easy
+    //53. Maximum Sub array  Easy
     public int maxSubArray(int[] nums) {
         if(nums.length==1)return nums[0];
         int max=nums[0];

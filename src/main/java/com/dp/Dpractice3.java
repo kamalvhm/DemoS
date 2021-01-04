@@ -16,6 +16,7 @@ import io.netty.handler.codec.http.HttpContentEncoder.Result;
 6)Longest repeating subSequence ANS:-3
 8)subsequence pattern Matching ANS:-true
 14)Min no of insertion in a string to make it palindromic  ANS:-2
+15) Edit Distance :-5
  */
 public class Dpractice3 {
 	static int dp[][]=new int[20][20];//m+1 n+1
@@ -63,29 +64,29 @@ public class Dpractice3 {
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
-		if(m==0 || n==0) return 0;
-		if(x.charAt(n-1)==y.charAt(m-1)) {
+		if(n==0 || m==0)return 0;
+		else if(x.charAt(n-1)==y.charAt(m-1)) {
 			return 1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
-		}else 
-			return Math.max(LCS_Simple_recursive_Code(x, y, n-1, m), LCS_Simple_recursive_Code(x, y, n, m-1));
+		}else return Math.max(LCS_Simple_recursive_Code(x, y, n-1, m) ,LCS_Simple_recursive_Code(x, y, n, m-1));
 	}
 	//SECOUND STEP
 	public static int LCS_BottomUp_Memoized(String x,String y,int n,int m) {
-		if(m==0 || n==0) return 0;
+		if(n==0 || m==0)return 0;
 		if(dp[n][m]!=-1)return dp[n][m];
-		if(x.charAt(n-1)==y.charAt(m-1)) {
-			return dp[n][m]=1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
-		}else 
-			return dp[n][m]=Math.max(LCS_Simple_recursive_Code(x, y, n-1, m), LCS_Simple_recursive_Code(x, y, n, m-1));	}
+		else if(x.charAt(n-1)==y.charAt(m-1)) {
+			return dp[n][m]=1+LCS_BottomUp_Memoized(x, y, n-1, m-1);
+		}else return dp[n][m]=Math.max(LCS_BottomUp_Memoized(x, y, n-1, m) ,LCS_BottomUp_Memoized(x, y, n, m-1));
+	}	
 	
 	//THIRD STEP
 	public static int LCS_TopDown(String x,String y,int n,int m) {
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
+		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<m+1;j++) {
 				if(x.charAt(i-1)==y.charAt(j-1)) {
 					t[i][j]=1+t[i-1][j-1];
-				}else t[i][j]=Math.max(t[i-1][j],t[i][j-1]);
+				}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 			}
 		}
 		
@@ -94,8 +95,7 @@ public class Dpractice3 {
 	
 	public static int LongestCommonSubString(String x,String y,int n,int m) {
 		int t[][]=new int [n+1][m+1];  
-		int max=0;  //!!!Secound CHANGE!!!
-
+		int max=0;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<m+1;j++) {
 				if(x.charAt(i-1)==y.charAt(j-1)) {
@@ -116,7 +116,7 @@ public class Dpractice3 {
 			for(int j=1;j<m+1;j++) {
 				if(x.charAt(i-1)==y.charAt(j-1)) {
 					t[i][j]=1+t[i-1][j-1];
-				}else t[i][j]=Math.max(t[i-1][j],t[i][j-1]);
+				}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 			}
 		}
 		
@@ -127,10 +127,9 @@ public class Dpractice3 {
 				sb.insert(0, x.charAt(i-1));
 				i--;
 				j--;
-			}else if(t[i][j-1]>t[i-1][j])
-				j--;
-			else i--;
-			
+			}else if(t[i-1][j]>t[i][j-1])
+				i--;
+			else j--;
 		}
 		
 		return sb.toString();
@@ -141,40 +140,41 @@ public class Dpractice3 {
 		 int m=y.length(),n=x.length();
 		 int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		 
-		 for(int i=1;i<n+1;i++) {
-			 for(int j=1;j<m+1;j++) {
-				 if(x.charAt(i-1)==y.charAt(j-1)) {
-					 t[i][j]=1+t[i-1][j-1];
-				 }else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-			 }
-		 }
+			for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1)) {
+						t[i][j]=1+t[i-1][j-1];
+					}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+				}
+			}
 			
-		StringBuffer sb=new StringBuffer();
-		int i=n,j=m;
-		while(i>0 && m>0) {
-			if(x.charAt(i-1)==y.charAt(j-1)) {
-				sb.insert(0,x.charAt(i-1));
-				i--;
-				j--;
-			}else if(t[i-1][j]>t[j][j-1])
-			{
+			StringBuffer sb=new StringBuffer();
+			int i=n,j=m;
+			while(i>0 && j>0) {
+				if(x.charAt(i-1)==y.charAt(j-1)) {
+					sb.insert(0, x.charAt(i-1));
+					i--;
+					j--;
+				}else if(t[i-1][j]>t[i][j-1]) {
+					sb.insert(0, x.charAt(i-1));
+					i--;
+				}
+				else {
+					sb.insert(0, y.charAt(j-1));
+					 j--;
+				}
+			}
+			while(i>0) {
 				sb.insert(0, x.charAt(i-1));
 				i--;
-			}else 
-			{
+			}
+			
+			while(j>0) {
 				sb.insert(0, y.charAt(j-1));
 				j--;
 			}
-		}
-		
-		while (i>0) {
-			sb.insert(0, x.charAt(i-1));
-			i--;
-		} 
-		while (j>0) {
-			sb.insert(0, y.charAt(j-1));
-			j--;
-		} 
+			
+			
 
 			return sb.toString();
 	    }
@@ -182,7 +182,8 @@ public class Dpractice3 {
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
 		    int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
-			for(int i=1;i<n+1;i++) {
+			
+		    for(int i=1;i<n+1;i++) {
 				for(int j=1;j<m+1;j++) {
 					if(x.charAt(i-1)==y.charAt(j-1) && i!=j) {
 						t[i][j]=1+t[i-1][j-1];
@@ -190,28 +191,29 @@ public class Dpractice3 {
 				}
 			}
 			
-			
 			return t[n][m];
 		}
 	
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
-	        for(int i=0;i<n+1;i++) {
-	        	for(int j=0;j<m+1;j++) {
-	        		if(i==0)
-	        			t[i][j]=j;
-	        		if(j==0)
-	        			t[i][j]=i;
-	        	}
-	        }
-	        for(int i=1;i<n+1;i++) {
-	        	for(int j=1;j<m+1;j++) {
-	        		if(x.charAt(i-1)!=y.charAt(j-1))
-	        			t[i][j]=Math.min(Math.min(t[i][j-1], t[i-1][j]),t[i-1][j-1]);
-	        		else t[i][j]=t[i-1][j-1];
-	        	}
-	        }
+	       for(int i=0;i<n+1;i++)
+	    	   t[i][0]=i;
+	       
+	       for(int j=0;j<m+1;j++)
+	    	   t[0][j]=j;
+	       
+	       for(int i=1;i<n+1;i++)
+	       {
+		       for(int j=1;j<m+1;j++)
+		       {
+		    	   if(x.charAt(i-1)!=y.charAt(j-1))
+		    		   t[i][j]=Math.min(Math.min(t[i][j-1], t[i-1][j]), t[i-1][j-1])+1;
+		    	   else t[i][j]=t[i-1][j-1];
+		       }
+	       }
+	       
+	       
 	        return t[n][m];
 	    }
 }

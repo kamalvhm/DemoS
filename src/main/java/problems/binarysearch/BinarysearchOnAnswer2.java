@@ -3,8 +3,7 @@
  */
 package problems.binarysearch;
 
-/**
- * Problems where we can apply binary search on unsorted array also !!!! for example findPeak problem
+/**BinarysearchOnAnswer is Problems where we can apply binary search on unsorted array also !!!! for example findPeak problem
  *
  */
 public class BinarysearchOnAnswer2 {

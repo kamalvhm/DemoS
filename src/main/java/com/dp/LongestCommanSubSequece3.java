@@ -9,15 +9,16 @@ import java.util.Arrays;
  * 4)print SCS [v-29] | 1092. https://leetcode.com/problems/shortest-common-supersequence/
  * 5)Min # insertion and deletion a->b
  * 6)Longest repeating subSequence
- * 7)Length of longest subsequence of a which is substring in b
+ * TODO 7)Length of longest subsequence of a which is substring in b
  * 8)subsequence pattern Matching | 392. Is Subsequence
- * 9)count how many times a appear as subsequence in b
- * 10)Longest palindromic sub sequence [v-26] |516. Longest Palindromic Subsequence https://leetcode.com/problems/longest-palindromic-subsequence/
- * 11)Longest palindromic substring
- * 12)count of palindromic substring
+ * TODO 9)count how many times a appear as subsequence in b
+ * 10)Longest palindromic sub sequence [v-26] |516. Longest palindromic Subsequence https://leetcode.com/problems/longest-palindromic-subsequence/
+ * TODO 11)Longest palindromic substring  (BELOW BOTH CAN BE CHANGED WITH LPS CODE) https://leetcode.com/problems/longest-palindromic-substring/
+ * TODO 12)count of palindromic substring
  * 13)Min no of deletion in a string to make it palindromic 
- * 14)Min no of insertion in a string to make it palindromic
+ * 14)Min no of insertion in a string to make it palindromic 
  * 15)Edit Distance
+ * 16)Distinct Subsequences
  */
 
 public class LongestCommanSubSequece3 {
@@ -30,7 +31,7 @@ public class LongestCommanSubSequece3 {
 	public static void main(String[] args) {
 		String x="abcdgh",y="abedfhr"; //common in both is abdh so 4 is ans
 		System.out.println("LCS Length ANS:-"+LCS_TopDown(x,y,x.length(),y.length())); //1143. Longest Common Subsequence
-		String a="abcde",b="abfce";  //ANS 2 longest countinues common string is 'ab' so 2
+		String a="abcde",b="abfce";  //ANS 2 longest continues common string is 'ab' so 2
 		System.out.println("1) Longest common subString ANS:-"+LongestCommonSubString(a,b,a.length(),b.length()));
 		System.out.println("2)print  LCS ANS :-"+printLCS_String(x,y,x.length(),y.length())); //ANS abdh
 		String a1="AGGTAB" ,b1="GXTXAVB"; //Merged Sortest will be AGGXTXAYB to find length = (length of a1 + length of b1) - LCS of both strings (ANS :-(6+7)-4=9)
@@ -59,6 +60,14 @@ public class LongestCommanSubSequece3 {
 		String e1="intention";
 		String e2="execution";//Ans will be 5
 		System.out.println("15) Edit Distance :-"+editDistance(e1,e2,e1.length(),e2.length()));
+		
+		String e3="rabbbit";
+		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.
+		System.out.println("16)Distinct Subsequences :-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
+		
+		/*String s4="";
+		System.out.println("11)Longest palindromic substring :-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));*/
+
 		
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
@@ -108,7 +117,7 @@ public class LongestCommanSubSequece3 {
 					t[i][j]=0;
 			}
 		}
-		int max=0;  //!!!Secound CHANGE!!!
+		int max=0;  //!!!Second CHANGE!!!
 		for(int i=1;i<m+1;i++) {
 			for(int j=1;j<n+1;j++) {
 				if(y.charAt(i-1)==x.charAt(j-1)) {   
@@ -263,6 +272,34 @@ public class LongestCommanSubSequece3 {
 	            }
 	        }
 	        return t[n][m];
+	    }
+	 //115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
+	 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
+         if(m==0)// we have traversed t and found all char so count 1 subsequence for that
+            return 1;
+         if(n==0)//we have traversed whole s and still not found all t chars so 0
+            return 0;
+        else if(s.charAt(n-1)!=t.charAt(m-1))// if last char not equal then exclude that char from s and look again
+            return DistinctSubsequencesR(s,t,n-1,m);
+        else return DistinctSubsequencesR(s,t,n-1,m-1)+DistinctSubsequencesR(s,t,n-1,m);//if both char mathes then add seletion and not seletion 
+    }
+	 
+	public static int DistinctSubsequences(String s ,String t,int n,int m){
+	        int dp[][]=new int [n+1][m+1];
+	        
+	        for(int i=0;i<n+1;i++){
+	            dp[i][0]=1;// we have traversed t and found all char so count 1 subsequence for that
+	        }
+	        
+	        for(int i=1;i<n+1;i++){
+	            for(int j=1;j<m+1;j++){
+	                if(s.charAt(i-1)!=t.charAt(j-1)) // if last char not equal then exclude that char from s and look again
+	                    dp[i][j]=dp[i-1][j];
+	                else dp[i][j]=dp[i-1][j-1]+dp[i-1][j];//if both char mathes then add seletion and not seletion 
+	            }
+	        }
+	         
+	      return dp[n][m];
 	    }
 	
 }

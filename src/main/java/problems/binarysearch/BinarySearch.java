@@ -50,7 +50,7 @@ public class BinarySearch {
 
 	        int mid = left + (right - left) / 2;
 
-	         if (nums[mid] >= target) {
+	         if (nums[mid] >= target) {// this condition is because if its equal check left and if greater also then 
 	        	index=mid;
 	            right = mid - 1;
 	        }

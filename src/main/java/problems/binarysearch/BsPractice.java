@@ -7,36 +7,34 @@ public class BsPractice {
 	public static void main(String[] args) {
 		//Simple binary search + variation of first and last 
 		int [] h= {5,7,7,8,8,8,8,9,10};
-		System.out.println(bslast(h,9));
+		System.out.println("1) "+search(h,9));
+		
+		int [] b= {1,2,3,4,5,5,5,6,7,8};
+		System.out.println("2) first:- "+bsfirst(b,5)+"last :- "+bslast(b,5));
 		//ANS:-5
 		int [] f= {1,2,3,4,5,6,7,4,3,2,1};
-		System.out.println("PEAK-> "+findPeakElement(f));
+		System.out.println("3) Peak-> "+findPeakElement(f));
+		
+		//Problem 1:- how many times a sorted array is rotated  ANS to below is 4
+				//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
+		int [] c= {11,12,15,18,2,5,6,8};
+		System.out.println("4) Rotated---->>> "+arrayRotatedcount(c));
 				
 		//Binary search in 2D array
-		
 		int arr[][]= {{10,20,30,40},
 					  {15,25,35,45},
 					  {27,29,37,48},
 					  {32,33,39,50}};
 		//2-1 should be retured;
-		System.out.println("2D--> "+Search2DArray(arr,29));
+		System.out.println("5) 2D--> "+Search2DArray(arr,29));
+		
+		//find element in infinite array  consider below as infinate 
+		int [] k= {1,2,3,4,5,6,7,8,9,10,11};
+		System.out.print("6) Infinite--->>"+bsInfiniteArray(k, 7));
 		
 		int [] a= {20,17,15,14,12,10,8,2,1};
-		System.out.println("Desc "+searchBsInDescArray(a,2)); //ANS:-7
+		System.out.println("7) Desc "+searchBsInDescArray(a,2)); //ANS:-7
 		//order agnostic array;
-		int [] b= {1,2,3,4,5,5,5,6,7,8};
-		System.out.println("Last-"+(bslast(b,6)-bsfirst(b,5)));
-		//System.out.println("Last"+bsfirst(b,5));
-
-		//Problem 1:- how many times a sorted array is rotated  ANS to below is 4
-		//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
-		int [] c= {11,12,15,18,2,5,6,8};
-		System.out.println("Rotated---->>> "+arrayRotatedcount(c));
-		
-
-		//Problem 2:- find element in rotated array after we get min index from below we can apply binary search with 
-		//index to get result
-		//int minIndex=arrayRotatedcount(c);
 		//floor of 5
 		int [] d= {1,2,3,4,8,9,10,10,12};
 		System.out.print(bsfloorofTarget(d,5));
@@ -44,11 +42,8 @@ public class BsPractice {
 		char [] e= {'a','b','e','g'};
 		System.out.print(nextGreaterElement(e,'f'));
 		
-		//find element in infinite array  consider below as infinate 
-		int [] k= {1,2,3,4,5,6,7,8,9,10,11};
-		System.out.print("Infinite--->>"+bsInfiniteArray(k, 7));
 		
-		int []l={4,5,6,7,0,1,2};
+		
 		
 		
 	}
@@ -57,34 +52,75 @@ public class BsPractice {
 		int l=0,r=a.length-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]==i)return mid;
+			if(a[mid]==i)
+				return mid;
 			else if(i>a[mid])
 				l=mid+1;
-			else r=mid-1;
+			else 
+				r=mid-1;
 		}
 		return -1;
 	}
 	
 	
 	
-	public static int bsInfiniteArray(int[] a, int target) {
-		int start=0;
-		int end=1;
-		while(a[end]<target && end<a.length)
-		{
-			start=end;
-			end=end*2;
+	
+	
+	public static int bsfirst(int [] a,int target) {
+		int l=0,r=a.length-1;
+		int index=0;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>=target) {
+				index=mid;
+				r=mid-1;
+			}else l=mid+1;
 		}
-		while(start<=end) {
-			int mid=start+(end-start)/2;
-			if(a[mid]==target)return mid;
-			else if(target>a[mid])
-				start=mid+1;
-			else end=mid-1;
-		}
-		return -1;
+		return index;
 		
-	} 
+	}
+	
+	public static int bslast(int [] a,int target) {
+		int l=0,r=a.length;
+		int index=0;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]<=target) {
+				index=mid;
+				l=mid+1;
+			}else r=mid-1;
+		}
+		return index;
+	}
+	
+	 public static int findPeakElement(int[] a) {
+	       int l=0,r=a.length;
+	       while(l<r) {
+	    	   int mid=l+(r-l)/2;
+	    	   if(a[mid]<a[mid+1])
+	    		   l=mid+1;
+	    	   else r=mid;
+	       }
+	      
+	       return l;
+	      }
+	
+	public static int arrayRotatedcount(int[] a) {
+		int l = 0, r = a.length - 1;
+		while(l<r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>a[a.length-1])
+				l=mid+1;
+			else r=mid;
+		}
+		return l;
+	}
+
+	public static int bsInfiniteArray(int[] a, int target) {
+
+		return -1;
+
+	}
 	
 	public static int searchBsInDescArray(int [] a,int target) {
 		int l=0,r=a.length-1;
@@ -97,46 +133,6 @@ public class BsPractice {
 				l=mid+1;
 		}
 		return -1;
-	}
-	
-	public static int bsfirst(int [] a,int target) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if((mid==0 || a[mid-1]<a[mid]) && a[mid]==target){
-				return mid;
-			}else if(target>a[mid]) {
-				l=mid+1;
-			}else r=mid-1;
-		} 
-		return -1;
-		
-	}
-	
-	public static int bslast(int [] a,int target) {
-		int l=0,r=a.length;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if((mid==r || a[mid+1]>a[mid]) && a[mid]==target){
-				return mid;
-			}else if(target<a[mid]) {
-				r=mid-1;
-			}else 
-				l=mid+1;
-		} 
-		return -1;
-	}
-	
-	
-	public static int arrayRotatedcount(int [] a) {
-		int l=0,r=a.length-1;
-		while(l<r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]<a[a.length-1])
-				r=mid;
-			else l=mid+1;
-		} 
-		return l;
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) {
@@ -203,16 +199,7 @@ public class BsPractice {
 		 	
 	      }
 	 
-	 public static int findPeakElement(int[] a) {
-	       int l=0,r=a.length-1;
-	       while(l<r) {
-	    	   int mid=l+(r-l)/2;
-	    	   if(a[mid]<a[mid+1])
-	    		   l=mid+1;
-	    	   else r=mid;
-	       }
-	       return l;
-	      }
+
 	 
 	public int findMin(int[] nums) {
 		int n = nums.length;

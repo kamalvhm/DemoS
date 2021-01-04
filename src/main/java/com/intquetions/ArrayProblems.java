@@ -11,6 +11,7 @@ public class ArrayProblems {
 	public static void main(String[] args) {
 		int[] nums={4,3,2,7,8,2,3,1};
 		  List ip= Arrays.asList(nums);
+		  Integer[] numsAgain=(Integer[])ip.toArray();
         
        int [] a= {4,3,2,7,8,2,3,1};
        System.out.println(largestValueInArrayWITHDEVIDEANDCONQUER(a,0,a.length-1));
@@ -38,6 +39,8 @@ public class ArrayProblems {
       //swap sort where we will arrange array such that i index contains i+1 value  so start from 0 nd check if its on correct spot if not swap this 
       //with correct spot https://leetcode.com/problems/find-the-duplicate-number/
       System.out.print(findDupUsingSlowFast(ar));
+      
+      
 	}
 	
 		//448. Find All Numbers Disappeared in an Array
