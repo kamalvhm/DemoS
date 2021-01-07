@@ -1,24 +1,24 @@
 package problems.binarysearch;
 
 import java.util.Arrays;
-
+//CODE COMAPRE with in class BinarySearch,BasicBSProblems1,BinarysearchOnAnswer2
 public class BsPractice {
 
 	public static void main(String[] args) {
 		//Simple binary search + variation of first and last 
 		int [] h= {5,7,7,8,8,8,8,9,10};
-		System.out.println("1) "+search(h,9));
+		System.out.println("1)-(7):- "+search(h,9));
 		
 		int [] b= {1,2,3,4,5,5,5,6,7,8};
-		System.out.println("2) first:- "+bsfirst(b,5)+"last :- "+bslast(b,5));
+		System.out.println("2) first (4):- "+bsfirst(b,5)+"-last (6):- "+bslast(b,5));
 		//ANS:-5
 		int [] f= {1,2,3,4,5,6,7,4,3,2,1};
-		System.out.println("3) Peak-> "+findPeakElement(f));
+		System.out.println("3) Peak (6)-> "+findPeakElement(f));
 		
 		//Problem 1:- how many times a sorted array is rotated  ANS to below is 4
 				//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
 		int [] c= {11,12,15,18,2,5,6,8};
-		System.out.println("4) Rotated---->>> "+arrayRotatedcount(c));
+		System.out.println("4) Rotated(4)---->>> "+arrayRotatedcount(c));
 				
 		//Binary search in 2D array
 		int arr[][]= {{10,20,30,40},
@@ -42,33 +42,24 @@ public class BsPractice {
 		char [] e= {'a','b','e','g'};
 		System.out.print(nextGreaterElement(e,'f'));
 		
-		
-		
-		
-		
 	}
 
 	private static int search(int[] a, int i) {
 		int l=0,r=a.length-1;
-		while(l<=r) {
+		while(l<=l) {
 			int mid=l+(r-l)/2;
 			if(a[mid]==i)
 				return mid;
 			else if(i>a[mid])
 				l=mid+1;
-			else 
-				r=mid-1;
+			else r=mid-1;
 		}
 		return -1;
 	}
 	
-	
-	
-	
-	
 	public static int bsfirst(int [] a,int target) {
 		int l=0,r=a.length-1;
-		int index=0;
+		int index=-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]>=target) {
@@ -81,7 +72,7 @@ public class BsPractice {
 	}
 	
 	public static int bslast(int [] a,int target) {
-		int l=0,r=a.length;
+		int l=0,r=a.length-1;
 		int index=0;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
@@ -93,25 +84,26 @@ public class BsPractice {
 		return index;
 	}
 	
-	 public static int findPeakElement(int[] a) {
-	       int l=0,r=a.length;
-	       while(l<r) {
-	    	   int mid=l+(r-l)/2;
-	    	   if(a[mid]<a[mid+1])
-	    		   l=mid+1;
-	    	   else r=mid;
-	       }
-	      
-	       return l;
-	      }
+	public static int findPeakElement(int[] a) {
+		int l = 0, r = a.length - 1;
+		while (l < r) {
+			int mid = l + (r - l) / 2;
+			if (a[mid] < a[mid + 1]) {
+				l = mid + 1;
+			} else
+				r = mid;
+
+		}
+		return l;
+	}
 	
 	public static int arrayRotatedcount(int[] a) {
-		int l = 0, r = a.length - 1;
+		int l=0,r=a.length-1;
 		while(l<r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]>a[a.length-1])
+			if(a[mid]>a[a.length-1]) {
 				l=mid+1;
-			else r=mid;
+			}else r=mid-1;
 		}
 		return l;
 	}
@@ -123,15 +115,7 @@ public class BsPractice {
 	}
 	
 	public static int searchBsInDescArray(int [] a,int target) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]==target)return mid;
-			else if(target>a[mid])
-				r=mid-1;
-			else 
-				l=mid+1;
-		}
+		
 		return -1;
 	}
 	
@@ -186,15 +170,7 @@ public class BsPractice {
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {
-		 	int i=0 ,j=a.length-1;
-		 	while(i>=0 && j>=0) {
-		 		if(a[i][j]==target)
-		 			return i+"-"+j;
-		 		else if(target>a[i][j])
-		 			i++;
-		 		else if(target<a[i][j])
-		 			j--;
-		 	}
+		 	
 		 	return "";
 		 	
 	      }

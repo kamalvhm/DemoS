@@ -4,6 +4,11 @@ import com.beans.ListNode;
 import com.beans.Node;
 
 public class MyLinkList<T> {
+	//eXERSISE
+	//https://www.hackerrank.com/challenges/merge-two-sorted-linked-lists/problem?h_r=internal-search
+	//https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list-in-reverse/problem
+
+	
 	private Node<T> st_node;
 	private int size;
 	
@@ -123,7 +128,7 @@ public class MyLinkList<T> {
 		}
 		return slow;
 	}
-	
+	//https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem
 	public Node deleteInPosRecursive(Node head,int p) {
 		if(p==0)return head.next_node;
 		head.next_node=deleteInPosRecursive(head.next_node,p-1);
@@ -144,7 +149,7 @@ public class MyLinkList<T> {
 		}
 			
 	}
-	
+	//https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list-in-reverse/problem
 	 static void reversePrint(Node head) {
 	        if(head==null)return;
 	        reversePrint(head.next_node);
@@ -183,7 +188,7 @@ public class MyLinkList<T> {
 	        return head;
 	    }
 		 
-		//445. Add Two Numbers II   #* MEDIUM
+		//445. Add Two Numbers II   #@ MEDIUM
 		 public static  ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		        Stack<Integer> s1=new Stack<>();
 		        Stack<Integer> s2=new Stack<>();

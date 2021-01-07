@@ -10,7 +10,7 @@ import scala.Array;
 import com.dp.BooleanParenthesization;
 //SAME PATTERN QUETION :-https://leetcode.com/problems/word-break/submissions/
 /** ##{@link #MatrixChainMultiplication()}
- * 1)MCM ##{@link #solveMCM()}
+ * 1)MCM ##{@link #solveMCM()}  | 312. Burst Balloons
  * 2)Printing MCM 
  * 3)Evaluate Expression to true / boolean parenthesization
  * 4)Min/Max value of an Expr.
@@ -379,4 +379,16 @@ public class MatrixChainMultiplication extends DynamicPrograming{
 			egg[e][f]=min; //Change 2
 			return min;
 		}
+		//312. Burst Balloons consider the ballon to be shot at the end not at the first so if A[K] is shot at last adjacent will be A[i-1] and A[j]
+		 public int solve(int [] nums,int i,int j,int dp[][]){
+		        if(i>=j)return 0;
+		        if(dp[i][j]!=-1)return dp[i][j];
+		        int ans=Integer.MIN_VALUE;
+		        for(int k=i;k<j;k++){
+		            //consider the ballon to be shot at the end not at the first so if A[k] is shot at last adjacent will be A[i-1] and A[j]
+		            int temp=solve(nums,i,k,dp)+solve(nums,k+1,j,dp)+nums[i-1]*nums[k]*nums[j];
+		            ans=Math.max(ans,temp);
+		        }
+		        return dp[i][j]=ans;
+		    }
 }

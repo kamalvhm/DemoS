@@ -9,16 +9,18 @@ import java.util.Arrays;
  * 4)print SCS [v-29] | 1092. https://leetcode.com/problems/shortest-common-supersequence/
  * 5)Min # insertion and deletion a->b
  * 6)Longest repeating subSequence
- * TODO 7)Length of longest subsequence of a which is substring in b
+ * 7)Length of longest subsequence of a which is substring in b
  * 8)subsequence pattern Matching | 392. Is Subsequence
- * TODO 9)count how many times a appear as subsequence in b
+ * 9)count how many times a appear as subsequence in b
  * 10)Longest palindromic sub sequence [v-26] |516. Longest palindromic Subsequence https://leetcode.com/problems/longest-palindromic-subsequence/
- * TODO 11)Longest palindromic substring  (BELOW BOTH CAN BE CHANGED WITH LPS CODE) https://leetcode.com/problems/longest-palindromic-substring/
+ * 11)Longest palindromic substring  https://leetcode.com/problems/longest-palindromic-substring/
  * TODO 12)count of palindromic substring
  * 13)Min no of deletion in a string to make it palindromic 
  * 14)Min no of insertion in a string to make it palindromic 
  * 15)Edit Distance
  * 16)Distinct Subsequences
+ * 17)Minimum ASCII Delete Sum for Two Strings
+ * 18)Longest Increasing Subsequences
  */
 
 public class LongestCommanSubSequece3 {
@@ -65,11 +67,27 @@ public class LongestCommanSubSequece3 {
 		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.
 		System.out.println("16)Distinct Subsequences :-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
 		
-		/*String s4="";
-		System.out.println("11)Longest palindromic substring :-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));*/
+		String s4="babad";
+		System.out.println("11)Longest palindromic substring :-"+longestPalindromicSubString(s4));
+		
+		String s5 = "sea", s6 = "eat";
+		/**
+		 * 	Output: 231
+			Explanation: Deleting "s" from "sea" adds the ASCII value of "s" (115) to the sum.
+			Deleting "t" from "eat" adds 116 to the sum.
+			At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
+		 */
+		System.out.println("17)Minimum ASCII Delete Sum for Two Strings :-"+minimumDeleteSum(s5,s6,s5.length(),s6.length()));
+		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
+		System.out.println("7)Length of longest subsequence of a which is substring in b :-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
+		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
+		System.out.println("9)count how many times a appear as subsequence in b :-"+stringASubSequenceInB(s9,s10,s9.length(),s10.length()));
+		int [] nums = {10,9,2,5,3,7,101,18};
+		System.out.println("18)LIS :-"+lengthOfLIS(nums));
 
 		
 	}
+	
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
 		if(n==0 || m==0)return 0;
@@ -301,5 +319,135 @@ public class LongestCommanSubSequece3 {
 	         
 	      return dp[n][m];
 	    }
+	//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
+	private static String longestPalindromicSubString(String e) {
+		int n=e.length();
+		int dp[][]=new int[n+1][n+1];
+		String res="";
+		int resE=1,resL=1;//length and end index of palindrom
+		if(n==0)return res;
+		
+		for(int i=0;i<=n;i++) dp[0][i]=dp[1][i]=1;//add 1 for empty and one length Strings 
+		
+		for(int i=2;i<=n;i++) {
+			for(int j=i;j<=n;j++) {
+				if(e.charAt(j-1)==e.charAt(j-i) && dp[i-2][j-1]==1) { //first and last chars are same and remaining middle is also same 
+					dp[i][j] = 1;
+					resL = i;
+					resE = j;
+				}
+				else dp[i][j]=0;
+			}
+		}
+		/*StringBuffer sb=new StringBuffer();
+		for(int i=resE-resL+1;i<=resE;i++) {
+			sb.append(e.charAt(i-1));
+			}
+		return sb.toString();*/
+		return e.substring(resE-resL,resE);
+	}
+	//CODE SAME AS LCS JUST ADD ANSCII AT EVERY STEP
+	public static int minimumDeleteSum(String s1,String s2,int n,int m){
+        int t[][]=new int [n+1][m+1];
+        
+        for(int i = 1;i < m+1;i++)
+            t[0][i] += (t[0][i-1] + (int)s2.charAt(i-1));
+        for(int i = 1;i < n+1;i++)
+            t[i][0] += (t[i-1][0] + (int)s1.charAt(i-1));
+        
+        for(int i=1;i<n+1;i++){
+            for(int j=1;j<m+1;j++){
+                if(s1.charAt(i-1)==s2.charAt(j-1))
+                {
+                    t[i][j]=t[i-1][j-1];
+                }else t[i][j]=Math.min(t[i][j-1]+(int)s2.charAt(j-1), t[i-1][j]+(int)s1.charAt(i-1));
+            }
+        }
+        return t[n][m];
+    }
+	//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
+	public static int longestOfAinB(String x,String y,int n,int m) {
+		int t[][]=new int [m+1][n+1];  
+		int max=0;
+		for(int i=1;i<m+1;i++) {
+			for(int j=1;j<n+1;j++) {
+				if(y.charAt(i-1)==x.charAt(j-1)) {   
+					t[i][j]=1+t[i-1][j-1];
+					max=Math.max(max, t[i][j]);
+				}else {
+					t[i][j]=t[i][j-1]; //Only change from LIS 
+				}
+			}
+		}
+		
+		return max;
+	}
+	//https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
+	public static int stringASubSequenceInB(String x,String y,int n,int m) {
+		//return count(x,y,n,m); //for recursive code 
+		return countBottomUp(x,y,n,m); //for bottomUp code 
+
+	}
+
+	public static int count(String a, String b, int n, int m) {
+		// If both first and second string is empty, or if second string is empty,return 1
+		if ((n == 0 && m== 0) || m == 0)
+			return 1;
+
+		// If only first string is empty and second string is not empty, return 0
+		if (n == 0)
+			return 0;
+
+		// If last characters are same Recur for remaining strings by 
+		//1. considering last characters of both strings
+		//2. ignoring last character of first string
+		if (a.charAt(n - 1) == b.charAt(m - 1))
+			return count(a, b, n - 1, m - 1) + count(a, b, n - 1, m);
+		else
+			// If last characters are different,ignore last char of first string and recur for remaining string
+			return count(a, b, n - 1, m);
+	} 
+	public static int countBottomUp(String x, String y, int n, int m) {
+		int t[][] = new int[n + 1][m + 1];
+		// If first string is empty
+		for (int i = 0; i <= m; ++i)
+			t[0][i] = 0;
+
+		// If second string is empty
+		for (int i = 0; i <= n; ++i)
+			t[i][0] = 1;
+
+		for (int i = 1; i < n + 1; i++) {
+			for (int j = 1; j < m + 1; j++) {
+				if (x.charAt(i - 1) == y.charAt(j - 1))
+					t[i][j] = t[i - 1][j - 1] + t[i - 1][j];
+				else
+					t[i][j] = t[i - 1][j];
+			}
+		}
+		return t[n][m];
+	}
+	//300. Longest Increasing Subsequence -https://www.youtube.com/watch?v=aPQY__2H3tE&t=417s
+	public static int lengthOfLIS(int[] nums) {
+        if(nums.length==0) return 0;
+        
+        int n = nums.length;
+        
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        
+        int max = 1;
+        
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    dp[i] = Math.max(1+dp[j], dp[i]);
+                    max = Math.max(max,dp[i]);
+                }
+            }
+        }
+        return max;
+    }
+
 	
 }

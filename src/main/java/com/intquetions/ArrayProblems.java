@@ -10,8 +10,8 @@ public class ArrayProblems {
 
 	public static void main(String[] args) {
 		int[] nums={4,3,2,7,8,2,3,1};
-		  List ip= Arrays.asList(nums);
-		  Integer[] numsAgain=(Integer[])ip.toArray();
+		List ip= Arrays.asList(nums);
+		Integer[] numsAgain=(Integer[])ip.toArray();
         
        int [] a= {4,3,2,7,8,2,3,1};
        System.out.println(largestValueInArrayWITHDEVIDEANDCONQUER(a,0,a.length-1));
@@ -81,6 +81,52 @@ public class ArrayProblems {
 	        return maxArea;
 	        
 	    }
+		//167. Two Sum II - Input array is sorted !!TWO POINTER!!
+		public int[] twoSum(int[] numbers, int target) {
+		       int[] res =new int[2];
+		       int i=0,j=numbers.length-1;
+		        while(i<j){
+		            int delta=numbers[i]+numbers[j];
+		            if(delta==target){
+		                res[0]=i+1;
+		                res[1]=j+1;
+		                return res;
+		            }else if(delta>target)
+		                j--;
+		            else i++;
+		        }
+		        return new int []{-1,-1};
+		    }
+		//15. 3Sum      !!TWO POINTER!!
+		  public List<List<Integer>> threeSum(int[] nums) {
+		        //https://www.youtube.com/watch?v=h9F6RFXdwCo&feature=youtu.be
+		       List<List<Integer>> result =new ArrayList<>();
+		       if(nums.length<3)return result;
+		        Arrays.sort(nums);
+		        for(int i=0;i<nums.length;i++){
+		            if(i!=0 && nums[i]==nums[i-1])continue;//to avoid duplicate at i  [-2,0,0,2,2]  0th is i and 1th is lo and last is hi
+		            int cur=nums[i];
+		            int lo=i+1,hi=nums.length-1;
+		            while(lo<hi){
+		                int sum=cur+nums[lo]+nums[hi];
+		                if(sum==0)
+		                {
+		                    
+		                    result.add(Arrays.asList(new Integer[]{cur,nums[lo],nums[hi]}));
+		                    lo++;
+		                    while(lo<hi && nums[lo]==nums[lo-1])//to avoid duplicate at i se top example where next value is also 0 
+		                        lo++;
+		                    hi--;
+		                    while(lo<hi && nums[hi]==nums[hi+1])//as we already lowerd hi so we are checking hi and hi+1
+		                        hi--;
+		                        
+		                }else if(sum<0)
+		                    lo++;
+		                else hi--;
+		            }
+		        }
+		        return result;
+		    }
 		
 		//26. Remove Duplicates from Sorted Array #*E
 		 public int removeDuplicates(int[] nums) {
@@ -132,8 +178,6 @@ public class ArrayProblems {
 		    	}
 		    	
 		    } 
-		    
-		   
 		    
 		    //54. Spiral Matrix ||| ALSO 59. Spiral Matrix II Check :-https://leetcode.com/problems/spiral-matrix-ii/
 		    public static List<Integer> spiralOrder(int[][] matrix) {

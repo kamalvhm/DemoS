@@ -51,6 +51,34 @@ public class SubsetProblemV12 {
         return;
 
     }
+    
+    //Same problem :-1239. Maximum Length of a Concatenated String with Unique Characters
+    //method to find out if all unique char exist in input String  
+    public static int uniqueCharacterCount(String ip){
+        int [] unique=new int[26];
+        for(char c:ip.toCharArray()){
+            if(unique[c-'a']++>0){
+                return -1;
+            }
+        }
+        return ip.length();
+    }
+    public void solve(List<String> ip,int i,String op,int [] result)
+    {
+        if(i==ip.size() && uniqueCharacterCount(op)>result[0]){
+            result[0]=op.length();
+            return;
+        }
+        if(i==ip.size() ){
+            return;
+        }
+        String op1=op+ip.get(i);
+        solve(ip,i+1,op1,result);
+        solve(ip,i+1,op,result);
+        return;
+        
+    }
+  
 	
 
 }

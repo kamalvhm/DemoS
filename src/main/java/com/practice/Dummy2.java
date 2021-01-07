@@ -14,6 +14,7 @@ import com.beans.ListNode;
 public class Dummy2 {
 	
 	public static void main(String args[]) {
+		 lcs("se","e",2,1);
 		ListNode l1 =new ListNode(7,new ListNode(2,new ListNode(4,new ListNode(3,null))));
 		ListNode l2 =new ListNode(5,new ListNode(6,new ListNode(4,null)));
 		
@@ -44,6 +45,33 @@ public class Dummy2 {
 		
 		
 	}
+	 public static int lcs(String s1,String s2,int n,int m){
+	        int t[][]=new int [n+1][m+1];
+	        
+	         for(int i=0;i<n+1;i++){
+	            for(int j=0;j<m+1;j++){
+	                if(i==0 && j>0)
+	                    t[i][j]=s2.charAt(j-1)-'0';
+	                if(j==0 && i>0)
+	                    t[i][j]=s1.charAt(i-1)-'0';
+
+	            }
+	         }
+	        
+	        StringBuffer sb=new StringBuffer();
+	        for(int i=1;i<n+1;i++){
+	            for(int j=1;j<m+1;j++){
+	                if(s1.charAt(i-1)==s2.charAt(j-1))
+	                {
+	                    t[i][j]=t[i-1][j];
+	                }else t[i][j]=t[i-1][j]+t[i][j-1];
+	            }
+	        }
+	        
+	   
+	        
+	        return t[n][m];
+	    }
 	
     	
 	

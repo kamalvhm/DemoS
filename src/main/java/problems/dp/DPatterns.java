@@ -26,7 +26,7 @@ public class DPatterns {
 			return gridTraveler(a - 1, b) + gridTraveler(a, b - 1);
 
 		}
-		//64. Minimum Path Sum  VARIATION CHECK CODE ONLINE 
+		//Normal Grid Pattern Variation  
 		public static int gridTraveler1(int a, int b) {
 			String key=a+"-"+b;
 			if(map2.containsKey(key))return map2.get(key);
@@ -38,6 +38,24 @@ public class DPatterns {
 			return map2.get(key);
 
 		}
+		//64. Minimum Path Sum
+		 public int gridTravler(int[][] grid,int h,int l){
+		        int dp[][]=new int[h+1][l+1];
+		        dp[0][0]=grid[0][0];
+		        
+		        for(int i=1;i<h+1;i++)
+		            dp[i][0]=dp[i-1][0]+grid[i][0];
+		        
+		        for(int i=1;i<l+1;i++)
+		            dp[0][i]=dp[0][i-1]+grid[0][i];
+		        
+		        for(int i=1;i<h+1;i++){
+		            for(int j=1;j<l+1;j++){
+		                dp[i][j]=grid[i][j]+Math.min(dp[i-1][j],dp[i][j-1]);
+		            }
+		        }
+		        return dp[h][l];
+		    }
 	//63. Unique Paths II | https://leetcode.com/problems/unique-paths-ii/
 		public static int gridTraveler2(int a, int b) {
 			int dp[][] = new int[a + 1][b + 1];
