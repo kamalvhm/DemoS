@@ -3,10 +3,11 @@ package com.practice;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 import com.beans.ListNode;
 
@@ -14,6 +15,8 @@ import com.beans.ListNode;
 public class Dummy2 {
 	
 	public static void main(String args[]) {
+		int i=10;
+		//System.out.print(maximumGain("cdbcbbaaabab",4,5));
 		 lcs("se","e",2,1);
 		ListNode l1 =new ListNode(7,new ListNode(2,new ListNode(4,new ListNode(3,null))));
 		ListNode l2 =new ListNode(5,new ListNode(6,new ListNode(4,null)));
@@ -39,12 +42,61 @@ public class Dummy2 {
 		
 		Set<Integer> set=new HashSet<Integer>();
 		new ArrayList(set);
-		
+		String s ="";
 		int [] arr= {3,2,2,4,1,4};
 		//shipWithinDays(arr,3);
 		
-		
+		int n[]={1,2,3};
+		//countSubsetSum(n,4);
 	}
+	//https://leetcode.com/contest/biweekly-contest-43/problems/maximum-score-from-removing-substrings/ ||5634. Maximum Score From Removing Substrings
+	public int maximumGain(String s, int x, int y) {
+		char first = x > y ? 'a' : 'b', secound = x > y ? 'b' : 'a';
+		int max = Math.max(x, y), min = Math.min(x, y);
+		int res = 0;
+		Stack<Character> stack = new Stack<>();
+
+		for (char c : s.toCharArray()) {
+			if (!stack.isEmpty() && stack.peek() == first && c == secound) {
+				stack.pop();
+				res += max;
+			} else
+				stack.push(c);
+		}
+		// Now we are iterating stack so string will become reversed , we look for ba not
+		// in actual string
+		Stack<Character> stack2 = new Stack<>();
+		Iterator<Character> itr = stack.iterator();
+		while (itr.hasNext()) {
+			Character c = itr.next();
+			if (!stack2.isEmpty() && stack2.peek() == first && c == secound) {
+				stack2.pop();
+				res += min;
+			} else
+				stack2.push(c);
+		}
+		return res;
+	}
+
+	 public static int totalMoney(int n) {
+		 int ans = 0;
+			for(int i = 0;i < n;i++){
+				ans += i/7 + i%7 + 1;
+			}
+			return ans;
+	    }
+	
+	 public static  int countSubsetSum(int [] a,int sum){
+	        int dp[]=new int [sum+1];
+	        dp[0]=1;
+	        for(int i=1;i<sum;i++){
+	            for(int x:a){
+	                dp[i]+=dp[i-x];
+	            }
+	        }
+	        return dp[sum];
+	    }
+	 
 	 public static int lcs(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        

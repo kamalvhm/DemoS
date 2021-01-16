@@ -1,4 +1,4 @@
-package com.practice;
+package com.spark;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function2;
 
 
-public class Example2 {
+public class GroupVsAggregate {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -35,6 +35,7 @@ public class Example2 {
 		// result.foreach(r -> {
 		// transformationfunction(r._1, r._2);
 		// });
+		// WE SHOULD NOT USE GROUP BY INSETEAD USE AGGREGATE BY KEY
 		JavaPairRDD<Integer, Iterable<String>> grpby = result.groupByKey();
 
 		//grpby.foreach(r -> System.out.println("Key " + r._1 + " | Value " + r._2));

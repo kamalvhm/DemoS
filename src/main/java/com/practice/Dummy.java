@@ -8,6 +8,7 @@ import java.util.Stack;
 import java.util.spi.CurrencyNameProvider;
 
 import org.apache.commons.math3.ode.nonstiff.GillIntegrator;
+import org.apache.hadoop.fs.DF;
 import org.apache.spark.sql.catalyst.expressions.CurrentRow;
 import org.apache.spark.sql.streaming.StreamingQueryListener.QueryStartedEvent;
 
@@ -65,7 +66,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands: " + numIslandsIterativeDFS(islandGrid));
+        System.out.println("No of Islands: " + numIslands(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -100,54 +101,54 @@ public class Dummy {
 		int count =0;
 		int h=grid.length;
 		int l=grid[0].length;
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<l;j++) {
-				if(grid[i][j]=='1') {
+		
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < l; j++) {
+				if (grid[i][j] == '1') {
 					DFS(grid,i,j);
 					count++;
 				}
 			}
 		}
-		
 		return count;
 		
 	}
-    private static void DFS(char[][] grid, int row, int col) {
+    private static void DFS(char[][] grid, int r, int c) {
     	int h=grid.length;
 		int l=grid[0].length;
-		if(row<0 || col<0 || row>=h || col>=l || grid[row][col]!='1')return;
-		grid[row][col]='0';
-		DFS(grid,row+1,col);
-		DFS(grid,row-1,col);
-		DFS(grid,row,col+1);
-		DFS(grid,row,col-1);
+		if(r<0 || c<0 || r>=h || c>=l || grid[r][c]!='1') return;
+		grid[r][c]='0';
+		DFS(grid,r+1,c);
+		DFS(grid,r-1,c);
+		DFS(grid,r,c+1);
+		DFS(grid,r,c-1);
 
 
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;
-		Stack<int[]> st=new Stack<>();
+		Stack<int []> st=new Stack<>();
 		int h=grid.length;
 		int l=grid[0].length;
+		
 		for(int i=0;i<h;i++) {
 			for(int j=0;j<l;j++) {
 				if(grid[i][j]=='1') {
-					st.add(new int[]{i,j});
+					st.push(new int[] {i,j});
 					grid[i][j]='0';
 					
-					
 					while(!st.isEmpty()) {
-						int [] cur=st.pop();
-						for(int [] dir:direction) {
-							int r=cur[0]+dir[0];
-							int c=cur[1]+dir[1];
+						int[] curr=st.pop();
+						for(int []dir:direction) {
+							int r=curr[0]+dir[0];
+							int c=curr[1]+dir[1];
 							
-							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1')
-							{
+							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1') {
 								grid[r][c]='0';
 								st.push(new int[] {r,c});
 							}
+
 						}
 					}
 					count++;
@@ -162,106 +163,28 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
-		Queue<TreeNode> st=new LinkedList<>();
-		TreeNode current=tree;
-		st.offer(tree);
-		while (!st.isEmpty()) {
-			current=st.poll();
-			System.out.print(current.val+", ");
-			
-			if(current.left!=null) {
-				st.offer(current.left);
-			}
-			
-			if(current.right!=null) {
-				st.offer(current.right);
-			}
-			
-		}
+		
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		 List<List<Integer>> result=new ArrayList<>();
-		 Queue<TreeNode> st=new LinkedList<>();
-			TreeNode current=tree;
-			st.offer(tree);
-			while (!st.isEmpty()) {
-				int qSize=st.size();
-				List<Integer> list=new ArrayList<>();
-				for(int i=0;i<qSize;i++) {
-					current=st.poll();
-					list.add((int)current.val);
-					if(current.left!=null) {
-						st.offer(current.left);
-					}
-					
-					if(current.right!=null) {
-						st.offer(current.right);
-					}
-				}
-				result.add(list);
-				
-			}
+		
+			
 			return result;
 	 }
 
 	private static void inorderWithout(TreeNode tree) {
-		Stack<TreeNode> st=new Stack<>();
-		TreeNode current=tree;
-
-		while(!st.isEmpty() || current!=null) {
-			if(current!=null) {
-				st.push(current);
-				current=current.left;
-			}else {
-				TreeNode node =st.pop();
-				System.out.print(node.val+", ");
-				current=node.right;
-			}
-		}
+		
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
-		Stack<TreeNode> st=new Stack<>();
-		TreeNode current=tree;
-		st.push(tree);
-		while (!st.isEmpty()) {
-			current=st.pop();
-			System.out.print(current.val+", ");
-			
-			if(current.right!=null) {
-				st.push(current.right);
-			}
-			if(current.left!=null) {
-				st.push(current.left);
-			}
-		}
+		
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-		Stack<TreeNode> st=new Stack<>();
-		TreeNode current=tree;
-		TreeNode prev=tree;
-		st.push(tree);
-		while (!st.isEmpty()) {
-			current=st.peek();
-			boolean isLeaf=current.left==null && current.right==null;
-			boolean isPrevRight=current.right==prev ||(current.left==prev && current.right==null);
-			
-			if(isLeaf || isPrevRight) {
-				current=st.pop();
-				System.out.print(current.val+", ");
-				prev=current;
-			}
-			else {
-				if(current.right!=null) {
-					st.push(current.right);
-				}
-				if(current.left!=null) {
-					st.push(current.left);
-				}
-			}
-		}
+		
+		
+		
 		
 	}
 

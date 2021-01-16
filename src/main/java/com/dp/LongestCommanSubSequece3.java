@@ -21,6 +21,7 @@ import java.util.Arrays;
  * 16)Distinct Subsequences
  * 17)Minimum ASCII Delete Sum for Two Strings
  * 18)Longest Increasing Subsequences
+ * 19)44. Wildcard Matching  (10. Regular Expression Matching)| https://leetcode.com/problems/wildcard-matching/
  */
 
 public class LongestCommanSubSequece3 {
@@ -84,6 +85,7 @@ public class LongestCommanSubSequece3 {
 		System.out.println("9)count how many times a appear as subsequence in b :-"+stringASubSequenceInB(s9,s10,s9.length(),s10.length()));
 		int [] nums = {10,9,2,5,3,7,101,18};
 		System.out.println("18)LIS :-"+lengthOfLIS(nums));
+		
 
 		
 	}
@@ -448,6 +450,77 @@ public class LongestCommanSubSequece3 {
         }
         return max;
     }
+	//Wildcard Matching
+	public boolean isMatch(String s, String p) {
+        // corner case
+        if (s == null || p == null)
+            return false;
 
+        int m = s.length();
+        int n = p.length();
+
+        boolean[][] dp = new boolean[n + 1][m + 1];
+
+        // 1. dp[0][0] = true, since empty string matches empty pattern
+        dp[0][0] = true;
+
+        // 2. dp[0][i] = false
+        // since empty pattern cannot match non-empty string
+
+        // 3. dp[j][0]
+        // for any continuative '*' will match empty string
+        // e.g s='aasffdasda' p='*'/'**'/'***'....
+        for (int j = 1; j < n + 1; j++) {
+            if (p.charAt(j - 1) == '*') {
+                dp[j][0] = dp[j - 1][0];
+            }
+        }
+
+        // 1. if p.charAt(j) == s.charAt(i), match single character
+        // =>>> dp[i][j] = dp[i - 1][j - 1]
+        // 2. if p.charAt(j) == '?', '?' match single character
+        // =>>> dp[i][j] = dp[i - 1][j - 1]
+
+        // 3. if p.charAt(j) == '*', dp[i][j]=dp[i-1][j]||dp[i][j-1]
+        // =>>> a. '*' match empty: dp[i][j]=dp[i-1][j]
+        // =>>> b. '*' match multiple characters: dp[i][j]=dp[i][j-1]
+
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                char charS = s.charAt(i - 1);
+                char charP = p.charAt(j - 1);
+                if (charS == charP || charP == '?')
+                    dp[j][i] = dp[j - 1][i - 1];
+                else if (charP == '*')
+                    dp[j][i] = dp[j - 1][i] || dp[j][i - 1];
+
+            }
+        }
+
+        return dp[n][m];
+    }
+//Wildcard Matching recusrsive 
+	 public static int solve(String s, String p,int i,int j,int[][]dp){
+	        if(dp[i][j]!=-1) return dp[i][j];
+	        if(i==s.length() && j==p.length())return 1;
+	        
+	        if(i==s.length() && j<p.length()){
+	            for(int k=j;k<p.length();k++){
+	                if(p.charAt(k)!='*')
+	                    return 0;
+	            }
+	            return 1;
+	        }
+	        if(j==p.length() && i<s.length())
+	            return 0;
+	        
+	        if(p.charAt(j)!='*'){
+	        if(s.charAt(i)==p.charAt(j) || p.charAt(j)=='?')
+	            return dp[i][j]=solve(s,p,i+1,j+1,dp);
+	        }else {
+	            return dp[i][j]=(solve(s,p,i+1,j,dp)==1 || solve(s,p,i,j+1,dp)==1)?1:0;
+	        }
+	        return 0;
+	    }
 	
 }

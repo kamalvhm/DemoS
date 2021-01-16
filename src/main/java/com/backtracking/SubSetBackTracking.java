@@ -2,8 +2,10 @@ package com.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-
+//SUbsets can have Less elments also 
+//but permutations will always have all but order may vary
 class SubSetBackTracking {
 	// 90. Subsets II
 	public List<List<Integer>> subsetsWithDup(int[] nums) {
@@ -34,4 +36,48 @@ class SubSetBackTracking {
 			}
 		}
 	}
+	
+	/**					below Recusion goes like
+	 * 						 [1,2,3]
+	 * 					/1      |2	  3\
+	 * 				   /        |		\
+	 Then again we [1,2,3]   [1,2,3]	 [1,2,3]  have same choices at every stage until either target is 0 or <0
+	 */
+	 //46. Permutations  A BACKTRACKING APPROACH
+	 public static void solve(int nums[] ,int pos,List<Integer> curr,List<List<Integer>> result){
+	        if(pos==nums.length){
+	            result.add(new ArrayList<>(curr));
+	            return;
+	        }
+	        for(int i=0;i<nums.length;i++){
+	             if(curr.contains(nums[i])){  //skip if already added
+	                continue;
+	            }
+	            
+	            curr.add(nums[i]);
+	            solve(nums,pos+1,curr,result);
+	            curr.remove(curr.size()-1);
+	        }
+	        return;
+	    }
+	 
+	 //47. Permutations II
+	 public static void solve(int nums[] ,int pos,List<Integer> curr,HashSet<List<Integer>> result,boolean [] seen){
+         if(pos==nums.length){
+            result.add(new ArrayList<>(curr));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){   
+            if(!seen[i]){
+                seen[i]=true;
+                curr.add(nums[i]);
+                solve(nums,pos+1,curr,result,seen);
+                curr.remove(curr.size()-1);
+                seen[i]=false;
+            }
+        
+        }
+        return;
+    }
+
 }

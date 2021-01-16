@@ -50,7 +50,7 @@ public class AggregateByKeyExample2 {
 
 		TreeSet<CallData> set = new TreeSet<CallData>();
 
-		
+		//Alternative to Group By key 
 		JavaPairRDD<String, TreeSet<CallData>> finalRdd = pair.aggregateByKey(set, (arg0,  arg1)->{
 			arg0.add(arg1);
 			return arg0;

@@ -17,6 +17,12 @@ import io.netty.handler.codec.http.HttpContentEncoder.Result;
 8)subsequence pattern Matching ANS:-true
 14)Min no of insertion in a string to make it palindromic  ANS:-2
 15) Edit Distance :-5
+16)Distinct Subsequences :-3
+11)Longest palindromic substring :-aba
+17)Minimum ASCII Delete Sum for Two Strings :-231
+7)Length of longest subsequence of a which is substring in b :-3
+9)count how many times a appear as subsequence in b :-4
+18)LIS :-4
  */
 public class Dpractice3 {
 	static int dp[][]=new int[20][20];//m+1 n+1
@@ -61,34 +67,44 @@ public class Dpractice3 {
 		String e2="execution";//Ans will be 5
 		System.out.println("15) Edit Distance :-"+editDistance(e1,e2,e1.length(),e2.length()));
 		
+
+		String e3="rabbbit";
+		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.
+		System.out.println("16)Distinct Subsequences :-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
+		
+		String s4="babad";
+		System.out.println("11)Longest palindromic substring :-"+longestPalindromicSubString(s4));
+		
+		String s5 = "sea", s6 = "eat";
+		/**
+		 * 	Output: 231
+			Explanation: Deleting "s" from "sea" adds the ASCII value of "s" (115) to the sum.
+			Deleting "t" from "eat" adds 116 to the sum.
+			At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
+		 */
+		System.out.println("17)Minimum ASCII Delete Sum for Two Strings :-"+minimumDeleteSum(s5,s6,s5.length(),s6.length()));
+		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
+		System.out.println("7)Length of longest subsequence of a which is substring in b :-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
+		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
+		System.out.println("9)count how many times a appear as subsequence in b :-"+stringASubSequenceInB(s9,s10,s9.length(),s10.length()));
+		int [] nums = {10,9,2,5,3,7,101,18};
+		System.out.println("18)LIS :-"+lengthOfLIS(nums));
+		
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
-		if(n==0 || m==0)return 0;
-		else if(x.charAt(n-1)==y.charAt(m-1)) {
-			return 1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
-		}else return Math.max(LCS_Simple_recursive_Code(x, y, n-1, m) ,LCS_Simple_recursive_Code(x, y, n, m-1));
+		return -1;
 	}
 	//SECOUND STEP
 	public static int LCS_BottomUp_Memoized(String x,String y,int n,int m) {
-		if(n==0 || m==0)return 0;
-		if(dp[n][m]!=-1)return dp[n][m];
-		else if(x.charAt(n-1)==y.charAt(m-1)) {
-			return dp[n][m]=1+LCS_BottomUp_Memoized(x, y, n-1, m-1);
-		}else return dp[n][m]=Math.max(LCS_BottomUp_Memoized(x, y, n-1, m) ,LCS_BottomUp_Memoized(x, y, n, m-1));
+		return -1;
 	}	
 	
 	//THIRD STEP
 	public static int LCS_TopDown(String x,String y,int n,int m) {
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<m+1;j++) {
-				if(x.charAt(i-1)==y.charAt(j-1)) {
-					t[i][j]=1+t[i-1][j-1];
-				}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-			}
-		}
+		
 		
 		return t[n][m];
 	}
@@ -96,14 +112,7 @@ public class Dpractice3 {
 	public static int LongestCommonSubString(String x,String y,int n,int m) {
 		int t[][]=new int [n+1][m+1];  
 		int max=0;
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<m+1;j++) {
-				if(x.charAt(i-1)==y.charAt(j-1)) {
-					t[i][j]=1+t[i-1][j-1];
-					max=Math.max(max, t[i][j]);
-				}else t[i][j]=0;
-			}
-		}
+		
 		
 		return max;
 	}
@@ -112,27 +121,9 @@ public class Dpractice3 {
 	public static String printLCS_String(String x,String y,int n, int m) {		
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<m+1;j++) {
-				if(x.charAt(i-1)==y.charAt(j-1)) {
-					t[i][j]=1+t[i-1][j-1];
-				}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-			}
-		}
 		
-		StringBuffer sb=new StringBuffer();
-		int i=n,j=m;
-		while(i>0 && j>0) {
-			if(x.charAt(i-1)==y.charAt(j-1)) {
-				sb.insert(0, x.charAt(i-1));
-				i--;
-				j--;
-			}else if(t[i-1][j]>t[i][j-1])
-				i--;
-			else j--;
-		}
 		
-		return sb.toString();
+		return "";
 	}
 	
 	
@@ -140,56 +131,16 @@ public class Dpractice3 {
 		 int m=y.length(),n=x.length();
 		 int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		 
-			for(int i=1;i<n+1;i++) {
-				for(int j=1;j<m+1;j++) {
-					if(x.charAt(i-1)==y.charAt(j-1)) {
-						t[i][j]=1+t[i-1][j-1];
-					}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-				}
-			}
-			
-			StringBuffer sb=new StringBuffer();
-			int i=n,j=m;
-			while(i>0 && j>0) {
-				if(x.charAt(i-1)==y.charAt(j-1)) {
-					sb.insert(0, x.charAt(i-1));
-					i--;
-					j--;
-				}else if(t[i-1][j]>t[i][j-1]) {
-					sb.insert(0, x.charAt(i-1));
-					i--;
-				}
-				else {
-					sb.insert(0, y.charAt(j-1));
-					 j--;
-				}
-			}
-			while(i>0) {
-				sb.insert(0, x.charAt(i-1));
-				i--;
-			}
-			
-			while(j>0) {
-				sb.insert(0, y.charAt(j-1));
-				j--;
-			}
-			
 			
 
-			return sb.toString();
+			return "";
 	    }
 	 
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
 		    int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 			
-		    for(int i=1;i<n+1;i++) {
-				for(int j=1;j<m+1;j++) {
-					if(x.charAt(i-1)==y.charAt(j-1) && i!=j) {
-						t[i][j]=1+t[i-1][j-1];
-					}else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-				}
-			}
+		  
 			
 			return t[n][m];
 		}
@@ -197,23 +148,68 @@ public class Dpractice3 {
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
-	       for(int i=0;i<n+1;i++)
-	    	   t[i][0]=i;
-	       
-	       for(int j=0;j<m+1;j++)
-	    	   t[0][j]=j;
-	       
-	       for(int i=1;i<n+1;i++)
-	       {
-		       for(int j=1;j<m+1;j++)
-		       {
-		    	   if(x.charAt(i-1)!=y.charAt(j-1))
-		    		   t[i][j]=Math.min(Math.min(t[i][j-1], t[i-1][j]), t[i-1][j-1])+1;
-		    	   else t[i][j]=t[i-1][j-1];
-		       }
-	       }
-	       
+	      
+	        return t[n][m];
+	    }
+	 
+	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
+		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
+	       return 1;
+	    }
+		 
+		public static int DistinctSubsequences(String s ,String t,int n,int m){
+		        int dp[][]=new int [n+1][m+1];
+		        
+		      
+		         
+		      return dp[n][m];
+		    }
+		//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
+		private static String longestPalindromicSubString(String e) {
+			int n=e.length();
+			int dp[][]=new int[n+1][n+1];
+			String res="";
+			int resE=1,resL=1;//length and end index of palindrom
+			
+			return e.substring(resE-resL,resE);
+		}
+		//CODE SAME AS LCS JUST ADD ANSCII AT EVERY STEP
+		public static int minimumDeleteSum(String s1,String s2,int n,int m){
+	        int t[][]=new int [n+1][m+1];
+	        
 	       
 	        return t[n][m];
+	    }
+		//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
+		public static int longestOfAinB(String x,String y,int n,int m) {
+			int t[][]=new int [m+1][n+1];  
+			int max=0;
+			
+			
+			return max;
+		}
+		//https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
+		public static int stringASubSequenceInB(String x,String y,int n,int m) {
+			//return count(x,y,n,m); //for recursive code 
+			return countBottomUp(x,y,n,m); //for bottomUp code 
+
+		}
+
+		public static int count(String a, String b, int n, int m) {
+			return 1;
+		} 
+		public static int countBottomUp(String x, String y, int n, int m) {
+			int t[][] = new int[n + 1][m + 1];
+			// If first string is empty
+			
+			return t[n][m];
+		}
+		//300. Longest Increasing Subsequence -https://www.youtube.com/watch?v=aPQY__2H3tE&t=417s
+		public static int lengthOfLIS(int[] nums) {
+	        if(nums.length==0) return 0;
+	        int max = 1;
+	        
+	        
+	        return max;
 	    }
 }

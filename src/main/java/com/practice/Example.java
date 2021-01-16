@@ -15,6 +15,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 public class Example {
 
 	public static void main(String[] args) {
+		long n ;
 		// TODO Auto-generated method stub
 		/*ZonedDateTime zone1 = ZonedDateTime.parse("2016-01-05T08:20:10+05:30[Asia/Kolkata]");
 
@@ -86,6 +87,10 @@ public class Example {
 		        
 		        
 		    
+	}
+	
+	public static void display(long n) {
+		System.out.print("DEFAULT;;"+n);
 	}
 
 	static long zonedDateTimeDifference(ZonedDateTime d1, ZonedDateTime d2, ChronoUnit unit) {
