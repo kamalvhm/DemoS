@@ -39,7 +39,7 @@ public class BinarySearch {
     	}
     	return -1;
     }
-   
+   //This code is also to find first Position greater then or equal to target value 
     static int find_first_occurrence(int [] nums, int target)
 	{	
 		int N=nums.length;

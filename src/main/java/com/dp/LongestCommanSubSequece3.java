@@ -324,7 +324,7 @@ public class LongestCommanSubSequece3 {
 	//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
 	private static String longestPalindromicSubString(String e) {
 		int n=e.length();
-		int dp[][]=new int[n+1][n+1];
+		int dp[][]=new int[n+1][n+1];//ith index is length and j th is end index
 		String res="";
 		int resE=1,resL=1;//length and end index of palindrom
 		if(n==0)return res;
@@ -333,7 +333,8 @@ public class LongestCommanSubSequece3 {
 		
 		for(int i=2;i<=n;i++) {
 			for(int j=i;j<=n;j++) {
-				if(e.charAt(j-1)==e.charAt(j-i) && dp[i-2][j-1]==1) { //first and last chars are same and remaining middle is also same 
+				if(e.charAt(j-1)==e.charAt(j-i) && dp[i-2][j-1]==1) { //first and last chars are same and remaining middle is also same [i-2][j-1] is Because i represent length of 
+						//String and j represent end index of string. so length will be of middle is -2 and end indx is -1
 					dp[i][j] = 1;
 					resL = i;
 					resE = j;
@@ -352,10 +353,16 @@ public class LongestCommanSubSequece3 {
 	public static int minimumDeleteSum(String s1,String s2,int n,int m){
         int t[][]=new int [n+1][m+1];
         
-        for(int i = 1;i < m+1;i++)
+     /*   for(int i = 1;i < m+1;i++)
             t[0][i] += (t[0][i-1] + (int)s2.charAt(i-1));
         for(int i = 1;i < n+1;i++)
-            t[i][0] += (t[i-1][0] + (int)s1.charAt(i-1));
+            t[i][0] += (t[i-1][0] + (int)s1.charAt(i-1));*/
+        for(int i=1;i<n+1;i++) {
+        	t[i][0]=t[i-1][0]+(int)s1.charAt(i-1);
+        }
+        for(int j=1;j<m+1;j++) {
+        	t[0][j]=t[0][j-1]+(int)s2.charAt(j-1);
+    	}
         
         for(int i=1;i<n+1;i++){
             for(int j=1;j<m+1;j++){
@@ -377,7 +384,8 @@ public class LongestCommanSubSequece3 {
 					t[i][j]=1+t[i-1][j-1];
 					max=Math.max(max, t[i][j]);
 				}else {
-					t[i][j]=t[i][j-1]; //Only change from LIS 
+					// Else copy the previous value in the 
+					t[i][j]=t[i][j-1]; //Only change from LIS (As we need subString from x so only one condition applied here )
 				}
 			}
 		}

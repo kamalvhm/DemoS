@@ -18,6 +18,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
       this.left = left;
       this.right = right;
     }
+
+	public Node(Object left2, Object right2, int i) {
+	}
+
   }
 
   // Check if this binary tree is empty
@@ -347,4 +351,31 @@ public class BinarySearchTree<T extends Comparable<T>> {
       }
     };
   }
+  
+  
+  //Create Binary Search Tree (BST CREATION) from array element recursively
+  /* A function that constructs Balanced Binary Search Tree  
+  from a sorted array */
+ Node sortedArrayToBST(int arr[], int start, int end) { 
+
+     /* Base Case */
+     if (start > end) { 
+         return null; 
+     } 
+
+     /* Get the middle element and make it root */
+     int mid = (start + end) / 2;
+     /*****UNCOMMENT******/
+     Node node = new Node(null,null,arr[mid]); 
+
+     /* Recursively construct the left subtree and make it 
+      left child of root */
+     node.left = sortedArrayToBST(arr, start, mid - 1); 
+
+     /* Recursively construct the right subtree and make it 
+      right child of root */
+     node.right = sortedArrayToBST(arr, mid + 1, end); 
+       
+     return node; 
+ } 
 }

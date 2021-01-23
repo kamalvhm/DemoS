@@ -1,4 +1,4 @@
-package com.practice;
+package com.spark;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -11,7 +11,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
 
-public class Example3 {
+public class SplitsRdd {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

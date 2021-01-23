@@ -37,7 +37,7 @@ class SubSetBackTracking {
 		}
 	}
 	
-	/**					below Recusion goes like
+	/**					below Recursion goes like
 	 * 						 [1,2,3]
 	 * 					/1      |2	  3\
 	 * 				   /        |		\

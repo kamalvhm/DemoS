@@ -21,6 +21,10 @@ public class DateAndTime {
 		}
 		//conversion from zoned to date 
         Date cdate = Date.from(fromZdt.withZoneSameLocal(ZoneId.systemDefault()).toInstant());
+        
+        for(int i=0;i<=5;++i) {
+        	System.out.println("HHHH->>"+i);
+        }
 
 	}
 

@@ -55,13 +55,7 @@ public class Array<T> implements Iterable<T>{
 	
 	
 	public static void main(String args[]) {
-		int x=123;
-		long r = 0;
 		
-        while (x != 0) {
-            r = r * 10 + (x % 10);
-            x /= 10;
-        }
         
         int a[] = {1,2,3};
         System.out.println(a.length);

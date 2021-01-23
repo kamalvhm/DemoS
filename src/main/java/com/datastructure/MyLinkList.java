@@ -135,7 +135,7 @@ public class MyLinkList<T> {
 		return head;
 		
 	}
-	//merge both of these list in sorted order 
+	//Merge Two Sorted Lists | merge both of these list in sorted order 
 	public static Node mergeInsortedOrder(Node head1,Node head2) {
 		if(head1==null)return head2;
 		if(head2==null)return head1;
@@ -156,20 +156,6 @@ public class MyLinkList<T> {
 	        System.out.println(head.getT());
 
 	    }
-	
-	 
-	 
-	 public ListNode reverseList(ListNode head) {
-			if(head==null)return head;
-			return reverse(head,null);
-
-		}
-		public ListNode reverse(ListNode iter,ListNode prev){
-		   ListNode curr = iter.next;
-			iter.next = prev;
-			if(curr!= null) return reverse(curr,iter);
-			return iter;
-		}
 		
 		//83. Remove Duplicates from Sorted List
 		 public ListNode deleteDuplicates(ListNode head) {
@@ -248,7 +234,27 @@ public class MyLinkList<T> {
 		}
 		return false;
 	}
-		    	
+	
+	//24. Swap Nodes in Pairs  #RECURSION
+   public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) return head;
+      ListNode oldHead = head, newHead = head.next;
+      oldHead.next = swapPairs(newHead.next);
+      newHead.next = oldHead;
+      return newHead;
+  }
+   //206. Reverse Linked List  #RECURSION
+   public ListNode reverseList(ListNode head) {
+		if(head==null)return head;
+		return reverse(head,null);
+
+	}
+	public ListNode reverse(ListNode head,ListNode prev){
+	   ListNode curr = head.next;
+	   head.next = prev;
+		if(curr!= null) return reverse(curr,head);
+		return head;
+	}
 
 }
 

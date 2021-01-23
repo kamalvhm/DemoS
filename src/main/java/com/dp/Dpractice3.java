@@ -70,7 +70,7 @@ public class Dpractice3 {
 
 		String e3="rabbbit";
 		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.
-		System.out.println("16)Distinct Subsequences :-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
+		System.out.println("16)Distinct Subsequences :-"+DistinctSubsequences(e3,e4,e3.length(),e4.length()));
 		
 		String s4="babad";
 		System.out.println("11)Longest palindromic substring :-"+longestPalindromicSubString(s4));
@@ -83,7 +83,7 @@ public class Dpractice3 {
 			At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
 		 */
 		System.out.println("17)Minimum ASCII Delete Sum for Two Strings :-"+minimumDeleteSum(s5,s6,s5.length(),s6.length()));
-		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
+		String s7 = "ALDBCEBCD", s8 = "ABCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
 		System.out.println("7)Length of longest subsequence of a which is substring in b :-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
 		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
 		System.out.println("9)count how many times a appear as subsequence in b :-"+stringASubSequenceInB(s9,s10,s9.length(),s10.length()));
@@ -93,7 +93,12 @@ public class Dpractice3 {
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
-		return -1;
+		if(n==0 || m==0)return 0;
+		if(dp[n][m]!=-1)return dp[n][m];
+		if(x.charAt(n-1)==y.charAt(m-1)) {
+			return dp[n][m]=1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
+		}else return dp[n][m]=Math.max(LCS_Simple_recursive_Code(x, y, n-1, m), LCS_Simple_recursive_Code(x, y, n, m-1));
+		
 	}
 	//SECOUND STEP
 	public static int LCS_BottomUp_Memoized(String x,String y,int n,int m) {
@@ -103,6 +108,7 @@ public class Dpractice3 {
 	//THIRD STEP
 	public static int LCS_TopDown(String x,String y,int n,int m) {
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
+		
 		
 		
 		
@@ -121,7 +127,7 @@ public class Dpractice3 {
 	public static String printLCS_String(String x,String y,int n, int m) {		
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		
-		
+	
 		
 		return "";
 	}
@@ -131,36 +137,67 @@ public class Dpractice3 {
 		 int m=y.length(),n=x.length();
 		 int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
 		 
+		 
+			StringBuffer sb =new StringBuffer();
 			
-
-			return "";
+			return sb.toString();
 	    }
 	 
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
-		    int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS  
-			
 		  
 			
-			return t[n][m];
+			return -1;
 		}
 	
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
+	        for(int i=0;i<n+1;i++){
+	            for(int j=0;j<m+1;j++){
+	                if(i==0)
+	                    t[i][j]=j;  //if any string is empty then cost will be to add all other chars
+	                if(j==0)
+	                    t[i][j]=i;
+	               
+	            }
+	        }
+	        
+	        for(int i=1;i<n+1;i++) {
+	        	for(int j=1;j<m+1;j++) {
+	        		if(x.charAt(i-1)!=y.charAt(j-1))
+	        			t[i][j]=1+Math.min(t[i][j-1], Math.min(t[i-1][j], t[i-1][j-1]));
+	        		else t[i][j]=t[i-1][j-1];
+	        	}
+	        }
 	      
 	        return t[n][m];
 	    }
 	 
 	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
 		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
-	       return 1;
+			 if(m==0)return 1;
+			 if(n==0)return 0;
+			 if(s.charAt(n-1)==t.charAt(m-1)) {
+				 return DistinctSubsequencesR(s, t, n-1, m)+DistinctSubsequencesR(s,t,n-1,m-1);
+			 }else return DistinctSubsequencesR(s, t, n-1, m);
 	    }
 		 
 		public static int DistinctSubsequences(String s ,String t,int n,int m){
 		        int dp[][]=new int [n+1][m+1];
 		        
-		      
+		        for(int i=0;i<n+1;i++) {
+		        	dp[i][0]=1;
+		        }
+		        for(int i=1;i<n+1;i++) {
+		        	for(int j=1;j<m+1;j++) {
+		        		if(s.charAt(i-1)==t.charAt(j-1)) {
+		        			dp[i][j]=dp[i-1][j]+dp[i-1][j-1];
+		        		}else {
+		        			dp[i][j]=dp[i-1][j];
+		        		}
+		        	}
+		        }
 		         
 		      return dp[n][m];
 		    }
@@ -170,21 +207,54 @@ public class Dpractice3 {
 			int dp[][]=new int[n+1][n+1];
 			String res="";
 			int resE=1,resL=1;//length and end index of palindrom
-			
+			if(n==0)return res;
+
+			for(int i=0;i<=n;i++) dp[0][i]=dp[1][i]=1;//add 1 for empty and one length Strings 
+
+			for(int i=2;i<n+1;i++) {
+				for(int j=i;j<n+1;j++) {
+					if(e.charAt(i-1)==e.charAt(j-1) && dp[i-2][j-1]==1) {
+						dp[i][j]=1;
+						resL=i;
+						resE=j;
+					}else dp[i][j]=0;
+				}
+			}
 			return e.substring(resE-resL,resE);
 		}
 		//CODE SAME AS LCS JUST ADD ANSCII AT EVERY STEP
 		public static int minimumDeleteSum(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
-	       
+	        for(int i=1;i<n+1;i++) {
+	        	t[i][0]=t[i-1][0]+(int)s1.charAt(i-1);
+	        }
+	        for(int j=1;j<m+1;j++) {
+	        	t[0][j]=t[0][j-1]+(int)s2.charAt(j-1);
+        	}
+	        
+	        for(int i=1;i<n+1;i++) {
+	        	for(int j=1;j<m+1;j++) {
+	        		if(s1.charAt(i-1)!=s2.charAt(j-1)) 
+	        			t[i][j]=Math.min(t[i-1][j]+(int)s1.charAt(i-1),t[i][j-1]+(int)s2.charAt(j-1));
+	        		else t[i][j]=t[i-1][j-1];
+	        	}
+	        }
 	        return t[n][m];
 	    }
 		//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
 		public static int longestOfAinB(String x,String y,int n,int m) {
-			int t[][]=new int [m+1][n+1];  
+			int t[][]=new int [n+1][m+1];  
 			int max=0;
-			
+			for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1)) {
+						t[i][j]=1+t[i-1][j-1];
+					}else t[i][j]=t[i][j-1];
+					
+					max=Math.max(t[i][j],max);
+				}
+			}
 			
 			return max;
 		}

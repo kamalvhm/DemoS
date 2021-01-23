@@ -13,15 +13,21 @@ class Nodee {
 		left = right = null;
 	}
 }
-
+//NOTE:- IN BINARY SEARCH TREE (Remmeber in BSt not in below tree) INORDER TRAVERSAL ALSWAYS GiVES SORTED ORDER
 public class DFSTraversals {
 
 	public static void main(String args[]) {
-		Nodee tree = new Nodee(1); 						// 1
+		Nodee tree = new Nodee(1); 				       // 1
 		tree.left = new Nodee(2); 					// 2	 3
 		tree.right = new Nodee(3); 				   // 4 5
 		tree.left.left = new Nodee(4);
 		tree.left.right = new Nodee(5);
+		//BST
+		/*Nodee tree = new Nodee(4); 					// 4
+		tree.left = new Nodee(2); 					// 2	 5
+		tree.right = new Nodee(5); 				   // 1 3
+		tree.left.left = new Nodee(1);
+		tree.left.right = new Nodee(3);*/
 
 		/**
 		 * (a) Inorder (Left, Root, Right) : 4 2 5 1 3

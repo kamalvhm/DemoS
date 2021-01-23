@@ -1,5 +1,7 @@
 package com.recursion;
 
+import org.apache.spark.sql.catalyst.expressions.Reverse;
+
 import com.beans.TreeNode;
 import com.datastructure.TreePrinter;
 
@@ -20,7 +22,9 @@ public class Practice {
 		
 		int [] a= {4,6,2,1,3};
 		//3)sort a given array
-		
+		char c []= {'h','e'};
+		reversee(c,c.length-1,0);
+		System.out.print(c);
 					
 	}
 
@@ -34,5 +38,14 @@ public class Practice {
 		if(root==null)return 0;
 		else return Math.max(height(root.left), height(root.right))+1;
 	}
+	
+	
+	 public static void reversee(char[] s ,int pos,int start){
+	        if(pos<0)return;
+	        char c=s[pos];
+	        reversee(s,pos-1,start+1);
+	        s[start]=c;
+	        return;
+	    }
 
 }

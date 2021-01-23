@@ -81,24 +81,15 @@ public class Dpractice4 extends DynamicPrograming{
 
 	}
 
-	//https://www.youtube.com/watch?v=kMK148J9qEE&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=34
-	public static int solveMCM(int arr[],int i,int j) {
-		if(i>=j)return 0;
-		int ans=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-			int tmep=solveMCM(arr, i, k)+solveMCM(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
-			ans =Math.min(ans, tmep);
-		}
-		return ans;
-	}
+	
 	
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
 		if(i>=j)return 0;
 		if(dp[i][j]!=-1)return dp[i][j];
 		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int tmep=solveMCM_BottomUp(arr, i, k)+solveMCM_BottomUp(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
-			ans =Math.min(ans, tmep);
+			int temp=solveMCM_BottomUp(arr, i, k)+solveMCM_BottomUp(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
+			ans=Math.min(ans, temp);
 		}
 		return dp[i][j]=ans;
 	}
@@ -108,16 +99,16 @@ public class Dpractice4 extends DynamicPrograming{
 		if(isPalindrom(s, i, j))return 0;
 		int min=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
-			int temp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
+			int temp=1+palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j);
 			min=Math.min(min, temp);
 		}
-		return 1;
+		return min;
 	}
 
 	private static boolean isPalindrom(String s, int i, int j) {
 		if(i==j)return true;
 		while(i<j) {
-			if(s.charAt(i)!=s.charAt(j))
+			if(s.charAt(i++)!=s.charAt(j--))
 				return false;
 		}
 		return true;
@@ -146,33 +137,37 @@ public class Dpractice4 extends DynamicPrograming{
 	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
 		if(i>j)return 0;
 		if(i==j) {
-			if(isTrue) {
+			if(isTrue)
 				return s.charAt(i)=='T'?1:0;
-			}else return s.charAt(i)=='F'?1:0;
+			else return s.charAt(i)=='F'?1:0;
 		}
 		int ans=0;
 		for(int k=i+1;k<j;k+=2) {
 			int leftTrue=evalExTRecursive(s, i, k-1, true);
-			int leftFalse=evalExTRecursive(s, i, k-1, false);
+			int leftfalse=evalExTRecursive(s, i, k-1, false);
 			int rightTrue=evalExTRecursive(s, k+1, j, true);
 			int rightFalse=evalExTRecursive(s, k+1, j, false);
-
-			char c =s.charAt(k);
 			
-		  if(c=='&') {
-			  if(isTrue)
-				  ans+=leftTrue*rightTrue;
-			  else ans+=leftFalse*rightTrue+leftTrue*rightFalse+leftFalse*rightFalse;
-		  }
-		  if(c=='|') {
-			  if(isTrue)
-				  ans+=leftTrue*rightTrue+leftFalse*rightTrue+leftTrue*rightFalse;
-			  else ans+=leftFalse*rightFalse;
-		  }if(c=='^') {
-			  if(isTrue)
-				  ans+=leftFalse*rightTrue+leftTrue*rightFalse;
-			  else ans+=leftTrue*rightTrue+leftFalse*rightFalse;
-		  }
+			char c =s.charAt(k);
+			if(c=='&') { //now add ans according to operator
+				 if(isTrue)
+					 ans+=leftTrue*rightTrue;
+				 else
+					 ans+=leftTrue*rightFalse + leftfalse*rightTrue + leftfalse*rightFalse;
+			 }
+			 else if(c=='|') {
+				 if(isTrue)
+					 ans+=leftTrue*rightTrue + leftTrue*rightFalse + leftfalse*rightTrue;
+				 else
+					 ans+=leftfalse*rightFalse;
+			 }
+			 else if(c=='^') {
+				 if(isTrue)
+					 ans+=leftTrue*rightFalse + leftfalse*rightTrue;
+				 else
+					 ans+=leftTrue*rightTrue + leftfalse*rightFalse;
+			 }
+
 		}
 		return ans;
 	} 
@@ -226,17 +221,15 @@ public class Dpractice4 extends DynamicPrograming{
 		if(a.compareTo(b)==0)return true;
 		if(a.length()<=1)return false;
 		int n=a.length();
-		boolean flag=false;
-		for(int i=1 ;i<n;i++) {
-			if(scrambledSolve(a.substring(0,i), b.substring(n-i,n)) && scrambledSolve(a.substring(i,n), b.substring(0,n-i)) || 
-					scrambledSolve(a.substring(0,i), b.substring(0,i)) && scrambledSolve(a.substring(i,n), b.substring(i,n))) {
+		boolean flag=false ;
+		for(int i=0;i<n;i++) {
+			if(scrambledSolve(a.substring(0,i),b.substring(n-i,n)) && scrambledSolve(a.substring(i,n),b.substring(0,n-i))
+					||scrambledSolve(a.substring(0,i),b.substring(0,i)) && scrambledSolve(a.substring(i,n),b.substring(i,n))) {
 				flag=true;
 				break;
-				
 			}
 		}
-		
-	return flag;
+		return flag;
 	} 
 	
 	 public static boolean scrambledMemoized(String a, String b) {
@@ -250,10 +243,9 @@ public class Dpractice4 extends DynamicPrograming{
 			if(e==1)return f;
 			int min=Integer.MAX_VALUE;
 			for(int k=1;k<=f;k++) {
-				int temp=Math.max(eggDropRecursive(e-1, k-1), eggDropRecursive(e, f-k))+1;
+				int temp=Math.max(eggDropRecursive(e-1, k-1),eggDropRecursive(e, f-k))+1;
 				min=Math.min(min, temp);
 			}
-			
 			return min;
 		}
 		
@@ -273,36 +265,5 @@ public class Dpractice4 extends DynamicPrograming{
 			return min;
 		}
 		
-		private static int eggDropMemoizedOptimized(int e, int f) {
-			if(f==0 || f==1)return f;
-			if(e==1)return f; 
-			if(egg[e][f]!=-1)return egg[e][f]; //Change 1
-			
-			int min=Integer.MAX_VALUE;
-			
-			for(int k=1;k<=f;k++) {
-				int breaks,intact;//here we are checking those two inner calls also in matrix 
-				if(egg[e-1][k-1]!=-1)  
-				{
-					breaks=egg[e-1][k-1];
-				} 
-				else {
-					breaks=eggDropRecursive(e-1, k-1);
-					egg[e-1][k-1]=breaks;
-				}
-				if(egg[e][f-k]!=-1) 
-				{
-					intact=egg[e][f-k];
-				} 
-				else {
-					intact=eggDropRecursive(e,f-k);
-					egg[e][f-k]=intact;
-				}
-				int temp=Math.max(breaks,intact)+1;  
-			
-				min=Math.min(min, temp);
-			}
-			egg[e][f]=min; //Change 2
-			return min;
-		}
+
 }

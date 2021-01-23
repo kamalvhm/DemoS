@@ -26,7 +26,7 @@ public class BsPractice {
 					  {27,29,37,48},
 					  {32,33,39,50}};
 		//2-1 should be retured;
-		System.out.println("5) 2D--> "+Search2DArray(arr,29));
+		System.out.println("5) 2D-(2-1)-> "+Search2DArray(arr,29));
 		
 		//find element in infinite array  consider below as infinate 
 		int [] k= {1,2,3,4,5,6,7,8,9,10,11};
@@ -46,10 +46,9 @@ public class BsPractice {
 
 	private static int search(int[] a, int i) {
 		int l=0,r=a.length-1;
-		while(l<=l) {
+		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]==i)
-				return mid;
+			if(a[mid]==i)return mid;
 			else if(i>a[mid])
 				l=mid+1;
 			else r=mid-1;
@@ -57,42 +56,41 @@ public class BsPractice {
 		return -1;
 	}
 	
-	public static int bsfirst(int [] a,int target) {
+	public static int bsfirst(int [] a,int i) {
 		int l=0,r=a.length-1;
 		int index=-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]>=target) {
+			if(i<=a[mid]) {
 				index=mid;
 				r=mid-1;
-			}else l=mid+1;
+			}
+			else l=mid+1;
 		}
 		return index;
-		
 	}
 	
-	public static int bslast(int [] a,int target) {
+	public static int bslast(int [] a,int i) {
 		int l=0,r=a.length-1;
-		int index=0;
+		int index=-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]<=target) {
+			if(i>=a[mid]) {
 				index=mid;
 				l=mid+1;
-			}else r=mid-1;
+			}
+			else r=mid-1;
 		}
 		return index;
 	}
 	
 	public static int findPeakElement(int[] a) {
-		int l = 0, r = a.length - 1;
-		while (l < r) {
-			int mid = l + (r - l) / 2;
-			if (a[mid] < a[mid + 1]) {
-				l = mid + 1;
-			} else
-				r = mid;
-
+		int l=0,r=a.length-1;
+		while(l<r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]<a[mid+1])
+				l=mid+1;
+			else r=mid;
 		}
 		return l;
 	}
@@ -101,21 +99,26 @@ public class BsPractice {
 		int l=0,r=a.length-1;
 		while(l<r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]>a[a.length-1]) {
+			if(a[mid]>=a[a.length-1])
 				l=mid+1;
-			}else r=mid-1;
+			else r=mid;
 		}
 		return l;
-	}
+		}
 
 	public static int bsInfiniteArray(int[] a, int target) {
-
+		int end=0,start=0;
+		while(end<target) {
+			start=end;
+			end*=2;
+		}
+		
+		
 		return -1;
 
 	}
 	
 	public static int searchBsInDescArray(int [] a,int target) {
-		
 		return -1;
 	}
 	
@@ -170,7 +173,15 @@ public class BsPractice {
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {
-		 	
+		 	int i=0,j=a[0].length-1;
+		 	while(i>=0 && j>=0 && i<a.length && j<a[0].length) {
+		 		int v=a[i][j];
+		 		if(v==target)
+		 			return i+" "+j;
+		 		else if(target<v)
+		 			j--;
+		 		else i++;
+		 	}
 		 	return "";
 		 	
 	      }
