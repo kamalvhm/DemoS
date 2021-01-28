@@ -9,7 +9,7 @@ public class Practice {
 
 	public static void main(String[] args) {
 		//1) Print No from 7 to 1 and reverse 
-		print(7);
+		/*print(7);
 		
 		TreeNode<Integer> tree = new TreeNode(1); // 1
 		tree.left = new TreeNode(2); // 2 3
@@ -25,7 +25,9 @@ public class Practice {
 		char c []= {'h','e'};
 		reversee(c,c.length-1,0);
 		System.out.print(c);
-					
+		System.out.println(power(3,2));*/
+		
+		pzz(2);
 	}
 
 	private static void print(int i) {
@@ -47,5 +49,34 @@ public class Practice {
 	        s[start]=c;
 	        return;
 	    }
+	 
+	 public static  int power(int x ,int n ) {
+		 if(n==0)
+			 return 1;
+		 int xnm1=power(x,n-1);
+		 return x*xnm1;
+	 }
+	 
+	 public static  int powerHalf(int x ,int n ) {
+		 if(n==0)
+			 return 1;
+		 int xnm1=power(x,n/2);
+		 int xn=xnm1*xnm1;
+		 if(x%2!=0)
+			 xn=xn*x;
+		 return xn;
+	 }
+	 
+	 
+	 public static void pzz(int n) {
+		 if(n==0)
+			 return;
+		 System.out.println("Pre "+n);
+		 pzz(n-1);
+		 System.out.println("In "+n);
+		 pzz(n-1);
+		 System.out.println("Post "+n);
+
+	 }
 
 }

@@ -1,6 +1,10 @@
 package problems.dp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.beans.TreeNode;
 
 /** PATTERNS 
  * 1) Grid Traveler :-63 Unique Paths 2, 64. Minimum Path Sum
@@ -137,4 +141,54 @@ public class DPatterns {
 	       }
 	      return dp[s.length()];
 	   }
+		 /**		     4
+		  * 	{1,2,3}    {5} left node count is 3 and right is 1 so total BST can be formed is for 4 as root is =3*1
+		  * 		
+		  *
+		  */
+		 //Catalan number  96. Unique Binary Search Trees   //https://www.youtube.com/watch?v=CMaZ69P1bAc
+		 public int numTrees(int n) {
+		        int t[]=new int[n+1];
+		        t[0]=t[1]=1;
+		        
+		        for(int i=2;i<=n;i++){
+		            for(int j=0;j<i;j++)
+		            {	
+		            	//consider for node c3 = c0c2+c1*c1+c2*c0
+		            	//for i-> 0 to n (Recursive code)
+		            	//result +=catalan(i)*catalan(n-i-1);
+		                t[i]+=t[j]*t[i-j-1]; //catalan number 
+		            }
+		        }
+		        return t[n];
+		    }
+		 //RECURSION 
+		 //95. Unique Binary Search Trees II | https://www.youtube.com/watch?v=hQn61BjdA7M&pbjreload=101
+		 public List<TreeNode> generateTrees(int n) {
+		        if(n == 0) return new ArrayList<>();
+		        return construct(1,n);
+		    }
+		    private ArrayList<TreeNode> construct(int start, int end){
+		        ArrayList<TreeNode> al = new ArrayList<>();
+		        if(start > end){
+		            al.add(null);
+		            return al;
+		        }
+		        for(int i = start; i <= end;i++){
+		            ArrayList<TreeNode> leftSubtree = construct(start,i-1);  // construct left of root node 
+					//generating possible left subtrees
+		            ArrayList<TreeNode> rightSubtree = construct(i+1,end);  // construct right of root node 
+		            //now once we got left and right sub trees put root infront of them(conect with root)  two inner loop because of all combination of left and right
+		            for(TreeNode L:leftSubtree){
+		                for(TreeNode R:rightSubtree){
+		                    TreeNode node = new TreeNode(i);
+		                    node.left = L;
+		                    node.right = R;
+							//appending the root of every unique tree to the list
+		                    al.add(node);
+		                }
+		            }
+		        }
+		        return al;
+		    }
 }

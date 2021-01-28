@@ -1,6 +1,8 @@
 package com.datastructure;
 
-public class BT<T extends Comparable<T>> {
+import com.beans.TreeNode;
+
+public class BinaryTreeRelated<T extends Comparable<T>> {
 
 	private int node_count = 0;
 
@@ -101,5 +103,17 @@ public class BT<T extends Comparable<T>> {
 		while (node.left != null) node = node.left;
 	    return node;
 	}
+	
+	//226. Invert Binary Tree
+	 public TreeNode invertTree(TreeNode root) {
+	        if(root==null)
+	            return root;
+	        TreeNode left=invertTree(root.left);
+	        TreeNode right=invertTree(root.right);
+	        //swap
+	        root.left=right;
+	        root.right=left;
+	        return root;
+	    }
 
 }

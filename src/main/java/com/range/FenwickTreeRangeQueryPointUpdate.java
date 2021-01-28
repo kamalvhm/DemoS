@@ -1,4 +1,4 @@
-package com.datastructure;
+package com.range;
 public class FenwickTreeRangeQueryPointUpdate {
 
   // The size of the array holding the Fenwick tree values

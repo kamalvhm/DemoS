@@ -255,7 +255,36 @@ public class MyLinkList<T> {
 		if(curr!= null) return reverse(curr,head);
 		return head;
 	}
-
+	
+	
+	//23. Merge k Sorted Lists
+	 public ListNode mergeKLists(ListNode[] lists) {
+	     if(lists == null || lists.length == 0) return null;
+	        int interval = 1;
+	        //this loop will merge in intervals and everytime increase interval
+	        while(interval < lists.length){
+	            for(int i=0;i<lists.length-interval; i += interval*2){
+	                lists[i] = merge(lists[i], lists[i+interval]);
+	            }
+	            interval *= 2; 
+	        }
+	        
+	        return lists[0];
+	    }
+	    
+	    ListNode merge(ListNode a, ListNode b){
+	        if(a == null) return b;
+	        if(b == null) return a;
+	        
+	        if(a.val <= b.val){
+	            a.next = merge(a.next,b);
+	            return a;
+	        }
+	        else{
+	            b.next = merge(a,b.next);
+	            return b;
+	        }
+	    }
 }
 
 

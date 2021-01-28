@@ -8,7 +8,7 @@ public class SubsetProblemV12 {
 	public static void main(String[] args) {
 		//print all subsets of given string 
 		
-		printSubsets("abcd","");
+		printSubsets("123","");
 
 	}
 

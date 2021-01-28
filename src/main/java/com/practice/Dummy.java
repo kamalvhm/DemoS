@@ -8,6 +8,7 @@ import java.util.Stack;
 import java.util.spi.CurrencyNameProvider;
 
 import org.apache.commons.math3.ode.nonstiff.GillIntegrator;
+import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
 import org.apache.hadoop.fs.DF;
 import org.apache.spark.sql.catalyst.expressions.CurrentRow;
 import org.apache.spark.sql.streaming.StreamingQueryListener.QueryStartedEvent;
@@ -60,13 +61,13 @@ public class Dummy {
 		//System.out.println(search(a,8));
 		
 	      char [][] islandGrid = new char[][] {
-              {'1', '1', '1', '1', '0'},
+              {'1', '1', '0', '1', '0'},
               {'1', '1', '0', '1', '0'},
               {'1', '1', '0', '1', '0'},
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands: " + numIslands(islandGrid));
+        System.out.println("No of Islands: " + numIslandsIterativeDFS(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -99,62 +100,19 @@ public class Dummy {
 
 	public static int numIslands(char[][] grid) {
 		int count =0;
-		int h=grid.length;
-		int l=grid[0].length;
 		
-		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < l; j++) {
-				if (grid[i][j] == '1') {
-					DFS(grid,i,j);
-					count++;
-				}
-			}
-		}
+		
 		return count;
 		
 	}
     private static void DFS(char[][] grid, int r, int c) {
-    	int h=grid.length;
-		int l=grid[0].length;
-		if(r<0 || c<0 || r>=h || c>=l || grid[r][c]!='1') return;
-		grid[r][c]='0';
-		DFS(grid,r+1,c);
-		DFS(grid,r-1,c);
-		DFS(grid,r,c+1);
-		DFS(grid,r,c-1);
-
+    	
 
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;
-		Stack<int []> st=new Stack<>();
-		int h=grid.length;
-		int l=grid[0].length;
 		
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<l;j++) {
-				if(grid[i][j]=='1') {
-					st.push(new int[] {i,j});
-					grid[i][j]='0';
-					
-					while(!st.isEmpty()) {
-						int[] curr=st.pop();
-						for(int []dir:direction) {
-							int r=curr[0]+dir[0];
-							int c=curr[1]+dir[1];
-							
-							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1') {
-								grid[r][c]='0';
-								st.push(new int[] {r,c});
-							}
-
-						}
-					}
-					count++;
-				}
-			}
-		}
 		return count;
 
 	}
@@ -168,12 +126,31 @@ public class Dummy {
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		 List<List<Integer>> result=new ArrayList<>();
-		
+		 Queue<TreeNode> q=new LinkedList<>();
+			TreeNode current=tree;
+			q.add(current);
+			while(!q.isEmpty()) {
+				int qSize=q.size();
+				List<Integer> list=new ArrayList<>();
+				for(int i=0;i<qSize;i++) {
+					current=q.poll();
+					list.add((int)current.val);
+					if(current.left!=null) {
+						q.offer(current.left);
+					}
+					if(current.right!=null) {
+						q.offer(current.right);
+					}
+				}
+				result.add(list);
+				
+			}
 			
 			return result;
 	 }
 
 	private static void inorderWithout(TreeNode tree) {
+		
 		
 	}
 	
@@ -182,10 +159,7 @@ public class Dummy {
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-		
-		
-		
-		
+
 	}
 
 	private static void postorder(TreeNode tree) {
