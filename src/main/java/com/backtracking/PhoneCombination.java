@@ -1,4 +1,4 @@
-package com.intquetions;
+package com.backtracking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import com.datastructure.TreePrinter.PrintableNode;
 
+//17. Letter Combinations of a Phone Number
 class PhoneCombination {
     static Map<Character,String> m ;
     static List<String > ans ;
@@ -46,6 +48,7 @@ class PhoneCombination {
     }
     
     public static void main(String args[]) {
-      letterCombinations("23");
+      System.out.print(letterCombinations("23"));
     }
+    
 }

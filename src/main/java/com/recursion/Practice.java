@@ -27,12 +27,37 @@ public class Practice {
 		System.out.print(c);
 		System.out.println(power(3,2));*/
 		
-		pzz(2);
+		//pzz(2);
+		int [] b= {4,6,2,1,3};
+		//System.out.print(print(b,0));
+		
+		int [] c= {2,3,6,9,8,3,2,6,3,4};
+		//System.out.print(firstOccurence(c,0,8));
+		
+
+	}
+	
+
+	
+	
+	
+	public static int firstOccurence(int a[],int i,int t) {
+		if(i==a.length)
+			return -1;
+		
+		if(a[i]==t)
+			return i;
+		else {
+			int j = firstOccurence(a, i+1, t);
+			return j;
+		}
 	}
 
-	private static void print(int i) {
-		// TODO Auto-generated method stub
-		
+	private static int print(int a[] ,int i) {
+		if(i==a.length-1)
+			return a[a.length-1];
+		return Math.max(a[i], print(a, i+1));
+
 	}
 	
 	
@@ -78,5 +103,7 @@ public class Practice {
 		 System.out.println("Post "+n);
 
 	 }
+	 
+	
 
 }

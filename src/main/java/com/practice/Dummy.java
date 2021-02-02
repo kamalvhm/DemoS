@@ -121,30 +121,23 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
-		
+		Queue<TreeNode> st=new LinkedList();
+		TreeNode current=tree;
+		st.add(current);
+		while(!st.isEmpty()) {
+			current=st.poll();
+			System.out.print(current.val+", ");
+			if(current.left!=null)
+				st.add(current.left);
+			if(current.right!=null)
+				st.add(current.right);
+			
+		}
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		 List<List<Integer>> result=new ArrayList<>();
-		 Queue<TreeNode> q=new LinkedList<>();
-			TreeNode current=tree;
-			q.add(current);
-			while(!q.isEmpty()) {
-				int qSize=q.size();
-				List<Integer> list=new ArrayList<>();
-				for(int i=0;i<qSize;i++) {
-					current=q.poll();
-					list.add((int)current.val);
-					if(current.left!=null) {
-						q.offer(current.left);
-					}
-					if(current.right!=null) {
-						q.offer(current.right);
-					}
-				}
-				result.add(list);
-				
-			}
+		
 			
 			return result;
 	 }
@@ -159,7 +152,7 @@ public class Dummy {
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-
+		
 	}
 
 	private static void postorder(TreeNode tree) {

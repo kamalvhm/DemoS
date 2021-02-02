@@ -48,10 +48,11 @@ public class BsPractice {
 		int l=0,r=a.length-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]==i)return mid;
-			else if(i>a[mid])
+			if(a[mid]==i)
+				return mid;
+			else if(i>a[mid]) {
 				l=mid+1;
-			else r=mid-1;
+			}else r=mid-1;
 		}
 		return -1;
 	}
@@ -61,25 +62,23 @@ public class BsPractice {
 		int index=-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(i<=a[mid]) {
+			if(a[mid]>=i) {
 				index=mid;
 				r=mid-1;
-			}
-			else l=mid+1;
+			}else l=mid+1;
 		}
 		return index;
 	}
 	
 	public static int bslast(int [] a,int i) {
 		int l=0,r=a.length-1;
-		int index=-1;
+		int index=0;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(i>=a[mid]) {
+			if(a[mid]<=i) {
 				index=mid;
 				l=mid+1;
-			}
-			else r=mid-1;
+			}else r=mid-1;
 		}
 		return index;
 	}
@@ -88,9 +87,11 @@ public class BsPractice {
 		int l=0,r=a.length-1;
 		while(l<r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]<a[mid+1])
+			if(a[mid]<a[mid+1]) {
 				l=mid+1;
-			else r=mid;
+			}else {
+				r=mid;
+			}
 		}
 		return l;
 	}
@@ -99,9 +100,9 @@ public class BsPractice {
 		int l=0,r=a.length-1;
 		while(l<r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]>=a[a.length-1])
+			if(a[mid]>a[a.length-1]) {
 				l=mid+1;
-			else r=mid;
+			}else r=mid;
 		}
 		return l;
 		}

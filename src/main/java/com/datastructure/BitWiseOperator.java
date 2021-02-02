@@ -24,7 +24,7 @@ public class BitWiseOperator {
 		//left shift >>
 		int rightshift= a>>2;  //1100 0011 3 withIn limit two bits ignored at front
 		
-		//rightShift zero fill operator >>> 
+		//rightShift zero fill operator >>>  IMP Check hammingWeight example 
 		int rightShiftZeroFill= a>>>2;
 		
 		System.out.println("AND "+and+" Bineary "+Integer.toBinaryString(and));
@@ -91,4 +91,17 @@ public class BitWiseOperator {
 		    
 		    return true;
 		}
+	 
+	 //191 Number of 1 Bits | https://www.youtube.com/watch?v=pAN7bz5dMxo
+	 public int hammingWeight(int n) {
+	        int count=0;
+	        while(n!=0){
+	            //n%2 will give last bit to check use & 1
+	            count+=(n%2) & 1;
+	            //>> shift oprator on negative (signed) adds 1 at right istead of zero  so use >>> instead this will
+	            // use 0 in LSB instead of one
+	            n>>>=1; 
+	        }
+	        return count;
+	    }
 }

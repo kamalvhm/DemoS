@@ -41,6 +41,23 @@ public class PermutaionsWithSpacesV14 {
 		
 		
 	}
+	
+	//Another option explore method 
+	public static void printpermutation(String ip,String op) {
+		if(ip.length()==0)
+		{
+			System.out.println(op);
+			return;
+		}
+		for(int i=0;i<ip.length();i++) {
+			char c=ip.charAt(i);
+			String opLeftPart=ip.substring(0,i);
+			String opRightPart=ip.substring(i+1);
+			String rip=opLeftPart+opRightPart;
+			printpermutation(rip, op+c);
+
+		}
+	}
 		
 
 }
