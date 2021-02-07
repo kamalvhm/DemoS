@@ -26,6 +26,7 @@ public class StringProblems {
 		//to append in front of String 
 		sb.insert(0, "ABC");
 		
+		
 	}
 	
 	//125. Valid Palindrome
@@ -166,4 +167,80 @@ public class StringProblems {
 	        }
 	        return s.substring(j);
 	    }
+	    
+	    //1221. Split a String in Balanced Strings
+	    public int balancedStringSplit(String s) {
+	        int balanceCount=0;
+	        int count=0;
+	        for(int i=0;i<s.length();i++){
+	           char c=s.charAt(i);
+	            if(c=='L')
+	                count++;
+	            else count--;
+	            if(count==0)
+	            {
+	                balanceCount++;
+	            }
+	        }
+	         return balanceCount;
+	    }
+	    
+	    //1309. Decrypt String from Alphabet to Integer Mapping
+	    public String freqAlphabets(String s) {
+	        StringBuffer sb=new StringBuffer();
+	        int r=s.length()-1;
+	        while(r>=0){
+	            char c =s.charAt(r);
+	            if(c=='#'){
+	                int cur = (s.charAt(r - 1) - '0')  + (s.charAt(r - 2) - '0') * 10;
+	                sb.insert(0,(char)(cur - 1 + 'a'));
+	                r=r-3;
+	            }else {
+	                sb.insert(0,(char)((c - '0') - 1 + 'a'));
+	                r--;
+	            }
+	        }
+	        return sb.toString();
+	    }
+	    
+	    //https://www.youtube.com/watch?v=RG5rWV6in38&list=PL-Jc9J83PIiHO9SQ6lxGuDsZNt2mkHEn0&index=9
+	    public static void solve(String unique,HashMap<Character,Integer> map , int idx,boolean[] used,String s1,String s2,String s3) {
+	    	if(idx==unique.length()) {
+	    		int num1=getNum(s1,map);
+	    		int num2=getNum(s2,map);
+	    		int num3=getNum(s3,map);
+	    		if(num1+num2==num3) {
+	    			for(int i=0;i<26;i++) { //to print in alphabetical order 
+	    				char c =(char) ('a'+i);
+	    				if(map.containsKey(c)) {
+	    					System.out.print(c+"-"+map.get(c)+" ");
+	    				}
+	    			}
+	    			System.out.println("");
+	    		}
+	    		return;
+	    	}
+	    	
+	    	char c =unique.charAt(idx);
+	    	for(int i=0;i<10;i++) {
+	    		if(used[i]==false) {
+	    			used[i]=true;
+	    			map.put(c, i);
+	    			solve(unique,map,idx+1,used,s1,s2,s3);
+	    			used[i]=false;
+	    			map.put(c, -1);
+	    		}
+	    	}
+	    	
+	    }
+
+		private static int getNum(String s1, HashMap<Character, Integer> map) {
+			String val="";
+			for(char c :s1.toCharArray())
+				val+=map.get(c);
+			return Integer.parseInt(val);
+		}
+		
+		
+		
 }

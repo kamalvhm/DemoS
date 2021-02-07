@@ -17,9 +17,15 @@ public class Nqueens {
 	        }
 	        printNqueens(matrix,0,result);
 	        System.out.println(result);
-		
+	        
+	       ////////BRANCH AND BOUND SOLUTION
+	       boolean [] cols=new boolean[n];
+	       boolean[] ndiag=new boolean[2*n-1];
+	       boolean[] rdiag=new boolean[2*n-1];
+	       solveNqueensBNB(matrix,0,cols,ndiag,rdiag,"");
 
 	}
+	
 	//this how to place queens on chess 
 	private static void printNqueens(char[][] chess, int row, List<List<String>> result) {
 		if (row == chess.length) {
@@ -112,6 +118,30 @@ public class Nqueens {
         return true;
     }
 
+    //Branch and bound Solution 
+    private static void solveNqueensBNB(char[][] board, int row, boolean[] cols, boolean[] ndiag, boolean[] rdiag,
+			String asf) {
+    	if(row==board.length) {
+    		System.out.print(asf);
+    		return;
+    	}
+		for(int col=0;col<board[0].length;col++) {
+			if(cols[col]==false && ndiag[row+col]==false && rdiag[row-col+board.length-1]==false) {
+				board[row][col]='Q';
+				cols[col]=true;
+				ndiag[row+col]=true;
+				rdiag[row-col+board.length-1]=true;
+				
+				solveNqueensBNB(board, row+1, cols, ndiag, rdiag, asf+row+"-"+col);
+				
+				cols[col]=false;
+				ndiag[row+col]=false;
+				rdiag[row-col+board.length-1]=false;
+				board[row][col]='.';
+
+			}
+		}
+	}
    
 
 }

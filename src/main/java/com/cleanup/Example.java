@@ -1,4 +1,4 @@
-package com.practice;
+package com.cleanup;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;

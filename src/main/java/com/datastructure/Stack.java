@@ -62,7 +62,7 @@ public class Stack<T> implements Iterable<T> {
 	
 	   //84. Largest Rectangle in Histogram || discussion https://www.youtube.com/watch?v=SSpnMY5TrTw || 
 	
-    //// https://www.youtube.com/watch?v=NFGteS5mnc0&feature=youtu.be
+    //// https://www.youtube.com/watch?v=NFGteS5mnc0&feature=youtu.be  //IMP CONCEPT OF FINDING MINIMUM AND MXIMUM
   public static int largestRectangleArea(int[] heights) {
         if(heights == null || heights.length == 0)
             return 0;
@@ -70,7 +70,7 @@ public class Stack<T> implements Iterable<T> {
         int[] left = new int[n];
         int[] right = new int[n];
 
-        java.util.Stack<Integer> stack = new java.util.Stack<>();
+        java.util.Stack<Integer> stack = new java.util.Stack<>();  
         //using the stack to find the last number which smaller than heights[i]
         for(int i=0; i<n; i++) { //we are keeping increaing sequence only in stack 
             while(!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {

@@ -296,4 +296,17 @@ public int numOfIcelands(int[][] grids)	{
 
        return found; 
     }
+    //1219. Path with Maximum Gold
+    public static int dfs(int[][] grid,int r,int c){
+        int h=grid.length;
+        int l=grid[0].length;
+       if(r<0 || c<0 || r>=h || c>=l || grid[r][c]==0)return 0;
+          int count=grid[r][c];
+          grid[r][c]=0;
+          int val1=Math.max(dfs(grid,r+1,c),dfs(grid,r-1,c));
+          int val2=Math.max(dfs(grid,r,c+1),dfs(grid,r,c-1));
+          grid[r][c]=count;
+          int val=Math.max(val1,val2);
+          return count+val;
+      }
 }

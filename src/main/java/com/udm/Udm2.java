@@ -23,7 +23,7 @@ public class Udm2 {
 			inputData.add(20);
 			
 			
-			Logger.getLogger("org.apache").setLevel(Level.WARN);
+			//Logger.getLogger("org.apache").setLevel(Level.WARN);
 
 			SparkConf conf=new SparkConf().setAppName("dem").setMaster("local[*]");
 			JavaSparkContext sc=new JavaSparkContext(conf);
@@ -34,8 +34,11 @@ public class Udm2 {
 			JavaRDD<IntegerwithSquaqeRoot> sqrtRdd=originalInteger.map(value->new IntegerwithSquaqeRoot(value));
 			
 			JavaRDD<Tuple2<Integer,Double>> sqrtRdd2=originalInteger.map(value->new Tuple2<Integer,Double>(value,Math.sqrt(value)));
+			sqrtRdd2.count();
+			
+			sqrtRdd2.toDebugString();
 
-			Tuple2<Integer,Double> myVal=new Tuple2<>(9,3.0);	
+			//Tuple2<Integer,Double> myVal=new Tuple2<>(9,3.0);	
 			 
 			sc.close();
 			

@@ -1,4 +1,4 @@
-package com.practice;
+package com.cleanup;
 
 import java.util.ArrayList;
 import java.util.Iterator;

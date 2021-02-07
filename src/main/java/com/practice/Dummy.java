@@ -100,18 +100,51 @@ public class Dummy {
 
 	public static int numIslands(char[][] grid) {
 		int count =0;
-		
+		int h=grid.length;
+		int l=grid[0].length;
+		for(int i=0;i<h;i++) {
+			for(int j=0;j<l;j++) {
+				if(grid[i][j]=='1') {
+					DFS(grid,i,j);
+					count++;
+				}
+			}
+		}
 		
 		return count;
 		
 	}
     private static void DFS(char[][] grid, int r, int c) {
     	
-
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
-		int count = 0;
+		int count =0;
+		Stack<int[]> st=new Stack<>();
+		int h=grid.length;
+		int l=grid[0].length;
+		
+		for(int i=0;i<h;i++) {
+			for(int j=0;j<l;j++) {
+				if(grid[i][j]=='1') {
+					st.push(new int [] {i,j});
+					grid[i][j]='0';
+					while(!st.isEmpty()) {
+						int[] cur=st.pop();
+						for(int [] dir:direction) {
+							int r=cur[0]+dir[0];
+							int c=cur[1]+dir[1];
+							
+							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1') {
+								st.push(new int [] {r,c});
+								grid[r][c]='0';
+							}
+						}
+					}
+					count++;
+				}
+			}
+		}
 		
 		return count;
 
@@ -121,25 +154,14 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
-		Queue<TreeNode> st=new LinkedList();
-		TreeNode current=tree;
-		st.add(current);
-		while(!st.isEmpty()) {
-			current=st.poll();
-			System.out.print(current.val+", ");
-			if(current.left!=null)
-				st.add(current.left);
-			if(current.right!=null)
-				st.add(current.right);
-			
-		}
+		
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		 List<List<Integer>> result=new ArrayList<>();
 		
 			
-			return result;
+		return result;
 	 }
 
 	private static void inorderWithout(TreeNode tree) {

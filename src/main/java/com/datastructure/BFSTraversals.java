@@ -54,6 +54,20 @@ public class BFSTraversals {
         for (i=1; i<=h; i++) 
             printGivenLevel(root, i); 
     } 
+    
+    /* Print nodes at the given level */
+    static void printGivenLevel (Nodee root ,int level) 
+    { 
+        if (root == null) 
+            return; 
+        if (level == 1) 
+            System.out.print(root.val + " "); 
+        else if (level > 1) 
+        { 
+            printGivenLevel(root.left, level-1); 
+            printGivenLevel(root.right, level-1); 
+        } 
+    } 
   
     /* Compute the "height" of a tree -- the number of 
     nodes along the longest path from the root node 
@@ -75,19 +89,7 @@ public class BFSTraversals {
         } 
     } 
   
-    /* Print nodes at the given level */
-    static void printGivenLevel (Nodee root ,int level) 
-    { 
-        if (root == null) 
-            return; 
-        if (level == 1) 
-            System.out.print(root.val + " "); 
-        else if (level > 1) 
-        { 
-            printGivenLevel(root.left, level-1); 
-            printGivenLevel(root.right, level-1); 
-        } 
-    } 
+
       
     //199. Binary Tree Right Side View   #*
     public List<Integer> rightSideView(TreeNode root) {
