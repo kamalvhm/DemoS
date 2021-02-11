@@ -67,7 +67,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands: " + numIslandsIterativeDFS(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -102,6 +102,7 @@ public class Dummy {
 		int count =0;
 		int h=grid.length;
 		int l=grid[0].length;
+		
 		for(int i=0;i<h;i++) {
 			for(int j=0;j<l;j++) {
 				if(grid[i][j]=='1') {
@@ -120,31 +121,6 @@ public class Dummy {
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count =0;
-		Stack<int[]> st=new Stack<>();
-		int h=grid.length;
-		int l=grid[0].length;
-		
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<l;j++) {
-				if(grid[i][j]=='1') {
-					st.push(new int [] {i,j});
-					grid[i][j]='0';
-					while(!st.isEmpty()) {
-						int[] cur=st.pop();
-						for(int [] dir:direction) {
-							int r=cur[0]+dir[0];
-							int c=cur[1]+dir[1];
-							
-							if(r>=0 && c>=0 && r<h && c<l && grid[r][c]=='1') {
-								st.push(new int [] {r,c});
-								grid[r][c]='0';
-							}
-						}
-					}
-					count++;
-				}
-			}
-		}
 		
 		return count;
 
@@ -154,6 +130,8 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
+		
+			
 		
 	}
 	

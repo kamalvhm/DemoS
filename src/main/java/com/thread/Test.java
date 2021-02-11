@@ -3,8 +3,10 @@ package com.thread;
 public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
+		//Below are two ways to create Thread in java 
+		//1)extending Thread Class 
+		//2)implement Runnable Interface (Required Thread class instance)
 		ThreadExtend t1=new ThreadExtend();
 		t1.start();
 		

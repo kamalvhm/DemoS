@@ -1,4 +1,7 @@
 package com.datastructure;
+
+import com.beans.TreeNode;
+
 public class BinarySearchTree<T extends Comparable<T>> {
 
   // Tracks the number of nodes in this BST
@@ -378,4 +381,51 @@ public class BinarySearchTree<T extends Comparable<T>> {
        
      return node; 
  } 
+ 
+ //669. Trim a Binary Search Tree
+ public TreeNode trimBST(TreeNode root, int L, int R) {
+	    if (root == null) {
+	        return null;
+	    }
+	    if ((int)root.val >= L && (int)root.val <= R) {
+	        root.left = trimBST(root.left, L, R);
+	        root.right = trimBST(root.right, L, R);
+	    } else if ((int)root.val < L) {
+	        root = trimBST(root.right, L, R);
+	    } else if ((int)root.val > R) {
+	        root = trimBST(root.left, L, R);
+	    }
+	    return root;
+	}
+ //1038. Binary Search Tree to Greater Sum Tree
+ int sum=0;
+ public TreeNode bstToGst(TreeNode root) {
+     Stack<TreeNode> st = new Stack<>();
+		TreeNode current = root;
+
+		while (!st.isEmpty() || current != null) {
+			if (current != null) {
+				st.push(current);
+				current = current.right;
+			} else {
+			 TreeNode node = st.pop();
+             sum+=(int)node.val;
+             node.val=sum;
+				current = node.left;
+			}
+
+		}
+     return root;
+ }
+ //alternate solution  reverse of inorder in both solutions
+ public TreeNode bstToGst2(TreeNode root) {
+     if(root==null)
+         return null;
+      bstToGst2(root.right);
+      sum+=(int)root.val;
+      root.val=sum;
+      bstToGst2(root.left);
+      return root;
+      
+  }
 }

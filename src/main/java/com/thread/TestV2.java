@@ -35,7 +35,7 @@ public class TestV2 {
 
 		Scanner sc=new Scanner(System.in);
 		sc.nextLine();
-		
+		//so main thread changing this variable on Press of Enter but thread might cached that variable so volatile is used 
 		p.shutdown();
 		
 		
