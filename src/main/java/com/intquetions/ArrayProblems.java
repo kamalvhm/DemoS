@@ -247,6 +247,29 @@ public class ArrayProblems {
 	        return slow;
 	    }
 		    
-     //41. First Missing Positive
+     //41. First Missing Positive  O(1) space TC is O(n).
+	  public int firstMissingPositive(int[] nums) {
+		     for(int i=0; i<nums.length; ){
+		            int indexNum = nums[i] - 1;
+					
+					// if number is in range and is not a duplicate (basically swap index position to place it to its correct index means 3
+		            //will go to third index) if its on correct position or greater then i++
+		            if(indexNum >= 0 && indexNum < nums.length && nums[i] != nums[indexNum])
+		                swap(nums, i, indexNum);
+		            else i++;
+		        }
+		        
+		        for(int i=0; i < nums.length; i++){
+		            if(nums[i] - 1 != i)
+		                return i + 1;
+		        }
+		        return nums.length + 1;
+		  }
+		    
+		    public void swap(int nums[],int i,int j){
+		        int temp=nums[i];
+		        nums[i]=nums[j];
+		        nums[j]=temp;
+		    }
 
 }

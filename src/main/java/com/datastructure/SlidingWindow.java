@@ -52,10 +52,14 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 		
 		String s2="abaccab";
 		System.out.println("12) Pick Toys :--"+pickToys(s2));
+		
+		String s3="TOTMTAPTAT";
+		String t="TTA";//return subString size minwindow which contain all letters of t string(atleast) no matter countineus or discontinues;
+		System.out.println("MinWindSubString:--->>"+minWindowSubString(s3,t));
+		
 
 
 	}
-	
 
 
 	public static List<int[]> triplet(int[] n,int winS,int target) {   //## #WINDOW SIZE  KNOWN ###
@@ -475,5 +479,43 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 			}
 		}
 		return max;
+	}
+	//https://www.youtube.com/watch?v=iwv1llyN6mo
+	private static int minWindowSubString(String s, String t) {
+		HashMap<Character,Integer> map=new HashMap<>();
+		
+		for(char c:t.toCharArray()) 
+			map.put(c,map.getOrDefault(c, 0)+1);
+		
+		int i=0,j=0;
+		int count=map.size();
+		int windowSize=Integer.MAX_VALUE;
+		while(j<s.length()) {
+			char c=s.charAt(j);
+			if(map.containsKey(c)) {
+				int val=map.get(c);
+				map.put(c, --val);
+				if(map.get(c)==0)
+					count--;
+			}
+			if(count>0)
+				j++;
+			else if(count==0) {
+			windowSize=Math.min(windowSize,j-i+1);
+			while(count==0) {
+				char ch=s.charAt(i);
+				if(map.containsKey(ch)) {
+					int val=map.get(c);
+					map.put(c, ++val);
+					if(map.get(c)>0)
+						count++;
+				}
+				i++;
+			}
+				j++;
+			}
+		}
+		
+		return windowSize;
 	}
 }

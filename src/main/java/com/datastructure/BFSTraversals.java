@@ -2,9 +2,11 @@ package com.datastructure;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 import com.beans.TreeNode;
 
@@ -142,4 +144,129 @@ public class BFSTraversals {
         }
         return result;
     }
+    
+    //301. Remove Invalid Parentheses | BFS solution
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> ans =new ArrayList<>();
+        if(s==null) return ans;
+        Queue<String> queue=new LinkedList<>();
+        Set<String> set=new HashSet<>();
+        boolean found=false;
+        queue.add(s);
+        set.add(s);
+        while(!queue.isEmpty()){
+            String current=queue.poll();
+            if(isValid(current)){
+                found=true;
+                ans.add(current);
+            }
+            if(found)continue;
+            
+            for(int i=0;i<current.length();i++){
+                if(current.charAt(i)!='(' && current.charAt(i)!=')')continue;
+                String temp=current.substring(0,i)+current.substring(i+1);
+                if(!set.contains(temp)){
+                    queue.add(temp);
+                    set.add(temp);
+                }
+            }
+        }
+        return ans;
+    }
+    //checking if all paranthesis is valid 
+    public boolean isValid(String s){
+        int count=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='(')
+                count++;
+            if(s.charAt(i)==')' && count--==0)
+                return false;
+                
+        }
+        return count==0;
+    }
+    
+    //1091. Shortest Path in Binary Matrix
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int h=grid.length-1;
+        int l=grid[0].length-1;
+        if(grid[0][0]==1 || grid[h][l]==1)return -1;
+
+        Queue<Point> q=new LinkedList();
+        q.add(new Point(0,0));
+        int level=0;
+        while(!q.isEmpty()){
+            int size=q.size();
+            while(size-->0){
+                Point head=q.poll();
+                int x=head.x;
+                int y=head.y;
+                
+                if(x==h && y==l){
+                    return level+1;
+                }
+                if(x<0 || y<0 || x>h || y>l || grid[x][y]>=1)
+                    continue;
+                grid[x][y]=2;
+                q.offer(new Point(x-1,y));
+                q.offer(new Point(x+1,y));
+                q.offer(new Point(x,y-1));
+                q.offer(new Point(x,y+1));
+                    
+                q.offer(new Point(x-1,y-1));
+                q.offer(new Point(x-1,y+1));
+                q.offer(new Point(x+1,y-1));
+                q.offer(new Point(x+1,y+1));
+
+            }
+            level++;
+        }
+        return -1; 
+    }
+    
+
+
+public class Point{
+    int x,y;
+
+    public Point(int x ,int y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+//Same Above  | https://www.youtube.com/watch?v=nmzxJDqgabg&list=PL1MJrDFRFiKbU7XYNy5WMU2Ci_x3Gbt2S&index=8 | check video for levelby loop
+public int shortestPathBinaryMatrix2(int[][] grid) {
+    int h=grid.length;
+    int l=grid[0].length;
+    if(grid[0][0]==1 || grid[h-1][l-1]==1)return -1;
+    int level=1;
+    Queue<int[]> q=new LinkedList<>();
+    q.offer(new int[]{0,0});
+    while(!q.isEmpty()){
+      int levelSize = q.size();
+	for (int i = 0; i < levelSize; i++) { //levelby loop
+        int []cur =q.poll();
+        
+        if(cur[0]==h-1 && cur[1]==l-1)
+            return level;
+        
+        for(int []dir:directions){
+            int r=cur[0]+dir[0];
+            int c=cur[1]+dir[1];
+            
+            if(r>=0 && c>=0 && r<h && c<l && grid[r][c]==0){
+                grid[r][c]=1;
+                q.offer(new int[]{r,c});
+            }
+        }
+    }
+    level++;
+    }
+    
+  return -1;  
+}
+
+public static final int[][] directions ={{1,0},{-1,0},{0,1},{0,-1},{-1,-1},{-1,1},{1,1},{1,-1}};
+
 }

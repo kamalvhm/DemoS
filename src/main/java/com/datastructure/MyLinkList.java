@@ -285,6 +285,57 @@ public class MyLinkList<T> {
 	            return b;
 	        }
 	    }
+	    
+	    //FAANG  | 138. Copy List with Random Pointer |https://www.youtube.com/watch?v=u0ICrnHaSg4 | https://github.com/Sunchit/Coding-Decoded/blob/master/February2021/CopyListwithRandomPointer.java
+	   /* public Node copyRandomList(Node head) {
+	        if(head==null) return null; 
+	        //Step 1:- Duplicate all nodes 1->1 
+	            Node temp=head;
+	           while(temp!=null){
+	               Node nextOfTemp=temp.next;
+	               Node duplicate=new Node(temp.val);
+	               duplicate.next=temp.next;                        
+	               temp.next=duplicate;
+	               temp=nextOfTemp;
+	           }
+	        //Step 2:-point duplicate random to actual nodes randoms duplicate 
+	        temp=head;
+	        Node newTemp=temp.next;
+	        Node newHead=head.next;
+	        while(temp!=null){
+	        if(temp.random!=null)
+	            newTemp.random=temp.random.next;
+	            
+	            temp=newTemp.next;
+	        if(temp!=null)
+	            newTemp=temp.next;
+	        }
+	        //Step 3:-create two linkList by seperating duplicate with actuals list
+	        temp=head;
+	        newTemp=temp.next;
+	        while(temp!=null){
+	            temp.next=newTemp.next;
+	            temp=temp.next;
+	            if(temp!=null){
+	                newTemp.next= temp.next;
+	                newTemp=temp.next;  
+	            }
+	        
+	        }
+	        return newHead;
+	    }
+	    
+	    class Node {
+    int val;
+    Node next;
+    Node random;
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+	    */
 }
 
 

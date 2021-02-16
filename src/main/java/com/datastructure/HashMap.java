@@ -27,10 +27,14 @@ class Entry1<K, V> {
 public class HashMap<K,V> {
 	private LinkedList<Entry1<K,V>>[] map;
 	private int size=0;
-	private int capacity=16;
+	private int capacity;
+	private int threshold;
 	
 	public HashMap() {
+		capacity=16;
 		map=new LinkedList[capacity];
+		threshold=(int)(0.75*capacity);
+		size=0;
 	}
 	
 	
@@ -60,7 +64,8 @@ private V insertBucket(int bucketIndex,Entry1<K,V> Entry1) {
     Entry1<K,V> exiting=seekEntry1(bucketIndex,Entry1.key);
     if(exiting==null) {
     	bucket.add(Entry1);
-    	size++;
+        if (++size > threshold) resizeTable();
+    	//size++;
     	return null;
     }else {
     	 V oldVal = exiting.value;
@@ -95,15 +100,46 @@ public Entry1<K, V> get(K key) {
 	return null;
 }
 	
+public void remove(K key) {
+	   int bucketIndex=getBucketIndex(key.hashCode());
+	   Entry1<K,V> e =seekEntry1(bucketIndex,key);
+	   if(e!=null)
+	   {
+	       LinkedList<Entry1<K,V>> list=map[bucketIndex];
+	       list.remove(e);
+	       --size;
+	   }
+	}
 
 public static void main(String args[]) {
 	HashMap<Integer,String> map =new HashMap<>();
-	for(int i=0;i<10;i++)
+	for(int i=0;i<14;i++)
 		map.put(i,"a"+i);
 	
 	for(int i=0;i<10;i++)
 	System.out.println(map.get(i).value);
 }
 	
+private void resizeTable() {
+	capacity=2*capacity;
+	threshold=(int)(0.75*capacity);
+	LinkedList<Entry1<K,V>>[] newTable=new LinkedList[capacity];
+	
+	for(int i=0;i<map.length;i++) {
+		if(map[i]!=null) {
+			for(Entry1<K, V> e:map[i]) {
+				int bucketIndex=getBucketIndex(e.hash);
+				LinkedList<Entry1<K,V>> exitingList=newTable[i];
+				if(exitingList==null)newTable[bucketIndex]=exitingList=new LinkedList<>();
+				exitingList.add(e);
+			}
+			map[i].clear();
+			map[i]=null;
+		}
+	}
+	map = newTable;
+}
+
+
 
 }

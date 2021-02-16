@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
+//Thread Pools are way to manage lots of threads at same time 
 class Processor2 implements Runnable{
 	private int id;
 	
@@ -34,16 +34,16 @@ public class TestV5ExecutorFr {
 		
 		ExecutorService e=Executors.newFixedThreadPool(2);
 		for(int i=0;i<10;i++) {
-			e.submit(new Processor2(i));
+			e.submit(new Processor2(i)); //submit returns future object where execute directly starts 
 
 		}
-		e.shutdown();
+		e.shutdown();//after this executor service won't accept new tasks and shutdown once done
 		
 		System.out.println("SUBMITTED!!!!!");
 
 		
 		try {
-			e.awaitTermination(1, TimeUnit.HOURS);
+			e.awaitTermination(1, TimeUnit.HOURS);//to wait for all task to complete in service wait for one Hour
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

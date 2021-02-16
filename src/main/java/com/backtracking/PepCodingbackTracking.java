@@ -64,11 +64,22 @@ public class PepCodingbackTracking {
 	
 	//wordPattern("graphtreegraph", "pep", new HashMap<>(), "pep");
 
-	String str="()())()";
+	/*String str="()())()";
 	int minRem=getMin(str);
-	RemoveInvalidParanthesis(str,minRem,new HashSet<>());
+	RemoveInvalidParanthesis(str,minRem,new HashSet<>());*/
+/*	int []boxes=new int[4];
+	printPermutationUsingBackTrack(boxes, 1, 2);*/
+	/*int nBoxes=4,rItems=2;
+	
+	combination(1, nBoxes, 0, rItems, "");*/
+	HashMap<Character,Integer> map=new HashMap<>();
+	map.put('a', 2);
+	map.put('b', 2);
+	generateWords(0,4,map,"");
 	}
 	
+	
+
 	public static void knightTour(int [][] chess,int r,int c,int move) {
 		if(r<0 || c<0 || r>=chess.length || c>=chess[0].length || chess[r][c]>0)
 			return;
@@ -469,6 +480,88 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 			set2.remove(set2.size() - 1);
 		}
 	}
+	/**------PERMUTATION COMBINATION STARTS----*/
+	// ARRAGE total item (r) int n boxes where ci is current item |https://www.youtube.com/watch?v=QKkHCS5bq0I&list=PL-Jc9J83PIiHO9SQ6lxGuDsZNt2mkHEn0&index=19
+	public static void printPermutationUsingBackTrack(int []boxes,int ci,int ti) {
+		if(ci>ti) {
+			for(int i=0;i<boxes.length;i++)
+				System.out.print(boxes[i]);
+			System.out.println("");
+			return;
+		}
+		
+		for(int i=0;i<boxes.length;i++) { //Boxes are OPTION Here
+			if(boxes[i]==0) {
+				boxes[i]=ci;
+				printPermutationUsingBackTrack(boxes, ci+1, ti);
+				boxes[i]=0;
+			}
+		}
+		
+	}
+	//cb=currentBoxs tb=totalBoxes,ssf=selectionSofar ,ts =total seletions
+	public static void combination(int cb, int tb,int ssf,int ts,String asf) {
+		if(cb>tb) {
+			if(ssf==ts) {
+				System.out.println(asf);
+			}
+			return;
+		}
+		combination(cb+1,tb,ssf+1,ts,asf+"i");//yes call
+		combination(cb+1,tb,ssf,ts,asf+"-");//no call
+	}	
+	public static void permutation(int cb, int tb,int []items,int ssf,int ts,String asf) {
+		if(cb>tb) {
+			if(ssf==ts) {
+				System.out.println(asf);
+			}
+			return;
+		}
+		for(int i=0;i<ts;i++) { //ITEMs Are Option here and boxes are on levels
+			if(items[i]==0) {
+				items[i]=1;
+				permutation(cb+1, tb, items, ssf+1, ts, asf+(i+1));
+				items[i]=0;
+			}
+		}
+		permutation(cb+1, tb, items, ssf, ts, asf+0);
+
+	}
+	//In this code we are making combination from permutaion code by eliminating extra branches of tree (criteria is to eliminate which is having non increasing order)
+	public static void combination2(boolean [] boxes,int ci,int ti,int lb) {
+		
+		if(ci>ti) {
+			for(int i=0;i<boxes.length;i++) {
+				if(boxes[i])
+					System.out.print("i");
+				else System.out.print("-");
+			}
+			System.out.println("");
+			return;
+		}
+		for(int b=lb+1;b<boxes.length;b++) { //Boxes are on option
+			if(!boxes[b]) {
+				boxes[b]=true;
+				combination2(boxes, ci+1, ti, b);
+				boxes[b]=false;
+			}
+		}
+	}
 	
+	private static void generateWords(int cs,int ts,HashMap<Character,Integer> map,String asf) {
+		if(cs>ts) {
+			System.out.print(asf);
+			return;
+		}
+		for(char ch:map.keySet()) {
+			int val=map.get(ch);
+			if(val>0) {
+				map.put(ch, --val);
+				generateWords(cs+1,ts,map,asf+ch);
+				map.put(ch, val+1);
+			}
+		}
+		
+	}
 
 }

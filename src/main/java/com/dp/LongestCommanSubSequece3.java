@@ -385,7 +385,7 @@ public class LongestCommanSubSequece3 {
 					max=Math.max(max, t[i][j]);
 				}else {
 					// Else copy the previous value in the 
-					t[i][j]=t[i][j-1]; //Only change from LIS (As we need subString from x so only one condition applied here )
+					t[i][j]=t[i][j-1]; //Only change from LCS (As we need subString from x so only one condition applied here )
 				}
 			}
 		}
@@ -507,7 +507,7 @@ public class LongestCommanSubSequece3 {
 
         return dp[n][m];
     }
-//Wildcard Matching recusrsive 
+	//Wildcard Matching recusrsive 
 	 public static int solve(String s, String p,int i,int j,int[][]dp){
 	        if(dp[i][j]!=-1) return dp[i][j];
 	        if(i==s.length() && j==p.length())return 1;

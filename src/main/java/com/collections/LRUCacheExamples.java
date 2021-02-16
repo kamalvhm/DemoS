@@ -2,6 +2,7 @@ package com.collections;
 
 public class LRUCacheExamples {
 	//https://www.geeksforgeeks.org/design-a-data-structure-for-lru-cache/
+	//Also bit complex :-https://www.geeksforgeeks.org/lru-cache-implementation/
 	public static void main(String[] args) {
 		//Brute force :- we can have a array of Node(key,value,time_stamp) to get we can traverse and compare key and return O(n) 
 		//to set we if array is full we can check least time_stamp and replace that element if not full we can add at the end O(n) to set also

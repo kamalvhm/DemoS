@@ -2,6 +2,7 @@ package com.datastructure;
 
 import java.util.ArrayDeque;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -54,7 +55,6 @@ public class Queue<T> implements Iterable{
 		PriorityQueue<Integer> maxPQ1 = new PriorityQueue<>((a,b) -> b - a); 
 		//Method 3:
 		PriorityQueue<Integer> maxPQ2 = new PriorityQueue<>((a,b) -> b.compareTo(a)); 
-		
 		
 		//Max heap by deafult it min heap
 		 PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>((a,b)->b-a); 

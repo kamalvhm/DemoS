@@ -383,20 +383,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
  } 
  
  //669. Trim a Binary Search Tree
- public TreeNode trimBST(TreeNode root, int L, int R) {
-	    if (root == null) {
-	        return null;
-	    }
-	    if ((int)root.val >= L && (int)root.val <= R) {
-	        root.left = trimBST(root.left, L, R);
-	        root.right = trimBST(root.right, L, R);
-	    } else if ((int)root.val < L) {
-	        root = trimBST(root.right, L, R);
-	    } else if ((int)root.val > R) {
-	        root = trimBST(root.left, L, R);
-	    }
-	    return root;
-	}
+ //https://www.youtube.com/watch?v=JNAqFV9AgVc
+ public TreeNode trimBST(TreeNode root, int low, int high) {
+  if (root == null) {
+      return null;
+  }
+  if((int)root.val<low){ //then ans will be in right coz of property of BST all left will be smaller
+      return trimBST(root.right,low,high);
+  }else if((int)root.val>high){ //ans will be on right
+      return trimBST(root.left,low,high);
+  }
+  //if both above is not true then root is the answer with updated left and right sub-tree
+    root.left=trimBST(root.left,low,high);
+    root.right=trimBST(root.right,low,high);
+      
+  return root;
+}
  //1038. Binary Search Tree to Greater Sum Tree
  int sum=0;
  public TreeNode bstToGst(TreeNode root) {
