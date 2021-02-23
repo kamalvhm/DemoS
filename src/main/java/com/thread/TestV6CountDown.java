@@ -5,7 +5,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
+//It lets one or more thread wait until latch reaches to 0 once iits zero one or more thread can resume 
+//it a way of inter thread communication
 class Processor3 implements Runnable{
 	CountDownLatch latch;
 	

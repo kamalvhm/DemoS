@@ -2,11 +2,11 @@ package com.datastructure;
 
 import java.util.ArrayDeque;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.PriorityQueue;
 //STUDY:-https://www.geeksforgeeks.org/queue-interface-java/
 //https://www.geeksforgeeks.org/arraydeque-in-java/
@@ -175,4 +175,5 @@ public class Queue<T> implements Iterable{
 	         }
 	         return q.remove();
 	     }
+	 
 }

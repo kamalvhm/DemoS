@@ -100,30 +100,19 @@ public class Dummy {
 
 	public static int numIslands(char[][] grid) {
 		int count =0;
-		int h=grid.length;
-		int l=grid[0].length;
 		
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<l;j++) {
-				if(grid[i][j]=='1') {
-					DFS(grid,i,j);
-					count++;
-				}
-			}
-		}
 		
 		return count;
 		
 	}
     private static void DFS(char[][] grid, int r, int c) {
-    	
+    
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
-		int count =0;
+		int count = 0;
 		
 		return count;
-
 	}
     
     public static int[][] direction= {{1,0},{-1,0},{0,1},{0,-1}};
@@ -131,19 +120,16 @@ public class Dummy {
 
 	private static void bfs(TreeNode tree) {
 		
-			
 		
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
-		 List<List<Integer>> result=new ArrayList<>();
-		
+		 List<List<Integer>> result=new ArrayList<>();	
 			
 		return result;
 	 }
 
 	private static void inorderWithout(TreeNode tree) {
-		
 		
 	}
 	

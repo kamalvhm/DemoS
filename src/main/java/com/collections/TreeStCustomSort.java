@@ -1,6 +1,7 @@
 package com.collections;
 
 import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.TreeSet;
 
 public class TreeStCustomSort {
@@ -46,8 +47,20 @@ public class TreeStCustomSort {
 		t3.add(new StringBuffer("roli"));
 		System.out.print(t3);
 		
-		
-		
+		//PriorityQueue Also can be used
+		PriorityQueue<String> queue = new PriorityQueue<>(new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				int val1=o1.length();
+				int val2=o2.length();
+				if(val1>val2)
+					return -1;
+				if(val2>val1)
+					return 1;
+				else return o1.compareTo(o2);
+			}
+		});
 		
 		 
 	}

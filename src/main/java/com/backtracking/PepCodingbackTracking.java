@@ -68,14 +68,17 @@ public class PepCodingbackTracking {
 	int minRem=getMin(str);
 	RemoveInvalidParanthesis(str,minRem,new HashSet<>());*/
 /*	int []boxes=new int[4];
-	printPermutationUsingBackTrack(boxes, 1, 2);*/
+	printPermutation(boxes, 1, 2);*/
 	/*int nBoxes=4,rItems=2;
 	
 	combination(1, nBoxes, 0, rItems, "");*/
-	HashMap<Character,Integer> map=new HashMap<>();
+/*	HashMap<Character,Integer> map=new HashMap<>();
 	map.put('a', 2);
 	map.put('b', 2);
-	generateWords(0,4,map,"");
+	generateWords(0,4,map,"");*/
+	
+	int [] coins= {2,3,5,6,7};
+	coinChange(coins, 12, 0, "");
 	}
 	
 	
@@ -481,8 +484,9 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 		}
 	}
 	/**------PERMUTATION COMBINATION STARTS----*/
+	//Item are ditinct{1,2,3}
 	// ARRAGE total item (r) int n boxes where ci is current item |https://www.youtube.com/watch?v=QKkHCS5bq0I&list=PL-Jc9J83PIiHO9SQ6lxGuDsZNt2mkHEn0&index=19
-	public static void printPermutationUsingBackTrack(int []boxes,int ci,int ti) {
+	public static void printPermutation(int []boxes,int ci,int ti) {
 		if(ci>ti) {
 			for(int i=0;i<boxes.length;i++)
 				System.out.print(boxes[i]);
@@ -490,10 +494,10 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 			return;
 		}
 		
-		for(int i=0;i<boxes.length;i++) { //Boxes are OPTION Here
+		for(int i=0;i<boxes.length;i++) { //Boxes are OPTION Here and ITEM are LEVELS
 			if(boxes[i]==0) {
 				boxes[i]=ci;
-				printPermutationUsingBackTrack(boxes, ci+1, ti);
+				printPermutation(boxes, ci+1, ti);
 				boxes[i]=0;
 			}
 		}
@@ -510,25 +514,27 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 		combination(cb+1,tb,ssf+1,ts,asf+"i");//yes call
 		combination(cb+1,tb,ssf,ts,asf+"-");//no call
 	}	
-	public static void permutation(int cb, int tb,int []items,int ssf,int ts,String asf) {
+	//https://www.youtube.com/watch?v=NWFpebVkmTI&list=PL-Jc9J83PIiHO9SQ6lxGuDsZNt2mkHEn0&index=21
+	//ts is means how many items are there ||PERMUTATION FROM COMBINATION||||
+	public static void permutationUsingCombination(int cb, int tb,int []items,int ssf,int ts,String asf) {
 		if(cb>tb) {
 			if(ssf==ts) {
 				System.out.println(asf);
 			}
 			return;
 		}
-		for(int i=0;i<ts;i++) { //ITEMs Are Option here and boxes are on levels
+		for(int i=0;i<ts;i++) { //ITEMs Are Option here and BOXES are on levels
 			if(items[i]==0) {
-				items[i]=1;
-				permutation(cb+1, tb, items, ssf+1, ts, asf+(i+1));
+				items[i]=1;// 1 means items is used Items are tells which item is used 
+				permutationUsingCombination(cb+1, tb, items, ssf+1, ts, asf+(i+1));//increase current box one selected so ssf+1
 				items[i]=0;
 			}
 		}
-		permutation(cb+1, tb, items, ssf, ts, asf+0);
+		permutationUsingCombination(cb+1, tb, items, ssf, ts, asf+0);//Box is not letting sit anyone  asf+0 means no one sitting on spot
 
 	}
 	//In this code we are making combination from permutaion code by eliminating extra branches of tree (criteria is to eliminate which is having non increasing order)
-	public static void combination2(boolean [] boxes,int ci,int ti,int lb) {
+	public static void combinationUsingPermutation(boolean [] boxes,int ci,int ti,int lb) {//lb is lastbox pos
 		
 		if(ci>ti) {
 			for(int i=0;i<boxes.length;i++) {
@@ -539,15 +545,15 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 			System.out.println("");
 			return;
 		}
-		for(int b=lb+1;b<boxes.length;b++) { //Boxes are on option
+		for(int b=lb+1;b<boxes.length;b++) { //Boxes are on option  || To maintain increasing order lb+1 
 			if(!boxes[b]) {
 				boxes[b]=true;
-				combination2(boxes, ci+1, ti, b);
+				combinationUsingPermutation(boxes, ci+1, ti, b);
 				boxes[b]=false;
 			}
 		}
 	}
-	
+	//Generate No from aabb Box are on level
 	private static void generateWords(int cs,int ts,HashMap<Character,Integer> map,String asf) {
 		if(cs>ts) {
 			System.out.print(asf);
@@ -562,6 +568,373 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 			}
 		}
 		
+	}
+	//item On level  
+	private static void generateWords2(int cc,String str,Character[]  spots,HashMap<Character,Integer> lastOccurentce) {
+		if(cc==str.length()) {
+			for(int i=0;i<spots.length;i++) {
+				System.out.print(spots[i]);
+			}
+			return;
+		}
+		
+		char ch =str.charAt(cc);
+		int lo=lastOccurentce.get(ch); //its because to avoid duplicate so new a will occur only after 
+		for(int i =lo+1;i<spots.length;i++) {
+			if(spots[i]==null) {
+				spots[i]=ch;
+				lastOccurentce.put(ch, i);
+				generateWords2(cc+1, str, spots, lastOccurentce);
+				spots[i]=null;
+				lastOccurentce.put(ch, lo);
+			}
+		}
+	}
+	//https://leetcode.com/problems/maximum-swap/
+	static String max;
+	private static void largestNoAfterKSwap(String str,int k) {
+		if(Integer.parseInt(str)>Integer.parseInt(max))
+			max=str;
+		if(k==0) {
+			return;
+		}
+		for(int i=0;i<str.length()-1;i++) {//not going to last as i must be always before j
+			for(int j=i+1;j<str.length();j++) {
+				if(str.charAt(j)>str.charAt(i)) {
+					String swp=swap(str,i,j);
+					largestNoAfterKSwap(swp,k-1);
+					//No need to remove string as swaped str in new String original didn't change so no revert either
+				}
+			}
+		}
+	}
+	
+	private static String swap(String str,int i,int j) {
+		char ith=str.charAt(i);
+		char jth=str.charAt(j);
+		String left=str.substring(0,i);
+		String middle=str.substring(i+1,j);
+		String right=str.substring(j+1);
+
+		return left+jth+middle+ith+right;
+	}
+	//Q. in "aabbbccdde" print all ways you can select distinct char from ip string create distinct chars in hashmap and str
+	public static void WordsKSelection(int cb,int ssf,int ts,String asf,String str) {
+		if(cb==str.length()) {
+			if(ssf==ts) {
+				System.out.println(asf);
+			}
+
+			return;
+		}
+		WordsKSelection(cb+1, ssf+0, ts, asf+"", str);
+		WordsKSelection(cb+1, ssf+1, ts, asf+str.charAt(cb),str);
+	}
+	//Items on level str will contain all uniq chars cs =1,ts=2,lc =-1
+	public static void WordsKSelection2(String str,int cs,int ts,int lc,String asf) {
+		if(cs>ts) {
+			System.out.print(asf);
+			return;
+		}
+		
+		for(int b=lc+1;b<str.length();b++) {
+			char ch =str.charAt(b);
+			WordsKSelection2(str, cs+1, ts, b, asf+ch);
+		}
+	}
+	//str have uniq chars 
+	public static void kLengthWord(int cc,String  str,int ssf,int ts,Character []spots) {
+		if(cc==str.length()) {
+			if(ssf==ts) {
+				for(char c:spots)
+					System.out.print(c);
+				System.out.println();
+
+			}
+			return;
+		}
+		
+		char ch=str.charAt(cc);
+		for(int i=0;i<spots.length;i++) {
+			if(spots[i]==null) {
+				spots[i]=ch;
+				kLengthWord(cc+1, str, ssf+1, ts, spots);
+				spots[i]=null;
+			}
+		}
+		kLengthWord(cc+1, str, ssf, ts, spots);
+	}
+	
+	public static void kLengthWord2(int cs,int ts,String str,HashSet<Character> used,String asf) {
+		if(cs>ts) {
+			System.out.print(asf);
+			return;
+		}
+		
+		for(int i=0;i<str.length();i++) {
+			char ch=str.charAt(i);
+			if(!used.contains(ch)) {
+				used.add(ch);
+				kLengthWord2(cs+1, ts, str, used, asf+ch);
+				used.remove(ch);
+			}
+		}
+	}
+	//Combination Approach BOX on LEVEL
+	public static void queenCombination(int qpsf,int tq,int row,int col,String asf) {
+		if(row==tq) {
+			if(qpsf==tq)
+			 System.out.println(asf);
+			return;
+		}
+		int nr=0;
+		int nc=0;
+		String yasf="";//yes ans so far 
+		String nasf="";//no ans so far 
+		if(col==tq-1) {
+			nr=row+1;
+			nc=0;
+			yasf=asf+"q\n";
+			nasf=asf+"-\n";
+		}else {
+			nr=row;
+			nc=col+1;
+			yasf=asf+"q";
+			nasf=asf+"-";
+		}
+		queenCombination(qpsf+1,tq,nr,nc,yasf);
+		queenCombination(qpsf+0,tq,nr,nc,nasf);
+	}
+	
+	//V-31 here QUEEN ON LEVEL AND CHESS BOARD(BOX) ON OPTION
+	public static void queenPermutation(int qpsf,int tq,int [][] chess) {
+		if(qpsf==tq) {
+			for(int i=0;i<chess.length;i++) {
+				for(int j=0;j<chess[0].length;j++) {
+					System.out.print(chess[i][j]+"\t");
+				}
+				System.out.println();
+			}
+			System.out.println();
+			return;
+		}
+		for(int i=0;i<chess.length;i++) {
+			for(int j=0;j<chess[0].length;j++) {
+				if(chess[i][j]==0) {
+					chess[i][j]=qpsf+1;
+					queenPermutation(qpsf+1, tq, chess);
+					chess[i][j]=0;
+				}
+			}
+		}
+	}
+	//V-32 Here BOARD(BOX) ON LEVEL and QUEEN Is OPTION
+	public static void queenPermutation2(int qsf,int tq,int row,int col,String asf,boolean [] queens) {
+		if(row==tq) {
+			if(qsf==tq) {
+				System.out.print(asf);
+			}
+			return;
+		} 
+		int nr=0;
+		int nc=0;
+		
+		if(col==tq-1) {
+			nr=row+1;
+			nc=0;
+		}else {
+			nr=row;
+			nc=col+1;
+		}
+				
+		
+		for(int i=0;i<queens.length;i++) {
+			if(!queens[i]) {
+				queens[i]=true;
+				queenPermutation2(qsf+1, tq, nr, nc, asf+"q"+i+1, queens);
+				queens[i]=false;
+			}
+		}
+		queenPermutation2(qsf+0, tq, nr, nc, asf+"q-", queens);
+
+	}
+	//i =0 and j=-1 BOX(Chess) is OPTION and Queens are on Level (OPTION DIVIDED IN TWO PARTS BUT FOR CURRENT ROW (partially filled) and ALL OTHER ROWS)
+	public static void queenCombination2(int qpsf,int tq,boolean [][] chess,int i,int j) {
+		if(qpsf>tq) {
+			for(int row=0;row<chess.length;row++) {
+				for(int col=0;col<chess[i].length;col++) {
+					System.out.print(chess[row][col]);
+				}
+				System.out.println();
+			}
+			System.out.println();
+			return;
+		}
+		for(int col=j+1;col<chess.length;col++) {//loop for current row
+			chess[i][col]=true;
+			queenCombination2(qpsf+1, tq, chess, i,col);
+			chess[i][col]=false;
+		}
+		for(int row=i+1;row<chess.length;row++) {//loop for rest all row
+			for(int col=0;col<chess[i].length;col++) {
+				chess[row][col]=true;
+				queenCombination2(qpsf+1, tq, chess, row,col);
+				chess[row][col]=false;
+			}
+		}
+	}
+	//V-34/V-35(with uncomment) 2D to 1D array CHECK NOTES (TWO SIMPLIFY TWO PARTS ABOVE WE CAN TREET 2D AS 1D)
+	public static void queenCombination3(int qpsf,int tq,boolean [][] chess,int lcno) {
+		if(qpsf>tq) {
+			for(int row=0;row<chess.length;row++) {
+				for(int col=0;col<chess[row].length;col++) {
+					System.out.print(chess[row][col]);
+				}
+				System.out.println();
+			}
+			System.out.println();
+			return;
+		}
+		for(int cell=lcno+1;cell<chess.length*chess.length;cell++) {
+			int row=cell/chess.length;//from 1D to 2D row call formula is row=cell/length col = cell%length 
+			int col=cell%chess.length;//if beck 2D to 1D cellNo= row*length+col;	
+			//isQueenSafe for V-35
+			chess[row][col]=true;
+			queenCombination3(qpsf+1,tq,chess,cell);
+			chess[row][col]=false;
+
+		}
+	}
+	public static boolean isQueenSafe(boolean[][] chess,int  row,int col) {
+		for(int i=row,j=col;i>=0;i--)
+		{
+			if(chess[i][j])
+				return false;
+		}
+		for(int i=row,j=col; j>=0;j--)
+		{
+			if(chess[i][j])
+				return false;
+		}
+		for(int i=row,j=col;i>=0 && j>=0;i--,j--)
+		{
+			if(chess[i][j])
+				return false;
+		}
+		
+		for(int i=row,j=col;i>=0 && j<chess.length;i--,j++)
+		{
+			if(chess[i][j])
+				return false;
+		}
+		return true;
+	}
+	public static boolean isQueenSafe(int[][] chess, int row, int col) {
+        // write your code here
+        int[][] dir={{0,-1},{-1,-1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1}};
+        for(int k=0;k<dir.length;k++){
+            int i=row;
+            int j=col;
+            while(i>=0 && j>=0 && j<chess.length && i<chess.length){
+                if(chess[i][j]!=0){
+                    return false;
+                }
+                j+=dir[k][1];
+                i+=dir[k][0];
+            }
+        }
+        return true;
+    }
+	
+	//V-36
+	public static void NqueenPermutation(int qpsf, int tq, int[][] chess) {
+		if (qpsf == tq) {
+			for (int row = 0; row < chess.length; row++) {
+				for (int col = 0; col < chess[row].length; col++) {
+					System.out.print(chess[row][col]);
+				}
+				System.out.println();
+			}
+			System.out.println();
+			return;
+		}
+		for (int cell = 0; cell < chess.length * chess.length; cell++) {
+			int row = cell / chess.length;
+			int col = cell % chess.length;
+			if (chess[row][col] == 0 && isQueenSafe(chess, row, col)) {
+				chess[row][col] = qpsf + 1;
+				NqueenPermutation(qpsf + 1, tq, chess);
+				chess[row][col] = 0;
+
+			}
+		}
+	}
+	
+	
+	public static void nknight(int kpsf,int tk,boolean[][]chess,int lcno) {
+		if(kpsf>tk) {
+			for(int row=0;row<chess.length;row++) {
+				for(int col=0;col<chess.length;col++){
+					System.out.print(chess[row][col]?"k\t":"-\t");
+				}
+				System.out.println("");
+			}
+			System.out.println("");	
+			return;
+		}
+		
+		for(int i=lcno+1;i<chess.length*chess.length;i++) {
+			int row=i/chess.length;
+			int col=i%chess.length;
+			if(chess[row][col]==false && isKnightSafe(chess,row,col)) {
+				chess[row][col]=true;
+				nknight(kpsf+1, tk, chess, row*chess.length+col);
+				chess[row][col]=false;
+			}
+		}
+	}
+
+	
+	private static boolean isKnightSafe(boolean[][] chess, int i, int j) {
+		if(i-1>=0 && j-2>=0 && chess[i-1][j-2])
+			return false;
+		if(i-2>=0 && j-1>=0 && chess[i-2][j-1])
+			return false;
+		if(i-2>=0 && j+1<chess.length && chess[i-2][j+1])
+			return false;
+		if(i-1>=0 && j+2<chess.length && chess[i-1][j+2])
+			return false;
+		return true;
+	}
+	//Combination appraoch(as ans 5-7 and 7-5 is considered same so combination) no duplicacy in coins
+	public static void coinChange(int [] arr,int sum,int index,String asf) {
+		if(index==arr.length)
+		{	
+			if(sum==0)
+			System.out.println(asf);
+			return;
+		}
+		coinChange(arr, sum-arr[index], index+1,asf+"-"+arr[index]);
+		coinChange(arr, sum, index+1,asf);
+
+	}
+	//same coin can be taken more then once same combination approch
+	public static void coinChange2(int i,int [] coins,int amtsf,int tamt,String asf) {
+		if(i==coins.length)
+		{	
+			if(amtsf==tamt)
+			System.out.println(asf);
+			return;
+		}
+		for(int j=tamt/coins[i];j>=1;j--) {
+			String part="";
+			for(int k=0;k<j;j++) {
+				part+=coins[i]+"-";
+			}
+			coinChange2(i+1, coins, amtsf+coins[i]*j, tamt, asf+part);
+		}
+		coinChange2(i+1, coins, amtsf, tamt, asf);
+
 	}
 
 }

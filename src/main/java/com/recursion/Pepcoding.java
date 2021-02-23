@@ -5,10 +5,17 @@ import java.util.ArrayList;
 import org.apache.spark.sql.catalyst.expressions.Substring;
 
 public class Pepcoding {
+	//EUlar Path explained :-https://www.youtube.com/watch?v=R7qja_gZrvI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=10
+	//Two Types of Recursion
+	//1)Faith and Expectation
+	//2)Levels and Options:-https://www.youtube.com/watch?v=QDBrZFROuA0&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=12
+	//https://www.youtube.com/watch?v=K5xJXbnYMBc&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=42
+	//https://www.youtube.com/watch?v=NEuYcztalew (37)
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int [] c= {2,3,6,9,8,3,2,6,3,4};
+		String str;
 		//System.out.print(firstOccurence(c,0,8));
 		/*int []arr=allIndices(c,3,0,0);
 		for(int a:arr)
