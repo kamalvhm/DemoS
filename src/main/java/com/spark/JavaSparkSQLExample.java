@@ -32,9 +32,9 @@ public class JavaSparkSQLExample {
 		spark.sparkContext().setLogLevel("ERROR");
 
 		runBasicDataFrameExample(spark);
-		runDatasetCreationExample(spark);
-		runInferSchemaExample(spark);
-		runProgrammaticSchemaExample(spark);
+		//runDatasetCreationExample(spark);
+		//runInferSchemaExample(spark);
+		//runProgrammaticSchemaExample(spark);
 
 		spark.stop();
 	}
@@ -145,12 +145,16 @@ public class JavaSparkSQLExample {
 		// Encoders are created for Java beans
 		Encoder<Person> personEncoder = Encoders.bean(Person.class);
 		Dataset<Person> javaBeanDS = spark.createDataset(Collections.singletonList(person), personEncoder);
-		javaBeanDS.show();
+		//javaBeanDS.show();
 		// +---+----+
 		// |age|name|
 		// +---+----+
 		// | 32|Andy|
 		// +---+----+
+		
+		Person p=javaBeanDS.orderBy(col("date")).first();
+		
+			System.out.println("PPPP:-"+p.getDate());
 
 		// Encoders for most common types are provided in class Encoders
 		Encoder<Integer> integerEncoder = Encoders.INT();

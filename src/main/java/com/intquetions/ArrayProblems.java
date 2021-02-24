@@ -2,8 +2,9 @@ package com.intquetions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Set;
 
 
 public class ArrayProblems {
@@ -99,7 +100,7 @@ public class ArrayProblems {
 		        }
 		        return new int []{-1,-1};
 		    }
-		//15. 3Sum      !!TWO POINTER!!
+		//15. 3 Sum      !!TWO POINTER!!
 		  public List<List<Integer>> threeSum(int[] nums) {
 		        //https://www.youtube.com/watch?v=h9F6RFXdwCo&feature=youtu.be
 		       List<List<Integer>> result =new ArrayList<>();
@@ -129,7 +130,56 @@ public class ArrayProblems {
 		        }
 		        return result;
 		    }
-		
+		  
+		  //18. 4Sum
+		  public List<List<Integer>> fourSum(int[] nums, int target) {
+		        
+		        Arrays.sort(nums);
+		        
+		         Set<List<Integer>> map=new HashSet<>();
+		        
+		        for(int i=0;i<nums.length-3;i++){
+		          
+		    
+		            for(int j=i+1;j<nums.length-2;j++){
+		               
+		             int left=j+1;
+		             int right=nums.length-1;
+		                
+		                while(left<right){
+		                    
+		                    int sum =nums[i]+nums[j]+nums[right]+nums[left];
+		                    
+		                    if(sum==target){
+		                        List<Integer> l=new ArrayList<Integer>();
+		                        l.add(nums[i]);
+		                        l.add(nums[j]);
+		                        l.add(nums[left]);
+		                        l.add(nums[right]);
+		                        map.add(l);
+		                        left++;
+		                        right--;
+		                        
+		                        while(left<right && nums[left]==nums[left-1])
+		                            left++;
+		                        
+		                        while(left<right && nums[right]==nums[right+1])
+		                            right--;
+		                        
+		                    }
+		                    
+		                    if(sum<target)
+		                        left++;
+		                    if(sum>target)
+		                        right--;
+		                }
+		            
+		         }  
+		            
+		        }
+		        return new ArrayList(map);
+		        
+		    }
 		//26. Remove Duplicates from Sorted Array #*E
 		 public int removeDuplicates(int[] nums) {
 		       int index=1;
