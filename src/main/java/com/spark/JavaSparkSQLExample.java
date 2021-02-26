@@ -2,6 +2,7 @@ package com.spark;
 
 import static org.apache.spark.sql.functions.col;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,8 +32,8 @@ public class JavaSparkSQLExample {
 		SparkSession spark = SparkSession.builder().appName("Demo").master("local").getOrCreate();
 		spark.sparkContext().setLogLevel("ERROR");
 
-		runBasicDataFrameExample(spark);
-		//runDatasetCreationExample(spark);
+		//runBasicDataFrameExample(spark);
+		runDatasetCreationExample(spark);
 		//runInferSchemaExample(spark);
 		//runProgrammaticSchemaExample(spark);
 
@@ -152,9 +153,9 @@ public class JavaSparkSQLExample {
 		// | 32|Andy|
 		// +---+----+
 		
-		Person p=javaBeanDS.orderBy(col("date")).first();
+		Date p=javaBeanDS.orderBy(col("date")).as(Encoders.DATE()).first();
 		
-			System.out.println("PPPP:-"+p.getDate());
+			System.out.println("PPPP:-"+p);
 
 		// Encoders for most common types are provided in class Encoders
 		Encoder<Integer> integerEncoder = Encoders.INT();

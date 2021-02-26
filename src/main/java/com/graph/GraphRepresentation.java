@@ -1,9 +1,12 @@
 package com.graph;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.graph.FindPathDFS_V2_4.Edge;
+//Check youTube :-
+//Kenny Talks Code
 //Practice :-https://www.pepcoding.com/resources/online-java-foundation/graphs (yah#19)
 //https://www.youtube.com/watch?v=nUgp0RG57wQ&list=PL-Jc9J83PIiHfqDcLZMcO9SsUDY4S3a-v&index=9
 public class GraphRepresentation {
@@ -21,7 +24,7 @@ public class GraphRepresentation {
 
 	public static void main(String[] args) {
 		//adjcency List 
-		int vtces=7;//0,1,2,3,4,5,6
+		/*int vtces=7;//0,1,2,3,4,5,6
 		ArrayList<Edge>[] graph = new ArrayList[vtces];
 		for(int i=0;i<vtces;i++) {
 			graph[i]=new ArrayList<Edge>();
@@ -30,6 +33,17 @@ public class GraphRepresentation {
 		//adding Edges 
 		graph[0].add(new Edge(0, 3, 40));
 		graph[0].add(new Edge(0, 1, 10));
+*/
+		
+		int vtces=2;//0,1,2,3,4,5,6
+		ArrayList<Edge>[] graph = new ArrayList[vtces];
+		for(int i=0;i<vtces;i++) {
+			graph[i]=new ArrayList<Edge>();
+		}
+		
+		//adding Edges 
+		graph[0].add(new Edge(0, 1, 40));
+		graph[0].add(new Edge(1, 0, 10));
 
 	}
 

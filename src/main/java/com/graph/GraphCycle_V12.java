@@ -1,7 +1,7 @@
 package com.graph;
 import java.io.*;
 import java.util.*;
-
+//directed Cycles coloring:-https://www.youtube.com/watch?v=a4hXpeHZ_-c   (10 min onward)
 public class GraphCycle_V12 {
    static class Edge {
       int src;
@@ -81,7 +81,49 @@ public class GraphCycle_V12 {
        }
        return false;
    }
-   
+   //207. Course Schedule  !!!!!!!!!!!DIRECTED GRAPH CYCLY DETECTION !!!!!!!!Check notes and https://www.youtube.com/watch?v=a4hXpeHZ_-c
+   public boolean canFinish(int numCourses, int[][] prerequisites) {
+	      HashMap<Integer,ArrayList<Integer>> map =new HashMap<>();
+	      for(int [] a:prerequisites)
+	      {
+	          ArrayList<Integer> list=map.getOrDefault(a[0],new ArrayList<Integer>());
+	          list.add(a[1]);
+	          map.put(a[0],list);
+	      }
+	        
+	      int [] visited=new int[numCourses];
+	      
+	      for(int v=0;v<numCourses;v++){
+	          //false if cycle found
+	          if(!dfs(map,v,visited))
+	              return false;
+	      }
+	      return true;
+	    }
+	    
+	   
+	   public static boolean dfs(HashMap<Integer,ArrayList<Integer>> map,int src,int[] visited)
+	  {     //if we ran into node that we saw eirlier in this CURRENT dfs,Its a cycle
+	     if(visited[src]==-1)
+	         return false;
+	       //if we ran into a node that we saw in saperate ealiar dfs,then it no problem
+	     if(visited[src]==1)
+	         return true;
+	      //mark current node as -1; 
+	        visited[src]=-1;
+	         if(map.containsKey(src)){
+	             //get all neighbors and return false if cyle was found
+	             for(int j:map.get(src)){
+	                 if(!dfs(map,j,visited))
+	                     return false;
+	             }
+	         }
+	       //if all its neighbars were visited and there are no issues
+	       //we're done with this and we mark it as 1 (done visiting)
+	       visited[src]=1;
+	       return true;
+	    
+	  }   
    
    
    

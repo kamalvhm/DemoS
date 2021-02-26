@@ -84,5 +84,86 @@ public class Bipartite_V13 {
        }
        return true;
    }
+   //https://www.youtube.com/watch?v=LBgVHZb07dc
+   //DFS way to find cycle
+   public boolean isBipartit(int [][] graph) {
+	   int len =graph.length;//****THIS GIVE ALL VTCES
+	   int[] color=new int[len];
+	   
+	   Arrays.fill(color, -1);//filling with blue -1 Green is 1 and Red =0;
+	   
+	   for(int i=0;i<len;i++){
+           if(color[i]==-1){ //if uncolored then colour and start DFS
+               color[i]=1; //if uncolor (blue) then color it green and go for DFS color of nbr with Red
+               if(!dfs(i,graph,color))
+                   return false;
+           }
+       }
+       return true ;
+			   
+   }
+   private boolean dfs( int src, int[][] graph,int[] color){
+       int currentColor=color[src];
+        for(int connectingIndex:graph[src]){//****THIS GIVE ALL NBR OF SRC
+            if(color[connectingIndex]==currentColor)//if its already equal to current 
+                return false;
+            if(color[connectingIndex]==-1){ //if uncolored 
+                color[connectingIndex]=1-currentColor;//its to toggle color if red then green and vice versa
+                // if(color[connectingIndex]==0)  //above stmnt is replacment of below commented 
+                //     color[connectingIndex]=1;
+                // if(color[connectingIndex]==1)
+                //     color[connectingIndex]=0;
+                if(!dfs(connectingIndex,graph,color))
+                    return false;
 
+            }
+                
+        }
+        return true;
+    }
+   /*********************************************NOW PEP WAY TO SOLVE THIS **************?
+    * 
+    */
+   
+   public boolean isBipartite(int[][] graph) {
+       int len =graph.length;
+       int[] visited = new int[len];
+
+       Arrays.fill(visited,-1);
+       
+       for(int i=0;i<len;i++){
+           if(visited[i]==-1){ 
+                boolean isCompBipartit=bfs(graph,i,visited);
+                if(isCompBipartit==false)
+                   return false;
+             
+           }
+       }
+       return true ;
+   }
+  
+   
+  public static boolean bfs(int[][] graph,int src,int [] visited){
+      ArrayDeque<Pair> q=new ArrayDeque<>();
+      q.add(new Pair(src,"",0));
+      //rM*WA*
+      while(q.size()>0){
+          Pair rem=q.removeFirst();
+          
+          if(visited[rem.v]!=-1){
+              if(rem.level!=visited[rem.v]){
+                  return false;
+              }
+          }else {
+              visited[rem.v]=rem.level;
+          }
+          for(int e:graph[rem.v]){
+              if(visited[e]==-1){
+                  q.add(new Pair(e,"",rem.level+1));
+              }
+          }
+          
+      }
+      return true;
+  }
 }
