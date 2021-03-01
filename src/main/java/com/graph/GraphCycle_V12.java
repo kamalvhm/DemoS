@@ -50,6 +50,7 @@ public class GraphCycle_V12 {
           if(visited[v]==false){
               //traverse
               boolean cycle=isCyclic(graph,v,visited);
+              // boolean cycle=dfs(graph,v,visited,-1); // uncomment for DFS solution
               if(cycle){
                   System.out.print(true);
                   return;
@@ -60,7 +61,7 @@ public class GraphCycle_V12 {
 
       
    }
-   
+   //BFS way
    public static boolean isCyclic(ArrayList<Edge>[] graph,int src, boolean[] visited){
        ArrayDeque<Pair> q=new ArrayDeque<>();
        q.add(new Pair(src,src+""));
@@ -78,6 +79,22 @@ public class GraphCycle_V12 {
                 }
             }
             
+       }
+       return false;
+   }
+   //DFS way for undirected graph || https://www.techiedelight.com/check-undirected-graph-contains-cycle-not/
+   public static boolean dfs(ArrayList<Edge>[] graph,int src,boolean visited[],int parent)  
+   { 
+       visited[src]=true;
+       for(Edge e:graph[src]){
+           if(visited[e.nbr]==false){//if `nbr` is not visited already
+               if(dfs(graph,e.nbr,visited,src))
+                return true;
+                
+           }
+        // if `nbr` is visited already, and `nbr` is not a parent
+           else if (e.nbr != parent) //this means where i came from (parent) and my nbr is same so cycle
+                return true; // we found a back-edge (cycle)
        }
        return false;
    }

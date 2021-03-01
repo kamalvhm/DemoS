@@ -80,6 +80,12 @@ public class FindPathDFS_V2_4 {
 	      int k=3;
 	      //v-4
 	      multiSolver(graph, src, dest,visited,criteria,k,src+"",0);
+	      
+	      System.out.println("Smallest Path = " + spath + "@" + spathwt);
+	      System.out.println("Largest Path = " + lpath + "@" + lpathwt);
+	      System.out.println("Just Larger Path than " + criteria + " = " + cpath + "@" + cpathwt);
+	      System.out.println("Just Smaller Path than " + criteria + " = " + fpath + "@" + fpathwt);
+	      System.out.println(k + "th largest path = " + pq.peek().psf + "@" + pq.peek().wsf);
 	    }
 	   //Wrong Code Cycle issue without visited check notes   
 	public static boolean hasPath(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited) {
@@ -99,7 +105,7 @@ public class FindPathDFS_V2_4 {
 		return false;
 	}
 	
-	//V-3
+	//V-3   //Basic DFS traversal
 	public static void allPath(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited,String psf) {
 		if (src == dest) {  //>>>1
 			System.out.println(psf);

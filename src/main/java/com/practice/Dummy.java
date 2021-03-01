@@ -28,7 +28,7 @@ public class Dummy {
 		tree.right = new TreeNode(3); // 4 5
 		tree.left.left = new TreeNode(4);
 		tree.left.right = new TreeNode(5);
-		
+		System.out.print(sumLeaf(tree));
 		System.out.print(TreePrinter.getTreeDisplay(tree));
 		/**
 		 * (a) Inorder (Left, Root, Right) 	 : 4 2 5 1 3
@@ -73,6 +73,15 @@ public class Dummy {
 
 	}
 	
+	private static int sumLeaf(TreeNode<Integer> root) {
+		if(root==null)
+			return 0;
+		if(root.left==null && root.right==null)
+			return root.val;
+		int sum=sumLeaf(root.left)+sumLeaf(root.right);
+		return sum;
+	}
+
 	private static String inorder2(TreeNode tree) {
 		if(tree==null)
 			return "";
@@ -130,15 +139,63 @@ public class Dummy {
 	 }
 
 	private static void inorderWithout(TreeNode tree) {
-		
+		Stack<TreeNode> st =new Stack<>();
+		TreeNode current=tree;
+		while(!st.isEmpty() || current!=null) {
+			if(current!=null) {
+				st.push(current);
+				current=current.left;
+			}
+			else {
+				TreeNode node=st.pop();
+				System.out.print(node.val+", ");
+				current=node.right;
+			}
+		}
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
+		Stack<TreeNode> st=new Stack<>();
+		TreeNode current=tree;
+		st.push(current);
+		while(!st.isEmpty()) {
+			current=st.pop();
+			System.out.print(current.val+", ");
+			
+			if(current.right!=null) {
+				st.push(current.right);
+			}
+			if(current.left!=null) {
+				st.push(current.left);
+			}
+		
+		}
 		
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-		
+		Stack<TreeNode> st=new Stack<>();
+		TreeNode current=tree;
+		TreeNode prev=tree;
+		st.push(current);
+		while(!st.isEmpty()) {
+			current=st.peek();
+			boolean isLeaf =current.left==null && current.right==null;
+			boolean isPrevRight=current.right==prev || (current.left==prev && current.right==null);
+			if(isLeaf || isPrevRight) {
+				current=st.pop();
+				System.out.print(current.val+", ");
+				prev=current;
+			}else {
+				if(current.right!=null) {
+					st.push(current.right);
+				}
+				if(current.left!=null) {
+					st.push(current.left);
+				}
+			}
+			
+		}
 	}
 
 	private static void postorder(TreeNode tree) {

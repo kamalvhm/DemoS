@@ -35,11 +35,12 @@ public class Hamiltonian_V9 {
       }
 
       int src = Integer.parseInt(br.readLine());
+      //It will be easy to check if all visited in hashset
       HashSet<Integer> visited=new HashSet<Integer>();
       // write all your codes here
       hamiltonian(graph,src,visited,src+"",src);
    }
-   
+   //normal dfs traversal
    public static void hamiltonian(ArrayList<Edge>[] graph,int src,HashSet<Integer> visited,String psf,int orgSrc){
       //here visited is one step behind then psf so it signify how many visited before you so -1 for    //that 
       if(visited.size()==graph.length-1){

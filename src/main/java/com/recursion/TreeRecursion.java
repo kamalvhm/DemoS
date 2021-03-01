@@ -3,6 +3,8 @@ package com.recursion;
 import java.util.ArrayList;
 import java.util.List;
 
+ import com.datastructure.TreePrinter;
+
 class TreeNode {
 	int val;
 	TreeNode left, right;
@@ -14,7 +16,16 @@ class TreeNode {
 }
 //STUDY:-https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
 //https://www.youtube.com/watch?v=kHi1DUhp9kM&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY
-public class RecussionProlemAndSolution {
+public class TreeRecursion {
+	public static void main(String[] args) {
+		TreeNode tree = new TreeNode(1); // 1
+		tree.left = new TreeNode(2); // 2 3
+		tree.right = new TreeNode(3); // 4 5
+		tree.left.left = new TreeNode(4);
+		tree.left.right = new TreeNode(5);
+		//System.out.print(sumLeaf(tree));
+		//System.out.print(TreePrinter.getTreeDisplay(tree));
+	}
 	//	100	Same Tree
 	 public boolean isSameTree(TreeNode p, TreeNode q) {
 	        if(p == null && q == null) {
@@ -44,8 +55,11 @@ public class RecussionProlemAndSolution {
      }
      //235. Lowest Common Ancestor of a Binary Search Tree
      public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    	  //checking if both are on right 
          if(root.val < p.val && root.val < q.val) return lowestCommonAncestor(root.right, p, q);
+         //checking if both are on left 
          if(root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left , p, q);
+         //this means one is on left and one is on right
          return root;
      }
      //572. Subtree of Another Tree

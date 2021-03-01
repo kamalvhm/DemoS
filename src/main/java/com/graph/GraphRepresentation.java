@@ -24,7 +24,7 @@ public class GraphRepresentation {
 
 	public static void main(String[] args) {
 		//adjcency List 
-		/*int vtces=7;//0,1,2,3,4,5,6
+		int vtces=7;//0,1,2,3,4,5,6
 		ArrayList<Edge>[] graph = new ArrayList[vtces];
 		for(int i=0;i<vtces;i++) {
 			graph[i]=new ArrayList<Edge>();
@@ -33,18 +33,9 @@ public class GraphRepresentation {
 		//adding Edges 
 		graph[0].add(new Edge(0, 3, 40));
 		graph[0].add(new Edge(0, 1, 10));
-*/
-		
-		int vtces=2;//0,1,2,3,4,5,6
-		ArrayList<Edge>[] graph = new ArrayList[vtces];
-		for(int i=0;i<vtces;i++) {
-			graph[i]=new ArrayList<Edge>();
-		}
-		
-		//adding Edges 
-		graph[0].add(new Edge(0, 1, 40));
-		graph[0].add(new Edge(1, 0, 10));
 
+		
+	
 	}
 
 }

@@ -507,21 +507,22 @@ public class LongestCommanSubSequece3 {
 
         return dp[n][m];
     }
-	//Wildcard Matching recusrsive 
+	//Wildcard Matching recusrsive  s is string and p is pattern 1 is true in return 
 	 public static int solve(String s, String p,int i,int j,int[][]dp){
 	        if(dp[i][j]!=-1) return dp[i][j];
-	        if(i==s.length() && j==p.length())return 1;
+	        //base cases 
+	        if(i==s.length() && j==p.length())return 1; //if both are efinished
 	        
-	        if(i==s.length() && j<p.length()){
+	        if(i==s.length() && j<p.length()){ //p is remianing 
 	            for(int k=j;k<p.length();k++){
 	                if(p.charAt(k)!='*')
 	                    return 0;
 	            }
 	            return 1;
 	        }
-	        if(j==p.length() && i<s.length())
+	        if(j==p.length() && i<s.length()) //s is remianing 
 	            return 0;
-	        
+	       //base cases end
 	        if(p.charAt(j)!='*'){
 	        if(s.charAt(i)==p.charAt(j) || p.charAt(j)=='?')
 	            return dp[i][j]=solve(s,p,i+1,j+1,dp);

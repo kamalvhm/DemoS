@@ -46,6 +46,7 @@ public class PerFactFriendV8 {
 	      
 	      //no solving so loop for combination
 	      int pairs=0;
+	      //if 3 component is there C1,C2,C3 then combination will be C1C2,C1C3 & C2C3 so both loop to select component 
 	      for(int i=0;i<comps.size();i++){
 	          for(int j=i+1;j<comps.size();j++){
 	              int count=comps.get(i).size()*comps.get(j).size();

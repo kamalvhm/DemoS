@@ -162,5 +162,19 @@ public class Stack<T> implements Iterable<T> {
           score+=Integer.valueOf(st.pop());
       return score;
   }
-  
+  //946. Validate Stack Sequences
+  public boolean validateStackSequences(int[] pushed, int[] popped) {
+      Stack<Integer> st =new Stack<>();
+      int i=0,n=pushed.length;
+      for(int num:pushed){
+          st.push(num);
+          
+         while(!st.isEmpty() && st.peek()==popped[i]){
+             st.pop();
+             ++i;
+         }
+      }
+     
+      return (i==n);
+  }
 }
