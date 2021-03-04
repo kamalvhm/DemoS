@@ -2,7 +2,7 @@ package com.graph;
 import java.io.*;
 import java.util.*;
 
-public class ShortestPathInWeightsV15 {
+public class ShortestPathInWeightsDijkstraV15 {
    static class Edge {
       int src;
       int nbr;
@@ -30,7 +30,7 @@ public class ShortestPathInWeightsV15 {
            return this.wsf-o.wsf;
        }
    }
-
+   //DIJKSTRA's ALGO
    public static void main(String[] args) throws Exception {
       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

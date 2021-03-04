@@ -5,7 +5,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class TestV7PCwithBlocking {
-
+	//you can simply imlement produces consumer pattern as no need to handle syncronisation is already handled in BQ
+	//FIFO queue but its thread safe from concurrent package
 	private static BlockingQueue<Integer> queue=new ArrayBlockingQueue<>(10);
 	
 	public static void main(String args[]) throws InterruptedException {
@@ -42,6 +43,7 @@ public class TestV7PCwithBlocking {
 	public static void producer() throws InterruptedException {
 		Random r=new Random();
 		while(true) {
+			//put also wait if Q is full both put and take mathod works in synk 
 			queue.put(r.nextInt(100));
 		}
 	}
@@ -55,6 +57,7 @@ public class TestV7PCwithBlocking {
 			Thread.sleep(100);
 			
 			if(r.nextInt(10)==0) {
+				//if there is nothing in queue then take will wait until there is something 
 				Integer val=queue.take();
 				
 				System.out.println("Value :- " +val+" ; Queue Size :- "+queue.size());

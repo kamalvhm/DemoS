@@ -6,37 +6,38 @@ import java.util.Random;
 
 
  class Processor6{
-	private  LinkedList<Integer> list= new LinkedList<Integer>();
+	 //implementing Producer consumer Patter using Low level Syncronisation 
+	private  LinkedList<Integer> list= new LinkedList<Integer>(); //shared data will be stored in this with limit 
 	private final int LIMIT=10;
 	
-	private Object lock =new Object();
-	
+	private Object lock =new Object();//lock 
+	//add value in list 
 	public  void producer() throws InterruptedException{
 		int value=0;
 		while(true) {
 			synchronized (lock) {
-				while(list.size()==LIMIT) {
-					  lock.wait();
+				while(list.size()==LIMIT) { //good practice to check condition in loop if this still apply or not
+					  lock.wait(); //wait if the list is full 
 				}
-				list.add(value++);
+				list.add(value++); //shared data within lock
 				lock.notify();
 			}
 		}
 	}
-
+	//remove from list 
 	public  void consumer() throws InterruptedException{
 		Random r=new Random();
 		while(true) {
 			synchronized (lock) {
 				
-				while(list.size()==0) {
+				while(list.size()==0) {//if empty wait until added 
 					  lock.wait();
 				}
 				
 				System.out.print("List size : "+list.size());
 				int val =list.removeFirst();
 				System.out.println(" Value : "+val);
-				lock.notify();
+				lock.notify(); //after remove notify producer
 			}
 			
 			Thread.sleep(r.nextInt(1000));

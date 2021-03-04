@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class Ab {
 
 	public static void main(String[] args) throws IOException {
+		
+
+	}
+	
+	public static void solve() {
 		Scanner s = new Scanner(System.in);
 		long row = s.nextLong();
 		long column = row;
@@ -30,6 +35,5 @@ public class Ab {
 
 			System.out.print(row * column + " ");
 		}
-
 	}
 }

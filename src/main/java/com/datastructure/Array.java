@@ -15,7 +15,7 @@ public class Array<T> implements Iterable<T>{
 	
 	
 	public Array(int capacity) {
-		if(capacity<0) throw new IllegalArgumentException("Invalic capacity"+capacity);
+		if(capacity<0) throw new IllegalArgumentException("Invalid capacity"+capacity);
 		this.capacity=capacity;
 		arr=(T[])new Object[capacity];
 	}

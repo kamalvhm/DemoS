@@ -76,7 +76,6 @@ public class Runner2 {
 	
 
 	public void finish() {
-		// TODO Auto-generated method stub
 		System.out.println("Account 1 balance :- " +acc1.getBalance());
 		System.out.println("Account 2 balance :- " +acc2.getBalance());
 		System.out.println("Account Total balance :- " +(acc1.getBalance()+acc2.getBalance()));

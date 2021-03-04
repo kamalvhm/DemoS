@@ -8,24 +8,22 @@ import java.util.Random;
 
 public class TestV10Reentrant {
 
-	
+	//Re-entrant lock is alternative to syncronise keyword 
 	public static void main(String args[]) throws InterruptedException {
 		Runner r=new Runner();
-		
+		//run first Thread
 		Thread t1 =new Thread(()->{
 			try {
 				r.firstThread();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
-		
+		//run secound Thread
 		Thread t2 =new Thread(()->{
 			try {
 				r.secoundThread();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -35,7 +33,8 @@ public class TestV10Reentrant {
 		
 		t1.join();
 		t2.join();
-		
+		//run finish 
+
 		r.finish();
 	
 
