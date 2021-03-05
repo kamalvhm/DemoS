@@ -17,7 +17,7 @@ public class SpreadInfectionV14 {
    
     static class Pair{
        int v;
-       int time;
+       int time;//when it will become sick
        Pair(int v,int time){
            this.v=v;
            this.time=time;
@@ -48,7 +48,7 @@ public class SpreadInfectionV14 {
       // write your code here
       ArrayDeque<Pair> q=new ArrayDeque<>();
       q.add(new Pair(src,1));//on t1 time src is sick
-      int [] visited=new int[vtces];
+      int [] visited=new int[vtces];//o is unvisited and we will add time when that vertex get sick
       int count=0;
       while(q.size()>0){
           Pair rem=q.removeFirst();
@@ -56,9 +56,9 @@ public class SpreadInfectionV14 {
           if(visited[rem.v]>0)
              continue;
           visited[rem.v]=rem.time;
-          if(rem.time>t)
+          if(rem.time>t)//if time exceeds asked time then break 
             break;
-          count++;
+          count++;//maintains count how many got sick
           
           
           

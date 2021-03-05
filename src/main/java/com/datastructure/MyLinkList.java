@@ -336,6 +336,66 @@ public class MyLinkList<T> {
     }
 }
 	    */
+	    
+	    //160. Intersection of Two Linked Lists   
+	    //TC: O(l1+l2)
+	    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+	        int lenA=length(headA);
+	        int lenB=length(headB);
+	        //making both start from eqaual
+	        if(lenA>lenB){
+	            int diff=lenA-lenB;
+	            while(diff>0){
+	                headA=headA.next;
+	                diff--;
+	            }
+	        }else {
+	            int diff=lenB-lenA;
+	            while(diff>0){
+	                headB=headB.next;
+	                diff--;
+	            }
+	        }
+	        //now at both are equal 
+	        while(headA!=null && headB!=null){
+	            if(headA==headB)
+	                return headA;
+	            headA=headA.next;
+	            headB=headB.next;
+	        }
+	        
+	      return null;
+	    }
+	    
+	    private static int length(ListNode head){
+	        int len=0;
+	        while(head!=null){
+	            head=head.next;
+	            len++;
+	        }
+	        return len;
+	    }
+	    
+	    
+	    
+	    //SAME WITH OTHER APPROACH -Check Notes first pages
+	    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+	        ListNode a=headA;
+	        ListNode b=headB;
+	        while(a!=b){
+	            if(a==null)
+	                a=headB;
+	            else a=a.next;
+	            if(b==null)
+	                b=headA;
+	            else b=b.next;
+	        }
+	        return a;
+	    }
+	    
+	    
+	    
+	    
 }
 
 

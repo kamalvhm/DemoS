@@ -153,7 +153,7 @@ public class FindPathDFS_V2_4 {
 			if(pq.size()<k) //for 3rd largest 
 				pq.add(new Pair(wsf,psf));
 			else {
-				if(wsf>pq.peek().wsf) { 
+				if(wsf>pq.peek().wsf) { //if the wsf is larger then only we consider
 					pq.remove();
 					pq.add(new Pair(wsf,psf));
 				}

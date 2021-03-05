@@ -44,14 +44,13 @@ public class Bipartite_V13 {
          graph[v2].add(new Edge(v2, v1, wt));
       }
 
-      // write your code here
       //graph can be disconnected so loop ALL componect must be bipartite in disconnected 
-      int [] visited=new int [vtces];
-      Arrays.fill(visited,-1);
+      int [] visited=new int [vtces];//to store level where vertex visited so  we will keep int [jis level pr visit hua]
+      Arrays.fill(visited,-1);//unvisited -1
       for(int v=0;v<vtces;v++){
           if(visited[v]==-1){
               boolean isCompBipartit=checkCompForBipartit(graph,v,visited);
-              if(isCompBipartit==false){
+              if(isCompBipartit==false){//if any one component is false then false
                   System.out.println(false);
                     return;
               }
@@ -63,29 +62,30 @@ public class Bipartite_V13 {
    //BFS 
    public static boolean checkCompForBipartit( ArrayList<Edge>[] graph,int src,int [] visited){
        ArrayDeque<Pair> q=new ArrayDeque<>();
-       q.add(new Pair(src,src+"",0));
+       q.add(new Pair(src,src+"",0));//initial level is 0 
        //rM*WA*
        while(q.size()>0){
            Pair rem=q.removeFirst();
            
-           if(visited[rem.v]!=-1){
-               if(rem.level!=visited[rem.v]){//if current level and older visited level is not same then ODD Cycle                       //then odd cycle
+           if(visited[rem.v]!=-1){//if visited means cycle ,we don't know yet ODD or EVEN we will check below
+               if(rem.level!=visited[rem.v]){//if current level(rem.level) and older visited level(rem.v) is not on same Level then ODD Cycle                       //then odd cycle
                    return false;
                }
            }else {
-               visited[rem.v]=rem.level;
+               visited[rem.v]=rem.level;//visited on 'rem.level' this level 
            }
            for(Edge e:graph[rem.v]){
                if(visited[e.nbr]==-1){
-                   q.add(new Pair(e.nbr,rem.psf+e.nbr,rem.level+1));
+                   q.add(new Pair(e.nbr,rem.psf+e.nbr,rem.level+1));//previous level +1
                }
            }
            
        }
        return true;
    }
+ 
    //https://www.youtube.com/watch?v=LBgVHZb07dc
-   //DFS way to find cycle
+   //785. Is Graph Bipartite? || DFS way to find cycle
    public boolean isBipartit(int [][] graph) {
 	   int len =graph.length;//****THIS GIVE ALL VTCES
 	   int[] color=new int[len];
@@ -121,8 +121,8 @@ public class Bipartite_V13 {
         }
         return true;
     }
-   /*********************************************NOW PEP WAY TO SOLVE THIS **************?
-    * 
+   /*********************************************NOW PEP WAY TO SOLVE THIS SAME CODE AS checkCompForBipartit() **************?
+    * Except graph representation all code same 
     */
    
    public boolean isBipartite(int[][] graph) {
