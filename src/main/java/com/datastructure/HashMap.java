@@ -3,7 +3,7 @@ package com.datastructure;
 import java.util.LinkedList;
 
 
-
+//https://leetcode.com/problems/design-hashmap/
 class Entry1<K, V> {
 	K key;
 	V value;

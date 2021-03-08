@@ -36,4 +36,5 @@ public class Ab {
 			System.out.print(row * column + " ");
 		}
 	}
+	
 }

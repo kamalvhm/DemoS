@@ -288,7 +288,7 @@ public class LongestCommanSubSequece3 {
 	            for(int j=1;j<m+1;j++){
 	                if(x.charAt(i-1)!=y.charAt(j-1)){ //if both are not equal then choose min from add + delete and replace
 	                    t[i][j]=1+Math.min(Math.min(t[i][j-1],t[i-1][j]),t[i-1][j-1]);//+1 is constant cost of add replace and delete
-	                }else t[i][j]=t[i-1][j-1]; //if both are equal then no cost 
+	                }else t[i][j]=t[i-1][j-1]; //if both are equal then no cost so copy previous cost
 	            }
 	        }
 	        return t[n][m];

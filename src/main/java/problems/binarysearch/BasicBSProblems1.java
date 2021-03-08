@@ -50,7 +50,7 @@ public class BasicBSProblems1 {
 		}
 		return -1;
 	}
-	
+	//USE BInarySearch Methods for first nad last
 	public static int bsfirst(int [] a,int target) {
 		int left=0,right=a.length-1;
 		while(left<=right) {

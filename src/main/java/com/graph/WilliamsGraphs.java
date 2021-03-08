@@ -1,9 +1,8 @@
 package com.graph;
 
 import java.util.ArrayDeque;
-
-import org.apache.hadoop.yarn.webapp.hamlet.Hamlet.Q;
-import org.apache.spark.deploy.history.config;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WilliamsGraphs {
 	//https://www.youtube.com/watch?v=eQA-m22wjTQ&list=PLDV1Zeh2NRsDGO4--qE8yH72HFL1Km93P&index=2
@@ -60,4 +59,33 @@ public class WilliamsGraphs {
 	}
   static int dr[] = {-1,1,0,0};
   static int dc[] = {0,0,-1,1};
+  
+  
+  //797. All Paths From Source to Target
+  public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+      List<List<Integer>> result=new ArrayList<>();
+      int n=graph.length;
+      boolean [] visited=new boolean[n];
+      ArrayList<Integer> path=new ArrayList<Integer>();
+      path.add(0);
+      dfs(graph,0,n-1,visited,result,path);
+      return result;
+  }
+  
+  public static void dfs(int[][] graph,int src,int dest,boolean visited[],List<List<Integer>> result,List<Integer> path){
+      if(src==dest){
+          List<Integer> list=new ArrayList<>(path);
+          result.add(list);
+          return;
+      }
+      visited[src]=true; //Node Pre
+      for(int e :graph[src]){
+          if(!visited[e]){
+              path.add(e);//Edge Pre
+              dfs(graph,e,dest,visited,result,path);
+              path.remove(path.size()-1);//edge post
+          }
+      }
+      visited[src]=false;//node post
+  }
 }

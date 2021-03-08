@@ -70,6 +70,7 @@ public class TarjanSccSolverAdjacencyList {
       if (ids[to] == UNVISITED) {
         dfs(to);
       }
+      //if at any point in to we see from we started this means its a cycle so now update tho low links 
       if (visited[to]) {//this will allow low link values to propagate through out cycle Its checking if it in the stack
         low[at] = min(low[at], low[to]);
       }

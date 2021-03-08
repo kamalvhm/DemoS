@@ -340,34 +340,25 @@ public class MyLinkList<T> {
 	    //160. Intersection of Two Linked Lists   
 	    //TC: O(l1+l2)
 	    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-	        int lenA=length(headA);
-	        int lenB=length(headB);
-	        //making both start from eqaual
-	        if(lenA>lenB){
-	            int diff=lenA-lenB;
-	            while(diff>0){
-	                headA=headA.next;
-	                diff--;
-	            }
-	        }else {
-	            int diff=lenB-lenA;
-	            while(diff>0){
-	                headB=headB.next;
-	                diff--;
-	            }
-	        }
-	        //now at both are equal 
+	        int lenA=getLength(headA);
+	        int lenB=getLength(headB);
+	        
+	        for(int i=0;i<lenA-lenB;i++)
+	            headA=headA.next;
+	        //in both one will execute and after this both will be of equal distance
+	        for(int i=0;i<lenB-lenA;i++)
+	            headB=headB.next;
+	        
 	        while(headA!=null && headB!=null){
 	            if(headA==headB)
 	                return headA;
 	            headA=headA.next;
 	            headB=headB.next;
 	        }
-	        
-	      return null;
+	        return null;
 	    }
 	    
-	    private static int length(ListNode head){
+	    public static int getLength(ListNode head){
 	        int len=0;
 	        while(head!=null){
 	            head=head.next;
@@ -377,7 +368,7 @@ public class MyLinkList<T> {
 	    }
 	    
 	    
-	    
+	    //Two Diffrent length Linkedlists find cooman node  point if any 
 	    //SAME WITH OTHER APPROACH -Check Notes first pages
 	    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
 	        ListNode a=headA;

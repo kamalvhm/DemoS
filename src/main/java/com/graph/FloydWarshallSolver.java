@@ -33,10 +33,12 @@ public class FloydWarshallSolver {
     // Copy input matrix and setup 'next' matrix for path reconstruction.
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        if (matrix[i][j] != POSITIVE_INFINITY) next[i][j] = j;
+        if (matrix[i][j] != POSITIVE_INFINITY) next[i][j] = j;//POSITIVE_INFINITY means there no edge between those nodes
         dp[i][j] = matrix[i][j];
       }
     }
+    
+    System.out.print(next.length);
   }
 
   /**
@@ -88,7 +90,7 @@ public class FloydWarshallSolver {
   public List<Integer> reconstructShortestPath(int start, int end) {
     solve();
     List<Integer> path = new ArrayList<>();
-    if (dp[start][end] == POSITIVE_INFINITY) return path;//this check if path possible if not return empty
+    if (dp[start][end] == POSITIVE_INFINITY) return path;//this check if path possible if not return empty(POSITIVE_INFINITY means there no edge between those nodes)
     int at = start;
     for (; at != end; at = next[at][end]) {
       // Return null since there are an infinite number of shortest paths.
@@ -108,7 +110,7 @@ public class FloydWarshallSolver {
   public static double[][] createGraph(int n) {
     double[][] matrix = new double[n][n];
     for (int i = 0; i < n; i++) {
-      java.util.Arrays.fill(matrix[i], POSITIVE_INFINITY);
+      java.util.Arrays.fill(matrix[i], POSITIVE_INFINITY);//POSITIVE_INFINITY means there no edge between those nodes
       matrix[i][i] = 0;
     }
     return matrix;
@@ -116,11 +118,12 @@ public class FloydWarshallSolver {
 
   public static void main(String[] args) {
     // Construct graph.
-    int n = 7;
+    //int n = 7;
+	  int n = 4;
     double[][] m = createGraph(n);
 
     // Add some edge values.
-    m[0][1] = 2;
+   /* m[0][1] = 2;
     m[0][2] = 5;
     m[0][6] = 10;
     m[1][2] = 2;
@@ -128,7 +131,10 @@ public class FloydWarshallSolver {
     m[2][6] = 2;
     m[6][5] = 11;
     m[4][5] = 1;
-    m[5][4] = -2;
+    m[5][4] = -2;*/
+    
+    m[0][1]=4;
+    m[0][2]=1; m[2][0]=4; m[2][1]=1; m[1][2]=6; m[2][3]=2; 
 
     FloydWarshallSolver solver = new FloydWarshallSolver(m);
     double[][] dist = solver.getApspMatrix();

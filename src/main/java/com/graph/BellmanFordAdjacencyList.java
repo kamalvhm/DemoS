@@ -1,6 +1,7 @@
 package com.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.graph.ShortestPathInWeightsDijkstraV15.Edge;
@@ -51,7 +52,7 @@ public class BellmanFordAdjacencyList {
     dist[start] = 0;
 
     // For each vertex, apply relaxation for all the edges
-    for (int i = 0; i < V - 1; i++)
+    for (int i = 0; i < V - 1; i++)//FOR EACH VERTEX <FOR EACH EDGE ,RELAX EDGE
       for (List<Edge> edges : graph)
         for (Edge edge : edges)
           if (dist[edge.from] + edge.cost < dist[edge.to])

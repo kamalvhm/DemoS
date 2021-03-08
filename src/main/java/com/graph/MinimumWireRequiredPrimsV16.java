@@ -2,7 +2,7 @@ package com.graph;
 import java.io.*;
 import java.util.*;
 
-public class MinimumWireRequiredV16 {
+public class MinimumWireRequiredPrimsV16 {
    static class Edge {
       int src;
       int nbr;

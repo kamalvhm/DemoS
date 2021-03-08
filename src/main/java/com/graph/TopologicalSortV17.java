@@ -34,13 +34,14 @@ public class TopologicalSortV17 {
       // write your code here
       boolean [] visited=new boolean[vtces];
       Stack<Integer> st=new Stack<Integer>();
-      
+      //as all nodes dependency should be check before so we will call in loop
+      //means if any node had dependency it should be in stack before see 3 and 4 node in example
       for(int v=0;v<vtces;v++){
           if(visited[v]==false){
               topologicalSort(graph,v,visited,st);
           }
       }
-      
+      //ORder of compilation will be reverse of topological order
       while(st.size()>0){
           System.out.println(st.pop());
       }
