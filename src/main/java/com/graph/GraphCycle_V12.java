@@ -93,12 +93,13 @@ public class GraphCycle_V12 {
                 
            }
         // if `nbr` is visited already, and `nbr` is not a parent
-           else if (e.nbr != parent) //this means where i came from (parent) and my nbr is same so cycle
+           else if (e.nbr != parent) //this means where i came from (parent) and my nbr is same so cycle (THIS CONDITION FOR DIRECTED NOT TRUE FOR THIS -ABOVE is GOOD)
                 return true; // we found a back-edge (cycle)
        }
        return false;
    }
-   //207. Course Schedule  !!!!!!!!!!!DIRECTED GRAPH CYCLY DETECTION !!!!!!!!Check notes and https://www.youtube.com/watch?v=a4hXpeHZ_-c
+   /********************!!!!!!!!!!!DIRECTED GRAPH CYCLY DETECTION !!!!!!!!*********************/
+   //207. Course Schedule  Check notes and https://www.youtube.com/watch?v=a4hXpeHZ_-c
    public boolean canFinish(int numCourses, int[][] prerequisites) {
 	      HashMap<Integer,ArrayList<Integer>> map =new HashMap<>();
 	      for(int [] a:prerequisites)
