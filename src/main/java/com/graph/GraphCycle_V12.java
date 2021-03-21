@@ -119,7 +119,7 @@ public class GraphCycle_V12 {
 	      return true;
 	    }
 	    
-	   //graph coloring algo
+	   //graph coloring algo 0=unvisited ,-1 =visiting , 1 =visited
 	   public static boolean dfs(HashMap<Integer,ArrayList<Integer>> map,int src,int[] visited)
 	  {     //if we ran into node that we saw eirlier in this CURRENT dfs,Its a cycle
 	     if(visited[src]==-1)

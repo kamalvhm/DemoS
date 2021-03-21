@@ -33,7 +33,7 @@ public class Practice {
 		
 		int [] c= {2,3,6,9,8,3,2,6,3,4};
 		//System.out.print(firstOccurence(c,0,8));
-		
+		solve("ABC", "");
 
 	}
 	
@@ -41,6 +41,22 @@ public class Practice {
 	
 	
 	
+	private static void solve(String ip, String op) {
+		
+		if(ip.length()==0)
+		{
+			System.out.println(op);
+			return;
+		}
+		solve(ip.substring(1), op+ip.charAt(0));
+		solve(ip.substring(1), op+ip.charAt(0)+"_");
+
+	}
+
+
+
+
+
 	public static int firstOccurence(int a[],int i,int t) {
 		if(i==a.length)
 			return -1;
