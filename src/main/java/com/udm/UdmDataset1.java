@@ -25,29 +25,35 @@ public class UdmDataset1 {
 		SparkSession spark =SparkSession.builder().appName("APP").master("local[*]").config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
 		
 		Dataset<Row> dataset = spark.read().option("header", true).csv("src/main/resources/exam/student.csv");
-	/*	dataset.show();
-		
+		dataset.show();
+		//returns the first row
 		Row firstrow=dataset.first();
-		
+		//get and get is to get column 
+		//firstrow.get(0); if header is not there other wise getAs as below 
 		String subject=firstrow.getAs("subject").toString();
-		System.out.println(subject);*/
-		//fileter using string expression
-		//Dataset<Row> modernArtResults = dataset.filter("subject = 'Modern Art' AND year >= 2007");
+		System.out.println(subject);
+		//FIRST APPROACH
+		//Filter using string expression some what like sql
+		Dataset<Row> modernArtResults = dataset.filter("subject = 'Modern Art' AND year >= 2007");
 		
-		
-		//fileter using lambda
+		//SECOUND APPROACH
+		//Filter using lambda
 		Dataset<Row> modernArtResults2 = dataset.filter(row->row.getAs("subject").equals("Modern Art")
 				&& Integer.parseInt(row.getAs("year"))>=2007);
-		
+		//THIRD APPROACH-selecting column first and then adding constaints in filter using them
 		Column subjectColumn=dataset.col("subject");
 		Column yearColumn=dataset.col("year");
-
-		//Dataset<Row> modernArtResults3 = dataset.filter(subjectColumn.equalTo("Modern Art").and(yearColumn.geq(2007)));
+		//greater then equal to geq 
+		Dataset<Row> modernArtResults3 = dataset.filter(subjectColumn.equalTo("Modern Art").and(yearColumn.geq(2007)));
 		
+		//In ABove method we have to have these col instance but we can create these with static imported function class 
+		//directly as below 
+		Dataset<Row> modernArtResults4 = dataset.filter(col("subject").equalTo("Modern Art").and(col("year").geq(2007)));
 		
-		//Dataset<Row> modernArtResults3 = dataset.filter(col("subject").equalTo("Modern Art").and(col("year").geq(2007)));
-		
-		
+		/**we can write sql statement using temp view it create temporary tables (it create in memory table)
+		 * which we can use to create sql by sparksession obj dot sql
+		 * 
+		 */
 		dataset.createOrReplaceTempView("students");
 			
 		spark.sql("select avg(score) from students where subject ='English'").show();

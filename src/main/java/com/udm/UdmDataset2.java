@@ -26,7 +26,7 @@ public class UdmDataset2 {
 
 		SparkSession spark =SparkSession.builder().appName("APP").master("local[*]").config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
 
-		
+		//we will use this in memory collection to create dataset, RowFactory is to create spark type row 
 		List<Row> inMemory=new ArrayList<>();
 		inMemory.add(RowFactory.create("WARN","2016-12-31 04:19:32"));
 		inMemory.add(RowFactory.create("FATAL","2016-12-31 03:22:34"));
@@ -39,6 +39,7 @@ public class UdmDataset2 {
 				new StructField("level",DataTypes.StringType,false,Metadata.empty()),
 				new StructField("datetime",DataTypes.StringType,false,Metadata.empty())
 		};
+		//schema is an object to tell spark what are the datatypes of each column are  
 		StructType schema=new StructType(fields);
 		//to create data frame from inmemo0ry we need StructType and StructField
 		Dataset<Row> dataset=spark.createDataFrame(inMemory,schema);

@@ -84,7 +84,7 @@ class LRUCache {
                 addToHead(node);
             }
             else {
-                map.remove(tail.pre.key);
+                map.remove(tail.pre.key);//remove last node key from map
                 deleteNode(tail.pre);
                 addToHead(node);
             }

@@ -13,7 +13,7 @@ import org.apache.spark.sql.types.DataTypes;
 import static org.apache.spark.sql.functions.*;
 
 
-public class UdmDataset8 {
+public class UdmDataset8UDF {
 //*******************UDF****************
 	public static void main(String[] args) { 
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
@@ -30,11 +30,16 @@ public class UdmDataset8 {
 				else return false;
 			}
 			return grade.startsWith("A") || grade.startsWith("B");
-			}, DataTypes.BooleanType);
+			}, DataTypes.BooleanType);//DataTypes.BooleanType this is to tell spark return type 
 		
 		Dataset<Row> dataset=spark.read().option("header", true).csv("src/main/resources/exam/student.csv");
 		//To add new column
-		//dataset=dataset.withColumn("pass", lit(col("grade").equalTo("A+")));
+		//To add column on dataset we use withColumn we are dinamically building col by passing literal value 
+		
+		//dataset=dataset.withColumn("pass", lit(col("grade").equalTo("A+")));//this will add TRUE if A+ and FALSE if not
+		
+		//but if your requirement is complex then we use UDF to solve this
+		//UDF allow us to add our own function in to spark API
 		dataset=dataset.withColumn("pass", callUDF("haspassed", col("grade"),col("subject")));
 
 		dataset.show();
