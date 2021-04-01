@@ -1,0 +1,15 @@
+             GOLDMAN
+Coderpad – two coding questions in 1 hour
+1) Given unsorted array and sum, find minimum length of subarray whose sum is = or > then given target. Example: {1,2,3,4} target 6 === return 2
+2) Given scores of the students in 2-D array{name,score}, return max average for any student, it should be floor if average is in decimal.
+   Example String[][] arr = {{“a”,”3”}, 
+							{“a”,”3”},
+							{“a”,”4”},
+							{“b”,”2”}}  10/3=3.3 so return 3
+
+Coderpad – two coding questions in 1 hour
+1)Implement RandomizedSet class {boolean add(), boolen remove(), int randomGet()} 
+randomGet is any random number with equal probability from the set.
+2) Implement HashMap – get and put.
+Coderpad – two coding questions in 1 hour
+A very large file , which needs to be sorted in java. How to do that, the file won’t fit in the memory.Right a function which will generate random number from 0-N, using a random function which generates random num from 0-9.

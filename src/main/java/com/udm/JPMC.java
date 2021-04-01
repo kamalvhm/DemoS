@@ -84,39 +84,30 @@ public class JPMC {
 	/**
 	 public static void main(String[] args) {
 
-		 
-
 		    Logger.getLogger("org.apache").setLevel(Level.ERROR);
 
-		 
 
 		    SparkSession spark = SparkSession.builder().appName("Demo").master("local[*]").getOrCreate();
 
-		 
 
 		    Dataset<WeatherData> weatherDataset = spark.read().option("header", true)
 		        .csv("resources/weather.txt").as(Encoders.bean(WeatherData.class));
 
-		 
 
 		    weatherDataset.printSchema();
 		    weatherDataset.show(10, false);
-
 		 
 
 		    // Now transforming F to C formula C=(F-32)*5/9
-
 		 
 
 		    Dataset<Row> cDataset =
 		        weatherDataset.withColumn("TempInC", col("TempInF").minus(32).multiply(5).divide(9));
 
-		 
-
+		
 		    cDataset.printSchema();
 		    cDataset.show();
 
-		 
 
 		    // save in parquet format
 		    // cDataset.write().format("parquet").save("resources/temp.parquet");

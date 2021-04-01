@@ -3,7 +3,8 @@ public class BubbleSort implements InplaceSort {
 
   @Override
   public void sort(int[] values) {
-    BubbleSort.bubbleSort(values);
+   // BubbleSort.bubbleSort(values);
+	  BubbleSort.bubbleSort2(values);
   }
 
   // Sort the array using bubble sort. The idea behind
@@ -41,5 +42,24 @@ public class BubbleSort implements InplaceSort {
     // Prints:
     // [2, 3, 4, 6, 8, 10, 13]
     System.out.println(java.util.Arrays.toString(array));
+  }
+  
+  private static void bubbleSort2(int [] ar ) {
+	  if(ar==null) return ;
+	  
+	  int n=ar.length;
+	  
+	  for(int k=1;k<n;k++) {
+		  boolean sorted=true;
+		  for(int i=0;i<=n-k-1;i++) {
+			  if(ar[i]>ar[i+1])
+			  {
+		          swap(ar, i+1, i);
+		          sorted=false;
+			  }
+		  }
+		  if(sorted)
+			  break;
+	  }
   }
 }

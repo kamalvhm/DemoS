@@ -28,9 +28,9 @@ public class InsertionSort implements InplaceSort {
 	    }
 
 	    for (int i = 1; i < ar.length; i++) {
-	     int value=ar[i];
-	     int hole=i;
-	     while(hole>0 && ar[hole-1]>value) {
+	     int value=ar[i];//storing value
+	     int hole=i;//hole position
+	     while(hole>0 && ar[hole-1]>value) { //if left of hole is greater then move hole to left
 	    	 ar[hole]=ar[hole-1];
 	    	 hole--;
 	     }

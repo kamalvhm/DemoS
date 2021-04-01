@@ -116,22 +116,29 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 					right++;   
 				}
 			}
+    //https://leetcode.com/problems/minimum-size-subarray-sum/
+	// 209 Minimum Size Subarray Sum   get minimun no of element which is greater than s; ###WINDOW SIZE NOT KNOWN###
+	public int minSubArrayLen(int s, int[] nums) {
+			        int sum=0;
+			        int n =nums.length;
+			        int ans=n+1;
+			        int i=0,j=0;
+			        while(j<n){
+			          sum+=nums[j];
+			          if(sum<s)
+			              j++;
+			          else if(sum>=s){
+			              while(sum>=s){
+			                ans=Math.min(ans,j-i+1);
+			                  sum-=nums[i++];
 
-	//Minimum Size Subarray Sum   get minimun no of element which is greater than s; ###WINDOW SIZE NOT KNOWN###
-	 public static int minSubArrayLen(int s, int[] nums) {
-	        int n = nums.length;
-	        int ans = n+1;
-	        int left = 0, right = 0;
-	        int sum = 0;
-	        while(right<n) {
-	            sum+=nums[right++];
-	            while(sum>=s) {
-	                sum-=nums[left++];
-	                ans = Math.min(ans,right-left+1);
-	            }
-	        }
-	        return (ans==n+1)?0:ans;
-	    }
+			              }
+			              j++;
+			          }
+			        }
+			        return ans==n+1 ? 0 : ans;
+			    }
+
 	 //***The question of sliding window
 	 //76. Minimum Window Substring   ALSO SEE IN PARENT CLASS
 	 public String minWindow3(String s, String t) {

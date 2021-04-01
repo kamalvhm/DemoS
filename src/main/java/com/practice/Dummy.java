@@ -70,7 +70,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands:(4) " + numIslands(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -113,61 +113,19 @@ public class Dummy {
 	public static int numIslands(char[][] grid) {
 		int count = 0;
 
-		int h = grid.length;
-		int w = grid[0].length;
-
-		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < w; j++) {
-				if (grid[i][j] == '1') {
-					DFS(grid, i, j);
-					count++;
-				}
-			}
-		}
+		
 		return count;
 
 	}
     private static void DFS(char[][] grid, int r, int c) {
-    	int h = grid.length;
-		int w = grid[0].length;
-		if(r<0 || c<0 || r>=h || c>=w || grid[r][c]!='1')return;
-		grid[r][c]='0';
-		DFS(grid,r+1,c);
-		DFS(grid,r-1,c);
-		DFS(grid,r,c+1);
-		DFS(grid,r,c-1);
+    	
 
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;
-		Stack<int []> st =new Stack<>();
-		int h=grid.length;
-		int w =grid[0].length;
+	
 		
-		for(int i=0;i<h;i++) {
-			for(int j=0;j<w;j++) {
-				if(grid[i][j]=='1') {
-					st.push(new int[] {i,j});
-					grid[i][j]='0';
-					
-					while(!st.isEmpty()) {
-						int [] curr=st.pop();
-						
-						for(int [] dir:direction) {
-							int r=dir[0]+curr[0];
-							int c=dir[1]+curr[1];
-							
-							if(r>=0 && c>=0 && r<h && c<w && grid[r][c]=='1') {
-								st.push(new int[] {r,c});
-								grid[r][c]='0';
-							}
-						}
-					}
-					count++;
-				}
-			}
-		}
 		return count;
 	}
     
@@ -181,7 +139,7 @@ public class Dummy {
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		 List<List<Integer>> result=new ArrayList<>();	
-		 
+		
 		return result;
 	 }
 
@@ -195,7 +153,7 @@ public class Dummy {
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-		
+	
 		
 	}
 
