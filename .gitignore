@@ -6,6 +6,6 @@
 *.log
 
 # ignoring practice classes
-*Practice*.java
+#*Practice*.java
 
-Dummy*.java
+#Dummy*.java
