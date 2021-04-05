@@ -8,7 +8,7 @@ Coderpad – two coding questions in 1 hour
 							{“b”,”2”}}  10/3=3.3 so return 3
 
 Coderpad – two coding questions in 1 hour
-1)Implement RandomizedSet class {boolean add(), boolen remove(), int randomGet()} 
+1)Implement RandomizedSet class {boolean add(), boolen remove(), int randomGet()}  https://leetcode.com/problems/insert-delete-getrandom-o1/submissions/
 randomGet is any random number with equal probability from the set.
 2) Implement HashMap – get and put.
 Coderpad – two coding questions in 1 hour

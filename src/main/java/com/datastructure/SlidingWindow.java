@@ -108,7 +108,8 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 					while(currentSum>=sum) {   //Step 2 :- check if the window size reaches equal or greater 
 						if(currentSum==sum)    //if equal extract answer 
 						System.out.printf("Subarray found [%d-%d]", left, right );
-						
+						System.out.println( );
+
 						currentSum-=a[left];  //slide window 
 						left++;
 						
@@ -525,4 +526,25 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 		
 		return windowSize;
 	}
+	//1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+	 public int longestSubarray(int[] nums, int limit) {
+	        int l=0,r=0,count=0;
+	        PriorityQueue<Integer> min = new PriorityQueue<>();
+	        PriorityQueue<Integer> max = new PriorityQueue<>((a,b)->Integer.compare(b,a));
+	        
+	        while(r<nums.length){
+	            min.add(nums[r]);
+	            max.add(nums[r]);
+	            
+	            while(Math.abs(max.peek()-min.peek())>limit){
+	                min.remove(nums[l]);
+	                max.remove(nums[l]);
+	                l++;
+	            }
+	            count=Math.max(count,r-l+1);
+	            r++;
+	        }
+	        
+	        return count;
+	    }
 }

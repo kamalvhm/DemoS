@@ -29,7 +29,7 @@ public class StringProblems {
 		
 	}
 	
-	//125. Valid Palindrome
+	//125. Valid Palindrom
 	  public boolean isPalindrome(String str) {
 	        int i=0,j=str.length()-1;
 	        boolean isPalindrom=false;
@@ -115,9 +115,7 @@ public class StringProblems {
 	           map.get(sorted).add(s);
 	            
 	        } 
-	        
-	        
-	       
+	
 	            groupAnagrams.addAll(map.values());
 	        
 	        

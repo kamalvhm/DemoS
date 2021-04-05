@@ -1,6 +1,8 @@
 package com.sorting;
 
 import java.util.Arrays;
+import java.util.Random;
+
 
 public class SortMaster {
 
@@ -76,6 +78,35 @@ public class SortMaster {
 		}
 		return a;
 	}
+	
+	private static void quickSort(int[] ar, int start, int end) {
+	      if(start>=end)return;
+	      //int pivot = partition(ar, start, end);
+	      int pivot=randomisedPartition(ar,start,end);
+	      quickSort(ar, start, pivot-1);
+	      quickSort(ar, pivot + 1, end);
+	  }
+	 public static int partition(int[] ar, int start, int end) {
+		  int pivot =ar[end];
+		  //partitionIndex
+		  int pIndex=start;
+		  //Pivot is fixed at end so end-1 times 
+		  for(int i=start;i<end;i++) {
+			  if(ar[i]<=pivot) {
+				  swap(ar,i,pIndex);
+				  pIndex++;
+			  }
+		  }
+		  swap(ar,end,pIndex); //at last swapping pivot withPartition index
+		  return pIndex;
+	  }
+	 
+	 public static int randomisedPartition(int[] ar, int start, int end) {
+		 Random r=new Random();
+		 int pivot=r.nextInt(end-start)+start;//getting random pivot with in range start to end (exclusive)
+		 swap(ar, pivot, end);
+		 return partition(ar, start, end);
+	 }
 	private static void swap(int [] arr,int i,int j) {
 		int tmp=arr[i];
 		arr[i]=arr[j];
@@ -83,19 +114,41 @@ public class SortMaster {
 	}
 
 	public static void main(String[] args) {
-		int[] array = {10, 4, 6, 8, 13, 2, 3};
+		//int[] array = {10, 4, 6, 8, 13, 2, 3};
 		SortMaster sort=new SortMaster();
-		sort.sort(array,3);
+		int[] array = {5,4,2,1,3};
+		sort.sort(array,0);
 		System.out.println(java.util.Arrays.toString(array));
+		int[] array1 = {5,4,2,1,3};
+		sort.sort(array1,1);
+		System.out.println(java.util.Arrays.toString(array1));
+		int[] array2 = {5,4,2,1,3};
+		sort.sort(array2,2);
+		System.out.println(java.util.Arrays.toString(array2));
+		int[] array3 = {5,4,2,1,3};
+		sort.sort(array3,3);
+		System.out.println(java.util.Arrays.toString(array3));
+		int[] array4 = {5,4,2,1,3};
+		sort.sort(array4,4);
+		System.out.println(java.util.Arrays.toString(array4));
 	}
 
 	private void sort(int[] array, int i) {
 		switch(i) {
 		case 0:selectionSort(array);
+		System.out.println("Selection");
+				break;
 		case 1:bubbleSort(array);
+		System.out.println("Bubble");
+				break;
 		case 2:insertionSort(array);
+		System.out.println("Insersion");
+				break;
 		case 3:mergeSort(array);
-
+		System.out.println("Merge");
+				break;
+		case 4:quickSort(array,0,array.length-1);
+		System.out.println("Quick");
 		}
 	}
 	

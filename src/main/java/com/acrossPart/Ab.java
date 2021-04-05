@@ -1,21 +1,9 @@
 package com.acrossPart;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
-
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.functions;
-import static org.apache.spark.sql.functions.*;
-import com.beans.Weather;
-
-import io.netty.buffer.SwappedByteBuf;
 
 public class Ab {
 
@@ -27,7 +15,9 @@ public class Ab {
 		Long.valueOf(i);
 		System.out.print("EQ "+(enumSixtyToFifteen.equals(Long.valueOf(i))));
 
-		
+		ArrayList<Integer> list=new ArrayList<>();
+		list.add(1);
+		list.indexOf(1);	
 		
 		/*//print(5);
 		//System.out.println("A".compareTo("Z"));

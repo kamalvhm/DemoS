@@ -399,10 +399,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
       
   return root;
 }
- //1038. Binary Search Tree to Greater Sum Tree
+ //1038. Binary Search Tree to Greater Sum Tree ,Reverse of InOrder Traversal
  int sum=0;
  public TreeNode bstToGst(TreeNode root) {
-     Stack<TreeNode> st = new Stack<>();
+       Stack<TreeNode> st = new Stack<>();
 		TreeNode current = root;
 
 		while (!st.isEmpty() || current != null) {
