@@ -22,8 +22,6 @@ public class JPMC {
 	 * @param args
 	 */
 	public static void main(String args[]) {
-		
-		
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 		SparkSession spark = SparkSession.builder().appName("Demo").master("local").getOrCreate();
 		spark.sparkContext().setLogLevel("ERROR");
@@ -46,7 +44,6 @@ public class JPMC {
 		Dataset<Row> peopleDF = spark.createDataFrame(peopleRDD, Person.class);
 		// Register the DataFrame as a temporary view
 		peopleDF.createOrReplaceTempView("people");
-		
 		
 		/**You are getting DEVICE_ID,TIME_STAMP,TEMP (F)
 		 * get this data and covert it to Centrigrade and write it to parque file

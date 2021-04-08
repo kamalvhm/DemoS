@@ -8,33 +8,7 @@ import com.datastructure.TreePrinter;
 public class Practice {
 
 	public static void main(String[] args) {
-		//1) Print No from 7 to 1 and reverse 
-		/*print(7);
 		
-		TreeNode<Integer> tree = new TreeNode(1); // 1
-		tree.left = new TreeNode(2); // 2 3
-		tree.right = new TreeNode(3); // 4 5
-		tree.left.left = new TreeNode(4);
-		tree.left.right = new TreeNode(5);
-		//2)Write function to return height of given tree
-		//System.out.print(TreePrinter.getTreeDisplay(tree));
-		//System.out.print("Height:-"+height(tree));
-		
-		int [] a= {4,6,2,1,3};
-		//3)sort a given array
-		char c []= {'h','e'};
-		reversee(c,c.length-1,0);
-		System.out.print(c);
-		System.out.println(power(3,2));*/
-		
-		//pzz(2);
-		int [] b= {4,6,2,1,3};
-		//System.out.print(print(b,0));
-		
-		int [] c= {2,3,6,9,8,3,2,6,3,4};
-		//System.out.print(firstOccurence(c,0,8));
-		solve("ABC", "");
-
 	}
 	
 
@@ -109,16 +83,7 @@ public class Practice {
 	 }
 	 
 	 
-	 public static void pzz(int n) {
-		 if(n==0)
-			 return;
-		 System.out.println("Pre "+n);
-		 pzz(n-1);
-		 System.out.println("In "+n);
-		 pzz(n-1);
-		 System.out.println("Post "+n);
-
-	 }
+	
 	 
 	
 

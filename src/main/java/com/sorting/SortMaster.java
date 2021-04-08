@@ -3,9 +3,15 @@ package com.sorting;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.beans.ListNode;
+
 
 public class SortMaster {
-
+	/**
+	 * 1)148. Sort List (sort a Linked list check in   {@link com.datastructure.MyLinkList.#sortList(ListNode)})
+	 *  @see com.datastructure.MyLinkedList
+	 * 
+	 */
 	private static void selectionSort(int[] arr) {
 		if(arr==null) return;
 		for(int i=0;i<arr.length;i++) {

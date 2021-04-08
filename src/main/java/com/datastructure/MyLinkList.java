@@ -384,7 +384,55 @@ public class MyLinkList<T> {
 	        return a;
 	    }
 	    
+	    //148. Sort List
+	    public ListNode sortList(ListNode head) {
+	        if(head==null || head.next==null)return head;
+	        
+	        ListNode temp=head;
+	        ListNode slow=head;
+	        ListNode fast=head;
+	        
+	        //dividing list in two halfs 
+	        while(fast!=null && fast.next!=null){
+	            temp=slow;
+	            slow=slow.next;
+	            fast=fast.next.next;
+	        }
+	        
+	        temp.next=null;
+	        ListNode left=sortList(head);
+	        ListNode right=sortList(slow);
+	      return  merge2(left,right);
+	    }
 	    
+	    public ListNode merge2(ListNode l1,ListNode l2){
+	        ListNode tempHead=new ListNode(0);
+	        ListNode current=tempHead;
+	        
+	        while(l1!=null && l2!=null){
+	            if(l1.val<l2.val){
+	                current.next=l1;
+	                l1=l1.next;
+	            }else {
+	                current.next=l2;
+	                l2=l2.next;
+	            }
+	            current=current.next;
+	        }
+	        
+	        if(l1!=null) // no while loop as its LL
+	        {
+	            current.next=l1;
+	            l1=l1.next;
+
+	        }
+	        
+	        if(l2!=null){
+	            current.next=l2;
+	            l2=l2.next;
+	        }
+	        return tempHead.next;
+	    }
 	    
 	    
 }

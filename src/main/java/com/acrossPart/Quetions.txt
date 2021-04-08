@@ -1,6 +1,6 @@
              GOLDMAN
 Coderpad – two coding questions in 1 hour
-1) Given unsorted array and sum, find minimum length of subarray whose sum is = or > then given target. Example: {1,2,3,4} target 6 === return 2
+1) Given unsorted array and sum, find minimum length of subarray whose sum is = or > then given target. Example: {1,2,3,4} target 6 === return 2 (Modified findSubarray in sliding window SW.java)
 2) Given scores of the students in 2-D array{name,score}, return max average for any student, it should be floor if average is in decimal.
    Example String[][] arr = {{“a”,”3”}, 
 							{“a”,”3”},

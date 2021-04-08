@@ -29,6 +29,8 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 		int[] A = { 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 };
 		int sum = 15;
 		findSubarray(A, sum);
+		
+		System.out.println("FIRST NEGATIVES");
 
 		int B[] = { 12, -1, -7, 8, -15, 30, 16, 28 };
 		printFirstNeg(B,3);
@@ -221,7 +223,7 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 				right++;
 			}
 			//STEP3:- if window size matches do following its inside same loop ****VERY IMPORTANT*****
-			if(right-left+1==window) {
+			if(right-left+1==window) {   //IF ELSE IF NOT USED R++ is Not there if Else if there then in slid do Right ++ as well
 				//SUB STEP 3.1 get the answer 
 				if(!negatives.isEmpty())
 				System.out.print(negatives.get(0)+", ");

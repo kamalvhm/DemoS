@@ -104,4 +104,16 @@ public class BitWiseOperator {
 	        }
 	        return count;
 	    }
+	 
+	 
+	 // The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+	    public int hammingDistance(int x, int y) {
+	        int results=0;
+	        while(x>0 || y>0){
+	            results+=(x%2)^(y%2);
+	            x>>=1;
+	            y>>=1; //shift 1 bit
+	        }
+	        return results;
+	    }
 }

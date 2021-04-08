@@ -59,6 +59,21 @@ public class Stack<T> implements Iterable<T> {
 		int[] a ={ 2,1,5,6,2,3};
 		System.out.print(largestRectangleArea(a));
 	}
+	//20. Valid Parentheses
+	 public boolean isValid(String s) {
+	        Stack<Character> stack=new Stack<Character>();
+	        for(char c:s.toCharArray()){
+	            //subtracting one or two from ch and comparing to top of stack because that is the difference between o                         open and closed breackets in the ascii table					
+	        	// open and closed breackets in the ascii table
+	                if(!stack.isEmpty() && (stack.peek()==c-1 || stack.peek()==c-2))
+	                    stack.pop();
+	                else
+	                    stack.push(c);
+	            }
+	              
+	        return stack.isEmpty();
+	        
+	    }
 	
 	   //84. Largest Rectangle in Histogram || discussion https://www.youtube.com/watch?v=SSpnMY5TrTw || 
 	
