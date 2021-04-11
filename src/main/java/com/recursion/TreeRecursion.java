@@ -3,7 +3,7 @@ package com.recursion;
 import java.util.ArrayList;
 import java.util.List;
 
- import com.datastructure.TreePrinter;
+import com.datastructure.TreePrinter;
 
 class TreeNode {
 	int val;
@@ -25,6 +25,12 @@ public class TreeRecursion {
 		tree.left.right = new TreeNode(5);
 		//System.out.print(sumLeaf(tree));
 		//System.out.print(TreePrinter.getTreeDisplay(tree));
+		System.out.print("HH"+height(tree));
+	}
+	
+	public static int height(TreeNode node) {
+		if(node==null)return 0;
+		else return 1+Math.max(height(node.left), height(node.right));
 	}
 	//	100	Same Tree
 	 public boolean isSameTree(TreeNode p, TreeNode q) {
