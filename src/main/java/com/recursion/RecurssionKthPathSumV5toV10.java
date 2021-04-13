@@ -50,7 +50,7 @@ public class RecurssionKthPathSumV5toV10 {
 		
 		//System.out.print(TreePrinter.getTreeDisplay(tree));
 		
-		//System.out.println("HIEGHT-"+height(tree));
+		System.out.println("HIEGHT (3)-"+height(tree));
 		
 		Stack<Integer> st=new Stack<>();
 		st.add(1);
@@ -67,6 +67,10 @@ public class RecurssionKthPathSumV5toV10 {
 		System.out.println(st);
 
 
+	}
+	public static int hieght(TreeNode root) {
+		if(root==null)return 0;
+		else return 1+Math.max(hieght(root.left), hieght(root.right));
 	}
 	
 	public static void print1toN(int n) {

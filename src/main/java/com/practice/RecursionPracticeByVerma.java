@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
 
+import org.apache.commons.math3.random.ISAACRandom;
+import org.apache.spark.deploy.master.BlackHolePersistenceEngine;
+import org.apache.spark.streaming.ui.JsCollector;
+
+import scala.Char;
+import scala.languageFeature.reflectiveCalls;
+/**CHECK CORRECTNESS In @link RecursionByVerma.java*/
 public class RecursionPracticeByVerma {
 	//FIRST THINK IN TERMS OF DECISION IF NOT THEN GO FOR INPUT SMALL (IBH)
 	//IF CHOICES/DECISION is clear go for Recursive Tree ,else go for IBH method
@@ -18,9 +25,9 @@ public class RecursionPracticeByVerma {
 		list.add(6);
 		list.add(3);
 		list.add(1);
-		System.out.println("2) BEFORE "+list);
+		//System.out.println("2) BEFORE "+list);
 		sortArraList(list);
-		System.out.println("2) AFTER SORT LIST"+list);
+		System.out.println("2) LIST  AFTER SORT [1, 3, 4, 6] :- "+list);
 	//3) Height of Tree
 		/**@link RecurssionKthPathSumV5toV10.java*/
 		
@@ -30,18 +37,18 @@ public class RecursionPracticeByVerma {
 		st.add(1);
 		st.add(3);
 		st.add(4);
-		System.out.println("4) BEFORE "+st);
+		//System.out.println("4) BEFORE "+st);
 		sortStack(st);
-		System.out.println("4) AFTER SORT STACK"+st);
+		System.out.println("4) STACK AFTER SORT [1, 3, 4, 5] :-"+st);
 	//5)sort an stack
 		reverseStack(st);
-		System.out.println("5) AFTER REVERSE STACK "+st);
+		System.out.println("5) AFTER REVERSE STACK [5, 4, 3, 1] :-"+st);
 	//6)delete in middle in stack
 		deleteMiddleStack(st,2);
-		System.out.println("6) AFTER DELETE MIDDLE STACK "+st);
+		System.out.println("6) AFTER DELETE MIDDLE STACK [5, 4, 1] :-"+st);
 	//7)Kth SYMBOL GRAMMER :- Two int given N,K generate grammer from this with below condition 1)if N=1 & K=1 then return 0 else to generate for N look for N-1 such that 
 		//if  N-1 =0 then 01 if 1 then 10 ,you need to return digit in N Row and K col 
-		System.out.println("7)Kth SYMBOL GRAMMER "+kthSymbolGrammer(4,6));
+		System.out.println("7)Kth SYMBOL GRAMMER (0) :-"+kthSymbolGrammer(4,6));
 		
    //8)TOWER OF HANOI:-
 		int numberOfDiskOnsource=3;
@@ -57,7 +64,7 @@ public class RecursionPracticeByVerma {
 		HashSet<String> unique=new HashSet<>();
 		uniqueSubsets("aab","",unique);
 		System.out.println(unique);
-	//11)Permutation with spaces :- in input a string given ABC so print all with space permutation
+	//11)Permutation with spaces :- in input a string given ABC so print all with space permutation {ABC, AB_C, A_BC, A_B_C}
 		System.out.println("*****************PERMUTATION WITH SPACES*******************");
 		permutationwithSpaces("ABC","");
 	//12)Permutation with CASE Change :- print with Capital and small combination
@@ -83,75 +90,76 @@ public class RecursionPracticeByVerma {
 		
 	}
 
-	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
-
+	public static void print(int n) {
+		
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {
-
+		
 	}
 	
-	public static void insert(ArrayList<Integer> list,int val) {
+	public static void insert(ArrayList<Integer> arr,int val) {
+		
+	}
+
 	
-	}
-
-	public static void print(int n) {
-
-	}
 	
 	private static void sortStack(Stack<Integer> st) {
-	
+		
 	}
 
 
 	private static void insert1(Stack<Integer> st, int val) {
-	
+		
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
-		
+			
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {
-	
+		
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
-
+		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
 		return 1;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-	
+		
 	}
 	
 	private static void subsets(String ip, String op) {
-	
+		
+	}
+	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
+		
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-
+		
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-	
+		
+
 	}
 
 	private static void letterPermutation(String ip, String op) {
-	
-
+		
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-	
+		
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-	
+		
 	}
 	
-	private static int josephusProblem(ArrayList<Integer> n, int k,int index) {
+	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
 		return 1;
 	}
 }

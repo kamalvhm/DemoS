@@ -24,7 +24,10 @@ public class DPractice {
 		for (int[] t : dp)
 			Arrays.fill(t, -1);
 	}
-
+	/**@link ZeroOneKnapsack1.java
+	 * @link ZeroOneKnapsackRelatedProblems.java
+	 * @link UnboundedKnapsack2.java
+	 */
 	public static void main(String[] args) {
 		// input : two arrays wt, val and one capacity is given return maximum profit
 		// which satisfy this capacity
@@ -73,24 +76,31 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		if(w==0 || n==0)return 0;
-		else  if(wt[n-1]<=w) {
+		if(n==0 || w==0)return 0;
+		if(wt[n-1]<=w) {
 			return Math.max(val[n-1]+knapsack1(wt, val, w-wt[n-1], n-1), knapsack1(wt, val, w, n-1));
-		} 
-		else return knapsack1(wt, val, w, n-1);
+		}else
+		return knapsack1(wt, val, w, n-1);
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] =new int [n+1][w+1];
-	
+		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<w+1;j++) {
+				if(wt[i-1]<=j)
+					t[i][j]=Math.max(val[i-1]+t[i-1][j-wt[i-1]], t[i-1][j]);
+				else t[i][j]=t[i-1][j];
+			}
+		}
 		return t[n][w];
 
 	}
 
 	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean t[][] =new boolean[n+1][sum+1];
-		for(int i=0;i<n+1;i++) 
-			t[i][0]=true;
+		for(int i=0;i<n+1;i++)
+			t[i][0]=true ;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
 				if(arr[i-1]<=j)
@@ -98,8 +108,6 @@ public class DPractice {
 				else t[i][j]=t[i-1][j];
 			}
 		}
-			
-		
 		return t[n][sum];
 	}
 
@@ -116,6 +124,7 @@ public class DPractice {
 		int t[][]=new int[n+1][sum+1];
 		for(int i=0;i<n+1;i++)
 			t[i][0]=1;
+		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
 				if(arr[i-1]<=j)
@@ -131,11 +140,12 @@ public class DPractice {
 	    int	sum=0;
 	    for(int i:arr)
 	    	sum+=i;
-	    boolean [][]t=subsetSumToReturnTable(arr, sum, n);
+	    boolean t[][]=subsetSumToReturnTable(arr, sum, n);
 	    int min=Integer.MAX_VALUE;
 	    for(int i=0;i<sum/2;i++) {
-	    	if(t[arr.length-1][i])
+	    	if(t[arr.length-1][i]) {
 	    		min=Math.min(min, sum-2*i);
+	    	}
 	    }
 		return min;
 	}
@@ -143,8 +153,8 @@ public class DPractice {
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
 		boolean t[][] = new boolean[n + 1][sum + 1];
 		
-		for(int i=0;i<n+1;i++) 
-			t[i][0]=true;
+		for(int i=0;i<n+1;i++)
+			t[i][0]=true ;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
 				if(arr[i-1]<=j)
@@ -168,28 +178,14 @@ public class DPractice {
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<w+1;j++) {
-				if(wt[i-1]<=j)
-					t[i][j]=Math.max(val[i-1]+t[i][j-wt[i-1]], t[i-1][j]);
-				else t[i][j]=t[i-1][j];
-			}
-		}
+		
 		return t[n][w];
 
 	}
 
 	public static int coinChangeI(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-		for(int i=0;i<n+1;i++)
-			t[i][0]=1;
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<sum+1;j++) {
-				if(coin[i-1]<=j)
-					t[i][j]=t[i][j-coin[i-1]]+t[i-1][j];
-				else t[i][j]=t[i-1][j];
-			}
-		}
+		
 		return t[n][sum];
 	}
 
@@ -198,17 +194,7 @@ public class DPractice {
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
 		
-		for(int i=0;i<sum+1;i++)
-			t[0][i]=Integer.MAX_VALUE-1;
-		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<sum+1;j++) {
-				if(coin[i-1]<=j)        
-					//t[i][j]=Math.min(t[i-1][j],1+t[i][j-coin[i-1]]);
-					t[i][j]=Math.min(1+t[i][j-coin[i-1]], t[i-1][j]);
-				else t[i][j]=t[i-1][j];
-			}
-		}
+	
 		
 		return t[n][sum];
 	}
