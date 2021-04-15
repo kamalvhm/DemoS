@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
+import org.apache.arrow.flatbuf.List;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.spark.deploy.master.BlackHolePersistenceEngine;
 import org.apache.spark.streaming.ui.JsCollector;
 
 import scala.Char;
 import scala.languageFeature.reflectiveCalls;
+import scala.sys.process.ProcessBuilderImpl.Simple;
 /**CHECK CORRECTNESS In @link RecursionByVerma.java*/
 public class RecursionPracticeByVerma {
 	//FIRST THINK IN TERMS OF DECISION IF NOT THEN GO FOR INPUT SMALL (IBH)
@@ -25,7 +29,7 @@ public class RecursionPracticeByVerma {
 		list.add(6);
 		list.add(3);
 		list.add(1);
-		//System.out.println("2) BEFORE "+list);
+		System.out.println("2) BEFORE "+list);
 		sortArraList(list);
 		System.out.println("2) LIST  AFTER SORT [1, 3, 4, 6] :- "+list);
 	//3) Height of Tree
@@ -91,7 +95,7 @@ public class RecursionPracticeByVerma {
 	}
 
 	public static void print(int n) {
-		
+	
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {
@@ -99,60 +103,63 @@ public class RecursionPracticeByVerma {
 	}
 	
 	public static void insert(ArrayList<Integer> arr,int val) {
-		
+	
 	}
 
 	
 	
 	private static void sortStack(Stack<Integer> st) {
-		
+	
 	}
 
 
 	private static void insert1(Stack<Integer> st, int val) {
-		
+
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
-			
+	
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {
-		
+	
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
-		
+	
 	}
 	private static int kthSymbolGrammer(int n, int k) {
 		return 1;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-		
+	
 	}
 	
 	private static void subsets(String ip, String op) {
-		
+	
+
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
-		
+
+
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-		
+	
+
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-		
-
+	
 	}
 
 	private static void letterPermutation(String ip, String op) {
-		
+	
+
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-		
+	
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {

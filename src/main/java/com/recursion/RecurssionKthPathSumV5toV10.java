@@ -70,7 +70,7 @@ public class RecurssionKthPathSumV5toV10 {
 	}
 	public static int hieght(TreeNode root) {
 		if(root==null)return 0;
-		else return 1+Math.max(hieght(root.left), hieght(root.right));
+		return 1+Math.max(hieght(root.left), hieght(root.right));
 	}
 	
 	public static void print1toN(int n) {
