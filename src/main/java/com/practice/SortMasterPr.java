@@ -9,7 +9,7 @@ public class SortMasterPr {
 		
 	}
 	private static void bubbleSort(int[] a) {
-	
+		
 	}
 	private static void insertionSort(int[] a) {
 		
@@ -17,6 +17,7 @@ public class SortMasterPr {
 	
 	private static int[] mergeSort(int[] a) {
 		return a;
+
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {
@@ -29,6 +30,7 @@ public class SortMasterPr {
 	}
 	
 	private static int partition(int[] a, int start, int end) {
+		
 		return 1;
 	}
 	private static int randomized(int[] a, int start, int end) {

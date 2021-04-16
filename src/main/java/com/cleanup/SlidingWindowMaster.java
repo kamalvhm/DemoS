@@ -1,4 +1,4 @@
-package com.practice;
+package com.cleanup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 
 import scala.xml.dtd.impl.WordExp.Letter;
 
-public class SlidingWindowPractice {
+public class SlidingWindowMaster {
 
 	public static void main(String[] args) {
 		//1)Return Maximum sum of subArray element of size 3 from below array;
