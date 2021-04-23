@@ -18,21 +18,21 @@ public class SlidingWindowPractice {
 			System.out.print("2)First Negative in SubArray (-1-1-7-15-15):- ");
 			firstNegative(arr2,3);
 			System.out.println();
-	    //3)Count Occurrence of Anagrams abc anagram are { cba, bca,acb,...} (always should be 3 chars in any order) 
+	    //3)Count Occurrence of Anagrams abc anagram are { cba, bca,acb,...} (always should be 3 chars in any order can't bee more than 3 chars) 
 			System.out.println("3)Count Occurrence of Anagrams [0,6]:-"+findAnagrams("cbaebabacd", "abc"));
 		//4) Maximum of All SubArray of Size k :-return max value present in each window of size 3
 			int arr3[] =  { 1, 3, -1, -3, 5, 3, 6, 7 };
 			System.out.println("4) Maximum of All SubArray [3, 3, 5, 5, 6, 7] :-"+maximumInWindow(arr3,3));
 			
 		/****************************************VARIABLE SIZE*****************************************/
-		//5) Longest Sub Array Of Sum K :-return longest subArray wich form SUM K
+		//5) Longest Sub Array Of Sum K :-return longest subArray size which form SUM K
 			int arr4[]= {4,1,1,1,2,3,5};
 			System.out.println("5) Longest Sub Array Of Sum K (4):- "+longestSubArray(arr4,5));
 		//6)Largest SubString with K unique Characters
 			String str="aabacbebebe";
 			System.out.println("6) Largest SubString with K unique Characters (cbebebe) Or (7):- "+largestSubStringWithKUnique(str,3));
 			
-		//7)Largest SubString without Repeating Character
+		//7)Largest SubString without Repeating Character ans will be 3 as KEW with all unique
 			String str2="bwwkew";
 			System.out.println("7) Largest SubString without Repeating Character(3):- "+LongestSubStringWithAllUnique(str2));
 			
@@ -52,18 +52,18 @@ public class SlidingWindowPractice {
 
 	private static int firstNegative(int[] arr, int window) {
 		int i=0,j=0;
-		List<Integer> negatives=new ArrayList<>();
+		List<Integer> list=new ArrayList<>();
 		while(j<arr.length) {
-			if(arr[j]<0)
-				negatives.add(arr[j]);
+			if(arr[j]<0) {
+				list.add(arr[j]);
+			}
 			if(j-i+1<window)
 				j++;
 			else if(j-i+1==window) {
-				if(!negatives.isEmpty())
-					System.out.print(negatives.get(0));
-				if(negatives.contains(arr[i]))
-					//negatives.remove(Integer.valueOf(arr[i]));
-					negatives.remove(0);
+				if(!list.isEmpty())
+					System.out.print(list.get(0)+", ");
+				if(list.contains(arr[i]))
+					list.remove(Integer.valueOf(arr[i]));
 				i++;
 				j++;
 			}
@@ -81,8 +81,7 @@ public class SlidingWindowPractice {
 				j++;
 			else if(j-i+1==window) {
 				max=Math.max(max, currentSum);
-				currentSum-=arr[i];
-				i++;
+				currentSum-=arr[i++];
 				j++;
 			}
 		}
@@ -91,52 +90,49 @@ public class SlidingWindowPractice {
 
 	//https://leetcode.com/problems/find-all-anagrams-in-a-string/
 	  public static List<Integer> findAnagrams(String s, String p) {
-	         List<Integer> ans = new ArrayList<>();
-		     if(s.length() < p.length()) return ans;
+		  List<Integer> ans=new ArrayList<>();
+	            int i=0,j=0;
+	            HashMap<Character,Integer> map=new HashMap<>();
+	            for(char c:p.toCharArray())
+	            	map.put(c,map.getOrDefault(c, 0)+1);
+	            
+	            int count=map.size();
+	            
+		        int window=p.length();
+
+	          while(j<s.length()) {
+	        	  char rc=s.charAt(j);
+	        	  if(map.containsKey(rc)) {
+	        		  int val=map.get(rc);
+	        		  map.put(rc, --val);
+	        		  if(val==0)
+	        			  count--;
+	        	  }
+	        	  if(j-i+1<window)
+	        		  j++;
+	        	  else if(j-i+1==window) {
+	        		  if(count==0)
+	        			  ans.add(i);
+	        		  
+	        		  char lc=s.charAt(i);
+	        		  if(map.containsKey(lc)) {
+	        			  int val=map.get(lc);
+	        			  if(val==0)
+	        				  count++;
+	        			  map.put(lc, ++val);
+	        		  }
+	        		  i++;
+        			  j++;
+	        	  }
+	          }    
 	        
-	        HashMap<Character,Integer> map=new HashMap<>();
-	        for(char c:p.toCharArray())
-	            map.put(c,map.getOrDefault(c,0)+1);
-	        int count =map.size();
-	        int left=0,right=0;
-	        
-	        int window=p.length();
-	        while(right<s.length()){
-	            char rightChar=s.charAt(right);
-	            
-	            if(map.containsKey(rightChar)){
-	                int val=map.get(rightChar);
-	                map.put(rightChar,--val);
-	                if(val==0)
-	                    count--;
-	            }
-	            
-	            if(right-left+1<window)
-	                right++;
-	            else if(right-left+1==window){
-	                if(count==0)
-	                    ans.add(left);
-	                
-	                char leftChar=s.charAt(left);
-	                if(map.containsKey(leftChar)){
-	                    int val=map.get(leftChar);
-	                    if(val==0)
-	                        count++;
-	                    map.put(leftChar,++val);
-	                }
-	                left++;
-	                right++;
-	                
-	            }
-	            
-	        }
 	        return ans;
 	    }
 
 	  private static int longestSubArray(int[] arr, int sum) {
 			int i=0,j=0;
+			int max=Integer.MIN_VALUE;
 			int currentSum=0;
-			int max =0;
 			while(j<arr.length) {
 				currentSum+=arr[j];
 				if(currentSum<sum)
@@ -146,8 +142,8 @@ public class SlidingWindowPractice {
 					j++;
 				}else if(currentSum>sum) {
 					while(currentSum>sum) {
-						currentSum-=arr[i++];
-						
+						currentSum-=arr[i];
+						i++;
 					}
 					j++;
 				}
@@ -157,29 +153,21 @@ public class SlidingWindowPractice {
 
 		private static List<Integer> maximumInWindow(int a[],int window){
 			List<Integer> ans =new ArrayList<>();
-			int left=0,right=0;
-			int max=Integer.MIN_VALUE;
-			
-			PriorityQueue<Integer> pq=new PriorityQueue<>((b,c)->c-b);
-			
-			while(right<a.length) {
-				
-				pq.add(a[right]);
-				
-				if(right -left+1<window)
-					right++;
-				else if(right-left+1==window) {
-
+			PriorityQueue<Integer> pq=new PriorityQueue<>((c,b)->b-c);
+			int i=0,j=0;
+			while(j<a.length) {
+				pq.add(a[j]);
+				if(j-i+1<window)
+					j++;
+				else if(j-i+1==window) {
 					if(!pq.isEmpty())
 						ans.add(pq.peek());
+					if(pq.contains(a[i])) {
+						pq.remove(Integer.valueOf(a[i]));
 					
-					
-					if(pq.contains(a[left])) {
-						pq.remove(Integer.valueOf(a[left]));
-						
 					}
-					left++;
-					right++;
+					i++;
+					j++;
 				}
 			}
 			return ans;
@@ -187,67 +175,63 @@ public class SlidingWindowPractice {
 
 		private static String largestSubStringWithKUnique(String s, int k) {
 			int i=0,j=0;
-			HashMap<Character,Integer> map=new HashMap<>();
 			int max=0;
-			String maxStr="";
-			while(j<s.length()) { 
-				char c=s.charAt(j);
-				map.put(c, map.getOrDefault(c, 0)+1);
-				
+			String ans="";
+			HashMap<Character,Integer> map=new HashMap<>();
+			while(j<s.length()) {
+				char rc=s.charAt(j);
+				map.put(rc, map.getOrDefault(rc, 0)+1);
 				if(map.size()<k)
 					j++;
 				else if(map.size()==k) {
-					//max=Math.max(max, j-i+1);
-					if(max<j-i+1) {
+					if(j-i+1>max) {
 						max=j-i+1;
-						maxStr=s.substring(i,j+1);
+						ans=s.substring(i,j+1);
 					}
 					j++;
 				}
 				else if(map.size()>k) {
-					while(map.size()>k) {
-						char leftChar=s.charAt(i);
-						int val=map.get(leftChar);
-						if(--val==0)
-							map.remove(leftChar);
-						else map.put(leftChar, val);
-						i++;
-					}
-					j++;
+					 while(map.size()>k) {
+						 char lc=s.charAt(i);
+						 int val=map.get(lc);
+						 if(--val==0)
+							 map.remove(lc);
+						 else map.put(lc, val);
+						 i++;
+					 }
+					 j++;
 				}
 			}
-			//return max;
-			return maxStr;
+			return ans;
 		}
 		
 		public static int LongestSubStringWithAllUnique(String s) {
 			int i=0,j=0;
 			HashMap<Character,Integer> map=new HashMap<>();
 			int max=0;
+			String ans="";
 			while(j<s.length()) {
-				char c=s.charAt(j);
-				map.put(c, map.getOrDefault(c, 0)+1);
-				if(map.size()>(j-i+1))//comparing map size with window size as all window characters should be unique !!!!THIS CAN BE IGNORED NOT VALID !!!!
-				{
+				char rc=s.charAt(j);
+				map.put(rc, map.getOrDefault(rc, 0)+1);
+				
+				if(map.size()==j-i+1) {
+					if(max<j-i+1)
+					{
+						max=j-i+1;
+						ans=s.substring(i,j+1);
+					}
 					j++;
-				}else if(map.size()==(j-i+1)) {
-					max =Math.max(max, map.size());
-					j++;
-				}else if(map.size()<(j-i+1)) { // < change from last ** suppose window contains pww then map size 2 window size 3 this mean we have w repeating in map so pop from behind
-					while (map.size()<(j-i+1)) {
-						char l=s.charAt(i);
-						if(map.containsKey(l)) {
-							int val=map.get(l);
-							if(val>1)
-								map.put(l, --val);
-							else 
-								map.remove(l);
-							i++;
-						}
+				}else if(map.size()<j-i+1) {
+					while(map.size()<j-i+1) {
+						char lc=s.charAt(i);
+						int val=map.get(lc);
+						if(--val==0)
+							map.remove(lc);
+						else map.put(lc, val);
+						i++;
 					}
 					j++;
 				}
-				
 			}
 			return max;
 	}
@@ -259,8 +243,8 @@ public class SlidingWindowPractice {
 			HashMap<Character,Integer> map=new HashMap<>();
 			int max=0;
 			while(j<s.length()) {
-				char c=s.charAt(j);
-				map.put(c, map.getOrDefault(c, 0)+1);
+				char rc=s.charAt(j);
+				map.put(rc, map.getOrDefault(rc, 0)+1);
 				
 				if(map.size()<MAX_TYPE) {
 					j++;
@@ -269,14 +253,12 @@ public class SlidingWindowPractice {
 					j++;
 				}else if(map.size()>MAX_TYPE) {
 					while(map.size()>MAX_TYPE) {
-						char l=s.charAt(i);
-						if(map.containsKey(l)) {
-							int v=map.get(l);
-							if(v>1)
-								map.put(l, --v);
-							else map.remove(l);
-							i++;
-						}
+						char lc=s.charAt(i);
+						int val=map.get(lc);
+						if(--val==0)
+							map.remove(lc);
+						else map.put(lc, val);
+						i++;
 					}
 					j++;
 				}

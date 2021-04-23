@@ -1,3 +1,4 @@
+
 package com.recursion;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class RecursionByVerma {
 	//15)N-bit Binary where 1s>0s in all its prefix :- A int n given for this in its binary representation print all prefix 1>0
 		nBitBinary(3,0,0,"");
 		System.out.println("*****************JOSEPHUS PROBLEM*******************");
-	//16)Josephus Problem:- N is total peaple ,K is die index return last person
+	//16)Josephus Problem:- N is total peaple ,K is die index return last person | 1823. Find the Winner of the Circular Game
 		ArrayList<Integer> totalPersons=new ArrayList<>();
 		for(int i=1;i<=40;i++)
 			totalPersons.add(i);

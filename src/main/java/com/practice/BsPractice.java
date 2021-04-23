@@ -45,10 +45,11 @@ public class BsPractice {
 	}
 
 	private static int search(int[] a, int i) {
-		return -1;
+			return -1;
 		}
 	
 	public static int bsfirst(int [] a,int i) {
+		
 		return -1;
 	}
 	
@@ -57,10 +58,11 @@ public class BsPractice {
 	}
 	
 	public static int findPeakElement(int[] a) {
-		return -1;
+		return 1;
 	}
 	
 	public static int arrayRotatedcount(int[] a) {
+		
 		return -1;
 
 	}
@@ -122,22 +124,14 @@ public class BsPractice {
 	 public static int findSearchInBiotonicArray(int[] a,int target) {
 	        int left=0;
 	      
-	          return left;
+	        return left;
 	      }
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {
-		 	int i=0,j=a.length-1;
-			while(i>=0 && j>=0 && i<a.length && j<a[0].length) {
-				if(a[i][j]==target)
-					return i+" "+j;
-				else if(target>a[i][j])
-					i++;
-				else j--;
-			}
-		 	return "";
 		 	
-	      }
+		 	return "";
+	 }
 	 
 
 	 

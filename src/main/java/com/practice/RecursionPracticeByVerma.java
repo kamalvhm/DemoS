@@ -3,6 +3,12 @@ package com.practice;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
+
+import javax.tools.Diagnostic;
+import javax.validation.constraints.Digits;
+
+import org.apache.hadoop.hdfs.server.namenode.block_005finfo_005fxml_jsp;
+import org.apache.spark.deploy.master.BlackHolePersistenceEngine;
 /**CHECK CORRECTNESS In @link RecursionByVerma.java*/
 public class RecursionPracticeByVerma {
 	//FIRST THINK IN TERMS OF DECISION IF NOT THEN GO FOR INPUT SMALL (IBH)
@@ -30,7 +36,7 @@ public class RecursionPracticeByVerma {
 		st.add(1);
 		st.add(3);
 		st.add(4);
-		//System.out.println("4) BEFORE "+st);
+		System.out.println("4) BEFORE "+st);
 		sortStack(st);
 		System.out.println("4) STACK AFTER SORT  [1, 3, 4, 5] :-"+st);
 	//5)sort an stack
@@ -92,7 +98,7 @@ public class RecursionPracticeByVerma {
 	}
 	
 	public static void insert(ArrayList<Integer> arr,int val) {
-		
+
 	}
 
 	
@@ -107,13 +113,14 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
-		
+	
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {
-	
+		
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
+	
 	}
 	private static int kthSymbolGrammer(int n, int k) {
 		return 1;
@@ -121,19 +128,19 @@ public class RecursionPracticeByVerma {
 	
 	private static void toh(int n, String s, String d, String h) {
 		
+		
 	}
 	
 	private static void subsets(String ip, String op) {
 		
-
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
-		
+	
 
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-	
+		
 
 	}
 
@@ -144,11 +151,11 @@ public class RecursionPracticeByVerma {
 
 	private static void letterPermutation(String ip, String op) {
 		
-
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
 		
+			
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
