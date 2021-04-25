@@ -1,8 +1,7 @@
 package com.thread;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class TestV4 {
+public class TestV4MultipleLocks {
 
 	
 	public static void main(String args[]) {

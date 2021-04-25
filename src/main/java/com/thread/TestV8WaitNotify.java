@@ -4,9 +4,9 @@ import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class TestV8 {
+public class TestV8WaitNotify {
 	//In this we will imlment same producer consumer patter with low level syncronization
-	private static BlockingQueue<Integer> queue=new ArrayBlockingQueue<>(10);
+	//private static BlockingQueue<Integer> queue=new ArrayBlockingQueue<>(10);
 	
 	public static void main(String args[]) throws InterruptedException {
 		Processor5 proc=new Processor5();

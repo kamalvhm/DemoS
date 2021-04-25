@@ -12,13 +12,13 @@ public class Worker {
 	private List<Integer> list2=new ArrayList<>();
 	//As both stage One and two are adding to different resource we have two critical section here 
 	//so adding syncronisation in method will not make both thread parallel so we have to go for 
-	//syncronisation block with two saperate locks
+	//syncronisation block with two separate locks
 	private Object lock1=new Object();
 	private Object lock2=new Object();
 
-	
+	//IF we add synchronized method that will solve the problem but both threads will take 4000 sec because there will be single lock
 	public void stageOne() {
-		synchronized (lock1) {
+		synchronized (lock1) {//syncronisation code block
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {

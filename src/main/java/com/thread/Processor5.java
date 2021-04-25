@@ -14,7 +14,7 @@ public class Processor5 {
 			System.out.println("Producer thread running ....");
 			wait(); //every obj have this method as it comes from Object class 
 			//It wait such that it does not consume lot of system resources for example if you have loop instead of this it will consume resouces
-			//you can only call in sync block, after wiat this thread will lose control of lock until two thing happen -it possible to regain control 
+			//you can only call in sync block, after wait this thread will lose control of lock until two thing happen -it possible to regain control 
 			// other thing is another thread on same lock call notify 
 			System.out.println(" Resumed ....");
 

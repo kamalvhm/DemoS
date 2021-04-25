@@ -25,7 +25,7 @@ class Processor extends Thread {
 	}
 }
 
-public class TestV2 {
+public class TestV2Volatile {
 
 	public static void main(String args[]) {
 		

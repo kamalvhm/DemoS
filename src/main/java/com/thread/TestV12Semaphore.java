@@ -17,7 +17,7 @@ public class TestV12Semaphore {
 		
 		ExecutorService e =Executors.newCachedThreadPool();
 		
-		for(int i=0;i<200;i++) {
+		for(int i=0;i<200;i++) { //we are creating 200 connection here 
 			e.submit(()->{
 				Connections.instance.connect();
 			});
@@ -25,7 +25,7 @@ public class TestV12Semaphore {
 		
 		
 		e.shutdown();
-		e.awaitTermination(1, TimeUnit.HOURS);
+		e.awaitTermination(1, TimeUnit.HOURS); //main thread will wait 
 	}
 	
 	

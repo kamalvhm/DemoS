@@ -6,7 +6,7 @@ import java.util.Random;
 
 
  class Processor6{
-	 //implementing Producer consumer Patter using Low level Syncronisation 
+	 //implementing Producer consumer Pattern using Low level Syncronisation 
 	private  LinkedList<Integer> list= new LinkedList<Integer>(); //shared data will be stored in this with limit 
 	private final int LIMIT=10;
 	
@@ -17,7 +17,8 @@ import java.util.Random;
 		while(true) {
 			synchronized (lock) {
 				while(list.size()==LIMIT) { //good practice to check condition in loop if this still apply or not
-					  lock.wait(); //wait if the list is full 
+					  lock.wait(); //wait if the list is full (as we don't wont to blindly assume that after woke this condition no longer 
+					  //apply so we check condition in loop)
 				}
 				list.add(value++); //shared data within lock
 				lock.notify();
@@ -28,7 +29,8 @@ import java.util.Random;
 	public  void consumer() throws InterruptedException{
 		Random r=new Random();
 		while(true) {
-			synchronized (lock) {
+			synchronized (lock) { //IMP:THis upper while(true) loop is out of synchronized block as only operation is critical 
+				//so you should only put critical code in synchronized
 				
 				while(list.size()==0) {//if empty wait until added 
 					  lock.wait();
@@ -45,7 +47,7 @@ import java.util.Random;
 	}
 }
 
-public class TestV9 {
+public class TestV9PCLowLevelSynk {
 
 	
 	public static void main(String args[]) throws InterruptedException {

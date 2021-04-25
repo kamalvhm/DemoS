@@ -8,16 +8,16 @@ import java.util.Scanner;
 public class Ab {
 
 	public static void main(String[] args) throws IOException {
+			 
 		
-		
-		Long enumSixtyToFifteen=new Long(1);
+		/*Long enumSixtyToFifteen=new Long(1);
 		int i=1;
 		Long.valueOf(i);
 		System.out.print("EQ "+(enumSixtyToFifteen.equals(Long.valueOf(i))));
 
 		ArrayList<Integer> list=new ArrayList<>();
 		list.add(1);
-		list.indexOf(1);	
+		list.indexOf(1);*/	
 		
 		/*//print(5);
 		//System.out.println("A".compareTo("Z"));

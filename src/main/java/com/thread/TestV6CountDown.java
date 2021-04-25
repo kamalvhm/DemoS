@@ -45,7 +45,7 @@ public class TestV6CountDown {
 		
 	}
 	try {
-		latch.await();
+		latch.await();//once coundown reach to zero awaits finally return and FINISHED!! will be printed
 	} catch (InterruptedException e2) {
 		// TODO Auto-generated catch block
 		e2.printStackTrace();

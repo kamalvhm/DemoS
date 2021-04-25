@@ -1,6 +1,6 @@
 package com.thread;
 
-public class Test {
+public class TestV1TwoWays {
 
 	public static void main(String[] args) {
 		

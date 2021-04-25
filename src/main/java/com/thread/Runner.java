@@ -23,7 +23,7 @@ public class Runner {
 	}
 
 	public void firstThread() throws InterruptedException {
-		lock.lock(); //aquired the lock 
+		lock.lock(); //Acquired the lock (Think of it as synk block and condition is wait and notify)
 		//same as wait 
 		cond.await();
 		System.out.println("Woken up !!");

@@ -2,13 +2,14 @@ package com.thread;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TestV3 {
+public class TestV3SyncronizedKeyword {
 	//In this we understand what is the need of synchronization  
 	//we  are running thread 20000 times so count should be always 20,000 
 	//so if do simple normal count ++ this will create issue <20000
 	//so we have two options here to solve this either use synchronization or atomic integer 
 	//atomic integer increment or decrement in single transaction 
 	private int count =0;
+	//It allows to increment in one step
 	AtomicInteger countAtomic =new AtomicInteger(0);
 	
 	public synchronized void increament() {
@@ -16,9 +17,9 @@ public class TestV3 {
 		//one thread can acquire at a time ,secount thread must wait until first finished;
 		count++;
 	}
-	
+	//we were having issue because count ++ is not an atomic operation it involve 3 steps
 	public static void main(String args[]) {
-		TestV3 t=new TestV3();
+		TestV3SyncronizedKeyword t=new TestV3SyncronizedKeyword();
 		t.doWork();
 	}
 	

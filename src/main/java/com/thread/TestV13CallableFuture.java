@@ -13,6 +13,15 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class TestV13CallableFuture {
+	/*********************************
+	 * Future:-Future is parameterized it shows the return value type
+	 * Callable:-Runnable can't return any value Callable on the other hand return future obj ,its a parameter 
+	 * class Callable<Integer> it shows the return type
+	 * 
+	 * 
+	 * 
+	 * 
+	 *********************************/
 
 	public static void main(String args[]) throws InterruptedException {
 
@@ -26,7 +35,8 @@ public class TestV13CallableFuture {
 					Random r=new Random();
 					int duration =r.nextInt(4000);
 					
-					if(duration>2000) {
+					if(duration>2000) { // we can also throw exception and future.get will throw ExecutionException for this 
+						//that ExecutionException will have this exception in cause 
 						throw new IOException("sleeping to long");
 					}
 					
@@ -38,18 +48,18 @@ public class TestV13CallableFuture {
 						e1.printStackTrace();
 					}
 					System.out.println("Finish");
-					return duration;
+					return duration;//we are returning duration 
 				}
 			});
 		
 
 		e.shutdown();
 		
-		try {
-			System.out.println("Result is "+future.get());
+		try {//get will block untill the thread associated with this future completes  so ExecutionException and usual 
+			//InterruptedException above declaired 
+			System.out.println("Result is "+future.get()); //future.get will give result it throws two exception
 		} catch (ExecutionException e1) {
-			// TODO Auto-generated catch block
-			IOException ioe=(IOException) e1.getCause();
+			IOException ioe=(IOException) e1.getCause();//this will give original IO exception 
 		System.out.println(e1);
 		}
 

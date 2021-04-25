@@ -9,26 +9,29 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Runner2 {
 	
+	//if we call with locks (switched in second method 1 2 then 2 1  so we can use try lock) it will create deadLock (if not add 1 sleep)
+	//dead lock can occur in nested synk blocks also so one solution is to always aquire locks in same order other we can use try lock 
+	
 	
 	private Account acc1=new Account();
 	private Account acc2=new Account();
 
 	private Lock lock1 =new ReentrantLock();
 	private Lock lock2 =new ReentrantLock();
-	
+	//this will aquire lock in such a way that deadlock won't occure no matter the order
 	private void acquireLocks(Lock first,Lock secound) throws InterruptedException {
-		
+		//while true as we need the locks any way we don't want to return without locks
 		while(true) {
 			boolean gotfirstLock = false;
 			boolean gotscoundLock = false;
 			
 			try {
-				gotfirstLock=first.tryLock();
-				gotscoundLock=secound.tryLock();
+				gotfirstLock=first.tryLock();//try lock return immediately if it got the lock then true otherwise false
+				gotscoundLock=secound.tryLock();//so no blocking in try lock
 			}finally {
-				if(gotfirstLock && gotscoundLock)
+				if(gotfirstLock && gotscoundLock) //if got both then return 
 					return;
-				if(gotfirstLock)
+				if(gotfirstLock)//other wise release your one lock and wait for next attempt
 					first.unlock();
 				if(gotscoundLock)
 					secound.unlock();
