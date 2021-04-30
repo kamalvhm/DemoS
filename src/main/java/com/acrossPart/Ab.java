@@ -1,14 +1,38 @@
 package com.acrossPart;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+import static org.apache.spark.sql.functions.col;
+
 
 public class Ab {
 
 	public static void main(String[] args) throws IOException {
-			 
+		//String s0="Sachin";  
+
+		String s1=new String("Sachin");  
+		String s2=s1.intern();  
+		//System.out.println(s2==s0);//Sachin  
+		System.out.println(s2==s1);//Sachin  
+		
+		SparkConf sc=new SparkConf().setAppName("A").setMaster("local");
+		JavaSparkContext jsc=new JavaSparkContext(sc);
+		
+		SparkSession spark=SparkSession.builder().appName("A").master("local").getOrCreate();
+		Dataset<Row> ds =spark.read().option("header", true).csv("path");
+		
+		ds=ds.withColumn("TEMP", col("F").minus(5).multiply(2));
+		ds.write().format("parque").save("path");
+		
+		
+
 		
 		/*Long enumSixtyToFifteen=new Long(1);
 		int i=1;

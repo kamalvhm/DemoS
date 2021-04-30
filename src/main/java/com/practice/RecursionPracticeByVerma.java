@@ -90,7 +90,7 @@ public class RecursionPracticeByVerma {
 	}
 
 	public static void print(int n) {
-		
+	
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {
@@ -98,7 +98,7 @@ public class RecursionPracticeByVerma {
 	}
 	
 	public static void insert(ArrayList<Integer> arr,int val) {
-
+		
 	}
 
 	
@@ -113,10 +113,10 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
-	
+		
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {
-		
+	
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
@@ -127,12 +127,21 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-		
+		if(n==0)
+			return;
+		toh(n-1,s,h,d);
+		System.out.println("Move "+n+" :-"+s+"->"+d);
+		toh(n-1,h,d,s);
 		
 	}
 	
 	private static void subsets(String ip, String op) {
-		
+		if(ip.isEmpty()) {
+			System.out.println("SUB-"+op);
+			return;
+		}
+		subsets(ip.substring(1), op);
+		subsets(ip.substring(1), op+ip.charAt(0));
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
 	
