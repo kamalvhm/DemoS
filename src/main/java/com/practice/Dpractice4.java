@@ -79,11 +79,49 @@ public class Dpractice4 extends DynamicPrograming{
 			int eggs=3,floor=5; //IP:-Eggs and floor given we need to identify threshold floor from which if we throw egg it will not break 
 			//we have to apply best technique in worst case to minimize no of attempts to find threshold floor
 			System.out.println("7)Egg Dropping Problem (3) ans:- "+eggDropRecursive(eggs,floor)); 
+			
+			  int mat[][] =
+			        {
+			            { 0, 0, 1, 0, 1, 1 },
+			            { 0, 1, 1, 1, 0, 0 },
+			            { 0, 0, 1, 1, 1, 1 },
+			            { 1, 1, 0, 1, 1, 1 },
+			            { 1, 1, 1, 1, 1, 1 },
+			            { 1, 1, 0, 1, 1, 1 },
+			            { 1, 0, 1, 1, 1, 1 },
+			            { 1, 1, 1, 0, 1, 1 }
+			        };
+			 
+			        System.out.print("The size of largest square submatrix of 1's is (3) " +
+			                findLargestSquare(mat));
 
 	}
 
 	
 	
+	private static int findLargestSquare(int[][] matrix) {
+	    int h =matrix.length;
+        int w =matrix[0].length;
+        int t[][]=new int[h][w];
+        int max=0;
+        
+        for(int i=0;i<h;i++) {
+        	for(int j=0;j<w;j++) {
+        		if(matrix[i][j]==1) {
+        			t[i][j]=1;
+        			if(i>0 && j>0) {
+        				t[i][j]=Math.min(Math.min(t[i-1][j-1], t[i-1][j]), t[i][j-1])+1;
+        			}
+        			max=Math.max(max, t[i][j]);
+        		}
+        	}
+        }
+
+		return max;
+	}
+
+
+
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
 		if(i>=j)return 0;
 		int min=Integer.MAX_VALUE;
@@ -95,22 +133,11 @@ public class Dpractice4 extends DynamicPrograming{
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
-		if(i>=j)return 0;
-		if(isPalindrom(s, i, j))return 0;
-		int ans=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-			int temp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
-			ans=Math.min(temp,ans);
-		}
-		return ans;
+		return 1;
 	}
 
 	private static boolean isPalindrom(String s, int i, int j) {
-		if(i==j)return true;
-		while(i<j) {
-			if(s.charAt(i++)!=s.charAt(j--));
-			return false;
-		}
+		
 		return true;
 
 	}

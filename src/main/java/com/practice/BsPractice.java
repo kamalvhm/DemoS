@@ -45,11 +45,10 @@ public class BsPractice {
 	}
 
 	private static int search(int[] a, int i) {
-			return -1;
+		return -1;
 		}
 	
 	public static int bsfirst(int [] a,int i) {
-		
 		return -1;
 	}
 	
@@ -58,11 +57,11 @@ public class BsPractice {
 	}
 	
 	public static int findPeakElement(int[] a) {
-		return 1;
+		return -1;
+
 	}
 	
 	public static int arrayRotatedcount(int[] a) {
-		
 		return -1;
 
 	}

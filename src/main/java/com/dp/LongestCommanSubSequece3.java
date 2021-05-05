@@ -82,6 +82,7 @@ public class LongestCommanSubSequece3 {
 		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
 		System.out.println("7)Length of longest subsequence of a which is substring in b :-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
 		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
+		//SAME AS DistinctSubsequences can call same 
 		System.out.println("9)count how many times a appear as subsequence in b :-"+stringASubSequenceInB(s9,s10,s9.length(),s10.length()));
 		int [] nums = {10,9,2,5,3,7,101,18};
 		System.out.println("18)LIS :-"+lengthOfLIS(nums));

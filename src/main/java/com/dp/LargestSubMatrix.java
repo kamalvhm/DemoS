@@ -32,7 +32,7 @@ public class LargestSubMatrix {
         for(int r=0;r<h;r++){
             for(int c=0;c<w;c++){
                 if(matrix[r][c]=='1'){
-                     t[r][c]=1;//or matrix[r][c]
+                     t[r][c]=1;//or matrix[r][c] by default what ever value in matrix in this case always 1
                 
                 if(r>0 && c>0){ //can select Min square only if row and col > 0 
                     t[r][c]=Math.min(Math.min(t[r-1][c],t[r][c-1]), t[r-1][c-1])+1;//minimum of last square + me 
