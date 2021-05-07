@@ -26,6 +26,7 @@ public class UdmDataset1 {
 		
 		Dataset<Row> dataset = spark.read().option("header", true).csv("src/main/resources/exam/student.csv");
 		dataset.show();
+		//dataset.queryExecution().executedPlan(); //this is to print execution Plan
 		//returns the first row
 		Row firstrow=dataset.first();
 		//get and get is to get column 

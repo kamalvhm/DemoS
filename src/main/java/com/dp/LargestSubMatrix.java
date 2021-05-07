@@ -36,6 +36,8 @@ public class LargestSubMatrix {
                 
                 if(r>0 && c>0){ //can select Min square only if row and col > 0 
                     t[r][c]=Math.min(Math.min(t[r-1][c],t[r][c-1]), t[r-1][c-1])+1;//minimum of last square + me 
+                    //this can be also as this +1 is from above 
+                    //t[r][c]+=Math.min(Math.min(t[r-1][c],t[r][c-1]), t[r-1][c-1]);
                 }
                     max=Math.max(max,t[r][c]);
                 }

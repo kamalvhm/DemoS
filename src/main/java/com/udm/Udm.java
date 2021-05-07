@@ -36,7 +36,7 @@ public class Udm {
 		
 		//parallelize will load a collection and turn it into Rdd
 		JavaRDD<Double> rdd = sc.parallelize(inputData);
-		// reduce to one value 
+		// reduce to one value its a ACTION  
 		Double result = rdd.reduce((value1, value2) -> value1 + value2);
 		
 		System.out.println("**Reduced Value***-> "+result);

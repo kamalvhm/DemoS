@@ -48,85 +48,34 @@ public class SlidingWindowPractice {
 			
 	}
 	
-
-
-	private static int firstNegative(int[] arr, int window) {
-		int i=0,j=0;
-		List<Integer> list=new ArrayList<>();
-		while(j<arr.length) {
-			if(arr[j]<0) {
-				list.add(arr[j]);
-			}
-			if(j-i+1<window)
-				j++;
-			else if(j-i+1==window) {
-				if(!list.isEmpty())
-					System.out.print(list.get(0)+", ");
-				if(list.contains(arr[i]))
-					list.remove(Integer.valueOf(arr[i]));
-				i++;
-				j++;
-			}
-		}
-		return 1;
-	}
-	
 	private static int maxInSubArray(int[] arr, int window) {
-		int max=0;
 		int i=0,j=0;
-		int currentSum=0;
+		int max=0;
+		int currentSum =0;
 		while(j<arr.length) {
 			currentSum+=arr[j];
 			if(j-i+1<window)
 				j++;
 			else if(j-i+1==window) {
 				max=Math.max(max, currentSum);
-				currentSum-=arr[i++];
+				currentSum-=arr[i];
+				i++;
 				j++;
 			}
 		}
 		return max;
 	}
+	
+	private static int firstNegative(int[] arr, int window) {
+		
+		return 1;
+	}
 
 	//https://leetcode.com/problems/find-all-anagrams-in-a-string/
 	  public static List<Integer> findAnagrams(String s, String p) {
-		  List<Integer> ans=new ArrayList<>();
-	            int i=0,j=0;
-	            HashMap<Character,Integer> map=new HashMap<>();
-	            for(char c:p.toCharArray())
-	            	map.put(c,map.getOrDefault(c, 0)+1);
-	            
-	            int count=map.size();
-	            
-		        int window=p.length();
-
-	          while(j<s.length()) {
-	        	  char rc=s.charAt(j);
-	        	  if(map.containsKey(rc)) {
-	        		  int val=map.get(rc);
-	        		  map.put(rc, --val);
-	        		  if(val==0)
-	        			  count--;
-	        	  }
-	        	  if(j-i+1<window)
-	        		  j++;
-	        	  else if(j-i+1==window) {
-	        		  if(count==0)
-	        			  ans.add(i);
-	        		  
-	        		  char lc=s.charAt(i);
-	        		  if(map.containsKey(lc)) {
-	        			  int val=map.get(lc);
-	        			  if(val==0)
-	        				  count++;
-	        			  map.put(lc, ++val);
-	        		  }
-	        		  i++;
-        			  j++;
-	        	  }
-	          }    
+		
 	        
-	        return ans;
+	        return new ArrayList<Integer> ();
 	    }
 
 	  private static int longestSubArray(int[] arr, int sum) {
