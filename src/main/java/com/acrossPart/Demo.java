@@ -1,22 +1,29 @@
 package com.acrossPart;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
+
+import scala.Tuple2;
 
 public class Demo {
 
 	public static void main(String[] args) {
 		
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
-		
-		/*SparkConf conf=new SparkConf().setAppName("A").setMaster("local");
+
+	}
+	
+	
+	public void old() {
+/*SparkConf conf=new SparkConf().setAppName("A").setMaster("local");
 		
 		JavaSparkContext jsc=new JavaSparkContext(conf);*/
 		SparkSession spark =SparkSession.builder().appName("A").master("local").getOrCreate();
@@ -32,10 +39,6 @@ public class Demo {
 		
 		rdd=rdd.map(r->2*r);
 		rdd.foreach(r->System.out.print(r+". "));
-		
-		
-		
-		
 	}
 
 }

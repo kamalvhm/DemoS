@@ -33,7 +33,7 @@ public class UdmStrm {
 				"C:\\Users\\z00427hs\\Downloads\\winutils-master\\winutils-master\\hadoop-3.0.0");
 
 		SparkConf conf = new SparkConf().setAppName("dem").setMaster("local[*]");
-		JavaStreamingContext sc=new JavaStreamingContext(conf,Durations.seconds(4));
+		JavaStreamingContext sc=new JavaStreamingContext(conf,Durations.seconds(10));
 		
 		JavaReceiverInputDStream<String> inputData = sc.socketTextStream("localhost", 8989);
 		//same as collections of RDDs operations we can perform same as RDD

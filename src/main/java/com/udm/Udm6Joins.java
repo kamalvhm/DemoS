@@ -48,12 +48,12 @@ public class Udm6Joins {
 		JavaPairRDD<Key,Integer> visitM=visits.mapToPair(w->new Tuple2<Key,Integer>(Key.create(w),w._4()));
 		JavaPairRDD<Key,Integer> usersM=users.mapToPair(w->new Tuple2<Key,Integer>(Key.create(w),w._4()));
 
-		logger.debug("visitM"+visitM.count());
-		logger.debug("usersM"+usersM.count());
+		logger.warn("visitM "+visitM.count());
+		logger.warn("usersM "+usersM.count());
 
 		JavaPairRDD<Key, Tuple2<Optional<Integer>, Optional<Integer>>> joinedRdd = visitM.fullOuterJoin(usersM);
 
-		logger.debug("joinedRdd"+joinedRdd.count());
+		logger.warn("joinedRdd "+joinedRdd.count());
 
 
 		 joinedRdd.foreach(it->System.out.println("F1:- "+it._1().one+"| had |"+it._1().two +"| had |"+it._1().three+"| SDP |"+(it._2()._1.orElse(0)+it._2()._2.orElse(0))));

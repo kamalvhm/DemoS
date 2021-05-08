@@ -1,45 +1,60 @@
 package com.spark;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
+import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
-import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
 
 import scala.Tuple2;
 
 public class WordCount {
-	public static void main(String[] args) throws Exception {
-		String inputFile = args[0];
-		String outputFile = args[1];
-		// Create a Java Spark Context.
-		SparkConf conf = new SparkConf().setAppName("wordCount");
-		JavaSparkContext sc = new JavaSparkContext(conf);
-		// Load our input data.
-		JavaRDD<String> input = sc.textFile(inputFile);
-		// Split up into words.
-		JavaRDD<String> words = input.flatMap(new FlatMapFunction<String, String>() {
-			public Iterator<String> call(String x) {
-				return (Iterator<String>) Arrays.asList(x.split(" "));
-			}
-		});
-		// Transform into word and count.
-		JavaPairRDD<String, Integer> counts = words.mapToPair(new PairFunction<String, String, Integer>() {
-			public Tuple2<String, Integer> call(String x) {
-				return new Tuple2(x, 1);
-			}
-		}).reduceByKey(new Function2<Integer, Integer, Integer>() {
-			public Integer call(Integer x, Integer y) {
-				return x + y;
-			}
-		});
-		// Save the word count back out to a text file, causing evaluation.
-		counts.saveAsTextFile(outputFile);
-	}
+	private static final Pattern SPACE = Pattern.compile(" ");
+  public static void main(String[] args) throws Exception {
+
+    FileUtils.deleteDirectory(new File("testdata/words_java.txt"));
+
+    SparkConf sparkConf = new SparkConf()
+        .setAppName("Example")
+        .setMaster("local[*]");
+
+    JavaSparkContext sc = new JavaSparkContext(sparkConf);
+
+    // open the text file as an RDD of String
+    JavaRDD<String> textFile = sc.textFile("testdata/shakespeare.txt");
+
+    // convert each line into a collection of words
+    JavaRDD<String> words = textFile.flatMap(new FlatMapFunction<String, String>() {
+      @Override
+      public Iterator<String> call(String s) throws Exception {
+        return Arrays.asList(SPACE.split(s)).iterator();
+      }
+    });
+
+    // map each word to a tuple containing the word and the value 1
+    JavaPairRDD<String, Integer> pairs = words.mapToPair(new PairFunction<String, String, Integer>() {
+      public Tuple2<String, Integer> call(String word) { return new Tuple2<>(word, 1); }
+    });
+
+    // for all tuples that have the same key (word), perform an aggregation to add the counts
+    JavaPairRDD<String, Integer> counts = pairs.reduceByKey(new org.apache.spark.api.java.function.Function2<Integer, Integer, Integer>() {
+      @Override
+      public Integer call(Integer a, Integer b) throws Exception {
+        return a + b;
+      }
+    });
+
+    // perform some final transformations, and then save the output to a file
+    counts.filter(tuple -> tuple._2() > 100)
+            .saveAsTextFile("testdata/words_java.txt");
+
+  }
+
 }

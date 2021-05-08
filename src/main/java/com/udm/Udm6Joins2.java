@@ -41,6 +41,10 @@ public class Udm6Joins2 {
 
 		JavaRDD<Tuple4<Integer ,String,Integer, Integer>> visits = sc.parallelize(left).distinct();
 		JavaRDD<Tuple4<Integer ,String,Integer, Integer>> users = sc.parallelize(right).distinct();
+		
+		JavaRDD<Tuple4<Integer ,String,Integer, Integer>> rdd =visits.union(users);
+		//union will simply add both of these Rdds 
+		System.out.println("********"+rdd.count());
 
 		visits.union(users)
 			  .mapToPair(t-> {

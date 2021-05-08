@@ -23,6 +23,7 @@ public class Udm5 {
 	
 	
 	public static void main(String[] args) { 
+		//This program reads Data from input.txt clean it remove boaring words from it and print  words count with count Desc
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 
 		System.setProperty("hadoop.home.dir",

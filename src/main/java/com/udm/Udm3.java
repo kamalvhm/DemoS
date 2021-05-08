@@ -16,6 +16,7 @@ public class Udm3 {
 
 	public static void main(String[] args) {
 		// TODO Tuple :-to put two or more data in to single unit we use tuple
+		//This Program will Aggrgate ALL errors and count no of Error type
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 
 		List<String> inputData = new ArrayList<>();

@@ -18,6 +18,8 @@ import scala.Tuple2;
 public class Udm4 {
 
 	public static void main(String[] args) {
+		//Transforamtion :- filter,flatMap
+		//This Program is to filter words length less then 4 (Just to keep Logs and Days)
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 
 		System.setProperty("hadoop.home.dir", "C:\\Users\\z00427hs\\Downloads\\winutils-master\\winutils-master\\hadoop-3.0.0");
@@ -35,7 +37,8 @@ public class Udm4 {
 
 		JavaRDD<String> stance = sc.parallelize(inputData);
 		
-		// flat map is requires a iterator in return because value could be 0 or more you don't know iterator and as list is because split produce array and we need list
+		// flat map is requires a iterator in return because value could be 0 or more you don't know iterator 
+		//and as list is because split produce array and we need list
 		JavaRDD<String> words=stance.flatMap(val -> Arrays.asList(val.split(" ")).iterator());
 
 		JavaRDD<String> filtered_words =words.filter(word->word.length()>4);
