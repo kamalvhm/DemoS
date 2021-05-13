@@ -26,7 +26,6 @@ public class UdmDataset4 {
 
 		SparkSession spark =SparkSession.builder().appName("APP").master("local[*]").config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
 
-		
 		Dataset<Row> dataset=spark.read().option("header", true).csv("src/main/resources/ds/biglog.txt");
 		dataset.createOrReplaceTempView("logging_table");
 

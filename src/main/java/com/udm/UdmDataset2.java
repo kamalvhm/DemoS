@@ -46,13 +46,17 @@ public class UdmDataset2 {
 		
 		//Grouping the data 
 		dataset.createOrReplaceTempView("logging_table");
-		//we are also passing count aggregation function with group
+		//we are also passing count aggregation function with group  collect_list =Collects and returns a list of non-unique elements
 		//Dataset<Row> results = spark.sql("select level,count(datetime) from logging_table group by level order by level");
 		Dataset<Row> results = spark.sql("select level,collect_list(datetime) from logging_table group by level order by level");
 
-		
 		results.show();
-		
+		//https://www.youtube.com/watch?v=UZt_tqx4sII
+		//To get Query Plan of operation :- we read this query plan from bottom to top
+		//Exchange :- means Shuffle is happening these are expensive operations (Exchange is perfomence bottleneck)
+		//
+		results.explain();
+
 		spark.close();
 	}
 

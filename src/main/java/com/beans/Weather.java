@@ -7,7 +7,7 @@ public class Weather implements Serializable{
 	  	private int temp;
 	    private int id;
 		private Date date;
-	  	private int temp_centi;
+	  	//private int temp_centi;
 
 		
 		public int getTemp() {
@@ -25,12 +25,12 @@ public class Weather implements Serializable{
 		public Date getDate() {
 			return date;
 		}
-		public int getTemp_centi() {
+		/*public int getTemp_centi() {
 			return temp_centi;
 		}
 		public void setTemp_centi(int temp_centi) {
 			this.temp_centi = temp_centi;
-		}
+		}*/
 		public void setDate(Date date) {
 			this.date = date;
 		}

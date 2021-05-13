@@ -8,7 +8,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import static org.apache.spark.sql.functions.*;
-
+//*#*#*:-https://www.youtube.com/watch?v=JRJzxdrj7YU
 //flatMap in map for one input we had one output 24 and sqrt(24) but in flat map we can have
 //multiple output or no output
 public class UdmDataset1 {
@@ -22,7 +22,8 @@ public class UdmDataset1 {
 		
 		//SparkConf conf = new SparkConf().setAppName("dem").setMaster("local[*]");
 		//JavaSparkContext sc = new JavaSparkContext(conf);
-		SparkSession spark =SparkSession.builder().appName("APP").master("local[*]").config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
+		SparkSession spark =SparkSession.builder().appName("APP").master("local[*]")
+				.config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
 		
 		Dataset<Row> dataset = spark.read().option("header", true).csv("src/main/resources/exam/student.csv");
 		dataset.show();
