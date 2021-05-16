@@ -3,7 +3,9 @@ package com.acrossPart;
 public class SQL {
 	/**
 	 * Tip - if consecutive in quetion think of self join or Lead lag 
-	 * @param args
+	 * SQL study :-https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB
+	 * Quetion :-https://www.youtube.com/watch?v=fvPddKyHxpQ&list=PL6n9fhu94yhXcztdLO7i6mdyaegC8CJwR
+	 * SUBQUERIES :-https://www.youtube.com/watch?v=0BW2Pi_HGYs (TechLake)
 	 */
 	
 	
@@ -69,7 +71,8 @@ public class SQL {
 		//Templete :- AGGREGATE() OVER(PARTITION BY ORDER BY)  :- partition is like group by 
 		//SELECT Score, DENSE_RANK() OVER(ORDER BY SCORE DESC)  AS "Rank" FROM Scores
 		
-		/**https://www.youtube.com/watch?v=l_Zn5sdkamM  | https://www.oracletutorial.com/oracle-analytic-functions/oracle-dense_rank/#:~:text=The%20DENSE_RANK()%20is%20an,rank%20in%20case%20of%20ties.
+/**************************************************WINDOW FUNCTION******************************************************
+		* https://www.youtube.com/watch?v=l_Zn5sdkamM  | https://www.oracletutorial.com/oracle-analytic-functions/oracle-dense_rank/#:~:text=The%20DENSE_RANK()%20is%20an,rank%20in%20case%20of%20ties.
 		* CREATE TABLE Employee (  
 				name  VARCHAR2(50 BYTE) NOT NULL,  
 				gender VARCHAR2(10 BYTE) NOT NULL, 
@@ -84,7 +87,12 @@ public class SQL {
 					SUM(salary) OVER (partition BY(gender) ORDER BY(Salary) ROWS BETWEEN UNBOUNDED preceding AND unbounded following) as summ,
 					COUNT(salary) OVER (partition BY(gender) ORDER BY(Salary) ROWS BETWEEN UNBOUNDED preceding AND unbounded following) as countt
 					FROM Employee;
-	    ****************Last_VALUE***********
+		****************RANGE VS ROWS interchange in below query***********(cumputing running total)
+				 	select name,Gender,Salary,
+					SUM(Salary) OVER (ORDER BY Salary RANGE BETWEEN unbounded preceding AND current row) as RunningTotalRANGE
+					SUM(Salary) OVER (ORDER BY Salary ROWS BETWEEN unbounded preceding AND current row) as RunningTotalROW
+					FROM Employee;
+	    ****************Last_VALUE***************(Name of highest Paid Employee)***************
 					select name,gender,salary ,
 					last_value(name) OVER (ORDER BY(Salary)) as "Last_value"
 					FROM Employee;
@@ -96,19 +104,31 @@ public class SQL {
 					FROM Employee;
 				
 				
-				with offset and default value LAG will look up
+			*--with offset and default value LAG will look up
 					select name,gender,salary ,
 					LEAD(salary,2,-1) OVER (ORDER BY Salary) as "Lead",
 					LAG(salary,2,-1) OVER (ORDER BY Salary) as "LAG"
 					FROM Employee;
 					
+		https://leetcode.com/problems/consecutive-numbers/submissions/  USE CASE - if there consecutive no are same 
+						with cte as
+				(select
+				                id, num,
+				                lead(num,1) over() le1,
+				                lead(num,2) over() le2
+				from logs)
+				
+				select DISTINCT
+				num as ConsecutiveNums
+				from cte
+				where (num=le1 and num=le2 )
 		**********************RANK AND DENSE_RANKE*****************
 					select name,gender,salary ,
 					RANK() OVER (ORDER BY salary DESC) as "Rank",
 					DENSE_RANK() OVER (ORDER BY salary DESC) as "Dense_Rank"
 					FROM Employee;
 					
-					
+					using Rank dense_rank we can find Nth highest salary
 		***********************N TH Highest salary using window functions*********************
 						WITH response AS 
 				(
@@ -122,6 +142,7 @@ public class SQL {
 			  select name,salary ,gender,
               row_number() over (partition by gender order by Gender ) as rowNumber
               from Employee;
+         NOTE:-use case of ROW_NUMBER is to delete all duplicate value except One
         *************************DELETE DUPLICATE ROW IN ***********************
         *https://www.youtube.com/watch?v=ynWgSZBoUkU
 				       			with EmployeeCTE as (
@@ -151,6 +172,24 @@ public class SQL {
 						From EmployeeCTE E1
 						LEFT Join EmployeeCTE E2
 						ON E1.ManagerID = E2.EmployeeId
+						
+			*********************************NULL SAFE JOIN***************************** by default sql ignores null values
+			*https://www.youtube.com/watch?v=jNa0kHsPCQk
+			 Don't use ISNULL(value,DefaultVal) while joining  as it might solve the problem but add default value in table 
+			 also we will null check every row so performence issues
+			 :- alternate solution is to rewrite our on conditions to join account type when value present otherwise check 
+			 for null values in both tables 
+			 
+			  SELECT a.userId,at.yearOpened,at.accountType, at.description
+			  FROM Account a INNER JOIN AccountType at 
+			       ON a.YearOpened =at.YearOpened
+			        AND 
+			       (a.AccountType=at.AccountType  
+			        OR (a.AccountType IS NULL AND at.AccountType IS NULL)
+			       )
+			 ORDER BY 
+			 userID,YearOpened,AccountType 
+			
 		 */
 	}
 	

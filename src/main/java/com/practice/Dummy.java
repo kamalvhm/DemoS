@@ -72,7 +72,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands:(4) " + numIslands(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -114,7 +114,7 @@ public class Dummy {
 
 	public static int numIslands(char[][] grid) {
 		int count = 0;
-
+		
 	
 		return count;
 
@@ -125,7 +125,6 @@ public class Dummy {
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;
-	
 		
 		return count;
 	}
@@ -140,7 +139,7 @@ public class Dummy {
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		 List<List<Integer>> result=new ArrayList<>();	
-		 
+		
 		return result;
 	 }
 
@@ -153,7 +152,6 @@ public class Dummy {
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-		
 
 	}
 

@@ -36,7 +36,7 @@ public class Udm2 {
 			JavaRDD<Tuple2<Integer,Double>> sqrtRdd2=originalInteger.map(value->new Tuple2<Integer,Double>(value,Math.sqrt(value)));
 			sqrtRdd2.count();
 			System.out.println("****************************");
-			sqrtRdd2.toDebugString();//ToDebugString Method to get RDD Lineage Graph in Spark
+			String lineage=sqrtRdd2.toDebugString();//ToDebugString Method to get RDD Lineage Graph in Spark
 
 			//Tuple2<Integer,Double> myVal=new Tuple2<>(9,3.0);	
 			 

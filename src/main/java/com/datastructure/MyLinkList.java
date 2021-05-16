@@ -68,7 +68,7 @@ public class MyLinkList<T> {
 		
 		
 	}
-	
+	//to reverse a linked list
 	public void reverse() {
 		Node previous=null;
 		Node current=st_node;

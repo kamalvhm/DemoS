@@ -7,6 +7,9 @@ import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+
+import com.beans.Student2;
+
 import static org.apache.spark.sql.functions.*;
 //*#*#*:-https://www.youtube.com/watch?v=JRJzxdrj7YU
 //flatMap in map for one input we had one output 24 and sqrt(24) but in flat map we can have
@@ -26,6 +29,8 @@ public class UdmDataset1 {
 				.config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
 		
 		Dataset<Row> dataset = spark.read().option("header", true).csv("src/main/resources/exam/student.csv");
+/*		Dataset<Student2> ds=spark.read().option("header", true).csv("src/main/resources/exam/student.csv")
+				.as(org.apache.spark.sql.Encoders.bean(Student2.class));*/
 		dataset.show();
 		//dataset.queryExecution().executedPlan(); //this is to print execution Plan
 		//returns the first row
@@ -63,5 +68,12 @@ public class UdmDataset1 {
 		//modernArtResults2.show();
 		spark.close();
 	}
+	
+	/**ALL THREE WAYS (OTHER IS TEMP VIEW ALSO BESIDES THESE )
+	    ds=ds.filter("subject = 'Modern Art' AND year > 2007");
+		ds=ds.filter(r->r.getAs("subject").equals("Modern Art") && Integer.parseInt(r.getAs("year"))>2007);
+		dataset.filter(col("subject").equalTo("Modern Art").and(col("year").geq(2007)));
+	 * 
+	 */
 
 }

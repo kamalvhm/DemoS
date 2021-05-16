@@ -51,12 +51,14 @@ public class Udm6Joins {
 		logger.warn("visitM "+visitM.count());
 		logger.warn("usersM "+usersM.count());
 
-		JavaPairRDD<Key, Tuple2<Optional<Integer>, Optional<Integer>>> joinedRdd = visitM.fullOuterJoin(usersM);
+		//JavaPairRDD<Key, Tuple2<Optional<Integer>, Optional<Integer>>> joinedRdd = visitM.fullOuterJoin(usersM);
+		JavaPairRDD<Key, Tuple2<Integer, Integer>> joinedRdd = visitM.join(usersM);
 
 		logger.warn("joinedRdd "+joinedRdd.count());
 
+		 joinedRdd.foreach(it->System.out.println("F1:- "+it._1().one+"| had |"+it._1().two +"| had |"+it._1().three+"| SDP |"+(it._2()._1+it._2()._2)));
 
-		 joinedRdd.foreach(it->System.out.println("F1:- "+it._1().one+"| had |"+it._1().two +"| had |"+it._1().three+"| SDP |"+(it._2()._1.orElse(0)+it._2()._2.orElse(0))));
+		 //joinedRdd.foreach(it->System.out.println("F1:- "+it._1().one+"| had |"+it._1().two +"| had |"+it._1().three+"| SDP |"+(it._2()._1.orElse(0)+it._2()._2.orElse(0))));
 
 		
 		sc.close();

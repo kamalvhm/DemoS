@@ -28,8 +28,8 @@ public class UdmDataset4 {
 
 		Dataset<Row> dataset=spark.read().option("header", true).csv("src/main/resources/ds/biglog.txt");
 		dataset.createOrReplaceTempView("logging_table");
-
-		//getting error counts for each month wise
+		//FIRST : Returns the first value of expr for a group of rows
+		//getting error counts for each month wise :-https://spark.apache.org/docs/latest/api/sql/index.html
 		Dataset<Row> results = spark.sql("select level,date_format(datetime,'MMMM') as month ,cast(first(date_format(datetime,'M')) as int) monthnum,count(1) as total "
 				+ "from logging_table group by level,month order by monthnum");
 		

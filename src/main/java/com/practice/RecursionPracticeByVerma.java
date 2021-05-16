@@ -6,9 +6,12 @@ import java.util.Stack;
 
 import javax.tools.Diagnostic;
 import javax.validation.constraints.Digits;
+import javax.xml.ws.Holder;
 
+import org.apache.arrow.flatbuf.List;
 import org.apache.hadoop.hdfs.server.namenode.block_005finfo_005fxml_jsp;
 import org.apache.spark.deploy.master.BlackHolePersistenceEngine;
+import org.apache.spark.sql.catalyst.expressions.IsNaN;
 
 import scala.Char;
 /**CHECK CORRECTNESS In @link RecursionByVerma.java*/
@@ -92,7 +95,7 @@ public class RecursionPracticeByVerma {
 	}
 
 	public static void print(int n) {
-	
+		
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {
@@ -103,113 +106,61 @@ public class RecursionPracticeByVerma {
 		
 	}
 
-	
-	
 	private static void sortStack(Stack<Integer> st) {
-		
+	
 	}
 
 
 	private static void insert1(Stack<Integer> st, int val) {
-		
+	
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
 		
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {
-	
+		
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
-	
+		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
 		return 1;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-		if(n==0)
-			return;
-		toh(n-1,s,h,d);
-		System.out.println("Move "+n+" :-"+s+"->"+d);
-		toh(n-1,h,d,s);
-		
+	
 	}
 	
 	private static void subsets(String ip, String op) {
-	
+		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
-	
+		
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println(op);
-			return;
-		}
-		permutationwithSpaces(ip.substring(1), op+ip.charAt(0));
-		if(ip.length()>1)
-		permutationwithSpaces(ip.substring(1), op+ip.charAt(0)+"_");
-
+	
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println(op);
-			return;
 		}
-		permutationwithCaseChange(ip.substring(1), op+Character.toLowerCase(ip.charAt(0)));
-		permutationwithCaseChange(ip.substring(1), op+Character.toUpperCase(ip.charAt(0)));
-
-
-	}
 
 	private static void letterPermutation(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println(op);
-			return;
-		}
-		boolean isDigit=Character.isDigit(ip.charAt(0));
-		if(!isDigit) {
-			letterPermutation(ip.substring(1), op+Character.toLowerCase(ip.charAt(0)));
-			letterPermutation(ip.substring(1), op+Character.toUpperCase(ip.charAt(0)));
-		}else {
-			letterPermutation(ip.substring(1), op+ip.charAt(0));
-		}
+		
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-		if(open==0 && close==0) {
-			System.out.println(op);
-			return;
-		}
-		
-		if(open>0)
-			balanceParanthesis(open-1, close, op+"(");
-		if(close>open)
-			balanceParanthesis(open, close-1, op+")");
-			
+	
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-		if(n==0) {
-			System.out.println(op);
-			return;
-		}
-		nBitBinary(n-1, one+1, zero, op+"1");
-		if(one>zero)
-			nBitBinary(n-1, one, zero+1, op+0);
+		
 	}
 	
 	
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		if(list.size()==1) {
-			return list.get(0);
-		}
-		index=(index+k)%list.size();
-		list.remove(index);
-		return josephusProblem(list, k, index);
+		return 1;
 	}
 }

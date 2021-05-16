@@ -10,6 +10,8 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 import scala.Tuple2;
@@ -38,6 +40,13 @@ public class wordCountPractice {
 		wordPair=wordPair.reduceByKey((v1,v2)->v1+v2);
 		
 		wordPair.foreach(r->System.out.println(r._1+" COUNT "+r._2));
+	}
+	
+	public static void wordCountWithDF(SparkSession spark) {
+		Dataset<Row> df=spark.read().csv("src/main/resources/boaringwords.txt");
+		df.createOrReplaceTempView("WordData");
+		Dataset<Row> words=spark.sql("Select _c0,count(*) from WordData group by _c0 order by _c0 desc");
+		words.show();
 	}
 
 }

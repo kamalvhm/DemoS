@@ -26,7 +26,7 @@ public class UdmDataset7 {
 		
 		Dataset<Row> dataset=spark.read().option("header", true).csv("src/main/resources/exam/student.csv");
 
-		Column score=dataset.col("score");
+		//Column score=dataset.col("score");
 		dataset=dataset.groupBy("subject").agg(max(col("score").cast(DataTypes.IntegerType)).alias("max_score"),
 											   min(col("score").cast(DataTypes.IntegerType)).alias("min_score"));
 		

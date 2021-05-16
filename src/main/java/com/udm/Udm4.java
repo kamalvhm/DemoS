@@ -19,7 +19,7 @@ public class Udm4 {
 
 	public static void main(String[] args) {
 		//Transforamtion :- filter,flatMap
-		//This Program is to filter words length less then 4 (Just to keep Logs and Days)
+		//This Program is to filter words length less then 4 length (Just to keep Logs and Days)
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 
 		System.setProperty("hadoop.home.dir", "C:\\Users\\z00427hs\\Downloads\\winutils-master\\winutils-master\\hadoop-3.0.0");

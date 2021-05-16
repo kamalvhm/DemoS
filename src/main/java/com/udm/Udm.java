@@ -12,7 +12,7 @@ import org.apache.spark.sql.SparkSession;
 
 
 public class Udm {
-	//Transforamtion-map()   Action:-reduce()
+	//Transforamtion-map()   Action:-reduce(),count()
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
