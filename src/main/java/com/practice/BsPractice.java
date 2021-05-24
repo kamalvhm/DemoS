@@ -45,15 +45,7 @@ public class BsPractice {
 	}
 
 	private static int search(int[] a, int i) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]==i)
-				return mid;
-			else if(i>a[mid])
-				l=mid+1;
-			else r=mid-1;
-		}
+		
 		return -1;
 	}
 	
@@ -67,11 +59,10 @@ public class BsPractice {
 	
 	public static int findPeakElement(int[] a) {
 		return -1;
-
 	}
 	
 	public static int arrayRotatedcount(int[] a) {
-		return 1;
+		return -1;
 
 	}
 

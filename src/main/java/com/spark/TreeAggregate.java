@@ -36,12 +36,14 @@ public class TreeAggregate {
 			}
 		};
 		TreeSet<String> finalRdd3 = rdd.treeAggregate(zero, mergeValue, mergePartition);
+		
 		double add = 0d;
 		for (String string : finalRdd3) {
 			String[] data = string.split(",");
 			add = add + Double.parseDouble(data[1]);
 		}
 		System.out.println(add);
+		
 		String sumTreeReduce = rdd.treeReduce(new Function2<String, String, String>() {
 			private static final long serialVersionUID = 89898;
 

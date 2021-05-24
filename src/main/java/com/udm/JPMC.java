@@ -65,7 +65,7 @@ public class JPMC {
 		NewweatherDataset.show(10,false);*/
 		
 		//with column is to add new col
-		Dataset<Row> NewweatherDataset = weatherDataset.withColumn("TEMP_IN_C", col("TEMP_IN_F").minus(32).multiply(5).divide(9));
+		Dataset<Row> NewweatherDataset = weatherDataset.withColumn("TEMP_IN_C", col("tempInF").minus(32).multiply(5).divide(9));
 	    NewweatherDataset.printSchema();
 	    NewweatherDataset.show();
 	    
@@ -75,7 +75,7 @@ public class JPMC {
 	  // NewweatherDataset.write().parquet("resources/temp_change.parquet");
 		
 		//Now transforming F to C formula C=(F-32)*5/9 
-		
+	    NewweatherDataset.explain();
 }
 	
 	/**

@@ -13,6 +13,7 @@ import org.apache.hadoop.fs.DF;
 import org.apache.hadoop.hdfs.server.namenode.status_jsp;
 import org.apache.spark.sql.catalyst.expressions.CurrentRow;
 import org.apache.spark.sql.streaming.StreamingQueryListener.QueryStartedEvent;
+import org.apache.spark.sql.types.StructType;
 import org.w3c.dom.ls.LSInput;
 
 import com.beans.TreeNode;
@@ -72,7 +73,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslands(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -88,16 +89,19 @@ public class Dummy {
 	}
 
 	private static String inorder2(TreeNode tree) {
-		if(tree==null)
-			return "";
-		String left="",right="";
-		if(tree.left!=null)
+		if(tree==null)return "";
+		String left="";
+		String right="";
+		
+		if(tree.left!=null) {
 			left=inorder2(tree.left);
-		else left="";
-		if(tree.right!=null)
+		}else left="";
+		
+		if(tree.right!=null) {
 			right=inorder2(tree.right);
-		else right="";
-		return left+", "+tree.val+right;
+		}else right="";
+		
+		return left+", "+tree.val+", "+right;
 	}
 //50. Pow(x, n)
 	private static int Pow(int base, int pow) {
@@ -133,13 +137,11 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
-		
-		
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
-		 List<List<Integer>> result=new ArrayList<>();	
-		
+		List<List<Integer>> result=new ArrayList<>();	
+
 		return result;
 	 }
 
@@ -152,7 +154,7 @@ public class Dummy {
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-
+		
 	}
 
 	private static void postorder(TreeNode tree) {

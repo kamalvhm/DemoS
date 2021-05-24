@@ -41,7 +41,7 @@ public class UdmDataset6 {
 		
 		dataset=dataset.groupBy("level").pivot("month",Arrays.asList(months)).count().na().fill(0);
 		
-		dataset.show(100);
+		dataset.show(50);
 		
 		spark.close();
 	}

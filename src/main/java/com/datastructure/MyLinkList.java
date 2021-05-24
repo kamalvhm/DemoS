@@ -68,7 +68,7 @@ public class MyLinkList<T> {
 		
 		
 	}
-	//to reverse a linked list
+	//to reverse a singly linked list | https://leetcode.com/problems/reverse-linked-list/
 	public void reverse() {
 		Node previous=null;
 		Node current=st_node;
@@ -85,6 +85,44 @@ public class MyLinkList<T> {
        
 	}
 	
+	//https://leetcode.com/problems/linked-list-cycle/
+		public boolean hasCycle(ListNode head) {
+			if (head == null || head.next == null) {
+				return false;
+			}
+			ListNode slow = head;
+			ListNode fast = head.next;
+			while (fast != null && fast.next != null) {
+				if (slow == fast)
+					return true;
+				slow = slow.next;
+				fast = fast.next.next;
+			}
+			return false;
+		}
+		
+		//https://leetcode.com/problems/middle-of-the-linked-list/
+		public Node findMid() {
+			Node slow=st_node;
+			Node fast=st_node;
+			 
+		    while (fast != null && fast.next_node != null) {
+		            slow = slow.next_node;
+		            fast = fast.next_node.next_node;
+		        }
+		        return slow;
+		}
+		
+	//recursive
+	 public Node reverseList(Node head) {
+			if(head == null || head.next_node == null){
+	           return head;
+	       }
+		   Node newRoot = reverseList(head.next_node);// find the new root - last element of the linked list
+	       head.next_node.next_node = head; // add new element at end
+	       head.next_node = null; // new start tail
+	      return newRoot;
+		}
 	
 	public static void mergeInbetween(String s ,MyLinkList list1,MyLinkList list2) {
 		String str[]=s.split(",");
@@ -115,19 +153,7 @@ public class MyLinkList<T> {
 		
 	}
 	
-	public Node findMid() {
-		Node slow=st_node;
-		Node fast=st_node;
-		
-		while(fast!=null) {
-			fast =fast.next_node;
-			if(fast!=null && fast.next_node!=null) {
-				slow=slow.next_node;
-				fast=fast.next_node;
-			}
-		}
-		return slow;
-	}
+	
 	//https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem
 	public Node deleteInPosRecursive(Node head,int p) {
 		if(p==0)return head.next_node;
@@ -219,21 +245,7 @@ public class MyLinkList<T> {
 				addTwoNumbers(l1,l2);
 			}
 		 
-		 
-	public boolean hasCycle(ListNode head) {
-		if (head == null || head.next == null) {
-			return false;
-		}
-		ListNode slow = head;
-		ListNode fast = head.next;
-		while (fast != null && fast.next != null) {
-			if (slow == fast)
-				return true;
-			slow = slow.next;
-			fast = fast.next.next;
-		}
-		return false;
-	}
+	
 	
 	//24. Swap Nodes in Pairs  #RECURSION
    public ListNode swapPairs(ListNode head) {

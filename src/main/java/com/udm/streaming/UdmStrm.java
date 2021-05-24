@@ -49,6 +49,8 @@ public class UdmStrm {
 		//This will start stream program infinitely   
 		sc.start();
 		sc.awaitTermination();
+		
+		
 	}
 
 }

@@ -4,7 +4,7 @@ public class SQL {
 	/**
 	 * Tip - if consecutive in quetion think of self join or Lead lag 
 	 * SQL study :-https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB
-	 * Quetion :-https://www.youtube.com/watch?v=fvPddKyHxpQ&list=PL6n9fhu94yhXcztdLO7i6mdyaegC8CJwR
+	 * Question :-https://www.youtube.com/watch?v=fvPddKyHxpQ&list=PL6n9fhu94yhXcztdLO7i6mdyaegC8CJwR
 	 * SUBQUERIES :-https://www.youtube.com/watch?v=0BW2Pi_HGYs (TechLake)
 	 */
 	
@@ -176,7 +176,7 @@ public class SQL {
 			*********************************NULL SAFE JOIN***************************** by default sql ignores null values
 			*https://www.youtube.com/watch?v=jNa0kHsPCQk
 			 Don't use ISNULL(value,DefaultVal) while joining  as it might solve the problem but add default value in table 
-			 also we will null check every row so performence issues
+			 also we will null check every row so performance issues
 			 :- alternate solution is to rewrite our on conditions to join account type when value present otherwise check 
 			 for null values in both tables 
 			 
@@ -189,7 +189,51 @@ public class SQL {
 			       )
 			 ORDER BY 
 			 userID,YearOpened,AccountType 
+			 
+		  ///////////////SUB_QUERIES -SECOUND ///////////////////// https://www.youtube.com/watch?v=JtmfAGM4pfc&list=PL08903FB7ACA1C2FB&index=60
+		   * 
+				Create Table tblProducts
+				(
+				 Id NUMBER primary key,
+				 Name VARCHAR2(50),
+				 Description VARCHAR2(250)
+				)
+				
+				Create Table tblProductSales
+				(
+				 Id NUMBER primary key,
+				 ProductId NUMBER ,
+				 UnitPrice NUMBER,
+				 QuantitySold NUMBER
+				)
+		 Insert into tblProducts values (1,'TV', '52 inch black color LCD TV');
+		Insert into tblProducts values (2,'Laptop', 'Very thin black color acer laptop');
+		Insert into tblProducts values (3,'Desktop', 'HP high performance desktop');
+		
+		Insert into tblProductSales values(1,3, 450, 5);
+		Insert into tblProductSales values(2,2, 250, 7);
+		Insert into tblProductSales values(3,3, 450, 4);
+		Insert into tblProductSales values(4,3, 450, 9);
+		
+		Question :- Return ID and Description of product that we haven't sold once
+			select id,name,description
+			from tblProducts where Id not in (select distinct productId from tblproductsales);
+			CAN be replaced by join query 
 			
+			select tblProducts.id,name,description
+			from tblProducts left join tblproductsales
+			on tblProducts.id=tblproductsales.productid
+			where tblproductsales.productid is null;
+	   	Question :- return name and quantity we sold 
+	   	    select Name,
+			(select sum(QuantitySold) from tblProductsales where productid= tblProducts.id) as qtySold
+			from tblProducts;
+
+			JOIN ONE 
+				select name,sum(tblproductsales.quantitysold) as QTYSold
+				from tblProducts left join tblproductsales
+				on tblProducts.id=tblproductsales.productid
+				group by name;
 		 */
 	}
 	

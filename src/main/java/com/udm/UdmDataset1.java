@@ -47,7 +47,7 @@ public class UdmDataset1 {
 		//Filter using lambda
 		Dataset<Row> modernArtResults2 = dataset.filter(row->row.getAs("subject").equals("Modern Art")
 				&& Integer.parseInt(row.getAs("year"))>=2007);
-		//THIRD APPROACH-selecting column first and then adding constaints in filter using them
+		//THIRD APPROACH-selecting column first and then adding constants in filter using them
 		Column subjectColumn=dataset.col("subject");
 		Column yearColumn=dataset.col("year");
 		//greater then equal to geq 
@@ -70,9 +70,12 @@ public class UdmDataset1 {
 	}
 	
 	/**ALL THREE WAYS (OTHER IS TEMP VIEW ALSO BESIDES THESE )
-	    ds=ds.filter("subject = 'Modern Art' AND year > 2007");
-		ds=ds.filter(r->r.getAs("subject").equals("Modern Art") && Integer.parseInt(r.getAs("year"))>2007);
-		dataset.filter(col("subject").equalTo("Modern Art").and(col("year").geq(2007)));
+	    1) ds=ds.filter("subject = 'Modern Art' AND year > 2007");
+		2) ds=ds.filter(r->r.getAs("subject").equals("Modern Art") && Integer.parseInt(r.getAs("year"))>2007);
+		3) dataset.filter(col("subject").equalTo("Modern Art").and(col("year").geq(2007)));
+	    4) dataset.createOrReplaceTempView("students");
+			
+		spark.sql("select avg(score) from students where subject ='English'").show();
 	 * 
 	 */
 

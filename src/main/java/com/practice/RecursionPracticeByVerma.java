@@ -107,12 +107,12 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void sortStack(Stack<Integer> st) {
-	
+		
 	}
 
 
 	private static void insert1(Stack<Integer> st, int val) {
-	
+		
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
@@ -130,29 +130,26 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-	
+		
 	}
 	
 	private static void subsets(String ip, String op) {
 		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
-		
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-	
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-		}
+	}
 
 	private static void letterPermutation(String ip, String op) {
-		
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-	
+		
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
@@ -162,5 +159,6 @@ public class RecursionPracticeByVerma {
 	
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
 		return 1;
+
 	}
 }

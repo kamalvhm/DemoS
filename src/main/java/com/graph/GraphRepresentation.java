@@ -7,7 +7,7 @@ import java.util.List;
 import com.graph.FindPathDFS_V2_4.Edge;
 //Check youTube :-
 //Kenny Talks Code
-//Practice :-https://www.pepcoding.com/resources/online-java-foundation/graphs (yah#19)
+//Practice :-https://www.pepcoding.com/resources/online-java-foundation/graphs (yahoo/#1to9)
 //https://www.youtube.com/watch?v=nUgp0RG57wQ&list=PL-Jc9J83PIiHfqDcLZMcO9SsUDY4S3a-v&index=9
 public class GraphRepresentation {
 	 static class Edge {

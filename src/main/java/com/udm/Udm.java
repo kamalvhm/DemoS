@@ -63,13 +63,13 @@ public class Udm {
 		//in spark System.out::println this method ins not serialiable to add Collect() it will gether all data in one JVM in one regular colletion List
 		sqrtRdd.collect().forEach(System.out::println);
 		
-		System.out.print(result2);
+		System.out.println(result2);
 	 
 		//count a interim value Two method one is call count() other is with Map and reduce both showed below 
-		System.out.println(sqrtRdd.count());
+		System.out.println("--->1 "+sqrtRdd.count());
 		JavaRDD<Long> singleIntRdd=sqrtRdd.map(value->1L);
 		Long count =singleIntRdd.reduce((value1,value2)->value1+value2);
-		System.out.println(count);
+		System.out.println("--->2 "+count);
 
 	
 		
