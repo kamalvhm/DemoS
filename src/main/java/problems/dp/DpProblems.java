@@ -7,34 +7,27 @@ public class DpProblems {
 
 	//198. House Robber
     public int rob(int[] nums) {
-        
         return helper(nums, 0);
     }
     
     private int helper(int[] nums, int index) {
         if (index >= nums.length) return 0;
-        
         return Math.max(nums[index] + helper(nums, index + 2), helper(nums, index + 1));
     }
        //With Memoization
     public int rob2(int[] nums) {
-        
         // HashMap used for Memoization
         Map<Integer, Integer> map = new HashMap<>();
-        
         return helper2(nums, 0, map);
     }
     
     private int helper2(int[] nums, int index, Map<Integer, Integer> map) {
         if (index >= nums.length) return 0;
-        
         if (map.get(index) != null) return map.get(index); 
-        
         int v1 = nums[index] + helper2(nums, index + 2, map); 
         int v2 = helper2(nums, index + 1, map);
         int val = Math.max(v1, v2);
         map.put(index, val);
-        
         return val;
     }
     
@@ -76,7 +69,6 @@ public class DpProblems {
     public int maxSubArray(int[] nums) {
         if(nums.length==1)return nums[0];
         int max=nums[0];
-        
         for(int i=1;i<nums.length;i++){
             if(nums[i-1]>0)nums[i]+=nums[i-1];
             if(nums[i]>max)
@@ -110,6 +102,5 @@ public class DpProblems {
             can_reach=Math.max(can_reach,i+nums[i]);
         }
         return false;
-        
     }
 }

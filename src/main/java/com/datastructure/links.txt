@@ -36,3 +36,6 @@ https://www.youtube.com/watch?v=D1Tv5cCs1d8
 hint-Inorder on BST producess sorted order on that apply two pointer to find value in one array from start and in one from end and 
 
 SPARK FILE FORMATS :-https://www.youtube.com/watch?v=oipFhroPFVM
+AMX
+Airthmetic SUM Fractions:-https://stackoverflow.com/questions/63068610/finding-arithmetic-mean-of-subarrays-efficiently-in-an-array
+https://leetcode.com/discuss/interview-question/398023/Microsoft-Online-Assessment-Questions/884278

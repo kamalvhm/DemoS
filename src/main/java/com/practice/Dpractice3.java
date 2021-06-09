@@ -71,7 +71,7 @@ public class Dpractice3 {
 
 		String e3="rabbbit";
 		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.so return 3
-		System.out.println("16)Distinct Subsequences (3):-"+DistinctSubsequences(e3,e4,e3.length(),e4.length()));
+		System.out.println("16)Distinct Subsequences (3):-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
 		
 		String s4="babad"; //Ans :-aba
 		System.out.println("11)Longest palindromic substring (aba):-"+longestPalindromicSubString(s4));
@@ -95,7 +95,7 @@ public class Dpractice3 {
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
-		return 1;
+		return 0;
 	}
 	
 	
@@ -103,6 +103,7 @@ public class Dpractice3 {
 	public static int LCS_TopDown(String x,String y,int n,int m) {
 		int t[][] =new int [n+1][m+1];
 		
+	
 		return t[n][m];
 	}
 	
@@ -116,8 +117,6 @@ public class Dpractice3 {
 	
 	public static String printLCS_String(String x,String y,int n, int m) {		
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS
-		
-		
 		return "";
 	}
 	
@@ -125,7 +124,7 @@ public class Dpractice3 {
 	 public static String shortestCommonSupersequence(String x, String y) {
 		 int n=x.length(),m=y.length();
 		 int t[][]=new int[n+1][m+1];
-		
+
 		 return "";
 	    }
 	 
@@ -138,32 +137,24 @@ public class Dpractice3 {
 	
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
-	        
-	      
 	      
 	        return t[n][m];
 	    }
 	 
 	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
 		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
-			 return 1;
+			 if(m==0)return 1;
+			 if(n==0)return 0;
+			 if(s.charAt(n-1)!=t.charAt(m-1))
+				 return DistinctSubsequencesR(s, t, n-1, m);
+			 else 
+			 return DistinctSubsequencesR(s, t, n-1, m)+DistinctSubsequencesR(s, t, n-1, m-1);
 	    }
 		 
 		public static int DistinctSubsequences(String s ,String t,int n,int m){
 		      int dp[][]=new int [n+1][m+1];
 		      
-		      for(int i=0;i<n+1;i++){
-		            dp[i][0]=1;// we have traversed t and found all char so count 1 subsequence for that
-		        }
-		        
-		        for(int i=1;i<n+1;i++){
-		            for(int j=1;j<m+1;j++){
-		                if(s.charAt(i-1)!=t.charAt(j-1)) // if last char not equal then exclude that char from s and look again
-		                    dp[i][j]=dp[i-1][j];
-		                else dp[i][j]=dp[i-1][j-1]+dp[i-1][j];//if both char mathes then add seletion and not seletion 
-		            }
-		        }
-
+		    
 		      return dp[n][m];
 		    }
 		//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw

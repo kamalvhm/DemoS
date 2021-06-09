@@ -309,4 +309,43 @@ public int numOfIcelands(int[][] grids)	{
           int val=Math.max(val1,val2);
           return count+val;
       }
+    //1020. Number of Enclaves
+    static boolean is_way;
+    public int numEnclaves(int[][] grid) {
+        int h=grid.length;
+        int w=grid[0].length;
+         is_way=false;
+        int count=0;
+        for(int i=0;i<h;i++){
+            for(int j=0;j<w;j++){
+                if(grid[i][j]==1){
+                    int val=dfs1(grid,i,j);
+                    if(!is_way)
+                        count+=val;
+                    is_way=false;
+                }
+            }
+        }
+        return count;
+    }
+    
+    public static int dfs1(int[][] grid,int r,int c){
+         int h=grid.length;
+         int w=grid[0].length;
+         if(r<0 || c<0 || r>=h || c>=w || grid[r][c]==0){
+           return 0;  
+         }
+        
+        if((r==0 || c==0 || r==h-1 || c==w-1) && grid[r][c]==1){
+            is_way=true;
+            return 0;
+        }
+       int count=1;
+       grid[r][c]=0;
+       count+=dfs1(grid,r+1,c);
+       count+=dfs1(grid,r-1,c);
+       count+=dfs1(grid,r,c+1);
+       count+=dfs1(grid,r,c-1);
+       return count;
+    }
 }

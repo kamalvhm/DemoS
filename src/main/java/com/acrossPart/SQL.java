@@ -73,13 +73,16 @@ public class SQL {
 		
 /**************************************************WINDOW FUNCTION******************************************************
 		* https://www.youtube.com/watch?v=l_Zn5sdkamM  | https://www.oracletutorial.com/oracle-analytic-functions/oracle-dense_rank/#:~:text=The%20DENSE_RANK()%20is%20an,rank%20in%20case%20of%20ties.
-		* CREATE TABLE Employee (  
+		* 		CREATE TABLE Employee (  
 				name  VARCHAR2(50 BYTE) NOT NULL,  
 				gender VARCHAR2(10 BYTE) NOT NULL, 
 				salary NUMBER NOT NULL  
 				); 
 				INSERT INTO Employee (name,gender,salary)   
-				VALUES ('Mira','Female',4000);
+				VALUES ('Mark','Male',1000);
+				VALUES ('Jhon','Male',2000);
+				VALUES ('Mira','Female',3000);
+				VALUES ('Sara','Female',4000);
 				
 		****************AGGREGATE WINDOW FUNCTIONS***********
 				  	select name,gender,salary ,
@@ -206,7 +209,7 @@ public class SQL {
 				 UnitPrice NUMBER,
 				 QuantitySold NUMBER
 				)
-		 Insert into tblProducts values (1,'TV', '52 inch black color LCD TV');
+		Insert into tblProducts values (1,'TV', '52 inch black color LCD TV');
 		Insert into tblProducts values (2,'Laptop', 'Very thin black color acer laptop');
 		Insert into tblProducts values (3,'Desktop', 'HP high performance desktop');
 		
