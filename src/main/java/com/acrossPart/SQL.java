@@ -238,6 +238,76 @@ public class SQL {
 				on tblProducts.id=tblproductsales.productid
 				group by name;
 		 */
+		
+		/************************************************************JOINS******************************************************
+			GROUP BY - In Employee Table we want sum of salary by City 
+			
+			CREATE TABLE Employee2 (  
+				name  VARCHAR2(50 BYTE) NOT NULL,  
+				gender VARCHAR2(10 BYTE) NOT NULL, 
+		        city VARCHAR2(10 BYTE) NOT NULL, 
+		        dept_id NUMBER,
+				salary NUMBER NOT NULL  
+				); 
+				
+				INSERT INTO Employee2 (name,gender,salary,city,dept_id)   
+				VALUES ('Mark','Male',1000,'London',1);
+			    VALUES ('Jhon','Male',2000,'London',2);
+			    VALUES ('Mira','Female',3000,'New York',1)
+				VALUES ('Sara','Female',4000,'New York',2)
+				VALUES ('Mark','Male',1400,'Delhi',3);
+				VALUES ('Miky','Male',1400,'Delhi');
+
+				
+			select city ,gender ,sum(salary) from Employee2 
+			group by gender,city
+			
+			--To filter Groupby we use having clause DIFF between Having and where is that in where you can not use agg functions
+			
+			select city ,gender ,sum(salary) from Employee2 
+			group by gender,city
+			having gender ='Male'
+			
+			CREATE TABLE Department (  
+				id NUMBER NOT NULL , 
+        		name VARCHAR2(10 BYTE) NOT NULL,
+				head VARCHAR2(10 BYTE) NOT NULL 
+				); 
+			INSERT INTO Department (id,name,head)   
+					VALUES (1,'IT','A')
+					VALUES (2,'PayRoll','B')
+				    VALUES (3,'HR','C')
+	                VALUES (4,'OTHER','C')
+		
+		select e.name as empName ,gender,salary, d.name as deptName from employee2 e 
+		join department d on e.dept_id=d.id
+		
+		--Gives non matching of left table same for right and FULL
+			select e.name as empName ,gender,salary,e.city, d.name as deptName from employee2 e 
+			left join department d on e.dept_id=d.id
+		
+		--CROSS JOIN WILL GIVE CARTICEAN PRODUCT IT DOES NOT HAVE ON CLAUSE
+			select e.name as empName ,gender,salary,e.city, d.name as deptName from employee2 e 
+			cross join department d
+		
+		-----------------------------------------ADVANCE JOIN---------------------------------if we need to retrive only non matching rows 
+		--NON MATCHING FROM LEFT TABLE (LEFT JOIN AND WHERE CONDITION)
+		    select e.name as empName ,gender,salary, d.name as deptName from employee2 e 
+			left join department d on e.dept_id=d.id
+			where e.dept_id is null
+		
+		--SAME FOR NON MATCHING RIGHT
+			select e.name as empName ,gender,salary, d.name as deptName from employee2 e 
+			right join department d on e.dept_id=d.id
+			where e.dept_id is null
+		
+		--IF REQUIRED NON MATCHING FROM BOTH THE TABLES 
+			select e.name as empName ,gender,salary, d.name as deptName from employee2 e 
+			full join department d on e.dept_id=d.id
+			where e.dept_id is null or 
+			d.id is null
+		
+		*/ 
 	}
 	
 	
