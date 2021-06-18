@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.spark_project.guava.collect.Iterables;
+import com.google.common.collect.Iterables;
 
 public class HashSetMethods {
 

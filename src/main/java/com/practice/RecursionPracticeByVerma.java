@@ -9,7 +9,6 @@ import javax.validation.constraints.Digits;
 import javax.xml.ws.Holder;
 
 import org.apache.arrow.flatbuf.List;
-import org.apache.hadoop.hdfs.server.namenode.block_005finfo_005fxml_jsp;
 import org.apache.spark.deploy.master.BlackHolePersistenceEngine;
 import org.apache.spark.sql.catalyst.expressions.IsNaN;
 
@@ -95,7 +94,9 @@ public class RecursionPracticeByVerma {
 	}
 
 	public static void print(int n) {
-		
+		if(n==0)return; 
+		System.out.print(n+" ");
+		print(n-1);
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {

@@ -6,6 +6,8 @@ public class SQL {
 	 * SQL study :-https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB
 	 * Question :-https://www.youtube.com/watch?v=fvPddKyHxpQ&list=PL6n9fhu94yhXcztdLO7i6mdyaegC8CJwR
 	 * SUBQUERIES :-https://www.youtube.com/watch?v=0BW2Pi_HGYs (TechLake)
+	 * 
+	 * WINDOW FUNCTIONS:-https://timepasstechies.com/window-functions-in-spark-sql-and-dataframe-ranking-functionsanalytic-functions-and-aggregate-function/
 	 */
 	
 	
@@ -92,7 +94,7 @@ public class SQL {
 					FROM Employee;
 		****************RANGE VS ROWS interchange in below query***********(cumputing running total)
 				 	select name,Gender,Salary,
-					SUM(Salary) OVER (ORDER BY Salary RANGE BETWEEN unbounded preceding AND current row) as RunningTotalRANGE
+					SUM(Salary) OVER (ORDER BY Salary RANGE BETWEEN unbounded preceding AND current row) as RunningTotalRANGE,
 					SUM(Salary) OVER (ORDER BY Salary ROWS BETWEEN unbounded preceding AND current row) as RunningTotalROW
 					FROM Employee;
 	    ****************Last_VALUE***************(Name of highest Paid Employee)***************

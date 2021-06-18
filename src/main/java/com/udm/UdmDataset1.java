@@ -45,13 +45,14 @@ public class UdmDataset1 {
 		
 		//SECOUND APPROACH
 		//Filter using lambda
-		Dataset<Row> modernArtResults2 = dataset.filter(row->row.getAs("subject").equals("Modern Art")
-				&& Integer.parseInt(row.getAs("year"))>=2007);
+	/*	Dataset<Row> modernArtResults2 = dataset.filter(row->row.getAs("subject").equals("Modern Art")
+				&& Integer.parseInt(row.getAs("year"))>=2007);*/
 		//THIRD APPROACH-selecting column first and then adding constants in filter using them
 		Column subjectColumn=dataset.col("subject");
 		Column yearColumn=dataset.col("year");
 		//greater then equal to geq 
 		Dataset<Row> modernArtResults3 = dataset.filter(subjectColumn.equalTo("Modern Art").and(yearColumn.geq(2007)));
+		
 		
 		//In ABove method we have to have these col instance but we can create these with static imported function class 
 		//directly as below 

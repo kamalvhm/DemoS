@@ -1,5 +1,7 @@
 package com.udm.streaming;
 
+import java.util.concurrent.TimeoutException;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.sql.Dataset;
@@ -35,19 +37,26 @@ public class UdmStrmStructuredStream {
 		Dataset<Row> results=session.sql("select cast(value as string) as course_name from viewing_figures");
 		//To write data after processing 
 		//https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#output-sinks
-		StreamingQuery query=results
-		.writeStream()
-		.format("console")
-		.outputMode(OutputMode.Append())
-		.start();
-		
-		//This will result of infinite processing of batches
+		StreamingQuery query;
 		try {
-			query.awaitTermination();
-		} catch (StreamingQueryException e) {
+			query = results
+			.writeStream()
+			.format("console")
+			.outputMode(OutputMode.Append())
+			.start();
+			
+			try {
+				query.awaitTermination();
+			} catch (StreamingQueryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (TimeoutException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		
+		
 	}
 
 }
