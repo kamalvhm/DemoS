@@ -55,6 +55,7 @@ public class BsPractice {
 	
 	public static int bslast(int [] a,int i) {
 		return -1;
+
 	}
 	
 	public static int findPeakElement(int[] a) {

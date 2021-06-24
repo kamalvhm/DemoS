@@ -10,6 +10,7 @@ import java.util.spi.CurrencyNameProvider;
 import org.apache.commons.math3.ode.nonstiff.GillIntegrator;
 import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
 import org.apache.hadoop.fs.DF;
+import org.apache.ivy.core.cache.CacheUtil;
 import org.apache.spark.sql.catalyst.expressions.CurrentRow;
 import org.apache.spark.sql.streaming.StreamingQueryListener.QueryStartedEvent;
 import org.apache.spark.sql.types.StructType;
@@ -72,7 +73,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands:(4) " + numIslands(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -136,11 +137,12 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
+		
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		List<List<Integer>> result=new ArrayList<>();	
-
+		
 		return result;
 	 }
 
@@ -149,7 +151,20 @@ public class Dummy {
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
-		
+		Stack<TreeNode> st=new Stack<>();
+		TreeNode current=tree;
+		st.push(current);
+		while(!st.isEmpty()) {
+			current=st.pop();
+			System.out.print(current.val+", ");
+			
+			if(current.right!=null)
+				st.push(current.right);
+			
+			if(current.left!=null)
+				st.push(current.left);
+			
+		} 
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {

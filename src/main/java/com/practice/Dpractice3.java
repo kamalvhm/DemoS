@@ -71,7 +71,7 @@ public class Dpractice3 {
 
 		String e3="rabbbit";
 		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.so return 3
-		System.out.println("16)Distinct Subsequences (3):-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
+		System.out.println("16)Distinct Subsequences (3):-"+DistinctSubsequences(e3,e4,e3.length(),e4.length()));
 		
 		String s4="babad"; //Ans :-aba
 		System.out.println("11)Longest palindromic substring (aba):-"+longestPalindromicSubString(s4));
@@ -95,7 +95,7 @@ public class Dpractice3 {
 	}
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
-		return 0;
+		return 1;
 	}
 	
 	
@@ -103,7 +103,15 @@ public class Dpractice3 {
 	public static int LCS_TopDown(String x,String y,int n,int m) {
 		int t[][] =new int [n+1][m+1];
 		
-	
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<m+1;j++) {
+				if(x.charAt(i-1)==y.charAt(j-1)) 
+					t[i][j]=1+t[i-1][j-1];
+				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+					
+				
+			}
+		}
 		return t[n][m];
 	}
 	
@@ -111,75 +119,112 @@ public class Dpractice3 {
 		int t[][]=new int[n+1][m+1];
 		int max =0;
 		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<m+1;j++) {
+				if(x.charAt(i-1)==y.charAt(j-1)) {
+					t[i][j]=1+t[i-1][j-1];
+					max=Math.max(max, t[i][j]);
+				}
+				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+			}
+		}
 		return max;
 	}
 	
 	
 	public static String printLCS_String(String x,String y,int n, int m) {		
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS
+		
+		
 		return "";
 	}
 	
 	
 	 public static String shortestCommonSupersequence(String x, String y) {
-		 int n=x.length(),m=y.length();
-		 int t[][]=new int[n+1][m+1];
+		 	int n= x.length();
+	        int m = y.length();
+	        int[][] t = new int[n+1][m+1];
 
-		 return "";
+	       
+	        StringBuffer result=new StringBuffer();
+	        
+	        return result.toString();
 	    }
 	 
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
 			int t[][]=new int [n+1][m+1];  
 			
+			
 			return t[n][m];
 		}
 	
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
-	      
+	        
+	    
 	        return t[n][m];
 	    }
 	 
 	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
 		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
-			 if(m==0)return 1;
-			 if(n==0)return 0;
-			 if(s.charAt(n-1)!=t.charAt(m-1))
-				 return DistinctSubsequencesR(s, t, n-1, m);
-			 else 
-			 return DistinctSubsequencesR(s, t, n-1, m)+DistinctSubsequencesR(s, t, n-1, m-1);
+			 if(m==0) return 1;
+			 if(n==0) return 0;
+			
+			 if(s.charAt(n-1)==t.charAt(m-1))
+				 return DistinctSubsequencesR(s, t, n-1, m-1)+DistinctSubsequencesR(s, t, n-1, m);
+			 else
+			 return DistinctSubsequencesR(s, t, n-1, m);
 	    }
 		 
-		public static int DistinctSubsequences(String s ,String t,int n,int m){
-		      int dp[][]=new int [n+1][m+1];
-		      
+		public static int DistinctSubsequences(String x ,String y,int n,int m){
+		      int t[][]=new int [n+1][m+1];
 		    
-		      return dp[n][m];
+		      return t[n][m];
 		    }
 		//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
 		private static String longestPalindromicSubString(String e) {
 			int n=e.length();
 			int t[][]=new int[n+1][n+1];
+			int sl=0,el=0;
 			
-		
 			
-			return "";
-			//return e.substring(el-sl,el);
+			//return "";
+			return e.substring(el-sl,el);
 		}
 		//CODE SAME AS LCS JUST ADD ANSCII AT EVERY STEP
 		public static int minimumDeleteSum(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
-	    
+	        for(int i=1;i<n+1;i++)
+	        	t[i][0]=t[i-1][0]+(int)s1.charAt(i-1);
 	        
+	        for(int j=1;j<m+1;j++)
+	        	t[0][j]=t[0][j-1]+(int)s2.charAt(j-1);
+	        
+	        for(int i=1;i<n+1;i++) {
+	        	for(int j=1;j<m+1;j++) {
+	        		if(s1.charAt(i-1)!=s2.charAt(j-1)) {
+	        			t[i][j]=Math.min(t[i][j-1]+(int)s2.charAt(j-1), t[i-1][j]+(int)s1.charAt(i-1));
+	        		}else t[i][j]=t[i-1][j-1];
+	        	}
+	        }
 	        return t[n][m];
 	    }
 		//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
 		public static int longestOfAinB(String x,String y,int n,int m) {
 			int t[][]=new int [n+1][m+1];  
 			int max=0;
-		
+			
+			for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1)) {
+						t[i][j]=1+t[i-1][j-1];
+					}else t[i][j]=t[i][j-1];
+					
+					max=Math.max(max, t[i][j]);
+				}
+			}
 			
 			return max;
 		}
@@ -204,7 +249,17 @@ public class Dpractice3 {
 	        if(nums.length==0) return 0;
 	        int dp [] =new int[nums.length];
 	        int max=0;
-	       
+	        
+	        Arrays.fill(dp, 1);
+	        
+	        for(int i=0;i<nums.length;i++) {
+	        	for(int j=0;j<i;j++) {
+	        		if(nums[j]<nums[i]) {
+	        			dp[i]=Math.max(dp[i], dp[j]+1);
+	        		}
+	        		max=Math.max(dp[i], max);
+	        	}
+	        }
 	        return max;
 	    }
 }

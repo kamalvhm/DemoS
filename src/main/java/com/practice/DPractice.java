@@ -76,24 +76,13 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		if(w==0 || n==0)return 0;
-		else if(wt[n-1]<=w)
-			return Math.max(val[n-1]+knapsack1(wt, val, w-wt[n-1], n), knapsack1(wt, val, w, n-1));
-		else 
-		return knapsack1(wt, val, w, n-1);
+		return 1;
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] =new int [n+1][w+1];
 		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<w+1;j++) {
-				if(wt[i-1]<=j)
-					t[i][j]=Math.max(val[i-1]+t[i-1][j-wt[i-1]], t[i-1][j]);
-				else t[i][j]=t[i-1][j];
-			}
-		}
-	
+		
 		
 		return t[n][w];
 
@@ -102,18 +91,11 @@ public class DPractice {
 	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean t[][] =new boolean[n+1][sum+1];
 		
-		
 		return t[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
-		int total=0;
-		for(int i:arr)
-			total+=i;
-		if(total%2!=0)return false;
-		
-		
-		return subsetSum(arr, total/2, n);
+		return false;
 
 	}
 
@@ -127,7 +109,7 @@ public class DPractice {
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
 	    int	sum=0;
-	    
+	  
 		return sum;
 	}
 
@@ -138,9 +120,9 @@ public class DPractice {
 		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
-				if(arr[i-1]<=j) {
-					t[i][j]=t[i-1][j-arr[i-1]]|| t[i-1][j];
-				}else t[i][j]=t[i-1][j];
+				if(arr[i-1]<=j)
+					t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
+				else t[i][j]=t[i-1][j];
 			}
 		}
 		
@@ -154,6 +136,7 @@ public class DPractice {
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
+		
 		
 		return t[n][w];
 
@@ -169,9 +152,8 @@ public class DPractice {
 	// :-https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-		
-		for(int j=0;j<sum+1;j++)
-			t[0][j]=Integer.MAX_VALUE-1;
+		for(int i=0;i<sum+1;i++)
+			t[0][i]=Integer.MAX_VALUE-1;
 		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
