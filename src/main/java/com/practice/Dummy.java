@@ -128,8 +128,7 @@ public class Dummy {
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
-		int count = 0;
-		
+		int count = 0;		
 		return count;
 	}
     
@@ -151,20 +150,7 @@ public class Dummy {
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
-		Stack<TreeNode> st=new Stack<>();
-		TreeNode current=tree;
-		st.push(current);
-		while(!st.isEmpty()) {
-			current=st.pop();
-			System.out.print(current.val+", ");
-			
-			if(current.right!=null)
-				st.push(current.right);
-			
-			if(current.left!=null)
-				st.push(current.left);
-			
-		} 
+		
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {

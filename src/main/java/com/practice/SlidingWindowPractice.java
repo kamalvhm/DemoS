@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 import scala.xml.dtd.impl.WordExp.Letter;
 
 public class SlidingWindowPractice {
-
+	//@link{com.cleanup.SlidingWindowMaster}
 	public static void main(String[] args) {
 		//1)Return Maximum sum of subArray element of size 3 from below array;
 			int [] arr1= {2,3,5,9,7,1};
@@ -50,32 +50,32 @@ public class SlidingWindowPractice {
 	
 	private static int maxInSubArray(int[] arr, int window) {
 		int i=0,j=0;
-		int max=0;
-		int currentSum =0;
+		int maxSum=0;
+		int currentSum=0;
 		while(j<arr.length) {
 			currentSum+=arr[j];
+			//calc
 			if(j-i+1<window)
 				j++;
 			else if(j-i+1==window) {
-				max=Math.max(max, currentSum);
+				maxSum=Math.max(maxSum, currentSum);
 				currentSum-=arr[i];
 				i++;
 				j++;
 			}
 		}
-		return max;
+		return maxSum;
 	}
 	
 	private static int firstNegative(int[] arr, int window) {
-		
 		return 1;
 	}
 
 	//https://leetcode.com/problems/find-all-anagrams-in-a-string/
 	  public static List<Integer> findAnagrams(String s, String p) {
-		
-	        
-	        return new ArrayList<Integer> ();
+		  	int i=0,j=0;
+		  
+	       return new ArrayList<Integer> ();
 	    }
 
 	  private static int longestSubArray(int[] arr, int sum) {
@@ -102,19 +102,15 @@ public class SlidingWindowPractice {
 
 		private static List<Integer> maximumInWindow(int a[],int window){
 			List<Integer> ans =new ArrayList<>();
-			PriorityQueue<Integer> pq=new PriorityQueue<>((c,b)->b-c);
 			int i=0,j=0;
+			PriorityQueue<Integer> maxHeap=new PriorityQueue<>((c,b)->b-c);
 			while(j<a.length) {
-				pq.add(a[j]);
+				maxHeap.add(a[j]);
 				if(j-i+1<window)
 					j++;
 				else if(j-i+1==window) {
-					if(!pq.isEmpty())
-						ans.add(pq.peek());
-					if(pq.contains(a[i])) {
-						pq.remove(Integer.valueOf(a[i]));
-					
-					}
+					ans.add(maxHeap.peek());
+					maxHeap.remove(0);
 					i++;
 					j++;
 				}

@@ -76,7 +76,10 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		return 1;
+		if(w==0 || n==0) return 0;
+		if(wt[n-1]<=w)
+			return Math.max(val[n-1]+knapsack1(wt, val, w-wt[n-1], n),knapsack1(wt, val, w, n-1));
+		return knapsack1(wt, val, w, n-1);
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {

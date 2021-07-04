@@ -97,7 +97,7 @@ public class SlidingWindowMaster {
 	        HashMap<Character,Integer> map=new HashMap<>();
 	        for(char c:p.toCharArray())
 	            map.put(c,map.getOrDefault(c,0)+1);
-	        int count =map.size();
+	        int count =map.size();//This is distinct letter count 
 	        int left=0,right=0;
 	        
 	        int window=p.length();

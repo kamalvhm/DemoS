@@ -1,38 +1,21 @@
 package com.acrossPart;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Scanner;
-
-import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import static org.apache.spark.sql.functions.col;
 
 
 public class Ab {
 
 	public static void main(String[] args) throws IOException {
-		//String s0="Sachin";  
-
-		String s1=new String("Sachin");  
-		String s2=s1.intern();  
-		//System.out.println(s2==s0);//Sachin  
-		System.out.println(s2==s1);//Sachin  
-		
-		SparkConf sc=new SparkConf().setAppName("A").setMaster("local");
-		JavaSparkContext jsc=new JavaSparkContext(sc);
-		
-		SparkSession spark=SparkSession.builder().appName("A").master("local").getOrCreate();
-		Dataset<Row> ds =spark.read().option("header", true).csv("path");
-		
-		ds=ds.withColumn("TEMP", col("F").minus(5).multiply(2));
-		ds.write().format("parque").save("path");
+//		ZonedDateTime usage = ZonedDateTime.parse("2018-04-02T16:01:00.000+03:00");
+//		ZonedDateTime cut = ZonedDateTime.parse("2018-04-03T16:01:00.000+03:00");
+//		System.out.println((usage.isBefore(cut)));
+		/*System.out.println(t1.isAfter(t2));
+		System.out.println(t1.isEqual(t2));*/
 		
 		
-
 		
 		/*Long enumSixtyToFifteen=new Long(1);
 		int i=1;
@@ -72,6 +55,8 @@ public class Ab {
 		//dF.write.format("parquet").save("<<location>>");
 */	}
 	
+	
+
 	private static void print(int n) {
 		if(n==0)
 			return;

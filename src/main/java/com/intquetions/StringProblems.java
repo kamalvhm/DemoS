@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
+//https://www.youtube.com/watch?v=uq7tbwl6DuM&list=PLt4nG7RVVk1gp0v3wg7gWB26lRzseuHQz
 public class StringProblems {
 	public static void main(String[] args) {
 		String s="ABRACADABRA";

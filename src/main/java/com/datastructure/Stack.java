@@ -74,6 +74,25 @@ public class Stack<T> implements Iterable<T> {
 	        return stack.isEmpty();
 	        
 	    }
+	 
+	    public boolean isValid2(String s) {
+	        Stack<Character> st =new Stack<>();
+	        for(int i=0;i<s.length();i++){
+	            char c=s.charAt(i);
+	            if(c=='(' || c=='[' || c=='{')
+	                st.push(c);
+	            else if(st.isEmpty())
+	                return false;
+	            else if(c==')' && st.pop()!='(')
+	                return false;
+	            else if(c==']' && st.pop()!='[')
+	                return false;
+	            else if(c=='}' && st.pop()!='{')
+	                return false;
+	            
+	        } 
+	        return st.isEmpty();
+	     }
 	
 	   //84. Largest Rectangle in Histogram || discussion https://www.youtube.com/watch?v=SSpnMY5TrTw || 
 	
@@ -116,7 +135,7 @@ public class Stack<T> implements Iterable<T> {
 
         int maxArea = 0;
         for(int i=0; i<n; i++) {
-            int area = (right[i] - left[i] - 1) * heights[i];
+            int area = (right[i] - left[i] - 1) * heights[i]; //right Minimum of position minus left min of pos
             maxArea = Math.max(maxArea, area);
         }
         return maxArea;

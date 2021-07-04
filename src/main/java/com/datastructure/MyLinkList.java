@@ -85,7 +85,7 @@ public class MyLinkList<T> {
        
 	}
 	
-	//https://leetcode.com/problems/linked-list-cycle/
+	//141. Linked List Cycle | https://leetcode.com/problems/linked-list-cycle/
 		public boolean hasCycle(ListNode head) {
 			if (head == null || head.next == null) {
 				return false;
@@ -101,7 +101,7 @@ public class MyLinkList<T> {
 			return false;
 		}
 		
-		//https://leetcode.com/problems/middle-of-the-linked-list/
+		//876. Middle of the Linked List | https://leetcode.com/problems/middle-of-the-linked-list/
 		public Node findMid() {
 			Node slow=st_node;
 			Node fast=st_node;
@@ -148,11 +148,8 @@ public class MyLinkList<T> {
 		st_split.next_node=en_split;
 		
 		list1.size=list1.size+list2.size;
-		
-		
-		
+
 	}
-	
 	
 	//https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem
 	public Node deleteInPosRecursive(Node head,int p) {
@@ -161,7 +158,7 @@ public class MyLinkList<T> {
 		return head;
 		
 	}
-	//Merge Two Sorted Lists | merge both of these list in sorted order 
+	//21 Merge Two Sorted Lists | merge both of these list in sorted order 
 	public static Node mergeInsortedOrder(Node head1,Node head2) {
 		if(head1==null)return head2;
 		if(head2==null)return head1;

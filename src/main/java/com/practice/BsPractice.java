@@ -55,7 +55,6 @@ public class BsPractice {
 	
 	public static int bslast(int [] a,int i) {
 		return -1;
-
 	}
 	
 	public static int findPeakElement(int[] a) {
@@ -64,7 +63,6 @@ public class BsPractice {
 	
 	public static int arrayRotatedcount(int[] a) {
 		return -1;
-
 	}
 
 	public static int bsInfiniteArray(int[] a, int target) {

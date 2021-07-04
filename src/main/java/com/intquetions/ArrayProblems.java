@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//Coding Ninjas:-https://www.youtube.com/watch?v=ibf7OBHbRlI | https://dynalist.io/d/f8y9_YRZW6Kt5-hLfqkW3kDS
 
 public class ArrayProblems {
 

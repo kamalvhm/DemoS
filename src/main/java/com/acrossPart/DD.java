@@ -70,6 +70,7 @@ public class DD {
 				new StructField("datetime",DataTypes.StringType,false,Metadata.empty())
 		};StructType schema=new StructType(fields);
 		Dataset<Row> results2 = spark.sql("select level,collect_list(datetime) from logging_table group by level order by level");
+		
 
 	}
 

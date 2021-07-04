@@ -94,10 +94,13 @@ public class RecursionPracticeByVerma {
 	}
 
 	public static void print(int n) {
-		
 	}
 
-	private static void sortArraList(ArrayList<Integer> list) {
+	private static void sortArraList(ArrayList<Integer> list) {  //[1,2,]
+		if(list.size()==1)return;
+		int val=list.remove(list.size()-1);
+		sortArraList(list);
+		insert(list, val);
 		
 	}
 	
@@ -105,7 +108,7 @@ public class RecursionPracticeByVerma {
 		
 	}
 
-	private static void sortStack(Stack<Integer> st) {
+	private static void sortStack(Stack<Integer> st) { 
 		
 	}
 
@@ -115,7 +118,6 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {
-		
 		
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {
@@ -134,19 +136,17 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void subsets(String ip, String op) {
-
+	
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
 		
-
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-	
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-		
+	
 	}
 
 	private static void letterPermutation(String ip, String op) {
@@ -154,16 +154,30 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
+		if(open==0 && close==0) {
+			System.out.println(op);
+			return;
+		}
+		if(open>0)
+			balanceParanthesis(open-1, close, op+"(");
+		if(open<close)
+			balanceParanthesis(open, close-1, op+")");
 		
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-	
+		if(n==0) {
+			System.out.println(op);
+			return;
+		}
+		
+		nBitBinary(n-1, one+1, zero, op+1);
+		if(one>zero)
+			nBitBinary(n-1, one, zero+1, op+0);
 	}
 	
-	
-	
+
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		return 0;
+		return 1;
 	}
 }
