@@ -549,4 +549,37 @@ public class SlidingWindow extends SlidingOlder {   /***********ALSO SEE IN PARE
 	        
 	        return count;
 	    }
+	 
+	 
+	 private static String largestSubStringWithKUnique(String s, int k) {
+			int i=0,j=0;
+			int max=0;
+			String ans="";
+			HashMap<Character,Integer> map=new HashMap<>();
+			while(j<s.length()) {
+				char rc=s.charAt(j);
+				map.put(rc, map.getOrDefault(rc, 0)+1);
+				if(map.size()<k)
+					j++;
+				else if(map.size()==k) {
+					if(j-i+1>max) {
+						max=j-i+1;
+						ans=s.substring(i,j+1);
+					}
+					j++;
+				}
+				else if(map.size()>k) {
+					 while(map.size()>k) {
+						 char lc=s.charAt(i);
+						 int val=map.get(lc);
+						 if(--val==0)
+							 map.remove(lc);
+						 else map.put(lc, val);
+						 i++;
+					 }
+					 j++;
+				}
+			}
+			return ans;
+		}
 }

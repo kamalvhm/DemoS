@@ -76,19 +76,13 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		if(w==0 || n==0) return 0;
-		if(wt[n-1]<=w)
-			return Math.max(val[n-1]+knapsack1(wt, val, w-wt[n-1], n),knapsack1(wt, val, w, n-1));
-		return knapsack1(wt, val, w, n-1);
+		return 1;
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] =new int [n+1][w+1];
 		
-		
-		
 		return t[n][w];
-
 	}
 
 	public static boolean subsetSum(int[] arr, int sum, int n) {
@@ -99,12 +93,10 @@ public class DPractice {
 
 	public static boolean equalSum(int[] arr, int n) {
 		return false;
-
 	}
 
 	public static int countSubsetSum(int[] arr, int sum, int n) {
 		int t[][]=new int[n+1][sum+1];
-		
 		
 		return t[n][sum];
 
@@ -112,8 +104,8 @@ public class DPractice {
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
 	    int	sum=0;
-	  
-		return sum;
+	   
+		return 1;
 	}
 
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
@@ -139,10 +131,8 @@ public class DPractice {
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
-		
-		
-		return t[n][w];
 
+		return t[n][w];
 	}
 
 	public static int coinChangeI(int[] coin, int sum, int n) {
@@ -155,16 +145,7 @@ public class DPractice {
 	// :-https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-		for(int i=0;i<sum+1;i++)
-			t[0][i]=Integer.MAX_VALUE-1;
 		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<sum+1;j++) {
-				if(coin[i-1]<=j)
-					t[i][j]=Math.min(t[i][j-coin[i-1]]+1, t[i-1][j]);
-				else t[i][j]=t[i-1][j];
-			}
-		}
 		return t[n][sum];
 	}
 

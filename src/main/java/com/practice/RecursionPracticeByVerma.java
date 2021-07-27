@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 import javax.tools.Diagnostic;
 import javax.validation.constraints.Digits;
 import javax.xml.ws.Holder;
@@ -94,13 +95,10 @@ public class RecursionPracticeByVerma {
 	}
 
 	public static void print(int n) {
+		
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {  //[1,2,]
-		if(list.size()==1)return;
-		int val=list.remove(list.size()-1);
-		sortArraList(list);
-		insert(list, val);
 		
 	}
 	
@@ -126,6 +124,7 @@ public class RecursionPracticeByVerma {
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
 		
+		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
 		return 1;
@@ -136,44 +135,31 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void subsets(String ip, String op) {
-	
+		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
 		
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
+
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-	
+
 	}
 
 	private static void letterPermutation(String ip, String op) {
-		
+	
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-		if(open==0 && close==0) {
-			System.out.println(op);
-			return;
-		}
-		if(open>0)
-			balanceParanthesis(open-1, close, op+"(");
-		if(open<close)
-			balanceParanthesis(open, close-1, op+")");
+		
 		
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-		if(n==0) {
-			System.out.println(op);
-			return;
-		}
-		
-		nBitBinary(n-1, one+1, zero, op+1);
-		if(one>zero)
-			nBitBinary(n-1, one, zero+1, op+0);
+	
 	}
 	
 

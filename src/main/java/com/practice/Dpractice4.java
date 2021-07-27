@@ -123,13 +123,8 @@ public class Dpractice4 extends DynamicPrograming{
 
 
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
-		if(i>=j)return 0;
-		int min=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-			int temp=solveMCM_BottomUp(arr, i, k)+solveMCM_BottomUp(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
-			min=Math.min(min, temp);
-		}
-		return min;
+		
+		return 1;
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
@@ -155,15 +150,8 @@ public class Dpractice4 extends DynamicPrograming{
 
 	//V-37
 	private static int palindrom_partitioningBottomUp(String s, int i, int j) {
-		if(i>=j)return 0;
-		if(dp[i][j]!=-1) return dp[i][j];
-		if(isPalindrom(s, i, j))return 0;
-		int min=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-			int tmp=palindrom_partitioningBottomUp(s, i, k)+palindrom_partitioningBottomUp(s, k+1, j)+1;
-			min=Math.min(min, tmp);
-		}
-		return dp[i][j]=min;
+		
+		return dp[i][j];
 	}
 	//CHECK PROBLEM SOLUTION IN PARENT CLASS
 	//V-38 To optimize further we can check "palindrom_partitioningBottomUp(s,i,k)+palindrom_partitioningBottomUp(s, k+1, j);" function in the matrix 
@@ -176,31 +164,34 @@ public class Dpractice4 extends DynamicPrograming{
 	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
 		if(i>j)return 0;
 		if(i==j) {
-			if(isTrue) {
-				return s.charAt(i)=='T'?1 :0;
-			}else return s.charAt(i)=='F'?1:0;
+			if(isTrue)
+				return s.charAt(i)=='T'?1:0;
+			else return s.charAt(i)=='F'?1:0;
 		}
 		int ans=0;
-		for(int k=i+1;k<j;k+=2) {
+		for(int k=i;k<j;k+=2) {
 			int leftTrue=evalExTRecursive(s, i, k-1, true);
 			int leftFalse=evalExTRecursive(s, i, k-1, false);
 			int rightTrue=evalExTRecursive(s, k+1, j, true);
 			int rightFalse=evalExTRecursive(s, k+1, j, false);
 			
-			char ch=s.charAt(k);
-			if(ch=='&') {
+			char c=s.charAt(k);
+			if(c=='&') {
 				if(isTrue)
 					ans+=leftTrue*rightTrue;
-				else ans+=leftTrue*rightFalse+leftFalse*rightTrue+ leftFalse*rightFalse;
-			}else if(ch=='|') {
-				if(isTrue) {
-					ans+=leftTrue*rightTrue+leftTrue*rightFalse+leftFalse*rightTrue;
-				}else ans+=leftFalse*rightFalse;
-			}else if(ch=='^') {
+				else ans+=leftTrue*rightFalse+leftFalse*rightTrue+leftFalse*rightFalse;
+			}
+			if(c=='|') {
 				if(isTrue)
-				ans+=leftTrue*rightFalse+leftFalse*rightTrue ;
+					ans+=leftTrue*rightTrue+leftTrue*rightFalse+leftFalse*rightTrue;
+				else ans+=leftFalse*rightFalse;
+			}
+			if(c=='^') {
+				if(isTrue)
+					ans+=leftTrue*rightFalse+leftFalse*rightTrue;
 				else ans+=leftTrue*rightTrue+leftFalse*rightFalse;
 			}
+
 		}
 		return ans;
 	} 
@@ -253,13 +244,13 @@ public class Dpractice4 extends DynamicPrograming{
 	public static boolean scrambledSolve(String a ,String b) {
 		if(a.compareTo(b)==0)return true;
 		if(a.length()<=1)return false;
-		int n=a.length();
 		boolean flag=false;
-		for(int i=1;i<=n-1;i++) {
-			if(scrambledSolve(a.substring(0,i), b.substring(n-i)) &&
-					scrambledSolve(a.substring(i,n), b.substring(0,n-i)) ||
-					scrambledSolve(a.substring(0,i), b.substring(0,i)) && 
-					scrambledSolve(a.substring(i,n),b.substring(i,n))) {
+		int n=a.length();
+		for(int i=1;i<n;i++) {
+			if(scrambledSolve(a.substring(0,i), b.substring(n-i,n)) 
+					&& scrambledSolve(a.substring(i,n), b.substring(0,n-i)) || 
+				scrambledSolve(a.substring(0,i), b.substring(0,i)) 
+				&& scrambledSolve(a.substring(i,n),b.substring(i,n))) {
 				flag=true;
 				break;
 			}
@@ -274,15 +265,14 @@ public class Dpractice4 extends DynamicPrograming{
 	 
 	 
 		private static int eggDropRecursive(int e, int f) {
-			if(f==0 || f==1)return f;
+			if(f==0 || f==1) return f;
 			if(e==1)return f;
-			if(egg[e][f]!=-1)return egg[e][f];
 			int min=Integer.MAX_VALUE;
 			for(int k=1;k<=f;k++) {
-				int temp =Math.max(eggDropRecursive(e-1, k-1),eggDropRecursive(e, f-k))+1;
+				int temp=Math.min(eggDropRecursive(e-1, k-1), eggDropRecursive(e, f-k));
 				min=Math.min(min, temp);
 			}
-			return egg[e][f]=min;
+			return min;
 		}
 		
 		private static int eggDropMemoized(int e, int f) {

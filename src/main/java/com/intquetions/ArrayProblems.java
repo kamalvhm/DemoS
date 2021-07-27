@@ -7,10 +7,22 @@ import java.util.List;
 import java.util.Set;
 
 //Coding Ninjas:-https://www.youtube.com/watch?v=ibf7OBHbRlI | https://dynalist.io/d/f8y9_YRZW6Kt5-hLfqkW3kDS
+/**
+		 * PRACTICE IN MORNING :-https://leetcode.com/problems/sort-colors/submissions/
+		
+		287. Find the Duplicate Number
+		
+		41. First Missing Positive 
+		
+		442. Find All Duplicates in an Array https://www.youtube.com/watch?v=iiYc32-4ZJY
+
+ *
+ */
 
 public class ArrayProblems {
 
 	public static void main(String[] args) {
+		//CONVERSION 
 		int[] nums={4,3,2,7,8,2,3,1};
 		List ip= Arrays.asList(nums);
 		Integer[] numsAgain=(Integer[])ip.toArray();
@@ -64,6 +76,24 @@ public class ArrayProblems {
           return result;
           
       }
+		
+		//448. Find All Numbers Disappeared in an Array
+		  public List<Integer> findDisappearedNumbers2(int[] nums) {
+		        List<Integer> result=new ArrayList<>();
+		        for(int i=0;i<nums.length;i++){
+		            int index=Math.abs(nums[i]);
+		            if(nums[index-1]>0){
+		                nums[index-1]=-nums[index-1];
+		            }
+		        }
+		        
+		         
+		        for(int j=0; j<nums.length;j++){
+		            if(nums[j]>0)
+		                result.add(j+1);
+		        }
+		        return result;
+		 }
 		//11. Container With Most Water  !!TWO POINTER!!
 		public int maxArea(int[] height) {
 	        int maxArea=0;
@@ -264,7 +294,7 @@ public class ArrayProblems {
 		        return nums;
 		    }
 		    
-// Keep note of the index being visited and then return if already visited
+// Keep note of the index being visited and then return if already visited ||x. Find the Duplicate Number  https://www.youtube.com/watch?v=32Ll35mhWg0
 	public static int findDuplicate(int[] nums) {
 		int n = nums.length;
 		int duplicate = n;
@@ -281,7 +311,7 @@ public class ArrayProblems {
 	}
 	
 	 public static int findDupUsingSlowFast(int[] nums) {
-	        if (nums == null || nums.length ==0) return -1;
+		        if (nums == null || nums.length ==0) return -1;
 	        
 	        int slow = nums[0];
 	        int fast = nums[slow];
@@ -298,7 +328,7 @@ public class ArrayProblems {
 	        return slow;
 	    }
 		    
-     //41. First Missing Positive  O(1) space TC is O(n).
+     //41. First Missing Positive  O(1) space TC is O(n). https://www.youtube.com/watch?v=-lfHWWMmXXM&t=555s
 	  public int firstMissingPositive(int[] nums) {
 		     for(int i=0; i<nums.length; ){
 		            int indexNum = nums[i] - 1;
@@ -322,5 +352,96 @@ public class ArrayProblems {
 		        nums[i]=nums[j];
 		        nums[j]=temp;
 		    }
+		    
+		    //75. Sort Colors | DUTCH NATIONAL FLAG ALGO |https://www.youtube.com/watch?v=oaVa-9wmpns&list=PLgUwDviBIf0rPG3Ictpu74YWBQ1CaBkm2&index=2
+		    public void sortColors(int[] nums) {
+		        int low=0;
+		        int mid=0;
+		        int high=nums.length-1;
+		        while(mid<=high){
+		            if(nums[mid]==0)
+		                swap(nums,low++,mid++);
+		            else if(nums[mid]==1)
+		                mid++;
+		            else {
+		                swap(nums,high,mid);
+		                high--;
+		            }
+		            
+		        }
+		        
+		    }
+		    //442. Find All Duplicates in an Array | https://www.youtube.com/watch?v=iiYc32-4ZJY
+		    /**
+		     *
+		   	Tips for beginners : Whenever you encounter a scenario when given array values a[i] is in range [1,n] or [0,n-1] then most probabily you can achieve the O(1) solution by modifiying the values of the array.
 
+			In this question we are modifiying the sign of the element to keep track that element is visited or not [instead of using HashSet]
+		     */
+		    
+	public List<Integer> findDuplicates(int[] nums) {
+		List<Integer> list = new ArrayList<>();
+		for (int i = 0; i < nums.length; i++) {
+			int num = Math.abs(nums[i]); // get the original number by removing - sign if visited
+			if (nums[num - 1] > 0)
+				nums[num - 1] = -nums[num - 1]; // sign change to negative (visit)
+			else
+				list.add(num); // if sign has been already changed(visited) then current number is duplicate
+		}
+		return list;
+	}
+	
+	
+	 //53. Maximum Sub array  Easy  KADANE's ALGO
+	 public int maxSubArray(int[] nums) { //https://www.youtube.com/watch?v=w_KEocd__20&list=PLgUwDviBIf0rPG3Ictpu74YWBQ1CaBkm2&index=5
+	        int sum=0;
+	        int max=nums[0];
+	        for(int i=0;i<nums.length;i++){
+	            sum+=nums[i];
+	            max=Math.max(max,sum);
+	            if(sum<0)
+	                sum =0;
+	        }
+	        return max;
+	    }
+    public int maxSubArray2(int[] nums) {
+        if(nums.length==1)return nums[0];
+        int max=nums[0];
+        for(int i=1;i<nums.length;i++){
+            if(nums[i-1]>0)nums[i]+=nums[i-1];
+            if(nums[i]>max)
+                max=nums[i];
+        }
+        return max;
+    }
+    //56. Merge Intervals
+    public int[][] merge(int[][] intervals) {
+        List<int []> result=new ArrayList<>();
+        
+        if(intervals==null || intervals.length==0)return result.toArray(new int[0][]);
+        
+        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        
+        int start=intervals[0][0];
+        int end=intervals[0][1];
+        
+        for(int [] i:intervals){
+            if(i[0]<=end){
+                end=Math.max(end,i[1]);
+            }else {
+                result.add(new int[] {start,end});
+                start=i[0];
+                end=i[1];
+            }
+            
+        }
+        result.add(new int[] {start,end});
+        return result.toArray(new int[0][]);
+    }
+	
+	//https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/
+/**	Given an unsorted array of size n. Array elements are in the range from 1 to n. One number 
+	from set {1, 2, …n} is missing and one number occurs twice in the array. Find these two numbers.*/
+	
+	
 }

@@ -1,12 +1,13 @@
 package com.datastructure;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.List;
 import java.util.PriorityQueue;
 //STUDY:-https://www.geeksforgeeks.org/queue-interface-java/
 //https://www.geeksforgeeks.org/arraydeque-in-java/
@@ -175,5 +176,22 @@ public class Queue<T> implements Iterable{
 	         }
 	         return q.remove();
 	     }
+	    //56. Merge Intervals |CHECK ARRAY VESRION IN ARRAY PROBLEMS 
+	    public int[][] merge(int[][] intervals) {
+	        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+	        List<int[]> res = new ArrayList<>();
+	        for (int[] interval: intervals)
+	            // construct priority queue from list of interval
+	            pq.offer(interval);
+	        while (!pq.isEmpty()) {
+	            // take out one interval
+	            int[] prev = pq.poll();
+	            // extend the prev interval when there is overlapping
+	            while (!pq.isEmpty() && prev[1] >= pq.peek()[0])
+	                prev[1] = Math.max(prev[1], pq.poll()[1]);
+	            res.add(prev);
+	        }
+	        return res.toArray(new int[res.size()][]);
+	    }
 	 
 }

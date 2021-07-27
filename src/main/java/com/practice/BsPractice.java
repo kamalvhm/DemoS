@@ -19,25 +19,28 @@ public class BsPractice {
 				//	Index  0  1  2   3 4 5 6 7   no of rotation = min value (pivot) index 
 		int [] c= {11,12,15,18,2,5,6,8};
 		System.out.println("4) Rotated(4)---->>> "+arrayRotatedcount(c));
-				
+		
+		int d[]= {4,5,6,7,0,1,2};
+		System.out.println("5) Find in Rotated(4)---->>> "+findElemntinRotatedArray(d,0));
+		
 		//Binary search in 2D array
 		int arr[][]= {{10,20,30,40},
 					  {15,25,35,45},
 					  {27,29,37,48},
 					  {32,33,39,50}};
 		//2-1 should be retured;
-		System.out.println("5) 2D-(2-1)-> "+Search2DArray(arr,29));
+		System.out.println("6) 2D-(2-1)-> "+Search2DArray(arr,29));
 		
 		//find element in infinite array  consider below as infinate 
 		int [] k= {1,2,3,4,5,6,7,8,9,10,11};
-		System.out.println("6) Infinite---(6)>>"+bsInfiniteArray(k, 7));
+		System.out.println("7) Infinite---(6)>>"+bsInfiniteArray(k, 7));
 		
 		int [] a= {20,17,15,14,12,10,8,2,1};
-		System.out.println("7) Desc "+searchBsInDescArray(a,2)); //ANS:-7
+		System.out.println("8) Desc "+searchBsInDescArray(a,2)); //ANS:-7
 		//order agnostic array;
 		//floor of 5
-		int [] d= {1,2,3,4,8,9,10,10,12};
-		System.out.print(bsfloorofTarget(d,5));
+		int [] D= {1,2,3,4,8,9,10,10,12};
+		System.out.print(bsfloorofTarget(D,5));
 		//NEXT Greater element than target
 		char [] e= {'a','b','e','g'};
 		System.out.print(nextGreaterElement(e,'f'));
@@ -77,7 +80,22 @@ public class BsPractice {
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) {
-		
+		int l=0,r=a.length;
+		int first=a[0];
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			int value=a[mid];
+			if(value==target)return mid;
+			boolean val_big=value>=first;
+			boolean target_big=target>=first;
+			if(val_big==target_big) {
+				if(value<target)
+					l=mid+1;
+				else r=mid-1;
+			}else if(val_big)
+					l=mid+1;
+			else r=mid-1;
+		}
 		return -1;
 	}
 	

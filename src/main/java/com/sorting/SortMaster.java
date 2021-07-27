@@ -137,6 +137,12 @@ public class SortMaster {
 		int[] array4 = {5,4,2,1,3};
 		sort.sort(array4,4);
 		System.out.println(java.util.Arrays.toString(array4));
+		//Sort these sorted arrays mutually TC:- O(n*m) where n is for traverse in array a and m is to order correct in b array
+		int a[]= {1,4,7,8,10};
+		int b[]= {2,3,9};
+		sort(a,b);
+		System.out.println(Arrays.toString(a));
+		System.out.println(Arrays.toString(b));
 	}
 
 	private void sort(int[] array, int i) {
@@ -156,6 +162,31 @@ public class SortMaster {
 		case 4:quickSort(array,0,array.length-1);
 		System.out.println("Quick");
 		}
+	}
+	
+	
+	public static void sort(int a[],int b[]) {
+		int j=0;
+		for(int i=0;i<a.length;i++) {
+			if(a[i]>b[j]) {//if array a ith element is bigger then b 0 th element then swap them and in b array use some 
+				//isertion logic to insert that swaped elemnt to its ocrrect pos; 
+				swapAndInsersion(a, b, i, j);
+			}
+			
+				
+		}
+	}
+	
+	public static void swapAndInsersion(int a[],int b[],int i,int j) {
+		int value=a[i];
+		a[i]=b[j];
+		b[j]=value;
+		int hole=j;
+		while(hole<b.length-1 && b[hole+1]<value) {
+				b[hole]=b[hole+1];
+				hole++;
+		}
+		b[hole]=value;
 	}
 	
 }

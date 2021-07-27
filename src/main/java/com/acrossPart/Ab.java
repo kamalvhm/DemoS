@@ -2,6 +2,7 @@ package com.acrossPart;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -15,7 +16,9 @@ public class Ab {
 		/*System.out.println(t1.isAfter(t2));
 		System.out.println(t1.isEqual(t2));*/
 		
-		
+		int[] a= {1,0,2,1,0,2};
+		partition(a,0,a.length-1);
+		System.out.print(Arrays.toString(a));
 		
 		/*Long enumSixtyToFifteen=new Long(1);
 		int i=1;
@@ -55,6 +58,34 @@ public class Ab {
 		//dF.write.format("parquet").save("<<location>>");
 */	}
 	
+	private static void partition(int[] a, int start, int end) {
+		int pivot=a[end];
+		int pIndex=start;
+		for(int i=start;i<end;i++) {
+			if(a[i]<pivot) {
+				swap(a, pIndex, i);
+				pIndex++;
+			}
+		}
+		swap(a,pIndex, end);
+	}
+	
+	public static void swap(int a[],int i,int j) {
+		int temp=a[i];
+		a[i]=a[j];
+		a[j]=temp;
+	}
+
+	public static void reverse(int a[]){
+        int i=0,j=a.length-1;
+        while(i<j){
+            int temp=a[i];
+            a[i]=a[j];
+            a[j]=temp;
+            i++;
+            j--;
+        }
+    }
 	
 
 	private static void print(int n) {

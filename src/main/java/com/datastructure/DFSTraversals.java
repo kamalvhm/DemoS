@@ -78,7 +78,7 @@ public class DFSTraversals {
 		   else rightS="";
 		return leftS+root.val+rightS;
 	}
-
+	//TC:-O(n) SC:-Hieght of the tree  O(log n) But in worst case (skew tree linear tree) it will be O(n)
 	public static void preorder(Nodee root) {
 		if (root == null)
 			return;

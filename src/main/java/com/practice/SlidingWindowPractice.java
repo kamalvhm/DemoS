@@ -49,22 +49,7 @@ public class SlidingWindowPractice {
 	}
 	
 	private static int maxInSubArray(int[] arr, int window) {
-		int i=0,j=0;
-		int maxSum=0;
-		int currentSum=0;
-		while(j<arr.length) {
-			currentSum+=arr[j];
-			//calc
-			if(j-i+1<window)
-				j++;
-			else if(j-i+1==window) {
-				maxSum=Math.max(maxSum, currentSum);
-				currentSum-=arr[i];
-				i++;
-				j++;
-			}
-		}
-		return maxSum;
+		return 1;
 	}
 	
 	private static int firstNegative(int[] arr, int window) {
@@ -77,97 +62,39 @@ public class SlidingWindowPractice {
 		  
 	       return new ArrayList<Integer> ();
 	    }
-
-	  private static int longestSubArray(int[] arr, int sum) {
-			int i=0,j=0;
-			int max=Integer.MIN_VALUE;
-			int currentSum=0;
-			while(j<arr.length) {
-				currentSum+=arr[j];
-				if(currentSum<sum)
-					j++;
-				else if(currentSum==sum) {
-					max=Math.max(max, j-i+1);
-					j++;
-				}else if(currentSum>sum) {
-					while(currentSum>sum) {
-						currentSum-=arr[i];
-						i++;
-					}
-					j++;
-				}
-			}
-			return max;
-		}
-
+	  
 		private static List<Integer> maximumInWindow(int a[],int window){
 			List<Integer> ans =new ArrayList<>();
-			int i=0,j=0;
-			PriorityQueue<Integer> maxHeap=new PriorityQueue<>((c,b)->b-c);
-			while(j<a.length) {
-				maxHeap.add(a[j]);
-				if(j-i+1<window)
-					j++;
-				else if(j-i+1==window) {
-					ans.add(maxHeap.peek());
-					maxHeap.remove(0);
-					i++;
-					j++;
-				}
-			}
+			
 			return ans;
 		}
 
+
+	  private static int longestSubArray(int[] arr, int sum) {
+			int i=0,j=0;
+			
+			return -1;
+		}
+
+	
 		private static String largestSubStringWithKUnique(String s, int k) {
+			String result="";
 			int i=0,j=0;
 			int max=0;
-			String ans="";
 			HashMap<Character,Integer> map=new HashMap<>();
 			while(j<s.length()) {
-				char rc=s.charAt(j);
-				map.put(rc, map.getOrDefault(rc, 0)+1);
+				char c=s.charAt(j);
+				map.put(c,map.getOrDefault(c, 0)+1);
 				if(map.size()<k)
 					j++;
 				else if(map.size()==k) {
 					if(j-i+1>max) {
 						max=j-i+1;
-						ans=s.substring(i,j+1);
+						result=s.substring(i,j+1);
 					}
 					j++;
-				}
-				else if(map.size()>k) {
-					 while(map.size()>k) {
-						 char lc=s.charAt(i);
-						 int val=map.get(lc);
-						 if(--val==0)
-							 map.remove(lc);
-						 else map.put(lc, val);
-						 i++;
-					 }
-					 j++;
-				}
-			}
-			return ans;
-		}
-		
-		public static int LongestSubStringWithAllUnique(String s) {
-			int i=0,j=0;
-			HashMap<Character,Integer> map=new HashMap<>();
-			int max=0;
-			String ans="";
-			while(j<s.length()) {
-				char rc=s.charAt(j);
-				map.put(rc, map.getOrDefault(rc, 0)+1);
-				
-				if(map.size()==j-i+1) {
-					if(max<j-i+1)
-					{
-						max=j-i+1;
-						ans=s.substring(i,j+1);
-					}
-					j++;
-				}else if(map.size()<j-i+1) {
-					while(map.size()<j-i+1) {
+				}else if(map.size()>k) {
+					while(map.size()>k) {
 						char lc=s.charAt(i);
 						int val=map.get(lc);
 						if(--val==0)
@@ -177,8 +104,36 @@ public class SlidingWindowPractice {
 					}
 					j++;
 				}
+				
 			}
-			return max;
+			
+			return result;
+		}
+		
+	public static int LongestSubStringWithAllUnique(String s) {
+		int i=0,j=0;
+		HashMap<Character,Integer> map=new HashMap<>();
+		int max=0;
+		while(j<s.length()) {
+			char c=s.charAt(j);
+			map.put(c, map.getOrDefault(c, 0)+1);
+			 if(map.size()==j-i+1) {
+				max=Math.max(max, j-i+1);
+				j++;
+			}else if(map.size()<j-i+1) {
+				while(map.size()<j-i+1) {
+					char cl=s.charAt(i);
+					int val=map.get(cl);
+					if(--val==0)
+						map.remove(cl);
+					else map.put(cl, val);
+					i++;
+				}
+				j++;
+			}
+			
+		}
+		return max;
 	}
 		public static int pickToys(String s) {
 			//USE CODE OR CALL COMMENTED METHOD
@@ -213,40 +168,37 @@ public class SlidingWindowPractice {
 		//https://www.youtube.com/watch?v=iwv1llyN6mo
 		private static int minWindowSubString(String s, String t) {
 			HashMap<Character,Integer> map=new HashMap<>();
-			
-			for(char c:t.toCharArray()) 
-				map.put(c,map.getOrDefault(c, 0)+1);
-			
-			int i=0,j=0;
+			for(char c :t.toCharArray())
+				map.put(c, map.getOrDefault(c, 0)+1);
 			int count=map.size();
-			int windowSize=Integer.MAX_VALUE;
+			int i=0,j=0;
+			int min=Integer.MAX_VALUE;
 			while(j<s.length()) {
-				char c=s.charAt(j);
-				if(map.containsKey(c)) {
-					int val=map.get(c);
-					map.put(c, --val);
-					if(map.get(c)==0)
+				char lc=s.charAt(j);
+				if(map.containsKey(lc)) {
+					int val=map.get(lc);
+					if(--val==0)
 						count--;
+					map.put(lc, val);
 				}
 				if(count>0)
 					j++;
 				else if(count==0) {
-				windowSize=Math.min(windowSize,j-i+1);
-				while(count==0) {
-					char ch=s.charAt(i);
-					if(map.containsKey(ch)) {
-						int val=map.get(c);
-						map.put(c, ++val);
-						if(map.get(c)>0)
-							count++;
+					min=Math.min(min, j-i+1);
+					while(count==0) {
+						char rc=s.charAt(i);
+						if(map.containsKey(rc)) {
+							int val=map.get(rc);
+							if(++val==0)
+								count++;
+							map.put(rc, val);
+						}
+						i++;
 					}
-					i++;
-				}
 					j++;
 				}
 			}
-			
-			return windowSize;
+			return min;
 		}
 
 }

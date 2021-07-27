@@ -36,6 +36,15 @@ public class BitWiseOperator {
 		System.out.println("rightShiftZeroFill "+rightShiftZeroFill+" Bineary "+Integer.toBinaryString(rightShiftZeroFill));
 
 		hasAlternatingBits(2);
+		
+		 int xor1=4;//100
+		 int set_bit_no;
+
+	     /* Get the rightmost set bit in set_bit_no */
+		 set_bit_no = xor1 & ~(xor1 - 1);
+		 System.out.print("RIGHT MOST "+set_bit_no);
+		 
+		 
 	}
 	//693. Binary Number with Alternating Bits  
 	/**101010101010

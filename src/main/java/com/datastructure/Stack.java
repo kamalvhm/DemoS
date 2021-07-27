@@ -96,7 +96,7 @@ public class Stack<T> implements Iterable<T> {
 	
 	   //84. Largest Rectangle in Histogram || discussion https://www.youtube.com/watch?v=SSpnMY5TrTw || 
 	
-    //// https://www.youtube.com/watch?v=NFGteS5mnc0&feature=youtu.be  //IMP CONCEPT OF FINDING MINIMUM AND MXIMUM
+    //// https://www.youtube.com/watch?v=NFGteS5mnc0&feature=youtu.be  //IMP CONCEPT OF FINDING MINIMUM AND MXIMUM  TC:O(N)
   public static int largestRectangleArea(int[] heights) {
         if(heights == null || heights.length == 0)
             return 0;
@@ -141,6 +141,30 @@ public class Stack<T> implements Iterable<T> {
         return maxArea;
     }
   
+//SEMILIAR :-503. Next Greater Element II https://www.youtube.com/watch?v=Du881K7Jtk8
+	public int[] nextGreaterElements(int[] nums) {
+		int right[] = new int[nums.length];
+		Stack<Integer> st = new Stack<>();
+		int n = nums.length;
+		for (int i = 2 * n - 1; i >= 0; i--) { // 2 n Iteration to compute in circles
+			// this will also run 2 n times only as we are adding and removing same elements
+			// so
+			// some time it will run and sometimes not add SOP and check
+			while (!st.isEmpty() && st.peek() <= nums[i % n])
+				st.pop();
+
+			if (i < n) {
+				if (!st.isEmpty())
+					right[i] = st.peek();
+				else
+					right[i] = -1;
+			}
+
+			st.push(nums[i % n]);
+
+		}
+		return right;
+	}
   
   //1717. Maximum Score From Removing Substrings
   public int maximumGain(String s, int x, int y) {

@@ -1,9 +1,9 @@
-package com.dp;
+package com.practice;
 
 import com.beans.TreeNode;
 import com.datastructure.TreePrinter;
 
-public class DpOnTrees4 {
+public class DpOnTreesPr {
 	/**
 	 * General Syntax
 	 * How Dp can be appilied on trees (Identification)
@@ -18,14 +18,15 @@ public class DpOnTrees4 {
 	 
 	public static void main(String[] args) {
 		//1)Diameter of binary tree	:- longest path between two leafs
-		DpOnTrees4 d=new DpOnTrees4();
+		DpOnTreesPr d=new DpOnTreesPr();
 
 		int [] a= {1,2,3,4,5,6,7,8,9,10,11};
 		TreeNode tree =d.buildBstFromArray(a, 0, a.length-1);
 		System.out.print(TreePrinter.getTreeDisplay(tree));
-		
-		System.out.println("diameterOfBinaryTree  :-"+d.diameterOfBinaryTree(tree));
-		System.out.println("Binary Tree Maximum Path Sum :-"+d.maxPathSum(tree));
+		//Longest distance between two nodes
+		System.out.println("diameterOfBinaryTree (6):-"+d.diameterOfBinaryTree(tree));
+		//The path sum of a path is the sum of the node's values in the path.
+		System.out.println("Binary Tree Maximum Path Sum (48) :-"+d.maxPathSum(tree));
 
 		
 	}
@@ -89,13 +90,12 @@ public class DpOnTrees4 {
 	    }
 	 //To build BST from array values recursivly
 	 public TreeNode buildBstFromArray(int a[] ,int start,int end) {
-		 if(start>end)
-			 return null;
-		 int mid=(start+end)/2;
-		 TreeNode<Integer> node=new TreeNode<>(a[mid]);
-		 node.left=buildBstFromArray(a,start,mid-1);
-		 node.right=buildBstFromArray(a, mid+1, end);
-		 return node ;
+		if(start>end)return null;
+		int mid=(start+end)/2;
+		TreeNode node=new TreeNode(a[mid],null,null);
+		node.left=buildBstFromArray(a,start,mid-1);
+		node.right=buildBstFromArray(a, mid+1, end);
+		return node;
 	 }
 	 
 	 //-------------------------------------PRACTICE----------------------------------

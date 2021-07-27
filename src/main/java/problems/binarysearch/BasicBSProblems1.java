@@ -143,6 +143,33 @@ public class BasicBSProblems1 {
 		}
 		return -1;
 	}
+	//https://www.youtube.com/watch?v=84a8fQp5hJA
+	public static int findElemntinRotatedErricto(int [] nums,int target) {
+		 int n=nums.length;
+	        if(n==0)
+	            return -1;
+	        int low=0,high=n-1;
+	        int first=nums[0];
+	        while(low<=high){
+	            int mid=low+(high-low)/2;
+	            int value=nums[mid];
+	            if(value==target)
+	                return mid;
+	            boolean im_big=value>=first;
+	            boolean target_big=target>=first;
+	            if(im_big==target_big){//this mean both value and target in same side
+	                if(value<target)
+	                    low=mid+1;
+	                else high=mid-1;
+	            }else {
+	                if(im_big){
+	                    low=mid+1;
+	                }else high=mid-1;
+	            }
+	            
+	        }
+	        return -1;
+	}
 	
 	//floor =greatest element less then target if taget not present
 	public static int bsfloorofTarget(int [] a,int target) {

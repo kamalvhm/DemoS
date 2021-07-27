@@ -186,7 +186,7 @@ public class BinarySearch {
 	    }
 	  
 	  /**
-	   * 744. Find Smallest Letter Greater Than Target   !!!!Lower bound templete!!!!!
+	   * 744. Find Smallest Letter Greater Than Target   !!!!Lower bound template!!!!!
 	   *letters = ["c", "f", "j"]
 		target = "a"
 		Output: "c"
@@ -195,8 +195,8 @@ public class BinarySearch {
 	        int left=0;
 	        int right=letters.length;
 	        
-	   if(target >= letters[right - 1] || target < letters[0])
-	            return letters[0];
+		   if(target >= letters[right - 1] || target < letters[0])
+		            return letters[0];
 	        
 	        while(left<right){
 	            int mid =left+(right-left)/2; 

@@ -10,7 +10,7 @@ public class Array<T> implements Iterable<T>{
 	
 	private int capacity=0;//actual size;
 	
-	public Array() {this(16);}
+	public Array() {this(16);}	
 	
 	
 	
