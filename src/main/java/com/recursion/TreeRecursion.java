@@ -47,6 +47,12 @@ public class TreeRecursion {
 	        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 	    }
 	 
+	 public boolean isSameTree2(TreeNode p, TreeNode q) {
+	        if(p==null && q==null)return true;
+	        if(p==null || q==null) return false;
+	        return (p.val==q.val) && (isSameTree(p.left,q.left) && isSameTree(p.right,q.right));
+	    }
+	 
 	 
 	 //101. Symmetric Tree
      public boolean isSymmetric(TreeNode l1,TreeNode l2) {
@@ -99,7 +105,7 @@ public class TreeRecursion {
          else return hasPathSum(root.left,sum-root.val) || hasPathSum(root.right,sum-root.val);
      }
      
-   //98. Validate Binary Search Tree CALL:-validate(root,null,null);
+   //98. Validate Binary Search Tree CALL:-validate(root,null,null); //https://www.youtube.com/watch?v=s6ATEkipzow
      public static boolean validate(TreeNode root ,Integer max,Integer min){
          if(root==null) return true;
          if(max!=null && root.val>=max || min!=null && root.val<=min) return false;

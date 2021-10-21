@@ -3,7 +3,7 @@ package com.recursion;
 import java.util.ArrayList;
 
 import org.apache.spark.sql.catalyst.expressions.Substring;
-
+//https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion
 public class Pepcoding {
 	//EUlar Path explained :-https://www.youtube.com/watch?v=R7qja_gZrvI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=10
 	//Two Types of Recursion
@@ -13,22 +13,39 @@ public class Pepcoding {
 	//https://www.youtube.com/watch?v=NEuYcztalew (37)
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int [] c= {2,3,6,9,8,3,2,6,3,4};
-		String str;
-		//System.out.print(firstOccurence(c,0,8));
-		/*int []arr=allIndices(c,3,0,0);
-		for(int a:arr)
-			System.out.print(a+" ");*/
 		
-		//System.out.print(printSubSeq("abc",0,"",new ArrayList<String>()));
-		//System.out.print(getKPC("678"));
+		System.out.println("1) power(x,n) ans (16):- "+power(2,4));
+		
+		
+		int [] c= {2,3,6,9,8,3,2,6,3,4};
+		//System.out.print(firstOccurence(c,0,8));
+	/*	int []arr=allIndices(c,3,0,0);
+		for(int a:arr)
+			System.out.print(a+" ");
+		
+		System.out.print(printSubSeq("abc",0,"",new ArrayList<String>()));
+		System.out.print(getKPC("678"));
 		//System.out.print(getMazePaths(1,1,3,3));
-		//printKPC("678","");
-		//printpermutation("abc","");
+		printKPC("678","");
+		printpermutation("abc","");*/
+		
+		display(c, c.length-1);
 
 	}
+	public static void display(int [] arr,int idx) {
+		if(idx==0)return;
+		System.out.println(arr[idx]);
+		display(arr, idx-1);
+	}
 	
+	private static int  power(int x, int n) {
+		if(n==0)return 1;
+		int val=power(x,n/2);
+		val=val*val;
+		if(n%2!=0)val=val*x;//if odd
+		return val;
+	}
+
 	public static ArrayList<String> printSubSeq(String s,int indx,String op,ArrayList<String> out) {
 		if(indx==s.length()) {
 			out.add(op);
@@ -62,11 +79,12 @@ public class Pepcoding {
 			bres.add("");
 			return bres;
 		}
-		char cd =str.charAt(0);
-		String ros=str.substring(1);
+		//573
+		char cd =str.charAt(0);//5
+		String ros=str.substring(1);//73
 		
-		ArrayList<String> rres=getKPC(ros);
-		ArrayList<String> mres=new ArrayList<>();
+		ArrayList<String> rres=getKPC(ros);//this will give ans for 73
+		ArrayList<String> mres=new ArrayList<>(); //Now add 5 chars with each of these 73 ans to form complete
 		for(char c:codes[cd-'0'].toCharArray()) {
 			for(String s :rres)
 				mres.add(c+s);
@@ -136,7 +154,7 @@ public class Pepcoding {
 		}
 		ArrayList<String> hpaths=new ArrayList<>();
 		ArrayList<String> vpaths=new ArrayList<>();
-		if(sc<dc)
+		if(sc<dc)//to check out of bound
 		hpaths=getMazePath(sr, sc+1, dr, dc);
 		if(sr<dr)
 		 vpaths=getMazePath(sr+1, sc, dr, dc);
@@ -162,33 +180,39 @@ public class Pepcoding {
 	}
 	
 	public static ArrayList<String> getMazePathsWithJumps(int sr,int sc,int dr,int dc){
-		if(sr==dr && sc==dc) {
-			ArrayList<String> bres=new ArrayList<>();
-			bres.add("");
-			return bres;
-		}
-		ArrayList<String> paths=new ArrayList<>();
-		//horizontal
-		for(int ms=1;ms<dc-sc;ms++) {
-			ArrayList<String> hpaths=getMazePathsWithJumps(sr,sc+ms,dr,dc);
-			for(String path:hpaths)
-				paths.add("h"+ms+hpaths);
+		if(sr > dr || sc > dc){
+            return new ArrayList<>();
+        }
 
-		}
-		//vertical
-		for(int ms=1;ms<dr-sr;ms++) {
-			ArrayList<String> vpaths=getMazePathsWithJumps(sr+ms,sc,dr,dc);
-			for(String path:vpaths)
-				paths.add("v"+ms+vpaths);
+        if(sr == dr && sc == dc){
+            ArrayList<String> bres = new ArrayList<>();
+            bres.add("");
+            return bres;
+        }
 
-		}
-		
-		for(int ms=1;ms<dc-sc && ms<dr-sr ;ms++) {
-			ArrayList<String> dpaths=getMazePathsWithJumps(sr+ms,sc+ms,dr,dc);
-			for(String path:dpaths)
-				paths.add("d"+ms+dpaths);
-		}
-		return paths;
+        ArrayList<String> paths = new ArrayList<>();
+        for(int move = 1; move <= dc - sc; move++){
+            ArrayList<String> hpaths = getMazePathsWithJumps(sr, sc + move, dr, dc);
+            for(String hpath: hpaths){
+                paths.add("h" + move + hpath);
+            }
+        }
+        
+        for(int move = 1; move <= dr - sr; move++){
+            ArrayList<String> vpaths = getMazePathsWithJumps(sr + move, sc, dr, dc);
+            for(String vpath: vpaths){
+                paths.add("v" + move + vpath);
+            }
+        }
+
+        for(int move = 1; move <= dc - sc && move <= dr - sr; move++){
+            ArrayList<String> dpaths = getMazePathsWithJumps(sr + move, sc + move, dr, dc);
+            for(String dpath: dpaths){
+                paths.add("d" + move + dpath);
+            }
+        }
+
+        return paths;
 	}
 	
 	public static void printMazePathsWithJumps(int sr,int sc,int dr,int dc,String psf){

@@ -48,11 +48,10 @@ public class BsPractice {
 	}
 
 	private static int search(int[] a, int i) {
-		
 		return -1;
 	}
 	
-	public static int bsfirst(int [] a,int i) {
+	public static int bsfirst(int [] a,int i) {  
 		return -1;
 	}
 	
@@ -64,7 +63,7 @@ public class BsPractice {
 		return -1;
 	}
 	
-	public static int arrayRotatedcount(int[] a) {
+	public static int arrayRotatedcount(int[] a) {  
 		return -1;
 	}
 
@@ -79,23 +78,8 @@ public class BsPractice {
 		return -1;
 	}
 	
-	public static int findElemntinRotatedArray(int [] a,int target) {
-		int l=0,r=a.length;
-		int first=a[0];
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			int value=a[mid];
-			if(value==target)return mid;
-			boolean val_big=value>=first;
-			boolean target_big=target>=first;
-			if(val_big==target_big) {
-				if(value<target)
-					l=mid+1;
-				else r=mid-1;
-			}else if(val_big)
-					l=mid+1;
-			else r=mid-1;
-		}
+	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3  6
+		
 		return -1;
 	}
 	
@@ -144,9 +128,9 @@ public class BsPractice {
 	      }
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
-	 public static String Search2DArray(int[][] a,int target) {
+	 public static String Search2DArray(int[][] a,int target) {   
 		 	
-		 	return "";
+		 	return " ";
 	 }
 	 
 

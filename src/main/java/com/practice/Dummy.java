@@ -73,7 +73,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands:(4) " + numIslands(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -119,13 +119,11 @@ public class Dummy {
 	public static int numIslands(char[][] grid) {
 		int count = 0;
 		
-	
 		return count;
 
 	}
     private static void DFS(char[][] grid, int r, int c) {
-    	
-
+    
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
@@ -145,31 +143,12 @@ public class Dummy {
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		List<List<Integer>> result=new ArrayList<>();	
 		
-		Queue<TreeNode> q = new LinkedList<>();
-		TreeNode current=tree;
-		q.offer(current);
-		while(!q.isEmpty()) {
-			int size=q.size();
-			List<Integer> list=new ArrayList<>();
-			for(int i=0;i<size;i++) {
-				current=q.poll();
-				list.add((int)current.val);
-				if(current.left!=null)
-					q.offer(current.left);
-				
-				if(current.right!=null)
-					q.offer(current.right);
-			}
-			result.add(list);
-			
-			
-		}
 		return result;
 	 }
 	 //TC:-O(n) for all and SC:- average O(log n) height of tree in worst O(N) 
 	private static void inorderWithout(TreeNode tree) {
-		
 		//System.out.println();
+		
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
@@ -178,6 +157,7 @@ public class Dummy {
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
+	
 		
 		System.out.println();
 	}

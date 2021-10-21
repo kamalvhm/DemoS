@@ -2,6 +2,7 @@ package com.acrossPart;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -56,7 +57,51 @@ public class Ab {
 		//Now transforming F to C formula C=(F-32)*5/9 
 
 		//dF.write.format("parquet").save("<<location>>");
-*/	}
+*/
+		
+		
+	}
+	public static String[] codes = {"","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+
+	public static ArrayList<String> getKPC(String str){
+		if(str.length()==0) {
+			ArrayList<String> bres=new ArrayList<>();
+			bres.add("");
+			return bres;
+		}
+		
+		char ch=str.charAt(0);
+		String ros=str.substring(1);
+		ArrayList<String> rres=getKPC(ros);
+		ArrayList<String> mres=new ArrayList<>();
+		for(char c:codes[ch-'0'].toCharArray()) {
+			for(String s:rres)
+				mres.add(c+s);
+		}
+		return mres;
+	}
+	
+	public static ArrayList<String> getStairsPath(int n){
+		if(n==0) {
+			ArrayList<String> path=new ArrayList<>();
+			path.add("");
+			return path;
+		}else if(n<0) {
+			ArrayList<String> path=new ArrayList<>();
+			return path;
+		}
+		ArrayList<String> p1=getStairsPath(n-1);
+		ArrayList<String> p2=getStairsPath(n-2);
+		ArrayList<String> p3=getStairsPath(n-3);
+		ArrayList<String> path=new ArrayList<>();
+		for(String p:p1)
+			path.add(1+p);
+		for(String p:p2)
+			path.add(2+p);
+		for(String p:p3)
+			path.add(3+p);
+		return path;
+	}
 	
 	private static void partition(int[] a, int start, int end) {
 		int pivot=a[end];

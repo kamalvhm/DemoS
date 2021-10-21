@@ -15,6 +15,7 @@ import org.apache.spark.sql.catalyst.expressions.IsNaN;
 
 import scala.Char;
 /**CHECK CORRECTNESS In @link RecursionByVerma.java*/
+//Practice:-https://www.pepcoding.com/resources/online-java-foundation/recursion-in-arrays/max-of-an-array-official/ojquestion#!
 public class RecursionPracticeByVerma {
 	//FIRST THINK IN TERMS OF DECISION IF NOT THEN GO FOR INPUT SMALL (IBH)
 	//IF CHOICES/DECISION is clear go for Recursive Tree ,else go for IBH method
@@ -91,14 +92,14 @@ public class RecursionPracticeByVerma {
 		int die=7;
 		die=die-1;//array is zero base
 		System.out.println("JOSEPHUS PROBLEM (24)ANS:- "+josephusProblem(totalPersons,die,0));
-		
+				
 	}
 
 	public static void print(int n) {
 		
 	}
 
-	private static void sortArraList(ArrayList<Integer> list) {  //[1,2,]
+	private static void sortArraList(ArrayList<Integer> list) {  //[5,2,]
 		
 	}
 	
@@ -124,10 +125,9 @@ public class RecursionPracticeByVerma {
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
 		
-		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
-		return 1;
+		return -1;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
@@ -135,6 +135,7 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void subsets(String ip, String op) {
+	
 		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
@@ -142,28 +143,31 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
+		
 
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-
+			
 	}
 
 	private static void letterPermutation(String ip, String op) {
-	
+		
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
 		
-		
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-	
+		
 	}
 	
 
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		return 1;
+		if(list.size()==1)return list.get(0);
+		 index=(index+k)%list.size();
+		 list.remove(index);
+		return josephusProblem(list, k, index);
 	}
 }

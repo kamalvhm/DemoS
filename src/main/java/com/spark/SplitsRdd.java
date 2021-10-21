@@ -42,6 +42,7 @@ public class SplitsRdd {
 		JavaRDD<Integer>[] splits = originalInteger.randomSplit(new double[]{0.9, 0.1}); 
 		JavaRDD<Integer> partOne = splits[0];
 		JavaRDD<Integer> partTwo = splits[1];
+		
 		        
 		/*System.out.println("partOne RDD size :-"+partOne.count());
 		partOne.foreach(r->System.out.print(r));

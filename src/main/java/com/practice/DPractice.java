@@ -76,11 +76,12 @@ public class DPractice {
 	}
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
-		return 1;
+		return -1;
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] =new int [n+1][w+1];
+		
 		
 		return t[n][w];
 	}
@@ -88,11 +89,13 @@ public class DPractice {
 	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean t[][] =new boolean[n+1][sum+1];
 		
+		
 		return t[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
-		return false;
+		
+		return false ;
 	}
 
 	public static int countSubsetSum(int[] arr, int sum, int n) {
@@ -104,8 +107,8 @@ public class DPractice {
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
 	    int	sum=0;
-	   
-		return 1;
+	  
+		return -1;
 	}
 
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
@@ -126,12 +129,13 @@ public class DPractice {
 	}
 
 	public static int noOfSubsetforGivenDiff(int[] arr, int diff, int n) {
-		return 1;
+		
+		return -1;
 	}
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
-
+	
 		return t[n][w];
 	}
 

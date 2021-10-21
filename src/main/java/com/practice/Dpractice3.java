@@ -109,15 +109,16 @@ public class Dpractice3 {
 	public static int LongestCommonSubString(String x,String y,int n,int m) {
 		int t[][]=new int[n+1][m+1];
 		int max =0;
+		
+		
 		return max;
 	}
 	
 	
 	public static String printLCS_String(String x,String y,int n, int m) {		
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS
-		
-		
-		return "";
+	
+		return"";
 	}
 	
 	

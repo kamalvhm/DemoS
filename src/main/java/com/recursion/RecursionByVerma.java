@@ -82,7 +82,46 @@ public class RecursionByVerma {
 		die=die-1;//array is zero base
 		System.out.println("JOSEPHUS PROBLEM (24)ANS:- "+josephusProblem(totalPersons,die,0));
 		
+	//17) First Index of X in array
+		int a[]= {1,2,3,4,5,5,5,6};
+		System.out.println("FIRST INDEX(4)ANS:- "+firstIndex(a,0,5));
+
+	//18) last Index of X in array
+	   System.out.println("LAST INDEX(6)ANS:- "+lastIndex(a,a.length-1,5));
+	   
+	 //19) All index of target
+	   System.out.println("ALL INDEX(6)ANS:- "+allIndices(a,5,0,0));
 	}
+	
+	public static int[] allIndices(int[] arr, int x, int idx, int fsf) {
+		if (idx == arr.length)
+			return new int[fsf];
+		if (arr[idx] == x) {
+			int[] output = allIndices(arr, x, idx + 1, fsf + 1);
+			output[fsf] = idx;
+			return output;
+		} else {
+			int[] output = allIndices(arr, x, idx + 1, fsf);
+			return output;
+		}
+	}
+	
+	  public static int lastIndex(int[] arr, int idx, int x){
+	        if(arr[idx]<0)return -1;
+	        if(arr[idx]==x)return idx;
+	        else return lastIndex(arr,idx-1,x);
+	    }
+	
+	  public static int firstIndex(int[] arr, int idx, int x){
+	        if(idx==arr.length)return -1;
+	          if(arr[idx]==x)
+	            return idx;
+	            else {
+	                 int pos=firstIndex(arr,idx+1,x);
+	                return pos;
+	            }
+	       
+	    }
 
 	private static int josephusProblem(ArrayList<Integer> n, int k,int index) {
 		if(n.size()==1) {
