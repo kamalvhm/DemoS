@@ -12,6 +12,7 @@ import javax.xml.ws.Holder;
 import org.apache.arrow.flatbuf.List;
 import org.apache.spark.deploy.master.BlackHolePersistenceEngine;
 import org.apache.spark.sql.catalyst.expressions.IsNaN;
+import org.apache.spark.sql.catalyst.expressions.Substring;
 
 import scala.Char;
 /**CHECK CORRECTNESS In @link RecursionByVerma.java*/
@@ -125,17 +126,18 @@ public class RecursionPracticeByVerma {
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
 		
+		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
-		return -1;
+		return 0;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-		
+	
 	}
 	
 	private static void subsets(String ip, String op) {
-	
+		
 		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
@@ -144,6 +146,7 @@ public class RecursionPracticeByVerma {
 
 	private static void permutationwithSpaces(String ip, String op) {
 		
+
 
 	}
 
@@ -160,14 +163,11 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-		
+
 	}
 	
 
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		if(list.size()==1)return list.get(0);
-		 index=(index+k)%list.size();
-		 list.remove(index);
-		return josephusProblem(list, k, index);
+		return 1;
 	}
 }

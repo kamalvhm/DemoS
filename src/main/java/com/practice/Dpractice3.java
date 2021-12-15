@@ -102,6 +102,13 @@ public class Dpractice3 {
 	//THIRD STEP
 	public static int LCS_TopDown(String x,String y,int n,int m) {
 		int t[][] =new int [n+1][m+1];
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<m+1;j++) {
+				if(x.charAt(i-1)==y.charAt(j-1))
+					t[i][j]=1+t[i-1][j-1];
+				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+			}
+		}
 		
 		return t[n][m];
 	}
@@ -126,7 +133,7 @@ public class Dpractice3 {
 		 	int n= x.length();
 	        int m = y.length();
 	        int[][] t = new int[n+1][m+1];
-
+	        
 	       
 	        return "";
 	    }
@@ -134,25 +141,45 @@ public class Dpractice3 {
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
 			int t[][]=new int [n+1][m+1];  
-			
+			for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1) && i!=j)
+						t[i][j]=1+t[i-1][j-1];
+					else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+				}
+			}
 			
 			return t[n][m];
 		}
 	
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
-	        
-	        
+
 	        return t[n][m];
 	    }
 	 
 	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
 		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
-			return -1;
+			 if(m==0)return 1;
+			 if(n==0)return 0;
+			 if(s.charAt(n-1)==t.charAt(m-1))
+				 return DistinctSubsequencesR(s, t, n-1, m-1)+DistinctSubsequencesR(s, t, n-1, m);
+			 else 
+			return DistinctSubsequencesR(s, t, n-1, m);
 	    }
 		 
 		public static int DistinctSubsequences(String x ,String y,int n,int m){
 		      int t[][]=new int [n+1][m+1];
+		      for(int i=0;i<n+1;i++)
+		    	  t[i][0]=1;
+		      
+		      for(int i=1;i<n+1;i++) {
+		    	  for(int j=1;j<m+1;j++) {
+		    		  if(x.charAt(i-1)==y.charAt(j-1))
+		    			  t[i][j]=t[i-1][j-1]+t[i-1][j];
+		    		  else t[i][j]=t[i-1][j];
+		    	  }
+		      }
 		      return t[n][m];
 		    }
 		//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
@@ -160,7 +187,18 @@ public class Dpractice3 {
 			int n=e.length();
 			int t[][]=new int[n+1][n+1];
 			int sl=0,el=0;
-		
+			for(int i=0;i<n+1;i++)
+				t[0][i]=t[1][i]=1;
+			
+			for(int i=2;i<n+1;i++) {
+				for(int j=i;j<n+1;j++) {
+					if(e.charAt(j-1)==e.charAt(j-i) && t[i-2][j-1]==1) {
+						t[i][j]=1;
+						sl=i;
+						el=j;
+					}
+				}
+			}
 			//return "";
 			return e.substring(el-sl,el);
 		}
@@ -168,7 +206,7 @@ public class Dpractice3 {
 		public static int minimumDeleteSum(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
-	      
+	        
 	        return t[n][m];
 	    }
 		//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
@@ -199,8 +237,9 @@ public class Dpractice3 {
 		public static int lengthOfLIS(int[] nums) {
 	        if(nums.length==0) return 0;
 	        int dp [] =new int[nums.length];
-	        int max=0;
+	        int max=1;
 	       
+	     
 	        
 	        return max;
 	    }
