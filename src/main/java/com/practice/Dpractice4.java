@@ -99,50 +99,36 @@ public class Dpractice4 extends DynamicPrograming{
 
 	
 	
-	private static int findLargestSquare(int[][] matrix) {
-	    int h =matrix.length;
-        int w =matrix[0].length;
-        int t[][]=new int[h][w];
-        int max=0;
-        
-        for(int i=0;i<h;i++) {
-        	for(int j=0;j<w;j++) {
-        		if(matrix[i][j]==1) {
-        			t[i][j]=1;
-        			if(i>0 && j>0) {
-        				t[i][j]=Math.min(Math.min(t[i-1][j-1], t[i-1][j]), t[i][j-1])+1;
-        			}
-        			max=Math.max(max, t[i][j]);
-        		}
-        	}
-        }
-
-		return max;
-	}
+	
 
 
 
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
-		
-		return 1;
+		if(i>=j)return 0;
+		int ans=Integer.MAX_VALUE;
+		for(int k=i;k<j;k++) {
+			int temp=solveMCM_BottomUp(arr, i, k)+solveMCM_BottomUp(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
+			 ans=Math.min(temp, ans);
+		}
+		return ans;
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
-		if(i>=j)return 0;
+		if(i>j)return 0;
 		if(isPalindrom(s, i, j))return 0;
-		int min=Integer.MAX_VALUE;
+		if(p[i][j]!=-1)return p[i][j];
+		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
 			int temp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
-			min=Math.min(min, temp);
+			ans=Math.min(ans, temp);
 		}
-		return min;
+		return p[i][j]= ans;
 	}
 
 	private static boolean isPalindrom(String s, int i, int j) {
 		if(i==j)return true;
 		while(i<j) {
-			if(s.charAt(i++)!=s.charAt(j--))
-				return false;
+			if(s.charAt(i)!=s.charAt(j))return false;
 		}
 		return true;
 
@@ -162,77 +148,10 @@ public class Dpractice4 extends DynamicPrograming{
 	 * 
 	 */
 	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
-		if(i>j)return 0;
-		if(i==j) {
-			if(isTrue)
-				return s.charAt(i)=='T'?1:0;
-			else return s.charAt(i)=='F'?1:0;
-		}
-		int ans=0;
-		for(int k=i;k<j;k+=2) {
-			int leftTrue=evalExTRecursive(s, i, k-1, true);
-			int leftFalse=evalExTRecursive(s, i, k-1, false);
-			int rightTrue=evalExTRecursive(s, k+1, j, true);
-			int rightFalse=evalExTRecursive(s, k+1, j, false);
-			
-			char c=s.charAt(k);
-			if(c=='&') {
-				if(isTrue)
-					ans+=leftTrue*rightTrue;
-				else ans+=leftTrue*rightFalse+leftFalse*rightTrue+leftFalse*rightFalse;
-			}
-			if(c=='|') {
-				if(isTrue)
-					ans+=leftTrue*rightTrue+leftTrue*rightFalse+leftFalse*rightTrue;
-				else ans+=leftFalse*rightFalse;
-			}
-			if(c=='^') {
-				if(isTrue)
-					ans+=leftTrue*rightFalse+leftFalse*rightTrue;
-				else ans+=leftTrue*rightTrue+leftFalse*rightFalse;
-			}
-
-		}
-		return ans;
+		
+		return 1;
 	} 
 	
-	public static int evalExTBottomUp(String s ,int i,int j,boolean isTrue) {
-		 if(i>j)return 0; //if its empty string 
-		 if(i==j) { //is i and j at same char 
-			 if(isTrue)  //if we are looking for true
-				 return s.charAt(i) == 'T' ? 1 : 0; //if we isTrue(we are looking for true) and character at i is also true then return true else false; 
-			 else  return s.charAt(i)== 'F' ? 1 : 0;
-		 }
-		 int ans=0;
-		 //looping k from i+1 to j-1 with increment k+2 as k will be at any operator any time and i and j will be at T or F;
-		 for(int k=i+1;k<j;k += 2) {
-			 int leftTrue=evalExTRecursive(s,i,k-1,true); //This will return no. of ways we get left expression as true
-			 int leftfalse=evalExTRecursive(s,i,k-1,false); //This will return no. of ways we get left expression as false
-			 int rightTrue=evalExTRecursive(s,k+1,j,true);
-			 int rightFalse=evalExTRecursive(s,k+1,j,false);
-			 char c=s.charAt(k);
-			 if(c=='&') { //now add ans according to operator
-				 if(isTrue)
-					 ans+=leftTrue*rightTrue;
-				 else
-					 ans+=leftTrue*rightFalse + leftfalse*rightTrue + leftfalse*rightFalse;
-			 }
-			 else if(c=='|') {
-				 if(isTrue)
-					 ans+=leftTrue*rightTrue + leftTrue*rightFalse + leftfalse*rightTrue;
-				 else
-					 ans+=leftfalse*rightFalse;
-			 }
-			 else if(c=='^') {
-				 if(isTrue)
-					 ans+=leftTrue*rightFalse + leftfalse*rightTrue;
-				 else
-					 ans+=leftTrue*rightTrue + leftfalse*rightFalse;
-			 }
-
-		 }
-		 return ans;
-	} 
 	
 	public static boolean scrambledStringRecursie(String a ,String b) {
 		if(a.length()!=b.length()) return false;
@@ -242,20 +161,8 @@ public class Dpractice4 extends DynamicPrograming{
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {
-		if(a.compareTo(b)==0)return true;
-		if(a.length()<=1)return false;
-		boolean flag=false;
-		int n=a.length();
-		for(int i=1;i<n;i++) {
-			if(scrambledSolve(a.substring(0,i), b.substring(n-i,n)) 
-					&& scrambledSolve(a.substring(i,n), b.substring(0,n-i)) || 
-				scrambledSolve(a.substring(0,i), b.substring(0,i)) 
-				&& scrambledSolve(a.substring(i,n),b.substring(i,n))) {
-				flag=true;
-				break;
-			}
-		}
-		return flag;
+		
+		return true;
 	} 
 	
 	 public static boolean scrambledMemoized(String a, String b) {
@@ -265,11 +172,11 @@ public class Dpractice4 extends DynamicPrograming{
 	 
 	 
 		private static int eggDropRecursive(int e, int f) {
-			if(f==0 || f==1) return f;
+			if(f==0 || f==1 )return f;
 			if(e==1)return f;
 			int min=Integer.MAX_VALUE;
-			for(int k=1;k<=f;k++) {
-				int temp=Math.min(eggDropRecursive(e-1, k-1), eggDropRecursive(e, f-k));
+			for(int k=1;k<=f;k++){
+				int temp=Math.max(eggDropRecursive(e-1, k-1),eggDropRecursive(e, f-k));
 				min=Math.min(min, temp);
 			}
 			return min;
@@ -292,4 +199,24 @@ public class Dpractice4 extends DynamicPrograming{
 		}
 		
 
+		private static int findLargestSquare(int[][] matrix) {
+		    int h =matrix.length;
+	        int w =matrix[0].length;
+	        int t[][]=new int[h][w];
+	        int max=0;
+	        
+	        for(int i=0;i<h;i++) {
+	        	for(int j=0;j<w;j++) {
+	        		if(matrix[i][j]==1) {
+	        			t[i][j]=1;
+	        			if(i>0 && j>0) {
+	        				t[i][j]=Math.min(Math.min(t[i-1][j-1], t[i-1][j]), t[i][j-1])+1;
+	        			}
+	        			max=Math.max(max, t[i][j]);
+	        		}
+	        	}
+	        }
+
+			return max;
+		}
 }

@@ -28,7 +28,7 @@ import com.dp.BooleanParenthesization;
 		}
 		return finalAns;
 	}
-	###########GENERQAL STEPS#############
+	###########GENERAL STEPS#############
  * STEPs 1) find where to place i and j (generally i at left end and j at right)
  * 2)find Base Condi.
  * 3)find where K loop will move (To find it place k at smallest and largest pos and check if partions are valid)

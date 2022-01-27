@@ -41,7 +41,7 @@ public class DPractice {
 		System.out.println("1)subset sum (true) ANS:- " + subsetSum(arr, 11, arr.length));
 
 		int[] arr2 = { 1, 5, 11, 5 };
-		// return true if two equal sum subset is there
+		// return true if two equal sum subset is there here {1,5,5} and {11}
 		System.out.println("2)equal sum partition (true) ANS:- " + equalSum(arr2, arr2.length));
 
 		int[] arr3 = { 2, 3, 5, 6, 8, 10 };
@@ -90,12 +90,16 @@ public class DPractice {
 		boolean t[][] =new boolean[n+1][sum+1];
 		
 		
+		
 		return t[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
-		
-		return false ;
+		int total=0;
+		for(int i:arr)
+			total+=i;
+		if(total%2!=0)return false;
+		return  subsetSum(arr, total/2, n);
 	}
 
 	public static int countSubsetSum(int[] arr, int sum, int n) {
@@ -107,7 +111,7 @@ public class DPractice {
 
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
 	    int	sum=0;
-	  
+	   
 		return -1;
 	}
 
@@ -129,13 +133,18 @@ public class DPractice {
 	}
 
 	public static int noOfSubsetforGivenDiff(int[] arr, int diff, int n) {
-		
 		return -1;
 	}
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
-	
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<w+1;j++) {
+				if(wt[i-1]<=j)
+					t[i][j]=Math.max(val[i-1]+t[i][j-wt[i-1]], t[i-1][j]);
+				else t[i][j]=t[i-1][j];
+			}
+		}
 		return t[n][w];
 	}
 
@@ -149,6 +158,7 @@ public class DPractice {
 	// :-https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
+		
 		
 		return t[n][sum];
 	}

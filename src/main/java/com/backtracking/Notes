@@ -1,4 +1,4 @@
-https://www.youtube.com/watch?v=kyLxTdsT8ws (Back tracking)
+https://www.youtube.com/watch?v=kyLxTdsT8ws (Back tracking) abdul Bari
 1) DP(Or Greedy) is used when problems are required to solve optimal solution
 2)IN backtracking is used when all possible solution is required.
 3) a bounding function is used in backtracking to bound further recurtion if condition fails at any point (isSafe method in N-Queens)

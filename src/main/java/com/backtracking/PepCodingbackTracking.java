@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class PepCodingbackTracking {
-
+//https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/recursion-and-backtracking
+//https://www.youtube.com/watch?v=LliQjLnbhx8&list=PL-Jc9J83PIiHO9SQ6lxGuDsZNt2mkHEn0&index=1
 	public static void main(String[] args) {
 
 		 	int n=5;

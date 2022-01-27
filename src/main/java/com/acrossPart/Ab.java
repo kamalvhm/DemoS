@@ -11,15 +11,15 @@ import java.util.Scanner;
 public class Ab {
 
 	public static void main(String[] args) throws IOException {
-//		ZonedDateTime usage = ZonedDateTime.parse("2018-04-02T16:01:00.000+03:00");
-//		ZonedDateTime cut = ZonedDateTime.parse("2018-04-03T16:01:00.000+03:00");
-//		System.out.println((usage.isBefore(cut)));
-		/*System.out.println(t1.isAfter(t2));
-		System.out.println(t1.isEqual(t2));*/
+		ZonedDateTime usage = ZonedDateTime.parse("2018-07-01T16:01:00.000+03:00");
+		ZonedDateTime cut = ZonedDateTime.parse("2018-07-01T16:01:00.000+03:00");
+		//System.out.println((usage.isBefore(cut)));
+		System.out.println(usage.isAfter(cut));
+		//System.out.println(t1.isEqual(t2));
 		
-		int[] a= {1,0,2,1,0,2};
-		partition(a,0,a.length-1);
-		System.out.print(Arrays.toString(a));
+//		int[] a= {1,0,2,1,0,2};
+//		partition(a,0,a.length-1);
+//		System.out.print(Arrays.toString(a));
 		
 		/*Long enumSixtyToFifteen=new Long(1);
 		int i=1;

@@ -5,13 +5,14 @@ import java.util.Random;
 
 public class SortMasterPr {
 
-	private static void selectionSort(int[] a) {
+	private static void selectionSort(int[] a) 	{	
 		
 	}
 	private static void bubbleSort(int[] a) {
 		
+		
 	}
-	private static void insertionSort(int[] a) {
+	private static void insertionSort(int[] a) { //1 4 5 7
 		
 	}
 	
@@ -30,7 +31,6 @@ public class SortMasterPr {
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		
 		return 1;
 	}
 	private static int randomized(int[] a, int start, int end) {

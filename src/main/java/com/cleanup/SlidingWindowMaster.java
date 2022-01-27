@@ -321,5 +321,37 @@ public class SlidingWindowMaster {
 			
 			return windowSize;
 		}
+		
+		public static int LongestSubStringWithAllUniqueBKP(String s) {
+			int i=0,j=0;
+			HashMap<Character,Integer> map=new HashMap<>();
+			int max=0;
+			while(j<s.length()) {
+				char c=s.charAt(j);
+				map.put(c, map.getOrDefault(c, 0)+1);
+				if(map.size()>(j-i+1))//comparing map size with window size as all window characters should be unique !!!!THIS CAN BE IGNORED NOT VALID !!!!
+				{
+					j++;
+				}else if(map.size()==(j-i+1)) {
+					max =Math.max(max, map.size());
+					j++;
+				}else if(map.size()<(j-i+1)) { // < change from last ** suppose window contains pww then map size 2 window size 3 this mean we have w repeating in map so pop from behind
+					while (map.size()<(j-i+1)) {
+						char l=s.charAt(i);
+						if(map.containsKey(l)) {
+							int val=map.get(l);
+							if(val>1)
+								map.put(l, --val);
+							else 
+								map.remove(l);
+							i++;
+						}
+					}
+					j++;
+				}
+				
+			}
+			return max;
+	}
 
 }

@@ -5,10 +5,14 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.apache.log4j.Logger;
+
+
 public class LoggingServer {
 
 	public static void main(String[] args) throws IOException, InterruptedException 
 	{
+	   
 	    ServerSocket echoSocket = new ServerSocket(8989);
 	    Socket socket = echoSocket.accept();
 

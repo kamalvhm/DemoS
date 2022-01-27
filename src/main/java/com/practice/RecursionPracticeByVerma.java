@@ -95,16 +95,15 @@ public class RecursionPracticeByVerma {
 		System.out.println("JOSEPHUS PROBLEM (24)ANS:- "+josephusProblem(totalPersons,die,0));
 				
 	}
-
 	public static void print(int n) {
 		
 	}
 
-	private static void sortArraList(ArrayList<Integer> list) {  //[5,2,]
+	private static void sortArraList(ArrayList<Integer> list) {  //[4, 6, 3, 1]
 		
 	}
 	
-	public static void insert(ArrayList<Integer> arr,int val) {
+	public static void insert(ArrayList<Integer> arr,int val) {// [3,4,6] ,1
 		
 	}
 
@@ -117,23 +116,22 @@ public class RecursionPracticeByVerma {
 		
 	}
 	
-	private static void reverseStack(Stack<Integer> st) {
+	private static void reverseStack(Stack<Integer> st) {// 1,3,4,6 
 		
 	}
-	public static void insertInReverse(Stack<Integer> st,int val) {
+	public static void insertInReverse(Stack<Integer> st,int val) {//4,3,1 ,6
 		
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
 		
-		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
-		return 0;
+		return -1;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-	
+		
 	}
 	
 	private static void subsets(String ip, String op) {

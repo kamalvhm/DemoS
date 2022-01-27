@@ -39,7 +39,7 @@ public class SlidingWindowPractice {
 	
 		//8)PickToys Rule 1:- pick continues from Rack ,Rule 2 :-Can only pick two types of toys
 			String s2="abaccab";
-			System.out.println("12) Pick Toys (4):--"+pickToys(s2));
+			System.out.println("12) Pick Toys (4):-"+pickToys(s2));
 		//9)Minimum Window SubString
 			String s3="TOTMTAPTAT";
 			String t="TTA";//return subString size minwindow which contain all letters of t string(atleast) no matter continues or discontinues;
@@ -49,10 +49,29 @@ public class SlidingWindowPractice {
 	}
 	
 	private static int maxInSubArray(int[] arr, int window) {
-		return 1;
+		return -1;
 	}
 	
 	private static int firstNegative(int[] arr, int window) {
+		List<Integer> list=new ArrayList<>();
+		int i=0,j=0;
+		while(j<arr.length) {
+			if(arr[j]<0)
+				list.add(arr[j]);
+			if(j-i+1<window) 
+				j++;
+			else if(j-i+1==window) {
+			   if(!list.isEmpty()) {
+				   System.out.print(list.get(0));
+				  Integer val=arr[i];
+				  if(list.contains(val))
+					  list.remove(val);
+				   
+			   }
+			   j++;
+			   i++;
+			}
+		}
 		return 1;
 	}
 
@@ -63,34 +82,52 @@ public class SlidingWindowPractice {
 	       return new ArrayList<Integer> ();
 	    }
 	  
-		private static List<Integer> maximumInWindow(int a[],int window){
-			List<Integer> ans =new ArrayList<>();
-			
+		private static List<Integer> maximumInWindow(int nums[],int k){
+	        ArrayList<Integer> ans=new ArrayList<>();
+	        PriorityQueue<Integer> q=new PriorityQueue<>((a,b)->b-a);
+	        int i=0,j=0;
+
+	        while(j<nums.length){
+	            int val=nums[j];
+	            q.offer(val);
+	            if(j-i+1<k)
+	                j++;
+	            else if(j-i+1==k){
+	            	if(!q.isEmpty())
+	            		ans.add(q.peek());
+	            	if(q.contains(nums[i])) {
+						q.remove(Integer.valueOf(nums[i]));
+						
+					}
+	                i++;
+	                j++;
+	            }
+	            
+	        }
 			return ans;
 		}
 
 
-	  private static int longestSubArray(int[] arr, int sum) {
-			int i=0,j=0;
+	  private static int longestSubArray(int[] arr, int k) {
 			
-			return -1;
+			return 0;
 		}
 
 	
-		private static String largestSubStringWithKUnique(String s, int k) {
-			String result="";
+	private static String largestSubStringWithKUnique(String s, int k) {
+			String res="";
 			int i=0,j=0;
 			int max=0;
 			HashMap<Character,Integer> map=new HashMap<>();
 			while(j<s.length()) {
-				char c=s.charAt(j);
-				map.put(c,map.getOrDefault(c, 0)+1);
+				char rc=s.charAt(j);
+				map.put(rc, map.getOrDefault(rc, 0)+1);
 				if(map.size()<k)
 					j++;
 				else if(map.size()==k) {
-					if(j-i+1>max) {
+					if(max<j-i+1) {
 						max=j-i+1;
-						result=s.substring(i,j+1);
+						res=s.substring(i,j+1);
 					}
 					j++;
 				}else if(map.size()>k) {
@@ -104,38 +141,85 @@ public class SlidingWindowPractice {
 					}
 					j++;
 				}
-				
 			}
-			
-			return result;
-		}
+			return res;
+	}
 		
 	public static int LongestSubStringWithAllUnique(String s) {
 		int i=0,j=0;
-		HashMap<Character,Integer> map=new HashMap<>();
-		int max=0;
-		while(j<s.length()) {
-			char c=s.charAt(j);
-			map.put(c, map.getOrDefault(c, 0)+1);
-			 if(map.size()==j-i+1) {
-				max=Math.max(max, j-i+1);
-				j++;
-			}else if(map.size()<j-i+1) {
-				while(map.size()<j-i+1) {
-					char cl=s.charAt(i);
-					int val=map.get(cl);
-					if(--val==0)
-						map.remove(cl);
-					else map.put(cl, val);
-					i++;
-				}
-				j++;
-			}
-			
-		}
-		return max;
+		
+		return -1;
 	}
 		public static int pickToys(String s) {
+			return -1;
+		}
+		//https://www.youtube.com/watch?v=iwv1llyN6mo
+		private static int minWindowSubString(String s, String t) {
+			return -1;
+		}
+		
+		
+		private static String largestSubStringWithKUniqueBKP(String s, int k) {
+			int max=0;
+			int i=0,j=0;
+			String res="";
+			HashMap<Character,Integer> map=new HashMap<>();
+			while(j<s.length()) {
+				char c=s.charAt(j);
+				map.put(c, map.getOrDefault(c, 0)+1);
+				if(map.size()<k)
+					j++;
+				else if(map.size()==k) {
+					if(j-i+1>max) {
+						max=j-i+1;
+						res=s.substring(i,j+1);
+					}
+					j++;
+				}else if(map.size()>k) {
+					while(map.size()>k) {
+						char lc=s.charAt(i);
+						if(map.containsKey(lc)) {
+							int val=map.get(lc);
+							val=val-1;
+							if(val==0)
+								map.remove(lc);
+							else map.put(lc, val);
+						}
+						i++;
+					}
+					j++;
+				}
+			}
+			return res;
+		}
+		
+		public static int LongestSubStringWithAllUniqueBKP(String s) {
+			int i=0,j=0;
+			HashMap<Character,Integer> map=new HashMap<>();
+			int max=0;
+			while(j<s.length()) {
+				char c=s.charAt(j);
+				map.put(c, map.getOrDefault(c, 0)+1);
+				 if(map.size()==j-i+1) {
+					max=Math.max(max, j-i+1);
+					j++;
+				}else if(map.size()<j-i+1) {
+					while(map.size()<j-i+1) {
+						char cl=s.charAt(i);
+						int val=map.get(cl);
+						if(--val==0)
+							map.remove(cl);
+						else map.put(cl, val);
+						i++;
+					}
+					j++;
+				}
+				
+			}
+			return max;
+		}
+		
+		public static int pickToysBKp(String s) {
 			//USE CODE OR CALL COMMENTED METHOD
 			//return kUniqueSubString(s,2);
 			int i=0,j=0;
@@ -165,8 +249,8 @@ public class SlidingWindowPractice {
 			}
 			return max;
 		}
-		//https://www.youtube.com/watch?v=iwv1llyN6mo
-		private static int minWindowSubString(String s, String t) {
+
+		private static int minWindowSubStringBKP(String s, String t) {
 			HashMap<Character,Integer> map=new HashMap<>();
 			for(char c :t.toCharArray())
 				map.put(c, map.getOrDefault(c, 0)+1);
@@ -200,5 +284,4 @@ public class SlidingWindowPractice {
 			}
 			return min;
 		}
-
 }
