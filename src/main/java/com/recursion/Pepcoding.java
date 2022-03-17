@@ -260,10 +260,10 @@ public class Pepcoding {
 			return;
 		}else if(ip.length()==1) {
 			char ch=ip.charAt(0);
-			if(ch=='0')
+			if(ch=='0') 
 				return;
 			else {
-				int chv=ch-'0';
+				int chv=ch-'0'; 
 				char code=(char)('a'+chv-1);
 				op+=code;
 				System.out.print(op);
@@ -272,10 +272,10 @@ public class Pepcoding {
 		}else {
 			char ch=ip.charAt(0);
 			String ros=ip.substring(1);
-			if(ch=='0')
+			if(ch=='0') //if single digit is zero then return
 				return;
 			else {
-				int chv=ch-'0';
+				int chv=ch-'0'; //call with single digit
 				char code=(char)('a'+chv-1);
 				printEncodings(ros,op+code);
 			}
@@ -285,7 +285,7 @@ public class Pepcoding {
 			int ch12v=Integer.parseInt(ch12);
 			if(ch12v<26) {
 				char code = (char)('a'+ch12v-1);
-				printEncodings(roq,op+code);
+				printEncodings(roq,op+code); //call with two digit
 			}
 		}	
 	}

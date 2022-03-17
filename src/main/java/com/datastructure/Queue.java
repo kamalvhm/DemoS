@@ -57,7 +57,7 @@ public class Queue<T> implements Iterable{
 		//Method 3:
 		PriorityQueue<Integer> maxPQ2 = new PriorityQueue<>((a,b) -> b.compareTo(a)); 
 		
-		//Max heap by deafult it min heap
+		//Max heap by default PQ is min heap
 		 PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>((a,b)->b-a); 
 		 
 		  

@@ -129,7 +129,7 @@ private void resizeTable() {
 		if(map[i]!=null) {
 			for(Entry1<K, V> e:map[i]) {
 				int bucketIndex=getBucketIndex(e.hash);
-				LinkedList<Entry1<K,V>> exitingList=newTable[i];
+				LinkedList<Entry1<K,V>> exitingList=newTable[bucketIndex];
 				if(exitingList==null)newTable[bucketIndex]=exitingList=new LinkedList<>();
 				exitingList.add(e);
 			}

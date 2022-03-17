@@ -95,7 +95,10 @@ public class Stack<T> implements Iterable<T> {
 	     }
 	
 	   //84. Largest Rectangle in Histogram || discussion https://www.youtube.com/watch?v=SSpnMY5TrTw || 
-	
+	    //psudo:- for i=0 to n: 
+	    		  //x=leftSmallerThenI[i];
+	    		  //y=rightSmallerThenI[i]
+	    		  //ans=max(ans,h[i]*(y-x-1));
     //// https://www.youtube.com/watch?v=NFGteS5mnc0&feature=youtu.be  //IMP CONCEPT OF FINDING MINIMUM AND MXIMUM  TC:O(N)
   public static int largestRectangleArea(int[] heights) {
         if(heights == null || heights.length == 0)
@@ -141,7 +144,7 @@ public class Stack<T> implements Iterable<T> {
         return maxArea;
     }
   
-//SEMILIAR :-503. Next Greater Element II https://www.youtube.com/watch?v=Du881K7Jtk8
+//SEMILIAR :-503. Next Greater Element II https://www.youtube.com/watch?v=Du881K7Jtk8  TC:- O(n)
 	public int[] nextGreaterElements(int[] nums) {
 		int right[] = new int[nums.length];
 		Stack<Integer> st = new Stack<>();
@@ -149,7 +152,7 @@ public class Stack<T> implements Iterable<T> {
 		for (int i = 2 * n - 1; i >= 0; i--) { // 2 n Iteration to compute in circles
 			// this will also run 2 n times only as we are adding and removing same elements
 			// so
-			// some time it will run and sometimes not add SOP and check
+			// some time it will run and sometimes not, add SOP and check
 			while (!st.isEmpty() && st.peek() <= nums[i % n])
 				st.pop();
 

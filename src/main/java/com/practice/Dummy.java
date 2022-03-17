@@ -87,7 +87,7 @@ public class Dummy {
 		int sum=sumLeaf(root.left)+sumLeaf(root.right);
 		return sum;
 	}
-
+//Mathod if you need a string in return
 	private static String inorder2(TreeNode tree) {
 		if(tree==null)return "";
 		String left="";
@@ -118,7 +118,11 @@ public class Dummy {
 
 	public static int numIslands(char[][] grid) {
 		int count = 0;
-		
+		int h=grid.length;
+		int w=grid[0].length;
+		for(int i=0;i<h;i++) {
+			
+		}
 		return count;
 
 	}
@@ -128,7 +132,7 @@ public class Dummy {
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
 		int count = 0;	
-	
+		
 		return count;
 	}
     
@@ -136,6 +140,7 @@ public class Dummy {
 
 
 	private static void bfs(TreeNode tree) {
+		
 		
 		System.out.println();
 	}
@@ -147,6 +152,7 @@ public class Dummy {
 	 }
 	 //TC:-O(n) for all and SC:- average O(log n) height of tree in worst O(N) 
 	private static void inorderWithout(TreeNode tree) {
+		Stack<TreeNode> st=new Stack<>();
 		
 		//System.out.println();
 		
@@ -154,11 +160,11 @@ public class Dummy {
 	
 	private static void preorderWithout(TreeNode tree) {
 		
+		
 		//System.out.println();
 	}
 	
 	private static void postOrderWithoutRecursion(TreeNode tree) {
-		
 		
 		System.out.println();
 	}

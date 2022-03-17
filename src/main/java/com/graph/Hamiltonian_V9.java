@@ -1,7 +1,7 @@
 package com.graph;
 import java.io.*;
 import java.util.*;
-
+//https://nados.io/question/hamiltonian-path-and-cycle?zen=true
 public class Hamiltonian_V9 {
    static class Edge {
       int src;
@@ -67,5 +67,50 @@ public class Hamiltonian_V9 {
       
    }
 
+   /**********************************************************************DIFFRENT VERSION8**/
+   public static void hamiltonianCycle(int N, int[][] graph) {
+       boolean[] visited = new boolean[graph.length];
+       visited[0] = true;
+       System.out.println(cycle(graph, visited, 0, 0, 0));
+   }
+
+   private static boolean cycle(int[][] graph, boolean[] visited, int src, int osrc, int pos) {
+       if (pos == graph.length-1) {
+           if (graph[src][osrc] == 1) {
+               return true;
+           }
+           return false;
+       }
+
+       for (int i = 0; i < graph[0].length; i++) {
+           if (visited[i] == false && graph[src][i] == 1) {
+               visited[i] = true;
+               boolean ans = cycle(graph, visited, i, osrc, pos + 1);
+               if (ans == true) {
+                   return true;
+               }
+               visited[i] = false;
+           }
+       }
+       return false;
+   }
+
+   public static void main2(String[] args) {
+       Scanner sc = new Scanner(System.in);
+       int N = sc.nextInt();
+       int M = sc.nextInt();
+       int[] edges = new int[2 * M];
+       for (int i = 0; i < edges.length; i++) {
+           edges[i] = sc.nextInt();
+       }
+	 int[][] graph = new int[N][N];
+       for (int i = 0; i < M; i++) {
+	     graph[edges[2 * i + 1]-1][edges[2 * i]-1] = 1;
+           graph[edges[2 * i]-1][edges[2 * i + 1]-1] = 1;
+       }
+       hamiltonianCycle(N, graph);
+   }
+   
+   
 
 }

@@ -1,23 +1,71 @@
 package com.acrossPart;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 
 
 public class Ab {
+	  private static final String DATE_FORMAT = "dd-M-yyyy hh:mm:ss a";
 
 	public static void main(String[] args) throws IOException {
-		ZonedDateTime usage = ZonedDateTime.parse("2018-07-01T16:01:00.000+03:00");
-		ZonedDateTime cut = ZonedDateTime.parse("2018-07-01T16:01:00.000+03:00");
+//		ZonedDateTime zdt=ZonedDateTime.now(ZoneId.of("UTC"));
+//		ZonedDateTime usage = ZonedDateTime.parse("2022-02-10T11:05:00.000Z[UTC]");
+//
+//		System.out.println(zdt);
+		
+		//String dateInString = "10-2-2022 11:05:00 PM";
+		String dateInString = "10-2-2022 10:00:00 PM";
+        LocalDateTime ldt = LocalDateTime.parse(dateInString, DateTimeFormatter.ofPattern(DATE_FORMAT));
+
+        ZoneId utcID = ZoneId.of("UTC");
+        ZonedDateTime utcZDT = ldt.atZone(utcID);
+
+		System.out.println("utcZDT-- "+utcZDT);
+		
+        ZoneId osloZid = ZoneId.of("Europe/Oslo");
+        ZonedDateTime osloDateTime = utcZDT.withZoneSameInstant(osloZid);
+
+		System.out.println("osloDateTime-- "+osloDateTime);
+        ZonedDateTime outcZDT = ldt.atZone(osloZid);
+		System.out.println("osloDateTime2-- "+outcZDT);
+		
+		Long lng=1644098400000L;
+		Long lng2=1644130740000L;
+		ZonedDateTime utc = Instant.ofEpochMilli(lng).atZone(ZoneOffset.UTC);
+		System.out.println("Long TO UTC :- "+utc);
+		System.out.println("Long TO UTC2 :- "+Instant.ofEpochMilli(lng2).atZone(ZoneOffset.UTC));
+
+
+		//ZonedDateTime usage = ZonedDateTime.parse("2018-07-01T16:01:00.000+03:00");
+		//ZonedDateTime cut = ZonedDateTime.parse("2018-07-01T16:01:00.000+03:00");
 		//System.out.println((usage.isBefore(cut)));
-		System.out.println(usage.isAfter(cut));
+		//System.out.println(usage.isAfter(cut));
 		//System.out.println(t1.isEqual(t2));
 		
-//		int[] a= {1,0,2,1,0,2};
+//		 ZonedDateTime usageDateSince = ZonedDateTime.parse("2015-01-01T00:00-08:00[America/Los_Angeles]");
+//		 ZonedDateTime usageDateTill = ZonedDateTime.parse("2015-01-04T00:00-08:00[America/Los_Angeles]");
+//		 for (ZonedDateTime date = usageDateSince; 
+//				 date.isBefore(usageDateTill); 
+//				 date =date.plusDays(1) ) {
+//			 
+//			 	System.out.println(date+"---->"+date.plusDays(1));
+//			 	
+//			    }
+				/*
+				 * //before and equal for (ZonedDateTime date = usageDateSince;
+				 * date.isAfter(usageDateTill); date = date.plusDays(1)) {
+				 * System.out.println(date+"---->"+date.plusDays(1)); }
+				 */
+			
+			//		int[] a= {1,0,2,1,0,2};
 //		partition(a,0,a.length-1);
 //		System.out.print(Arrays.toString(a));
 		
@@ -166,6 +214,8 @@ public class Ab {
 		}
 	}
 	
+	
+
 	
 	
 }

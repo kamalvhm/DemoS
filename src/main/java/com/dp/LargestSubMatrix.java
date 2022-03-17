@@ -22,7 +22,7 @@ public class LargestSubMatrix {
 
 	}
 	
-	  //221. Maximal Square
+	  //221. Maximal Square ERRICTO
     public int maximalSquare(char[][] matrix) {
         int h =matrix.length;
         int w =matrix[0].length;
@@ -44,6 +44,7 @@ public class LargestSubMatrix {
                
             }
         }
+        //Because they ask for area in return so multiple with its self
         return max*max;
     }
 	

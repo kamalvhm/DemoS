@@ -8,7 +8,7 @@ import java.util.Set;
 
 import com.beans.TreeNode;
 //https://www.bigocheatsheet.com/
-
+// MID CALC :-https://hackernoon.com/binary-search-in-detail-914944a1434a
 //https://www.includehelp.com/algorithms/variants-of-binary-search.aspx
 public class BinarySearch {
 	public static void main(String args[]) {

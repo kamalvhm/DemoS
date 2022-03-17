@@ -25,4 +25,9 @@ com.datastruture>Queue.java
 com.datastruture>SlidingWindow.java
  
  
+ Permutations :- 
+ https://nados.io/question/print-permutations?zen=true
+ https://leetcode.com/problems/permutation-sequence/
+ https://leetcode.com/problems/combinations/
+ 
  

@@ -125,16 +125,17 @@ public class TreeRecursion {
      
      
      //894. All Possible Full Binary Trees       (check DS NOTES)                    ##Medium##   #*
+     //https://www.youtube.com/watch?v=VYczyMiMTqA
      public List<TreeNode> allPossibleFBT(int N) {
  		List<TreeNode> ans=new ArrayList<>();
- 		if(N%2==0){
+ 		if(N%2==0){ //For Even n we can't make full bineary tree
  			return ans;            
  		}if(N==1){
  			TreeNode root=new TreeNode(0);
  			ans.add(root);
- 		}
- 		//for odd loop
- 		for(int i=1;i<N;i+=2){
+ 		}																	//root
+ 		//for odd loop							    in left we have i node (1) ^ on right n-i-1
+ 		for(int i=1;i<N;i+=2){ //selecting roots 1,3,5,7 like that           0,1,2,3,4
  			//in left we are assigning 1,3,5
  			for(TreeNode left : allPossibleFBT(i)){
  				//we are assigning same in reverse order for right

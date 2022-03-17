@@ -7,7 +7,7 @@ import java.util.Arrays;
  * 2)print  LCS [v-23]|
  * 3)Shortest common superSequence [v-24]
  * 4)print SCS [v-29] | 1092. https://leetcode.com/problems/shortest-common-supersequence/
- * 5)Min # insertion and deletion a->b
+ * 5)Min # insertion and deletion a->b  583. Delete Operation for Two Strings
  * 6)Longest repeating subSequence
  * 7)Length of longest subsequence of a which is substring in b
  * 8)subsequence pattern Matching | 392. Is Subsequence
@@ -508,6 +508,7 @@ public class LongestCommanSubSequece3 {
 
         return dp[n][m];
     }
+	//call solve(s,p,0,0,dp)
 	//Wildcard Matching recusrsive  s is string and p is pattern 1 is true in return 
 	 public static int solve(String s, String p,int i,int j,int[][]dp){
 	        if(dp[i][j]!=-1) return dp[i][j];
@@ -521,7 +522,7 @@ public class LongestCommanSubSequece3 {
 	            }
 	            return 1;
 	        }
-	        if(j==p.length() && i<s.length()) //s is remianing 
+	        if(j==p.length() && i<s.length()) //s is remaining 
 	            return 0;
 	       //base cases end
 	        if(p.charAt(j)!='*'){

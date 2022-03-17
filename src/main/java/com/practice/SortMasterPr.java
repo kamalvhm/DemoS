@@ -5,11 +5,10 @@ import java.util.Random;
 
 public class SortMasterPr {
 
-	private static void selectionSort(int[] a) 	{	
+	private static void selectionSort(int[] a) 	{
 		
 	}
 	private static void bubbleSort(int[] a) {
-		
 		
 	}
 	private static void insertionSort(int[] a) { //1 4 5 7
@@ -18,7 +17,6 @@ public class SortMasterPr {
 	
 	private static int[] mergeSort(int[] a) {
 		return a;
-
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {
@@ -28,10 +26,12 @@ public class SortMasterPr {
 	
 	private static void quickSort(int[] a, int start, int end) {
 		
+		
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		return 1;
+		
+		return -1;
 	}
 	private static int randomized(int[] a, int start, int end) {
 		return a[0];
@@ -60,6 +60,12 @@ public class SortMasterPr {
 		int[] array4 = {5,4,2,1,3};
 		sort.sort(array4,4);
 		System.out.println(java.util.Arrays.toString(array4));
+		//Sort these sorted arrays mutually TC:- O(n*m) where n is for traverse in array a and m is to order correct in b array
+		int a[]= {1,4,7,8,10};
+		int b[]= {2,3,9};
+		sort(a,b);
+		System.out.println(Arrays.toString(a));
+		System.out.println(Arrays.toString(b));
 		
 	}
 
@@ -82,5 +88,13 @@ public class SortMasterPr {
 		}
 	}
 	
+	public static void sort(int a[],int b[]) {
+		
+	}
+	
+	public static void swapAndInsersion(int a[],int b[],int i,int j) {
+	
+		
+	}
 	
 }

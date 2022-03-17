@@ -104,7 +104,7 @@ public class RecursionPracticeByVerma {
 	}
 	
 	public static void insert(ArrayList<Integer> arr,int val) {// [3,4,6] ,1
-		
+	
 	}
 
 	private static void sortStack(Stack<Integer> st) { 
@@ -136,20 +136,17 @@ public class RecursionPracticeByVerma {
 	
 	private static void subsets(String ip, String op) {
 		
-		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
 		
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-		
-
-
+	 
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-			
+		
 	}
 
 	private static void letterPermutation(String ip, String op) {
@@ -161,11 +158,12 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
+	
 
 	}
 	
 
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		return 1;
+		return -1;
 	}
 }

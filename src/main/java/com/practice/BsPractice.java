@@ -36,7 +36,7 @@ public class BsPractice {
 		System.out.println("7) Infinite---(6)>>"+bsInfiniteArray(k, 7));
 		
 		int [] a= {20,17,15,14,12,10,8,2,1};
-		System.out.println("8) Desc "+searchBsInDescArray(a,2)); //ANS:-7
+		System.out.println("8) Desc (7) "+searchBsInDescArray(a,2)); //ANS:-7
 		//order agnostic array;
 		//floor of 5
 		int [] D= {1,2,3,4,8,9,10,10,12};
@@ -58,6 +58,7 @@ public class BsPractice {
 	}
 	
 	public static int bslast(int [] a,int i) {
+		
 		return -1;
 	}
 	
@@ -71,56 +72,39 @@ public class BsPractice {
 
 	public static int bsInfiniteArray(int[] a, int target) {
 		
-		return 1;
-
-
+		return -1;
 	}
 	
 	public static int searchBsInDescArray(int [] a,int target) {
-		
+		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]==target)return mid;
+			else if(a[mid]<target)
+				r=mid-1;
+			else l=mid+1;
+		}
 		return -1;
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3 6
-		int l=0,r=a.length-1;
-		int first=a[0];
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			int val=a[mid];
-			if(val==target)return mid;
-		    boolean i_m_big=val>first;
-		    boolean target_is_big=target>first;
-		    if(i_m_big==target_is_big) {
-		    	if(target>val) {
-		    		l=mid+1;
-		    	}else r=mid-1; 
-		    }else if(i_m_big) {
-		    	l=mid+1;
-		    	
-		    }else r=mid-1;
-		}
-		
+	
 		return -1;
 	}
 	
-	//floor =greatest element less then target if taget not present
+	//floor =greatest element less then target if target not present
 	public static int bsfloorofTarget(int [] a,int target) {
-		int left=0,right=a.length-1;
-		int res=-1;
-		while(left<=right) {
-			int mid =left+(right-left)/2;
-			int v =a[mid];
-			if(v==target) {
-				return a[mid];
-			}
-			else if(v<target) {
-				res= a[mid];
-				left=mid+1;
-			}else {
-				right=mid-1;
-			}
+		int l=0,r=a.length-1;
+		int rs=0;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]==target)return mid;
+			if(a[mid]<target) {
+				rs=mid;
+				l=mid+1;
+			}else r=mid-1;
 		}
-		return res;
+		return rs;
 	}
 	
 	public static char nextGreaterElement(char[] a, char target) {

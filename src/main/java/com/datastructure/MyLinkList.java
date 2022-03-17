@@ -84,6 +84,16 @@ public class MyLinkList<T> {
 		st_node = previous; 
        
 	}
+	//recursive
+	public Node reverseList(Node head) {
+			if(head == null || head.next_node == null){
+		          return head;
+		     }
+			 Node newRoot = reverseList(head.next_node);// find the new root - last element of the linked list
+		     head.next_node.next_node = head; // add new element at end
+		     head.next_node = null; // new start tail
+		     return newRoot;
+	}
 	
 	//141. Linked List Cycle | https://leetcode.com/problems/linked-list-cycle/
 		public boolean hasCycle(ListNode head) {
@@ -113,17 +123,8 @@ public class MyLinkList<T> {
 		        return slow;
 		}
 		
-	//recursive
-	 public Node reverseList(Node head) {
-			if(head == null || head.next_node == null){
-	           return head;
-	       }
-		   Node newRoot = reverseList(head.next_node);// find the new root - last element of the linked list
-	       head.next_node.next_node = head; // add new element at end
-	       head.next_node = null; // new start tail
-	      return newRoot;
-		}
 	
+	//1669. Merge In Between Linked Lists
 	public static void mergeInbetween(String s ,MyLinkList list1,MyLinkList list2) {
 		String str[]=s.split(",");
 		int st=Integer.parseInt(str[0]);
@@ -266,7 +267,7 @@ public class MyLinkList<T> {
 	}
 	
 	
-	//23. Merge k Sorted Lists
+	//23. Merge k Sorted Lists | https://www.youtube.com/watch?v=3yvecsuv3iQ
 	 public ListNode mergeKLists(ListNode[] lists) {
 	     if(lists == null || lists.length == 0) return null;
 	        int interval = 1;
