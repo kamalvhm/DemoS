@@ -940,5 +940,50 @@ public static void wordBreak(String str,String ans,HashSet<String> dict) {
 		coinChange2(i+1, coins, amtsf, tamt, asf);
 
 	}
+	
+	//Pattern Matching str=graphtreesgraph, pattern= pep, ans= p -> graph, e -> trees, . 
+	public static void solution(String str, String pattern, HashMap<Character,String> map, String op){
+		if(pattern.length()==0){
+			if(str.length()==0){
+				HashSet<Character> already=new HashSet<>();
+				for(int i=0;i<op.length();i++){
+					char ch=op.charAt(i);
+					if(!already.contains(ch)){
+						System.out.print(ch+" -> "+map.get(ch)+", ");
+						already.add(ch);
+					}
+				}
+				System.out.println(".");
+			}
+			return;
+		}
+		char ch=pattern.charAt(0);
+		String rop=pattern.substring(1);
+		if(map.containsKey(ch)){
+			
+				String pre_mapping=map.get(ch);
+				if(str.length()>=pre_mapping.length()){
+					String left=str.substring(0,pre_mapping.length());
+					String right=str.substring(pre_mapping.length());
+					if(pre_mapping.equals(left))
+						solution(right,rop,map,op);
+				}
+
+				
+				
+			}
+			
+			else{
+				for(int i=0;i<str.length();i++){
+					String left=str.substring(0,i+1);
+					String right=str.substring(i+1);
+					map.put(ch,left);
+					solution(right,rop,map,op);
+					map.remove(ch);
+				}
+			}
+		
+	
+	}
 
 }

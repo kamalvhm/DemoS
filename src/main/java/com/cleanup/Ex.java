@@ -10,8 +10,9 @@ import com.beans.TreeNode;
 public class Ex {
 
 	public static void main(String[] args) throws Exception{
-	
-		
+		int [][] a={{0,1},{0,2}};
+		int b[]=a[0];
+		System.out.println("HELLO "+b[0]+"--"+b[1]);
 		int x=1,y=4;
 		System.out.println("XOR "+(x^y));
 		

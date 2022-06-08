@@ -31,10 +31,10 @@ public class Dpractice3 {
 		for(int[] a:dp)
 			Arrays.fill(a, -1);
 	}
-	
+	//#@link LongestCommanSubSequece3.java
 	public static void main(String[] args) {
 		String x="abcdgh",y="abedfhr"; //common in both is abdh so 4 is ans
-		System.out.println("LCS Length (4) ANS:-"+LCS_TopDown(x,y,x.length(),y.length())); //1143. Longest Common Subsequence
+		System.out.println("LCS Length (4) ANS:-"+LCS_Simple_recursive_Code(x,y,x.length(),y.length())); //1143. Longest Common Subsequence
 		String a="abcde",b="abfce";  /**ANS  2 */ // 2 longest countinues common string is 'ab' so 2
 		System.out.println("1) Longest common subString (2)ANS:-"+LongestCommonSubString(a,b,a.length(),b.length()));
 /*		String a10="intention",b10="execution"; 
@@ -85,7 +85,7 @@ public class Dpractice3 {
 			At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
 		 */
 		System.out.println("17)Minimum ASCII Delete Sum for Two Strings (231) :-"+minimumDeleteSum(s5,s6,s5.length(),s6.length()));
-		String s7 = "ALDBCEBCD", s8 = "ABCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
+		String s7 = "ALDBCEBCD", s8 = "ABCD";//Output : 3 "ACD" is longest subsequence of S8 which is substring of s7.
 		System.out.println("7)Length of longest subsequence of a which is substring in b (3):-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
 		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
 		//SAME AS DistinctSubsequences
@@ -111,17 +111,15 @@ public class Dpractice3 {
 	public static int LongestCommonSubString(String x,String y,int n,int m) {
 		int t[][]=new int[n+1][m+1];
 		int max =0;
-		
+	
 		return max;
 	}
 	
 	
 	public static String printLCS_String(String x,String y,int n, int m) {		
 		int t[][]=new int [n+1][m+1];  //Make n and then m to make similar with KS
-		
-		StringBuffer sb=new StringBuffer();
-		
-		return sb.toString();
+	
+		return "";
 	}
 	
 	
@@ -130,7 +128,6 @@ public class Dpractice3 {
 	        int m = y.length();
 	        int[][] t = new int[n+1][m+1];
 	        
-	       
 	       
 	        return "";
 	    }
@@ -164,9 +161,7 @@ public class Dpractice3 {
 			int t[][]=new int[n+1][n+1];
 			String res="";
 			int resE=1,resL=1;
-			
 		
-			
 			return e.substring(resE-resL,resE);
 		}
 		
@@ -174,13 +169,32 @@ public class Dpractice3 {
 		public static int minimumDeleteSum(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
+	        for(int i=1;i<n+1;i++)
+	        	t[i][0]=t[i-1][0]+(int)s1.charAt(i-1);
+	        for(int i=1;i<m+1;i++)
+	        	t[0][i]=t[0][i-1]+(int)s2.charAt(i-1);
+	        
+	        for(int i=1;i<n+1;i++) {
+	        	for(int j=1;j<m+1;j++) {
+	        		if(s1.charAt(i-1)!=s2.charAt(j-1)) {
+	        			t[i][j]=Math.min(t[i-1][j]+(int)s1.charAt(i-1), t[i][j-1]+(int)s2.charAt(j-1));
+	        		}else t[i][j]=t[i-1][j-1];
+	        	}
+	        }
 	        return t[n][m];
 	    }
 		//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
 		public static int longestOfAinB(String x,String y,int n,int m) {
 			int t[][]=new int [n+1][m+1];  
 			int max=0;
-			
+			for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1)) {
+						t[i][j]=1+t[i-1][j-1];
+						max=t[i][j];
+					}else t[i][j]=t[i][j-1];
+				}
+			}
 		
 			
 			return max;
@@ -207,7 +221,14 @@ public class Dpractice3 {
 	        int dp [] =new int[nums.length];
 	        int max=1;
 	        Arrays.fill(dp,1);
-	        
+	        for(int i=0;i<nums.length;i++) {
+	        	for(int j=0;j<i;j++) {
+	        		if(nums[j]<nums[i]) {
+	        			dp[i]=Math.max(dp[i], 1+dp[j]);
+	        			max=Math.max(max, dp[i]);
+	        		}
+	        	}
+	        } 
 	        
 	        return max;
 	    }

@@ -1,33 +1,16 @@
 package com.practice;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
-import java.util.spi.CurrencyNameProvider;
-
-import org.apache.commons.math3.ode.nonstiff.GillIntegrator;
-import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
-import org.apache.hadoop.fs.DF;
-import org.apache.ivy.core.cache.CacheUtil;
-import org.apache.spark.sql.catalyst.expressions.CurrentRow;
-import org.apache.spark.sql.streaming.StreamingQueryListener.QueryStartedEvent;
-import org.apache.spark.sql.types.StructType;
-import org.w3c.dom.ls.LSInput;
 
 import com.beans.TreeNode;
 import com.datastructure.TreePrinter;
-import com.dp.DpOnTrees4.In;
-
-import io.netty.handler.codec.ByteToMessageDecoder.Cumulator;
-import scala.reflect.io.Directory;
-import scala.sys.process.ProcessBuilderImpl.Simple;
 
 
 
 public class Dummy {
-
+	// BFSTraversals and DFSTraversals
 	public static void main(String[] args) {
 		TreeNode<Integer> tree = new TreeNode(1); // 1
 		tree.left = new TreeNode(2); // 2 3
@@ -73,7 +56,7 @@ public class Dummy {
               {'1', '1', '0', '0', '0'},
               {'0', '0', '1', '0', '1'}};
               
-        System.out.println("No of Islands:(4) " + numIslandsIterativeDFS(islandGrid));
+        System.out.println("No of Islands:(4) " + numIslands(islandGrid));
                
       /*  System.out.println(Pow(2,2));*/
 
@@ -121,13 +104,24 @@ public class Dummy {
 		int h=grid.length;
 		int w=grid[0].length;
 		for(int i=0;i<h;i++) {
-			
+			for(int j=0;j<w;j++) {
+				if(grid[i][j]=='1') {
+					DFS(grid,i,j);
+					count++;
+				}
+			}
 		}
 		return count;
 
 	}
     private static void DFS(char[][] grid, int r, int c) {
-    
+    	
+    	if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]!='1') return;
+    	grid[r][c]='0';
+    	DFS(grid,r+1,c);
+    	DFS(grid,r-1,c);
+    	DFS(grid,r,c+1);
+    	DFS(grid,r,c-1);
 	}
 
 	public static int numIslandsIterativeDFS(char[][] grid) {
@@ -141,26 +135,21 @@ public class Dummy {
 
 	private static void bfs(TreeNode tree) {
 		
-		
 		System.out.println();
 	}
 	
 	 public static List<List<Integer>> levelOrder(TreeNode tree){
 		List<List<Integer>> result=new ArrayList<>();	
-		
 		return result;
 	 }
 	 //TC:-O(n) for all and SC:- average O(log n) height of tree in worst O(N) 
 	private static void inorderWithout(TreeNode tree) {
-		Stack<TreeNode> st=new Stack<>();
 		
 		//System.out.println();
 		
 	}
 	
 	private static void preorderWithout(TreeNode tree) {
-		
-		
 		//System.out.println();
 	}
 	

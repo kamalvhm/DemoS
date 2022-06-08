@@ -1,10 +1,12 @@
 package com.intquetions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class HashMapProblems {
 
@@ -92,6 +94,7 @@ public class HashMapProblems {
 	  
 	  //It select pairs of two no which total to 60 multiple and returns the count of such pairs  
 	 // 1010. Pairs of Songs With Total Durations Divisible by 60
+	  //https://www.youtube.com/watch?v=5gHnQ4lfDko
 	public static int numPairsDivisibleBy60(int[] time) {
 		Map<Integer, Integer> map = new HashMap<>();
 		int count = 0;
@@ -103,5 +106,20 @@ public class HashMapProblems {
 		}
 		return count;
 	}
+	//2008. Maximum Earnings From Taxi
+	public long maxTaxiEarnings(int n, int[][] rides) {
+        Arrays.sort(rides, (a, b) -> (a[1] - b[1]));
+        TreeMap<Integer, Long> dp = new TreeMap<>();
+        dp.put(0, 0L);
+        for (int[] ride : rides) {
+        	// if map contains key 1,2,3,4 ,6 and we call flooEntry(5) then it will give result for 4
+            long currEarning = ride[1] - ride[0] + ride[2] + dp.floorEntry(ride[0]).getValue();
+            				   //Drivers NEW Trip          + DRIVERS LAST NEAREST TRIP
+            if (currEarning > dp.lastEntry().getValue()) {
+                dp.put(ride[1], currEarning);
+            }  
+        }
+        return dp.lastEntry().getValue();
+    }
 
 }

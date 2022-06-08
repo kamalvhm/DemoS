@@ -85,7 +85,8 @@ public class Bipartite_V13 {
    }
  
    //https://www.youtube.com/watch?v=LBgVHZb07dc
-   //785. Is Graph Bipartite? || DFS way to find cycle
+   //https://www.youtube.com/watch?v=uC884ske2uQ&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=11
+   //785. Is Graph Bipartite? || DFS way to find cycle 
    public boolean isBipartit(int [][] graph) {
 	   int len =graph.length;//****THIS GIVE ALL VTCES
 	   int[] color=new int[len];
@@ -167,4 +168,7 @@ public class Bipartite_V13 {
       }
       return true;
   }
+  
+  //BIPARTITE SOLVED WTIH KENNEY METHOD directed graph cycleDetation  GraphCycle_V12.canFinish();
+ 
 }

@@ -49,113 +49,143 @@ public class SlidingWindowPractice {
 	}
 	
 	private static int maxInSubArray(int[] arr, int window) {
-		return -1;
+		int i=0,j=0;
+		int currentSum=0;
+		int max=0;
+		while(j<arr.length) {
+			currentSum+=arr[j];
+			if(j-i+1<window)
+				j++;
+			else if(j-i+1==window) {
+				max=Math.max(currentSum, max);
+				currentSum-=arr[i];
+				i++;
+				j++;
+			}
+		}
+		return max;
 	}
 	
 	private static int firstNegative(int[] arr, int window) {
-		List<Integer> list=new ArrayList<>();
-		int i=0,j=0;
-		while(j<arr.length) {
-			if(arr[j]<0)
-				list.add(arr[j]);
-			if(j-i+1<window) 
-				j++;
-			else if(j-i+1==window) {
-			   if(!list.isEmpty()) {
-				   System.out.print(list.get(0));
-				  Integer val=arr[i];
-				  if(list.contains(val))
-					  list.remove(val);
-				   
-			   }
-			   j++;
-			   i++;
-			}
-		}
+		
 		return 1;
 	}
 
 	//https://leetcode.com/problems/find-all-anagrams-in-a-string/
 	  public static List<Integer> findAnagrams(String s, String p) {
-		  	int i=0,j=0;
-		  
+		  	
 	       return new ArrayList<Integer> ();
 	    }
 	  
 		private static List<Integer> maximumInWindow(int nums[],int k){
 	        ArrayList<Integer> ans=new ArrayList<>();
-	        PriorityQueue<Integer> q=new PriorityQueue<>((a,b)->b-a);
-	        int i=0,j=0;
-
-	        while(j<nums.length){
-	            int val=nums[j];
-	            q.offer(val);
-	            if(j-i+1<k)
-	                j++;
-	            else if(j-i+1==k){
-	            	if(!q.isEmpty())
-	            		ans.add(q.peek());
-	            	if(q.contains(nums[i])) {
-						q.remove(Integer.valueOf(nums[i]));
-						
-					}
-	                i++;
-	                j++;
-	            }
-	            
-	        }
+	      
 			return ans;
 		}
 
 
 	  private static int longestSubArray(int[] arr, int k) {
+			int max=0;
 			
-			return 0;
+			return max;
 		}
 
 	
 	private static String largestSubStringWithKUnique(String s, int k) {
 			String res="";
-			int i=0,j=0;
-			int max=0;
-			HashMap<Character,Integer> map=new HashMap<>();
-			while(j<s.length()) {
-				char rc=s.charAt(j);
-				map.put(rc, map.getOrDefault(rc, 0)+1);
-				if(map.size()<k)
-					j++;
-				else if(map.size()==k) {
-					if(max<j-i+1) {
-						max=j-i+1;
-						res=s.substring(i,j+1);
-					}
-					j++;
-				}else if(map.size()>k) {
-					while(map.size()>k) {
-						char lc=s.charAt(i);
-						int val=map.get(lc);
-						if(--val==0)
-							map.remove(lc);
-						else map.put(lc, val);
-						i++;
-					}
-					j++;
-				}
-			}
+			
 			return res;
 	}
 		
 	public static int LongestSubStringWithAllUnique(String s) {
 		int i=0,j=0;
-		
-		return -1;
+		HashMap<Character,Integer> map=new HashMap<>();
+		int max=0;
+		while(j<s.length()) {
+			char rch=s.charAt(j);
+			map.put(rch, map.getOrDefault(rch, 0)+1);
+			if(map.size()==j-i+1) {
+				max=Math.max(max, j-i+1);
+				j++;
+			}
+			else if(map.size()<j-i+1) {
+				while(map.size()<j-i+1) {
+					char lch=s.charAt(i);
+					int val=map.get(lch);
+					if(--val==0)
+						map.remove(lch);
+					else map.put(lch, val);
+					i++;
+				}
+				j++;
+			}
+		}
+		return max;
 	}
 		public static int pickToys(String s) {
-			return -1;
+			HashMap<Character,Integer> map=new HashMap<>();
+			int i=0,j=0;
+			int max=0;
+			while(j<s.length()) {
+				char rch=s.charAt(j);
+				map.put(rch, map.getOrDefault(rch, 0)+1);
+				if(map.size()<2)
+					j++;
+				else if(map.size()==2) {
+					max=Math.max(max, j-i+1);
+					j++;
+				}
+				else if(map.size()>2) {
+					while(map.size()>2) {
+						char lch=s.charAt(i);
+						int val=map.get(lch);
+						if(--val==0)
+							map.remove(lch);
+						else map.put(lch, val);
+						i++;
+					}
+					j++;
+				}
+			}
+			return max;
 		}
 		//https://www.youtube.com/watch?v=iwv1llyN6mo
 		private static int minWindowSubString(String s, String t) {
-			return -1;
+			HashMap<Character,Integer> map=new HashMap<>();
+			for(char ch:t.toCharArray()) {
+				map.put(ch, map.getOrDefault(ch, 0)+1);
+			}
+			int count=map.size();
+			int i=0,j=0;
+			int min=Integer.MAX_VALUE;
+			while(j<s.length()) {
+				char rch=s.charAt(j);
+				if(map.containsKey(rch)) {
+					int val=map.get(rch);
+					if(--val==0) {
+						count--;
+					}
+					map.put(rch, val);
+				}
+				if(count>0)
+					j++;
+				else if(count==0) {
+					min=Math.min(min, j-i+1);
+					while(count==0) {
+						char lch=s.charAt(i);
+						if(map.containsKey(lch)) {
+							int val=map.get(lch);
+							if(val==0) {
+								count++;
+							}
+							map.put(lch, ++val);
+						}
+						i++;
+					}
+					j++;
+				}
+			}
+			return min;
 		}
 		
 		

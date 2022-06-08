@@ -56,10 +56,36 @@ public class TopologicalSortV17 {
         }
     }
     st.push(src);
-}   
+} 
    
    
-   
+   //FOR BFS ways visit https://www.youtube.com/watch?v=rZv_jHZva34&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=14
+   public static void topo(ArrayList<Edge>[] graph,int vtces){
+	    int [] indegree=new int[vtces];//find all indegrees of each vertex
+	      for(int i=0;i<vtces;i++){
+	         for(Edge e:graph[i]){
+	             indegree[e.nbr]++;
+	         }
+	      }
+
+	      Queue<Integer> q=new LinkedList<>();
+	      for(int i=0;i<indegree.length;i++){ // put nodes in queue which have indegree 0 
+	         if(indegree[i]==0)
+	            q.offer(i); 
+	      }
+
+	      while(!q.isEmpty()){//remove print and subtract indegree then add to queue if zero
+	         int i=q.poll();
+	         System.out.println(i);
+
+	         for(Edge e:graph[i]){
+	            indegree[e.nbr]--;
+
+	            if(indegree[e.nbr]==0)
+	               q.offer(e.nbr);
+	         }
+	      }
+	 }
     
 
 }

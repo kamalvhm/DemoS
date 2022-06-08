@@ -61,7 +61,7 @@ public class GraphCycle_V12 {
 
       
    }
-   //BFS way
+   //BFS way  undirected graph
    public static boolean isCyclic(ArrayList<Edge>[] graph,int src, boolean[] visited){
        ArrayDeque<Pair> q=new ArrayDeque<>();
        q.add(new Pair(src,src+""));
@@ -113,7 +113,7 @@ public class GraphCycle_V12 {
 	      
 	      for(int v=0;v<numCourses;v++){
 	          //false if cycle found
-	          if(!dfs(map,v,visited))
+	          if(!dfs(map,v,visited)) //IN BC we handled so no visited check here and below dfs call
 	              return false;
 	      }
 	      return true;

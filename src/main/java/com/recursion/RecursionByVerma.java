@@ -123,14 +123,7 @@ public class RecursionByVerma {
 	       
 	    }
 
-	private static int josephusProblem(ArrayList<Integer> n, int k,int index) {
-		if(n.size()==1) {
-			return n.get(0);
-		}
-		index=(index+k)%n.size();
-		n.remove(index);
-		return josephusProblem(n, k, index);
-	}
+
 
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
 		if(ip.length()==0) {
@@ -307,5 +300,13 @@ public class RecursionByVerma {
 		nBitBinary(n-1, one+1, zero, op+1);
 		if(one>zero)
 		nBitBinary(n-1, one, zero+1, op+0);
+	}
+	private static int josephusProblem(ArrayList<Integer> n, int k,int index) {
+		if(n.size()==1) {
+			return n.get(0);
+		}
+		index=(index+k)%n.size();
+		n.remove(index);
+		return josephusProblem(n, k, index);
 	}
 }

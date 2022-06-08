@@ -145,7 +145,7 @@ public class Queue<T> implements Iterable{
 	       
 	    }
 	  
-	  //239. Sliding Window Maximum
+	  //239. Sliding Window Maximum | https://www.youtube.com/watch?v=5VDQxLAlfu0
 	  public int[] maxSlidingWindow(int[] nums, int k) {
 	        if (k == 0) return nums;
 	    
@@ -160,7 +160,8 @@ public class Queue<T> implements Iterable{
 	            if (i - k + 1 >= 0) ans[i - k + 1] = nums[q.getFirst()];
 	        
 	            //finally remove max which is out of range
-	            if (i - k + 1 == q.getFirst()) q.removeFirst();
+	            if (i - k + 1 == q.getFirst()) q.removeFirst(); //if we add this before adding to ans 
+	            //then we can use i-k 
 	        }
 	             
 	        return ans;

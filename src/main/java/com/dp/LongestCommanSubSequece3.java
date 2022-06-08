@@ -79,7 +79,7 @@ public class LongestCommanSubSequece3 {
 			At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
 		 */
 		System.out.println("17)Minimum ASCII Delete Sum for Two Strings :-"+minimumDeleteSum(s5,s6,s5.length(),s6.length()));
-		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of X which is substring of Y.
+		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of s7 which is substring of s8.
 		System.out.println("7)Length of longest subsequence of a which is substring in b :-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
 		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
 		//SAME AS DistinctSubsequences can call same 
@@ -533,5 +533,29 @@ public class LongestCommanSubSequece3 {
 	        }
 	        return 0;
 	    }
-	
+	 public boolean isMatch2(String s, String p) {
+	        int n=s.length();
+	        int m=p.length();
+	        boolean t[][] =new boolean[n+1][m+1];
+	        t[0][0]=true;//base case 1
+	        
+	        for(int j=1;j<m+1;j++){  //base case 2 
+	            if(p.charAt(j-1)=='*')
+	                t[0][j]=t[0][j-1];
+	        }
+	        //base case 3 is already false in table 
+	        for(int i=1;i<n+1;i++){
+	            for(int j=1;j<m+1;j++){
+	                char charS = s.charAt(i - 1);
+	                char charP = p.charAt(j - 1);
+	                if(charS==charP || charP=='?')
+	                    t[i][j]=t[i-1][j-1];
+	                else if(charP=='*'){
+	                    t[i][j]=t[i-1][j] || t[i][j-1];
+	                }
+	            }
+	        }
+	        return t[n][m];
+	       // return solve(0,0,s,p);
+	    }
 }
