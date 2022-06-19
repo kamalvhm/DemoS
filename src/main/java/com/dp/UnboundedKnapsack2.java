@@ -24,7 +24,7 @@ public class UnboundedKnapsack2 {
 		System.out.println("3)coin change II :-"+coinChangeII(coin,5,coin.length));
 
 	}
-
+	
 	public static int unboundedKnapsack(int [] wt,int [] val,int w,int n) {
 		int[][] top=new int [n+1][w+1];
 		//Initialization 

@@ -53,12 +53,10 @@ public class BsPractice {
 	}
 	
 	public static int bsfirst(int [] a,int i) { 
-		
 		return -1;
 	}
 	
 	public static int bslast(int [] a,int i) {
-		
 		return -1;
 	}
 	
@@ -88,7 +86,22 @@ public class BsPractice {
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3 6
-	
+		int l=0,r=a.length-1;
+		int first=a[0];
+		while(l<=r) {
+			int mid=l+(r-l)/2; 
+			int val=a[mid];
+			if(val==target)return mid;
+			boolean i_m_big=val>=first;
+			boolean targetBig=target>=first;
+			if(i_m_big==targetBig) {
+				if(val>target)
+					r=mid-1;
+				else l=mid+1;
+			}else if(i_m_big)
+				l=mid+1;
+			else r=mid-1;
+		}
 		return -1;
 	}
 	
