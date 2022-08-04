@@ -513,9 +513,9 @@ public class LongestCommanSubSequece3 {
 	 public static int solve(String s, String p,int i,int j,int[][]dp){
 	        if(dp[i][j]!=-1) return dp[i][j];
 	        //base cases 
-	        if(i==s.length() && j==p.length())return 1; //if both are efinished
+	        if(i==s.length() && j==p.length())return 1; //if both are finished
 	        
-	        if(i==s.length() && j<p.length()){ //p is remianing 
+	        if(i==s.length() && j<p.length()){ //p is remaining 
 	            for(int k=j;k<p.length();k++){
 	                if(p.charAt(k)!='*')
 	                    return 0;

@@ -254,18 +254,25 @@ public class MyLinkList<T> {
       return newHead;
   }
    //206. Reverse Linked List  #RECURSION
+//   public ListNode reverseList(ListNode head) {
+//		if(head==null)return head;
+//		return reverse(head,null);
+//
+//	}
+//	public ListNode reverse(ListNode head,ListNode prev){
+//	   ListNode curr = head.next;
+//	   head.next = prev;
+//		if(curr!= null) return reverse(curr,head);
+//		return head;
+//	}
    public ListNode reverseList(ListNode head) {
-		if(head==null)return head;
-		return reverse(head,null);
-
-	}
-	public ListNode reverse(ListNode head,ListNode prev){
-	   ListNode curr = head.next;
-	   head.next = prev;
-		if(curr!= null) return reverse(curr,head);
-		return head;
-	}
-	
+       if(head==null || head.next==null)return head;
+       
+       ListNode node=reverseList(head.next);
+       head.next.next=head;
+       head.next=null;
+       return node;
+   }
 	
 	//23. Merge k Sorted Lists | https://www.youtube.com/watch?v=3yvecsuv3iQ
 	 public ListNode mergeKLists(ListNode[] lists) {

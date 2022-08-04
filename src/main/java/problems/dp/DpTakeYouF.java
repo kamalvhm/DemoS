@@ -1,6 +1,8 @@
 package problems.dp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 //https://takeuforward.org/dynamic-programming/striver-dp-series-dynamic-programming-problems/
@@ -17,11 +19,518 @@ public class DpTakeYouF {
 		//System.out.println("House Robber "+houseRobber(a,a.length-1,dp));
 		//System.out.println("House Robber "+houseRobberSpace(a));
 		int b[][]= {{10,50,1},{5,100,11}};
-		System.out.println("Ninja "+ninjaTraining(b));
-
+		//System.out.println("Ninja "+ninjaTraining(b));
 		
+		String aa[]= {"a","abc","ab"};
+	    Arrays.sort(aa,new Comparator<String>() {
+	
+				@Override
+				public int compare(String o1, String o2) {
+					if(o1.length()>o2.length())return -1;
+					else if (o2.length()>o1.length()) return 1;
+					return o1.compareTo(o2);
+				}
+			});
+		
+		System.out.print(Arrays.toString(aa));	
 	}
-	//prob 26 Print LCS 
+	//prob 46
+	public static int findNumberOfLIS(int n, int[] arr) {
+		int dp[]=new int [n]; 
+        int count[]=new int[n];
+        Arrays.fill(dp,1);
+        Arrays.fill(count,1);
+        int max=1;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(arr[j]<arr[i] && dp[j]+1>dp[i]){
+                    dp[i]=dp[j]+1;
+                    //inherit
+                    count[i]=count[j];
+                }else if(arr[j]<arr[i] && dp[j]+1==dp[i])
+                       count[i]+=count[j];
+            }
+            max=Math.max(max,dp[i]);
+        }
+        //System.out.println("MAX D "+max);
+       // System.out.println("HELLO D "+Arrays.toString(dp));
+        //System.out.println("HELLO "+Arrays.toString(count));
+
+        int nos=1;
+        for(int i=0;i<n;i++){
+            if(dp[i]==max)
+                nos+=count[i];
+        }
+        return nos;
+	}
+	//prob 45
+	public static int longestBitonicSequence(int[] arr, int n) {
+           int dp1[]=new int[n];
+           int dp2[]=new int[n];
+          //LIS from left
+          for(int i=0;i<n;i++){
+              dp1[i]=1;
+              for(int j=0;j<i;j++){
+                  if(arr[j]<arr[i]){
+                      dp1[i]=Math.max(dp1[i],dp1[j]+1);
+                  }
+              }
+          } 
+        //LIS from right
+            for(int i=n-1;i>=0;i--){
+              dp2[i]=1;
+              for(int j=n-1;j>i;j--){
+                  if(arr[j]<arr[i]){
+                      dp2[i]=Math.max(dp2[i],dp2[j]+1);
+                  }
+              }
+          } 
+        int max=1;
+        //adding both left and right -1 for common value
+        for(int i=0;i<n;i++)
+        {
+            int bitonic=dp1[i]+dp2[i]-1;
+            max=Math.max(max,bitonic);
+        }
+        return max;
+    }
+	//prob 44 NOT WORKING NEEDS RE EVAL
+	public static int longestStrChain(int n, String[] arr) {
+		int dp[]=new int[n];
+        Arrays.sort(arr,new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                if(o1.length()>o2.length())return -1;
+                else if (o2.length()>o1.length()) return 1;
+                return o1.compareTo(o2);
+            }
+        });
+        Arrays.fill(dp,1);
+        int maxi=1;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(possible(arr[i],arr[j])){
+                    dp[i]=Math.max(dp[j]+1,dp[i]);
+                   
+                } 
+            }
+             maxi=Math.max(dp[i],maxi);
+        }
+        return maxi;
+	}
+    public static boolean possible(String s1,String s2){
+        if(s1.length()!=s2.length()+1)return false;
+        int first=0;
+        int secound=0;
+        while(first<s1.length()){//s1 is bigger by then
+            if(s1.charAt(first)==s2.charAt(secound)){
+                first++;
+                secound++;
+            }else {
+                first++;
+            }
+        }
+        if(first==s1.length() && secound==s2.length())return true;
+         return false;
+    }
+	////prob 43 LIC bineary search
+	public static int longestIncreasingSubsequence(int arr[]) {
+		ArrayList<Integer> temp=new ArrayList<>();
+        temp.add(arr[0]);
+        int len=1;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]>temp.get(temp.size()-1)){
+                  temp.add(arr[i]);
+                  len++;
+            }
+            else {
+                int ind=lowerBound(temp,arr[i]);
+                temp.add(ind,arr[i]);
+            }
+        }
+        return len;
+	}
+    
+    public static int lowerBound(ArrayList<Integer> a,int t){
+        int i=0,j=a.size()-1; 
+        int index=-1;
+        while(i<=j){
+            int mid=i+(j-i)/2;
+            if(a.get(mid)>=t){
+                index=mid;
+                j=mid-1;
+            }else {
+                i=mid+1;
+            }
+        }
+        return index;
+    }
+	
+	//prob 42
+	static int longestIncreasingSubsequence(int arr[], int n){
+	    int dp[][]=new int[n+1][n+1];
+	    for(int ind = n-1; ind>=0; ind --){
+	        for (int prev_index = ind-1; prev_index >=-1; prev_index --){
+	            int notTake = 0 + dp[ind+1][prev_index +1];
+	            int take = 0;
+	            if(prev_index == -1 || arr[ind] > arr[prev_index]){
+	                take = 1 + dp[ind+1][ind+1];
+	            }
+	            dp[ind][prev_index+1] = Math.max(notTake,take);
+	        }
+	    }
+	    return dp[0][0];
+	}
+	static int longestIncreasingSubsequence2(int arr[], int n){
+	    int next[]=new int[n+1];
+	    int cur[]=new int[n+1];
+	    for(int ind = n-1; ind>=0; ind --){
+	        for (int prev_index = ind-1; prev_index >=-1; prev_index --){
+	            int notTake = 0 + next[prev_index +1];
+	            int take = 0;
+	            if(prev_index == -1 || arr[ind] > arr[prev_index]){
+	                take = 1 + next[ind+1];
+	            }
+	            cur[prev_index+1] = Math.max(notTake,take);
+	        }
+	        next = cur.clone();
+	    }
+	    return cur[0];
+	}
+	//Printing 
+	static int longestIncreasingSubsequence3(int arr[], int n){
+	    
+	    int[] dp=new int[n];
+	    Arrays.fill(dp,1);
+	    int[] hash=new int[n];
+	    Arrays.fill(hash,1);
+	    
+	    for(int i=0; i<=n-1; i++){
+	        
+	        hash[i] = i; // initializing with current index
+	        for(int prev_index = 0; prev_index <=i-1; prev_index ++){
+	            
+	            if(arr[prev_index]<arr[i] && 1 + dp[prev_index] > dp[i]){
+	                dp[i] = 1 + dp[prev_index];
+	                hash[i] = prev_index;
+	            }
+	        }
+	    }
+	    
+	    int ans = -1;
+	    int lastIndex =-1;
+	    
+	    for(int i=0; i<=n-1; i++){
+	        if(dp[i]> ans){
+	            ans = dp[i];
+	            lastIndex = i;
+	        }
+	    }
+	    
+	    ArrayList<Integer> temp=new ArrayList<>();
+	    temp.add(arr[lastIndex]);
+	    
+	    while(hash[lastIndex] != lastIndex){ // till not reach the initialization value
+	        lastIndex = hash[lastIndex];
+	        temp.add(arr[lastIndex]);    
+	    }
+	    
+	    // reverse the array 
+	    
+	    System.out.print("The subsequence elements are ");
+	    
+	    for(int i=temp.size()-1; i>=0; i--){
+	        System.out.print(temp.get(i)+" ");
+	    }
+	    System.out.println();
+	    
+	    return ans;
+	}
+	//prob 41
+	static int getAns(int arr[], int n,  int ind, int prev_index,int[][] dp){
+	    
+	    // base condition
+	    if(ind == n)
+	        return 0;
+	        
+	    if(dp[ind][prev_index+1]!=-1)
+	        return dp[ind][prev_index+1];
+	    
+	    int notTake = 0 + getAns(arr,n,ind+1,prev_index,dp);
+	    
+	    int take = 0;
+	    
+	    if(prev_index == -1 || arr[ind] > arr[prev_index]){
+	        take = 1 + getAns(arr,n,ind+1,ind,dp);
+	    }
+	    
+	    return dp[ind][prev_index+1] = Math.max(notTake,take);
+	}
+	//prob 40
+	static int getAns(int[] Arr, int ind, int buy, int n, int fee, int[][] dp ){
+	    if(ind==n) return 0; //base case
+	    if(dp[ind][buy]!=-1)
+	        return dp[ind][buy];
+	        
+	    int profit=0;
+	    if(buy==0){// We can buy the stock
+	        profit = Math.max(0+getAns(Arr,ind+1,0,n,fee,dp), -Arr[ind] + getAns(Arr,ind+1,1,n,fee,dp));
+	    }
+	    
+	    if(buy==1){// We can sell the stock
+	        profit = Math.max(0+getAns(Arr,ind+1,1,n,fee,dp), Arr[ind] -fee + getAns(Arr,ind+1,0,n,fee,dp));
+	    }
+	    
+	    return dp[ind][buy] = profit;
+	}
+
+	public static int maximumProfit(int n, int fee, int[] prices) {
+
+		int dp[][] = new int[n + 1][2];
+		for (int i = n - 1; i >= 0; i--) {
+			for (int buy = 0; buy < 2; buy++) {
+				if (buy == 1)
+					dp[i][buy] = Math.max(-prices[i] + dp[i + 1][0], dp[i + 1][1]);
+				else
+					dp[i][buy] = Math.max(prices[i] - fee + dp[i + 1][1], dp[i + 1][0]);
+			}
+		}
+		return dp[0][1];
+		// return solve(prices,0,1,fee,dp);
+	}
+	//prob 39 
+	 public static int solve2(int []prices,int i,int buy,int [][]dp){
+	        if(i>=prices.length)return 0;
+	        if(dp[i][buy]!=-1)return dp[i][buy];
+	        
+	        if(buy==1){
+	            return dp[i][buy]=Math.max(-prices[i]+solve2(prices,i+1,0,dp),
+	                              solve2(prices,i+1,1,dp));
+	        }else {
+	            return dp[i][buy]=Math.max(prices[i]+solve2(prices,i+2,1,dp),
+	            		solve2(prices,i+1,0,dp));
+	        }
+	    }
+	 public static int stockProfit(int[] prices) {
+	        int n=prices.length;
+			int dp[][]=new int [n+2][2];
+	        
+	        for(int i=n-1;i>=0;i--){
+	            for(int buy=0;buy<2;buy++){
+	                 if(buy==1){
+	                     dp[i][buy]=Math.max(-prices[i]+dp[i+1][0],
+	                                  dp[i+1][1]);
+	        }    else {
+	                 dp[i][buy]=Math.max(prices[i]+dp[i+2][1],
+	                               dp[i+1][0]);
+	                    } 
+	          }
+	        }
+	        return dp[0][1];
+		}
+	 public static int stockProfit2(int[] prices) {
+	        int n=prices.length;
+	        int front1[]=new int [2];
+	        int front2[]=new int [2];
+	        int curr[]=new int[2];
+	        for(int i=n-1;i>=0;i--){
+	           
+	            //inner loop can be removed as one after another both below will execute
+	                curr[1]=Math.max(-prices[i]+front1[0],
+	                                  front1[1]);
+	          
+	                 curr[0]=Math.max(prices[i]+front2[1],
+	                               front1[0]);
+	                    
+	          
+	            front2=(int[])(front1.clone());;
+	            front1=(int[])(curr.clone());;
+	        
+	        }
+	        return curr[1];
+		}
+	//prob 37/38 also
+	public static int solve(ArrayList<Integer> prices, int i, int buy, int cap, int[][][] dp) {
+		if (cap == 0)
+			return 0;
+		if (i == prices.size()) {
+			return 0;
+		}
+		if (dp[i][buy][cap] != -1)
+			return dp[i][buy][cap];
+
+		if (buy == 1)
+			return dp[i][buy][cap] = Math.max(-prices.get(i) + solve(prices, i + 1, 0, cap, dp),
+					solve(prices, i + 1, 1, cap, dp));
+		else {
+			return dp[i][buy][cap] = Math.max(prices.get(i) + solve(prices, i + 1, 1, cap - 1, dp),
+					solve(prices, i + 1, 0, cap, dp));
+		}
+	}
+	
+	public static int maxProfit(ArrayList<Integer> prices, int n) {
+		int dp[][][]=new int[n+1][2][3];
+		//base case can be ignored as those are already zero in array
+     
+        for(int i=n-1;i>=0;i--){
+            for(int buy=0;buy<2;buy++){
+                  for(int cap=1;cap<3;cap++){
+                      if(buy==1)
+             dp[i][buy][cap]=Math.max(-prices.get(i)+dp[i+1][0][cap],
+                           dp[i+1][1][cap]);
+        else {
+             dp[i][buy][cap]=Math.max(prices.get(i)+dp[i+1][1][cap-1],
+                           dp[i+1][0][cap]);
+                }
+            }
+        }
+        }
+        return dp[0][1][2];
+          
+	}
+	//prob 36 
+	 public int fn(int index,int buy,int[] p,int[][] dp){
+	        if(index==p.length){
+	            return 0;
+	        }
+	        if(dp[index][buy]!=-1) return dp[index][buy];
+	        int profit=0;
+	        if(buy==1){
+	            profit=Math.max((-p[index]+fn(index+1,0,p,dp)),(0+fn(index+1,1,p,dp))); //buy case
+	        }
+	        //sell case
+	        else{
+	            profit=Math.max((p[index]+fn(index+1,1,p,dp)),(0+fn(index+1,0,p,dp)));
+	        }
+	        return dp[index][buy]=profit;
+	    }
+	    
+	    
+	//Tabulation
+	public int maxProfit2(int[] p) {
+	    int[][] dp=new int[p.length+1][2];
+	    dp[p.length][0]=0;
+	    dp[p.length][1]=0;
+
+	    for(int index=p.length-1;index>=0;index--){
+	        for(int buy=0;buy<=1;buy++){//sell and buy cases in this loop 
+	        int profit=0;
+	         if(buy==1){
+	            profit=Math.max((-p[index]+dp[index+1][0]),dp[index+1][1]); //buy case
+	         }
+	        //sell case
+	         else{
+	            profit=Math.max((p[index]+dp[index+1][1]),dp[index+1][0]);
+	         }
+	             dp[index][buy]=profit;
+	     }
+	 
+	   }
+	      return dp[0][1];
+	  }
+	    
+	//prob 35
+public static boolean wildcardMatching2(String p, String s) {
+		
+        int n=s.length();
+        int m=p.length();
+        boolean dp[][]=new boolean [n+1][m+1];
+        dp[0][0]=true;
+        
+        for(int i=1;i<n+1;i++){
+                dp[i][0]=false;
+        }
+        for(int j=1;j<m+1;j++){
+            boolean flag=true;
+              for(int k=1;k<=j;k++){
+                  if(p.charAt(k-1)!='*'){
+                    flag=false;
+                    break;
+                } 
+              }
+            dp[0][j]=flag;
+        }  
+        
+        
+        for(int i=1;i<n+1;i++){
+            for(int j=1;j<m+1;j++){
+                 char charS = s.charAt(i - 1);
+                    char charP = p.charAt(j - 1);
+                    if(charS==charP || charP=='?')
+                        dp[i][j]=dp[i-1][j-1];
+                    else if(charP=='*'){
+                        dp[i][j]=dp[i-1][j] || dp[i][j-1];
+                    }
+            }
+        }
+        return dp[n][m];
+        
+	}
+	 static boolean isAllStars(String S1, int i) {
+		    for (int j = 0; j <= i; j++) {
+		      if (S1.charAt(j) != '*')
+		        return false;
+		    }
+		    return true;
+		  }
+
+		  static int wildcardMatchingUtil(String S1, String S2, int i, int j, int[][] dp) {
+
+		    //Base Conditions
+		    if (i < 0 && j < 0)
+		      return 1;
+		    if (i < 0 && j >= 0)
+		      return 0;
+		    if (j < 0 && i >= 0)
+		      return isAllStars(S1, i) ? 1 : 0;
+
+		    if (dp[i][j] != -1) return dp[i][j];
+
+		    if (S1.charAt(i) == S2.charAt(j) || S1.charAt(i) == '?')
+		      return dp[i][j] = wildcardMatchingUtil(S1, S2, i - 1, j - 1, dp);
+
+		    else {
+		      if (S1.charAt(i) == '*')
+		        return (wildcardMatchingUtil(S1, S2, i - 1, j, dp) == 1 || wildcardMatchingUtil(S1, S2, i, j - 1, dp) == 1) ? 1 : 0;
+		      else return 0;
+		    }
+		  }
+
+		  static int wildcardMatching(String S1, String S2) {
+
+		    int n = S1.length();
+		    int m = S2.length();
+
+		    int dp[][] = new int[n][m];
+		    for (int row[]: dp)
+		      Arrays.fill(row, -1);
+		    return wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp);
+
+		  }
+	//prob 34
+	  public static int editDistance(String s1, String s2) {
+	        int n=s1.length();
+	        int m=s2.length();
+	        int prev[]=new int[m+1];
+	        int curr[]=new int[m+1];
+
+	        for(int j=0;j<m+1;j++)
+	            prev[j]=j;
+	        
+	        for(int i=1;i<n+1;i++){
+	            curr[0]=i;
+	            for(int j=1;j<m+1;j++){
+	                if(s1.charAt(i-1)==s2.charAt(j-1))
+	                   curr[j]=prev[j-1];
+	                else curr[j]=Math.min(Math.min(prev[j],curr[j-1]),
+	                                     prev[j-1])+1;
+	            }
+	             prev = (int[])(curr.clone());
+	        }
+	        return prev[m];
+	    }
+	
+	//prob 26 Print LCS SKIP 26 to 33
 	//prob 25
     public static int solve(String s,String t,int n,int m,int[][]dp){
         if(n<0 || m<0){
