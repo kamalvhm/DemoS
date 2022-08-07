@@ -2,6 +2,7 @@ package problems.dp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,192 @@ public class DpTakeYouF {
 		
 		System.out.print(Arrays.toString(aa));	
 	}
+	//prob 57
+	public static int countSquares(int n, int m, int[][] arr) {
+		int dp[][]=new int[n][m];
+        int total=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i==0 || j==0)
+                    dp[i][j]=arr[i][j];
+                else if(arr[i][j]==1){
+                    dp[i][j]=Math.min(Math.min(dp[i][j-1],dp[i-1][j])
+                                      ,dp[i-1][j-1])+1;
+                }
+                total+=dp[i][j];
+            }
+        }
+        return total;
+        
+	}
+	//prob 56
+	 public int maximalRectangle(char[][] matrix) {
+	        int maxArea=0;
+	        int n=matrix.length;
+	        int m=matrix[0].length;
+	        int heights[]=new int[m]; 
+	        
+	        for(int i=0;i<n;i++){
+	            for(int j=0;j<m;j++){
+	                if(matrix[i][j]=='1')
+	                    heights[j]++;
+	                else heights[j]=0;
+	            }
+	            //int area=largestRectangleArea(heights); uncomment and use largestRectangleArea this from Stack.java
+	            //maxArea=Math.max(area,maxArea);
+	        }
+	        return maxArea;
+	    }
+	//Prob 53
+	public static int palindromePartitioning(String str) {
+        int dp[][]=new int[str.length()][str.length()];
+        int n=str.length();
+
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<n;j++){
+                if(i>=j || isPalindrom(str,i,j)) continue;
+                 int min=Integer.MAX_VALUE;
+                    for(int k=i;k<j;k++){
+                        int part=dp[i][k]+dp[k+1][j]+1;
+                        min=Math.min(min,part);
+                    }
+                dp[i][j]=min;
+            }
+        }
+        return dp[0][n-1];
+    }
+	 public static boolean isPalindrom(String s,int i,int j){
+	        while(i<j){
+	            if(s.charAt(i++)!=s.charAt(j--))return false;
+	        }
+	        return true;
+	    }
+	//prob 52 skip 
+	//prob 51 Balloons
+	 public static int maxCoins(int nums[]) {
+	        int n=nums.length;
+	        int coinsNew[] = new int[n + 2];
+	       
+	        coinsNew[0]=coinsNew[n+1]=1;
+	        int index = 1;
+	        for(int coin: nums)
+	            coinsNew[index++] = coin;
+	        
+	        //n = coinsNew.length;
+	        int dp[][]=new int [n+1][n+1];
+	        for(int [] d:dp)
+	            Arrays.fill(d,-1);
+	           
+	        
+	        return solv(coinsNew,1,n,dp);
+	    }
+	    public static  int solv(int a[],int i,int j,int dp[][]){
+	            if(i>j)return 0;
+	            if(dp[i][j]!=-1)return dp[i][j];
+	            int max=Integer.MIN_VALUE;
+	            for(int k=i;k<=j;k++){
+	                int cost=a[i-1]*a[k]*a[j+1]+solv(a,i,k-1,dp)+
+	                    solv(a,k+1,j,dp);
+	                max=Math.max(max,cost);
+	            }
+	        dp[i][j]=max;
+	        return max;
+	    }
+	    //Tabulation 
+	    public int maxCoins2(int[] nums) {
+	        int n=nums.length;
+	         int coinsNew[] = new int[n + 2];
+	        
+	         coinsNew[0]=coinsNew[n+1]=1;
+	         int index = 1;
+	         for(int coin: nums)
+	             coinsNew[index++] = coin;
+	         
+	         int dp[][]=new int [n+2][n+2];
+	         
+	         for(int i=n;i>=1;i--){
+	             for(int j=1;j<=n;j++){
+	                 if(i>j)continue;
+	                  int max=Integer.MIN_VALUE;
+	                     for(int k=i;k<=j;k++){
+	                         int cost=coinsNew[i-1]*coinsNew[k]*coinsNew[j+1]
+	                             +dp[i][k-1]+
+	                             dp[k+1][j];
+	                         max=Math.max(max,cost);
+	                     }
+	                     dp[i][j]=max;
+	             }
+	         }
+	            
+	         return dp[1][n];
+	     }
+	//Prob 50 MIn cost to cut stick 
+	 public static int cost(int n, int c, int cuts[]) {
+	        HashMap<String ,Integer> dp=new HashMap<>();
+	        ArrayList<Integer> arr=new ArrayList<>();
+	        arr.add(0);
+	        for(int i=0;i<cuts.length;i++)
+	            arr.add(cuts[i]);
+	        arr.add(n);
+	        Collections.sort(arr);
+	        return minCost(arr,1,c,dp);
+	    }
+	    
+	     //Assuming cuts are sorted
+	    public static int minCost(ArrayList<Integer> cuts,int i,int j,HashMap<String,Integer> dp){
+	        if(i>j)return 0;
+	        String key=i+"-"+j;
+	        if(dp.containsKey(key))return dp.get(key);
+	        int min=Integer.MAX_VALUE;
+	        for(int k=i;k<=j;k++){
+	            int cost=minCost(cuts,i,k-1,dp)+minCost(cuts,k+1,j,dp)
+	                +cuts.get(j+1)-cuts.get(i-1);
+	            min=Math.min(min,cost);
+	        }
+	        dp.put(key,min);
+	        return min;
+	    }
+	    
+	    //Tabulation 
+	    public static int cost2(int n, int c, int cuts[]) {
+	        ArrayList<Integer> arr=new ArrayList<>();
+	        arr.add(0);  //added boundries
+	        for(int i=0;i<cuts.length;i++)
+	            arr.add(cuts[i]);
+	        arr.add(n);
+	        Collections.sort(arr);
+	        int dp[][]=new int[c+2][c+2];
+	        for(int i=c;i>=1;i--){
+	            for(int j=1;j<=c;j++){
+	                if(i>j)continue;
+	                int min=Integer.MAX_VALUE;
+	                for(int k=i;k<=j;k++){
+	                int cost=dp[i][k-1]+dp[k+1][j]
+	                    +arr.get(j+1)-arr.get(i-1);
+	                min=Math.min(min,cost);
+	                }
+	              dp[i][j]=min;
+	            }
+	        }
+	        return dp[1][c];
+	    }
+	//prob 48 MCM Tabulation 
+	public static int matrixMultiplication(int[] arr , int N) {
+		//skip BC as its already 0 in dp array
+        int dp[][]=new int[N+1][N+1];
+        for(int i=N-1;i>=1;i--){
+            for(int j=i+1;j<N;j++){
+                 int ans=Integer.MAX_VALUE;
+                 for(int k=i;k<j;k++){
+                    int temp=dp[i][k]+dp[k+1][j]+arr[i-1]*arr[k]*arr[j];
+                    ans=Math.min(ans,temp);
+                }
+                dp[i][j]=ans;
+            }
+        }
+        return dp[1][N-1];
+	}
+	//Prob 47 MCM skip ans 
 	//prob 46
 	public static int findNumberOfLIS(int n, int[] arr) {
 		int dp[]=new int [n]; 
