@@ -40,10 +40,10 @@ public class BsPractice {
 		//order agnostic array;
 		//floor of 5
 		int [] D= {1,2,3,4,8,9,10,10,12};
-		System.out.print(bsfloorofTarget(D,5));
+		System.out.println("FLOOR (4)"+bsfloorofTarget(D,5));
 		//NEXT Greater element than target
 		char [] e= {'a','b','e','g'};
-		System.out.print(nextGreaterElement(e,'f'));
+		System.out.print("NEXT (g)"+nextGreaterElement(e,'f'));
 		
 	}
 
@@ -53,19 +53,29 @@ public class BsPractice {
 	}
 	
 	public static int bsfirst(int [] a,int i) { 
+		
 		return -1;
 	}
 	
 	public static int bslast(int [] a,int i) {
+		
 		return -1;
 	}
 	
 	public static int findPeakElement(int[] a) {
+		
 		return -1;
 	}
 	
 	public static int arrayRotatedcount(int[] a) { 
-		return -1;
+		int l=0,r=a.length-1;
+		while(l<r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>a[a.length-1])
+				l=mid+1;
+			else r=mid;
+		}
+		return l;
 	}
 
 	public static int bsInfiniteArray(int[] a, int target) {
@@ -89,36 +99,43 @@ public class BsPractice {
 		int l=0,r=a.length-1;
 		int first=a[0];
 		while(l<=r) {
-			int mid=l+(r-l)/2; 
+			int mid=l+(r-l)/2;
 			int val=a[mid];
 			if(val==target)return mid;
 			boolean i_m_big=val>=first;
-			boolean targetBig=target>=first;
-			if(i_m_big==targetBig) {
-				if(val>target)
+			boolean target_big=target>=first;
+			if(i_m_big==target_big) {
+				if(target<val)
 					r=mid-1;
 				else l=mid+1;
 			}else if(i_m_big)
 				l=mid+1;
 			else r=mid-1;
+			
 		}
 		return -1;
 	}
 	
 	//floor =greatest element less then target if target not present
 	public static int bsfloorofTarget(int [] a,int target) {
-		int l=0,r=a.length-1;
-		int rs=0;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]==target)return mid;
-			if(a[mid]<target) {
-				rs=mid;
-				l=mid+1;
-			}else r=mid-1;
+		int left=0,right=a.length-1;
+		int res=-1;
+		while(left<=right) {
+			int mid =left+(right-left)/2;
+			int v =a[mid];
+			if(v==target) {
+				return a[mid];
+			}
+			else if(v<target) {
+				res= a[mid];
+				left=mid+1;
+			}else {
+				right=mid-1;
+			}
 		}
-		return rs;
+		return res;
 	}
+	
 	
 	public static char nextGreaterElement(char[] a, char target) {
 		int start=0,end=a.length-1;

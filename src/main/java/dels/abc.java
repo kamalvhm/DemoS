@@ -38,9 +38,12 @@ class abc {
 //		int a[]= {5,3,4};
 //		System.out.println("CANN:- "+bestSum2(a,7));
 
-		String a[]= {"ab","abc","cd","def","abcd","ef","c"};
-	System.out.println("CANN:- "+allConstruct2(a,"dbcdef"));
+		/*
+		 * String a[]= {"ab","abc","cd","def","abcd","ef","c"};
+		 * System.out.println("CANN:- "+allConstruct2(a,"dbcdef"));
+		 */
 
+		
 	}
 	
 

@@ -44,7 +44,7 @@ public class TestV7PCwithBlocking {
 		Random r=new Random();
 		while(true) {
 			//put also wait if Q is full both put and take mathod works in synk 
-			queue.put(r.nextInt(100));
+			queue.put(r.nextInt(100)); /****>>>>PUT METHOD normal add won't work<<<<*****/
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class TestV7PCwithBlocking {
 			
 			if(r.nextInt(10)==0) {
 				//if there is nothing in queue then take will wait until there is something 
-				Integer val=queue.take();
+				Integer val=queue.take();/****>>>>TAKE METHOD<<<<*****/
 				
 				System.out.println("Value :- " +val+" ; Queue Size :- "+queue.size());
 			}

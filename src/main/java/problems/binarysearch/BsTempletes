@@ -2,6 +2,7 @@ https://leetcode.com/explore/learn/card/binary-search/135/template-iii/936/
 
 Template #2 is an advanced form of Binary Search. It is used to search for an element or 
 condition which requires accessing the current index and its immediate right neighbor's index in the array.
+COMPARISON WITH DIFFRENT ELEMENT(IN ARRAY ONLY) OTHER THEN TARGET (TARGET NOT GIVEN IN THESE)
 
 int binarySearch(int[] nums, int target){
   if(nums == null || nums.length == 0)

@@ -100,7 +100,7 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {  //[4, 6, 3, 1]
-	
+		
 	}
 	
 	public static void insert(ArrayList<Integer> arr,int val) {// [3,4,6] ,1
@@ -108,16 +108,16 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void sortStack(Stack<Integer> st) { 
-	
+		
 	}
 
 
 	private static void insert1(Stack<Integer> st, int val) {
-
+		
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {// 1,3,4,6 
-	
+		
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {//4,3,1 ,6
 		
@@ -142,12 +142,11 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-	
+		
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
 		
-
 	}
 
 	private static void letterPermutation(String ip, String op) {
@@ -164,9 +163,6 @@ public class RecursionPracticeByVerma {
 	
 
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		if(list.size()==1)return list.get(0);
-		index=(index+k)%list.size();
-		list.remove(index);
-		return josephusProblem(list, k, index);
+		return -1;
 	}
 }

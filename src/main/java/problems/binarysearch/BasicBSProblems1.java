@@ -171,7 +171,7 @@ public class BasicBSProblems1 {
 	        return -1;
 	}
 	
-	//floor =greatest element less then target if taget not present
+	//floor =greatest element less then target if target not present
 	public static int bsfloorofTarget(int [] a,int target) {
 		int left=0,right=a.length-1;
 		int res=-1;

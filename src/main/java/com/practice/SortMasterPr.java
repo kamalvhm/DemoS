@@ -7,15 +7,12 @@ public class SortMasterPr {
 
 	private static void selectionSort(int[] a) 	{
 	 int n=a.length;
-	 
 	}
 	private static void bubbleSort(int[] a) {
 		int n=a.length;
-		
 	}
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
-		
 	}
 	
 	private static int[] mergeSort(int[] a) {
