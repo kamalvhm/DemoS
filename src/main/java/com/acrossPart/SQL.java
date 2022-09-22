@@ -1,20 +1,36 @@
 package com.acrossPart;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+
 public class SQL {
 	/**
 	 * Tip - if consecutive in quetion think of self join or Lead lag 
 	 * SQL study :-https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB
 	 * Question :-https://www.youtube.com/watch?v=fvPddKyHxpQ&list=PL6n9fhu94yhXcztdLO7i6mdyaegC8CJwR
 	 * SUBQUERIES :-https://www.youtube.com/watch?v=0BW2Pi_HGYs (TechLake)
+	 * CO-related :-https://www.youtube.com/watch?v=pCx94Bzepsw&t=315s
 	 * 
 	 * WINDOW FUNCTIONS:-https://timepasstechies.com/window-functions-in-spark-sql-and-dataframe-ranking-functionsanalytic-functions-and-aggregate-function/
 	 */
 	
+	public static void main(String[] args) {
+		Logger.getLogger("org.apache").setLevel(Level.WARN);
+				
+		SparkSession spark =SparkSession.builder().appName("wc").master("local").getOrCreate();
+		
+		Dataset<Row> df=spark.read().option("header", true).option("inferschema",true).csv("D:/vhm/DemoS/src/main/resources/exam/employee.csv");
+		
+		df.show();
+	}
 	
 	
 //DATA ENGINEER DOC :-https://docs.google.com/spreadsheets/d/1djhTq4vD72lzuLY2rCMOkkSuNG2rRf_C5PwNMjcIAMk/edit#gid=859146723
 	//https://towardsdatascience.com/how-to-prepare-for-your-data-engineering-interview-d245519da45c
-	public static void main(String[] args) {
+	public static void mainOLd(String[] args) {
 		//select distinct CITY from STATION where LOWER(SUBSTR(CITY,LENGTH(CITY),1)) NOT IN ('a','e','i','o','u') ;
 		String cityWithNoFirstVOwel="Select DISTINCT city from STATION where LOWER(SUBSTR(CITY,0,1)) NOT IN ('a','e','i','o','u');";//orcle
 		//sAME fro mYQL select DISTINCT CITY from STATION where CITY NOT REGEXP '^[aeiou]'; // that do not start with vowels. 
@@ -242,7 +258,7 @@ public class SQL {
 		 */
 		
 		/************************************************************JOINS******************************************************
-			GROUP BY - In Employee Table we want sum of salary by City 
+			V-12:- GROUP BY - In Employee Table we want sum of salary by City 
 			
 			CREATE TABLE Employee2 (  
 				name  VARCHAR2(50 BYTE) NOT NULL,  
@@ -252,34 +268,34 @@ public class SQL {
 				salary NUMBER NOT NULL  
 				); 
 				
-				INSERT INTO Employee2 (name,gender,salary,city,dept_id)   
-				VALUES ('Mark','Male',1000,'London',1);
-			    VALUES ('Jhon','Male',2000,'London',2);
-			    VALUES ('Mira','Female',3000,'New York',1)
-				VALUES ('Sara','Female',4000,'New York',2)
-				VALUES ('Mark','Male',1400,'Delhi',3);
-				VALUES ('Miky','Male',1400,'Delhi');
+				INSERT INTO Employee2 (name,gender,salary,city,dept_id)	VALUES ('Mark','Male',1000,'London',1);
+				INSERT INTO Employee2 (name,gender,salary,city,dept_id) VALUES ('Jhon','Male',2000,'London',2);
+				INSERT INTO Employee2 (name,gender,salary,city,dept_id)	VALUES ('Mira','Female',3000,'New York',1);
+				INSERT INTO Employee2 (name,gender,salary,city,dept_id)	VALUES ('Sara','Female',4000,'New York',2);
+		        INSERT INTO Employee2 (name,gender,salary,city,dept_id)	VALUES ('Mark','Male',1400,'Delhi',3);
+		        INSERT INTO Employee2 (name,gender,salary,city,dept_id)	VALUES ('Miky','Male',1400,'Delhi',null);
 
 				
 			select city ,gender ,sum(salary) from Employee2 
 			group by gender,city
 			
 			--To filter Groupby we use having clause DIFF between Having and where is that in where you can not use agg functions
+			also in having class records are fetched then filtered but in where it will fetch only filtered records
 			
 			select city ,gender ,sum(salary) from Employee2 
 			group by gender,city
 			having gender ='Male'
-			
+			-----------------------------------------JOINs---------------------------------
 			CREATE TABLE Department (  
 				id NUMBER NOT NULL , 
         		name VARCHAR2(10 BYTE) NOT NULL,
 				head VARCHAR2(10 BYTE) NOT NULL 
 				); 
-			INSERT INTO Department (id,name,head)   
-					VALUES (1,'IT','A')
-					VALUES (2,'PayRoll','B')
-				    VALUES (3,'HR','C')
-	                VALUES (4,'OTHER','C')
+				
+			INSERT INTO Department (id,name,head) VALUES (1,'IT','A');
+			INSERT INTO Department (id,name,head) VALUES (2,'PayRoll','B');
+			INSERT INTO Department (id,name,head) VALUES (3,'HR','C');
+			INSERT INTO Department (id,name,head)  VALUES (4,'OTHER','C');
 		
 		select e.name as empName ,gender,salary, d.name as deptName from employee2 e 
 		join department d on e.dept_id=d.id
@@ -292,7 +308,7 @@ public class SQL {
 			select e.name as empName ,gender,salary,e.city, d.name as deptName from employee2 e 
 			cross join department d
 		
-		-----------------------------------------ADVANCE JOIN---------------------------------if we need to retrive only non matching rows 
+		-----------------------------------------ADVANCE JOIN---------------------------------if we need to retrieve only non matching rows 
 		--NON MATCHING FROM LEFT TABLE (LEFT JOIN AND WHERE CONDITION)
 		    select e.name as empName ,gender,salary, d.name as deptName from employee2 e 
 			left join department d on e.dept_id=d.id
@@ -308,6 +324,21 @@ public class SQL {
 			full join department d on e.dept_id=d.id
 			where e.dept_id is null or 
 			d.id is null
+			
+			___________________SELF JOINS__________________________________
+			CREATE TABLE EMPLOYEES
+			   (	EMP_ID NUMBER, 
+					EMP_NAME VARCHAR2(50 BYTE), 
+					MANAGERID NUMBER
+			   )
+			   
+			  INSERT INTO EMPLOYEES (EMP_ID,EMP_NAME,MANAGERID) VALUES (1,'Mike',3);
+			  INSERT INTO EMPLOYEES (EMP_ID,EMP_NAME,MANAGERID) VALUES (2,'Mike',1);
+			  INSERT INTO EMPLOYEES (EMP_ID,EMP_NAME,MANAGERID) VALUES (3,'Todd',null);
+			  INSERT INTO EMPLOYEES (EMP_ID,EMP_NAME,MANAGERID) VALUES (4,'Ben',1);
+			  INSERT INTO EMPLOYEES (EMP_ID,EMP_NAME,MANAGERID) VALUES (5,'Sam',1);
+
+
 		
 		*/ 
 	}

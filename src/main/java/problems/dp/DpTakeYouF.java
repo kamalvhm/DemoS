@@ -1297,6 +1297,28 @@ public static boolean wildcardMatching2(String p, String s) {
 	             mini=Math.min(mini,prev[j]);
 	         return mini;
 	     }
+	    
+//	    public static int getMaxPathSum(int[][] matrix) {
+//	        int n=matrix.length;
+//	        int m=matrix[0].length;
+//			int max=Integer.MIN_VALUE;
+//	        int dp[][]=new int[n][m];
+//	        for(int d[]:dp)
+//	            Arrays.fill(d,-1);
+//	        for(int i=0;i<m;i++){
+//	            max=Math.max(max,solve2(matrix,n-1,i,dp));
+//	        }
+//	        return max;
+//		}
+//	    public static int solve2(int [][]a,int i,int j,int dp[][]){
+//	        if(j<0 || j>=a[0].length)return (int)Math.pow(-10,9);;
+//	        if(i==0)return a[0][j];
+//	        if(dp[i][j]!=-1)return dp[i][j];
+//	        int topLeft=solve2(a,i-1,j-1,dp)+a[i][j];
+//	        int top=solve2(a,i-1,j,dp)+a[i][j];
+//	        int topRight=solve2(a,i-1,j+1,dp)+a[i][j];
+//	        return dp[i][j]=Math.max(topLeft,Math.max(top,topRight));
+//	    }
 	//prob 11 n is 'tri.size()' https://leetcode.com/problems/triangle/submissions/ 
 	  public int solveTriangle(List<List<Integer>> tri,int i,int j,int n){
 	        if(i==n-1)return tri.get(i).get(j);//if reached last row that means we already selected last row col so return same 
@@ -1315,6 +1337,22 @@ public static boolean wildcardMatching2(String p, String s) {
 	        }
 	        return dp[0][0];
 	    }
+//	   public static int minimumPathSum(int[][] triangle, int n) {
+//	       int m=triangle[n-1].length;
+//	       int dp[][]=new int [n][m];
+//	        for(int i=n-1;i>=0;i--){
+//	            for(int j=triangle[i].length-1;j>=0;j--){
+//	                if(i==n-1){
+//	                    dp[i][j]=triangle[i][j];
+//	                }else {
+//	                      int down=triangle[i][j]+dp[i+1][j];
+//	                      int dia=triangle[i][j]+dp[i+1][j+1];
+//	                      dp[i][j]=Math.min(down,dia);
+//	                }
+//	            }
+//	        }
+//	        return dp[0][0];
+//	    }
 	  //Space Optimized but not running well
 	   public int minimumTotal(List<List<Integer>> triangle) {
 	        int n=triangle.size();
@@ -1382,6 +1420,20 @@ public static boolean wildcardMatching2(String p, String s) {
 		  return dp[i][j] = up+left;
 		  
 		}
+	
+//	 static int paths(int i, int j, ArrayList<ArrayList<Integer>> mat, int n, int m) {
+//	        // Base case of first cell.
+//	        if (i == 0 && j == 0) {
+//	            return 1;
+//	        }
+//	        // If the cell is onvalid return 0.
+//	        if (i < 0 || j < 0 || j >= m || i >= n || mat.get(i).get(j) == -1) {
+//	            return 0;
+//	        }
+//	        int mod = 1000000007;
+//	        // Recursively call the function for previous cells.
+//	        return (paths(i - 1, j, mat, n, m) + paths(i, j - 1, mat, n, m)) % mod;
+//	    }
 	
 	 public int uniquePathsWithObstacles(int[][] grid) {
          int m = grid.length; 
@@ -1540,7 +1592,25 @@ public static boolean wildcardMatching2(String p, String s) {
 		}
 		return prev;
 	}
-
+	
+	 public static int solve(ArrayList<Integer> nums,int i,int dp[]){
+	        if(i<0)return 0;
+	        if(dp[i]!=-1)return dp[i];
+	        int pick=nums.get(i)+solve(nums,i-2,dp);
+	        int nonPick=solve(nums,i-1,dp);
+	        return dp[i]=Math.max(pick,nonPick);
+	    }
+	public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+		int n=nums.size();
+        int dp[]=new int[n+1];
+        dp[0]=nums.get(0);
+        for(int i=1;i<n;i++){
+            int   pick=nums.get(i)+((i>1)?dp[i-2]:0);
+            int nonPick=dp[i-1];
+            dp[i]=Math.max(pick,nonPick);
+        }
+        return dp[n-1];
+	}
 	
 	//Prob 4
 	private static int frogJumpWithKJumps(int[] a, int i,int k, int[] dp) {

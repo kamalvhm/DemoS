@@ -21,8 +21,8 @@ public class UdmDataset2 {
 	public static void main(String[] args) { 
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 
-		System.setProperty("hadoop.home.dir",
-				"C:\\Users\\z00427hs\\Downloads\\winutils-master\\winutils-master\\hadoop-3.0.0");
+//		System.setProperty("hadoop.home.dir",
+//				"C:\\Users\\z00427hs\\Downloads\\winutils-master\\winutils-master\\hadoop-3.0.0");
 
 		SparkSession spark =SparkSession.builder().appName("APP").master("local[*]").config("spark.sql.warehouse.dir","file:///c:/tmp/").getOrCreate();
 

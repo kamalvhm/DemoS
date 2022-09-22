@@ -3,16 +3,20 @@ package com.practice;
 import java.util.Arrays;
 import java.util.Random;
 
+import scala.annotation.bridge;
+
 public class SortMasterPr {
 
 	private static void selectionSort(int[] a) 	{
 	 int n=a.length;
+	
 	}
 	private static void bubbleSort(int[] a) {
 		int n=a.length;
 	}
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
+	
 	}
 	
 	private static int[] mergeSort(int[] a) {
@@ -21,15 +25,28 @@ public class SortMasterPr {
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {
+		
 		return a;
 	}
 	
 	private static void quickSort(int[] a, int start, int end) {
-		
+		if(start>=end)return;
+		int pivot=partition(a, start, end);
+		quickSort(a, start, pivot-1);
+		quickSort(a, pivot+1, end);
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		return -1;
+		int pivot=a[end];
+		int pIndex=start;
+		for(int i=start;i<end;i++) {
+			if(a[i]<=pivot) {
+				swap(a, pIndex, i);
+				pIndex++;
+			}
+		}
+		swap(a, pIndex, end);
+		return pIndex;
 	}
 	private static int randomized(int[] a, int start, int end) {
 		Random r=new Random();

@@ -140,6 +140,24 @@ public class MathRelated {
 	        }
 	        return count+longDivide(lDividend-sum,ldivisor);
 	    }
-
-
+	    //326. Power of Three
+	    /**
+	     * Ex 1) 27 => 27/3=9[Remainder 0] --> 9/3 =3[0] --> 3/3 --> 1[0]
+	     * 	  2) 10 => 10/3=3[1]
+	     */
+	    public boolean isPowerOfThree(int n) {
+	        
+	        // Base Cases
+	        if(n == 0){
+	            return false;
+	        }
+	        if(n == 1){
+	            return true;
+	        }
+	        
+	        // Check remainder is 0 or not when divided by 3, and recursion call.
+	        return (n % 3 == 0) && (isPowerOfThree(n/3));
+	        //OR      return (Math.log10(n) / Math.log10(3)) % 1 == 0;
+	    }
+	    
 }

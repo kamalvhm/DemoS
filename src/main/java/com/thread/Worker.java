@@ -6,6 +6,9 @@ import java.util.List;
 import scala.util.Random;
 
 public class Worker {
+	//RUN WITHOUT LOCK AND WITH LOCKS 
+	//if we run without synk then value in list will be added incorrectly if we use synk keyword then values will be coorect but both will not work 
+	//parallel as one thread is exec stageOne then other can add to list2 so use synk block instead
 	
 	private Random r=new Random();
 	private List<Integer> list1=new ArrayList<>();

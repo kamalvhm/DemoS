@@ -34,19 +34,27 @@ public class WindowFunctions {
 		//df.createOrReplaceTempView("result");
 		
 		/** SINGLE VALUE FROM TABLE  */
+		
 		//df=spark.sql("select salary from result where department ='WATER' and ranks =1");
 		/** ROW NUMBER */
+		
 		/*df=spark.sql("select * ,row_number() over (partition By department order by salary desc) as ranks "
 				+ "from Emp");*/
+		
 		/**PERCENT_RANK() – Calculates the relative rank of a row within a group of rows. 
 		 *NTILE() – The ntile function takes an integer as an input and divides the records of the result set into that number of groups.
 		 * (NTile will in below queries based on salry in two parts 0 to 400 and 400+ to Rest) */
+		
 		/*	df=spark.sql("select * , percent_rank () over (order by salary desc) as percent_ranks, "
 				+ " ntile(2) over ( order by salary desc) as nTiles from Emp ");*/
+		
 		/** CUME_DIST() :-Calculates the cumulative distribution of a value in a group of values . 
 		 	It computes the relative position of a specified value in a group of values..*/
+		
 		/*df=spark.sql("select * , cume_dist() over (order by salary desc) as CUME_DISTs " + " from Emp ");*/
+		
 		/** FIRST VALUE */
+		
 		/*df=spark.sql("select * ,first_value(salary) over (partition By department order by salary desc"
 				+ " ) as first_value from Emp");*/
 		
