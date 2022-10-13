@@ -38,7 +38,70 @@
 		     <version>0.6.0</version>
 		 </dependency>
 		 
-				
-		 
+		 <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-yarn -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-yarn_2.12</artifactId>
+    <version>3.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-repl -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-repl_2.12</artifactId>
+    <version>3.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-network-yarn -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-network-yarn_2.12</artifactId>
+    <version>3.0.1</version>
+    <scope>test</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-mllib_2.12</artifactId>
+    <version>3.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib-local -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-mllib-local_2.12</artifactId>
+    <version>3.0.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-hive_2.12</artifactId>
+    <version>3.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+<dependency>
+    <groupId>org.apache.zookeeper</groupId>
+    <artifactId>zookeeper</artifactId>
+    <version>3.8.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper-jute -->
+<dependency>
+    <groupId>org.apache.zookeeper</groupId>
+    <artifactId>zookeeper-jute</artifactId>
+    <version>3.8.0</version>
+</dependency>
+
+
+
+
     </dependencies>
 </project>

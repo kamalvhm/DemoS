@@ -716,7 +716,15 @@ public static boolean wildcardMatching2(String p, String s) {
 	        }
 	        return prev[m];
 	    }
-	
+	  public static int solve4(String s,String t,int n,int m,int [][]dp){
+	        if(m==0)return n;//no of char remaining in s 
+	        if(n==0)return m;//Similarly no of char remaining in t 
+	        if(dp[n][m]!=-1)return dp[n][m];
+	        if(s.charAt(n-1)==t.charAt(m-1))
+	            return dp[n][m]=solve4(s,t,n-1,m-1,dp);
+	        else return dp[n][m]=Math.min(Math.min(solve4(s,t,n-1,m,dp),solve4(s,t,n,m-1,dp)),
+	                            solve(s,t,n-1,m-1,dp))+1;
+	    }
 	//prob 26 Print LCS SKIP 26 to 33
 	//prob 25
     public static int solve(String s,String t,int n,int m,int[][]dp){
