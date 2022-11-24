@@ -105,7 +105,7 @@ public class BasicBSProblems1 {
 			return -1;
 		}*/
 	 
-	 //Templet 2 
+	 //Templet 2 :- target not given and we have to compare imidiet right or last element
 	 public static int arrayRotatedcount(int[] nums) {
 		 	int left = 0, right = nums.length - 1;
 	        while (left < right) {
@@ -170,7 +170,7 @@ public class BasicBSProblems1 {
 	        }
 	        return -1;
 	}
-	
+	//ALWAYs think about condition by putting MID in True element (where condition satisfy) then think where to go from there left or right
 	//floor =greatest element less then target if target not present
 	public static int bsfloorofTarget(int [] a,int target) {
 		int left=0,right=a.length-1;
@@ -181,7 +181,10 @@ public class BasicBSProblems1 {
 			if(v==target) {
 				return a[mid];
 			}
-			else if(v<target) {
+			else if(v<target) { //IN LOWER/UPPER BOUND PROBLEM this condition try to think to include potential ans
+				//for example in arr 1 2 3 4 8 10 10 12 19 mid is 8  so target 5 is smaller then 8 but for lowerbound we are 
+				//finding last value from left True if target is not there so think apporching this condition from left 
+				// which is what if value is smaller then target then it potential and we have to look for right side for next best
 				res= a[mid];
 				left=mid+1;
 			}else {

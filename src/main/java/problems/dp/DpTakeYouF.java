@@ -310,7 +310,7 @@ public class DpTakeYouF {
         int first=0;
         int secound=0;
         while(first<s1.length()){//s1 is bigger by then
-            if(s1.charAt(first)==s2.charAt(secound)){
+            if(secound<s2.length() && s1.charAt(first)==s2.charAt(secound)){
                 first++;
                 secound++;
             }else {
@@ -318,24 +318,57 @@ public class DpTakeYouF {
             }
         }
         if(first==s1.length() && secound==s2.length())return true;
-         return false;
+        else return false;
     }
-	////prob 43 LIC bineary search
+    
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        Arrays.sort(nums);
+        int n=nums.length;
+        int dp[]=new int[n];
+        int hash[]=new int[n];
+         //Arrays.fill(dp,1);
+         //Arrays.fill(hash,1);
+        int maxi=1;
+        int lastIndex=0;
+         for(int i=0; i<n; i++){
+	        
+	        hash[i] = i; // initializing with current index
+	        for(int prev_index = 0; prev_index <i; prev_index ++){
+	            if(nums[i]%nums[prev_index]==0 && (1 + dp[prev_index]) > dp[i]){
+	                dp[i] = 1 + dp[prev_index];
+	                hash[i] = prev_index;
+	            }
+	        }
+             if(dp[i]>=maxi){
+                 maxi=dp[i];
+                 lastIndex=i;
+             }
+	    }
+        List<Integer> ans=new ArrayList<>();
+        ans.add(nums[lastIndex]);
+        
+        while(hash[lastIndex]!=lastIndex){
+            lastIndex=hash[lastIndex];
+            ans.add(nums[lastIndex]);
+        }
+        return ans;
+    }
+	////prob 43 LIC bineary search which will only give max length not complete LIS
 	public static int longestIncreasingSubsequence(int arr[]) {
 		ArrayList<Integer> temp=new ArrayList<>();
         temp.add(arr[0]);
         int len=1;
         for(int i=1;i<arr.length;i++){
-            if(arr[i]>temp.get(temp.size()-1)){
+            if(arr[i]>temp.get(temp.size()-1)){//if current is greater then last in array then simply add it
                   temp.add(arr[i]);
                   len++;
             }
-            else {
+            else { //else store it in its lower bound currect possition
                 int ind=lowerBound(temp,arr[i]);
-                temp.add(ind,arr[i]);
+                temp.set(ind,arr[i]);
             }
         }
-        return len;
+        return temp.size();
 	}
     
     public static int lowerBound(ArrayList<Integer> a,int t){
@@ -368,6 +401,7 @@ public class DpTakeYouF {
 	    }
 	    return dp[0][0];
 	}
+
 	static int longestIncreasingSubsequence2(int arr[], int n){
 	    int next[]=new int[n+1];
 	    int cur[]=new int[n+1];
@@ -384,7 +418,7 @@ public class DpTakeYouF {
 	    }
 	    return cur[0];
 	}
-	//Printing 
+	//Printing LIS TC:-O(n2) SC:-O(N)
 	static int longestIncreasingSubsequence3(int arr[], int n){
 	    
 	    int[] dp=new int[n];
@@ -453,6 +487,21 @@ public class DpTakeYouF {
 	    
 	    return dp[ind][prev_index+1] = Math.max(notTake,take);
 	}
+	//Tabulation of LIS
+	  public int lengthOfLIS(int[] nums) {
+	        int n=nums.length;
+	        int dp[][]=new int[n+1][n+1];
+
+	        for(int ind=n-1;ind>=0;ind--){
+	            for(int prev=ind-1;prev>=-1;prev--){
+	                    int len=dp[ind+1][prev+1];//due to cordinate shift +1 for prev
+	                    if(prev==-1 || nums[ind]>nums[prev])//don't do the cordinate shif here !!!
+	                        len=Math.max(len,1+dp[ind+1][ind+1]);
+	                     dp[ind][prev+1]=len;
+	            }
+	        }
+	        return dp[0][0];
+	    }
 	//prob 40
 	static int getAns(int[] Arr, int ind, int buy, int n, int fee, int[][] dp ){
 	    if(ind==n) return 0; //base case
@@ -575,6 +624,23 @@ public class DpTakeYouF {
         return dp[0][1][2];
           
 	}
+	
+	//Alternate solution 
+	 public int maxProfit(int k, int[] prices) {
+	        int n=prices.length;
+	       //return solve(prices,0,0,k); 
+	        int dp[][]=new int[n+1][2*k+1];
+	        for(int i=n-1;i>=0;i--){
+	            for(int transNum=2*k-1;transNum>=0;transNum--){
+	                if(transNum%2==0)
+	                    dp[i][transNum]=Math.max(-prices[i]+dp[i+1][transNum+1],
+	                                   dp[i+1][transNum]);
+	                else  dp[i][transNum]=Math.max(prices[i]+dp[i+1][transNum+1],
+	                                    dp[i+1][transNum]);
+	          }
+	        }
+	        return dp[0][0];
+	    }
 	//prob 36 
 	 public int fn(int index,int buy,int[] p,int[][] dp){
 	        if(index==p.length){

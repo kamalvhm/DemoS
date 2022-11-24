@@ -8,15 +8,13 @@ import scala.annotation.bridge;
 public class SortMasterPr {
 
 	private static void selectionSort(int[] a) 	{
-	 int n=a.length;
-	
+		int n=a.length;
 	}
 	private static void bubbleSort(int[] a) {
 		int n=a.length;
 	}
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
-	
 	}
 	
 	private static int[] mergeSort(int[] a) {
@@ -25,35 +23,18 @@ public class SortMasterPr {
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {
-		
 		return a;
 	}
 	
 	private static void quickSort(int[] a, int start, int end) {
-		if(start>=end)return;
-		int pivot=partition(a, start, end);
-		quickSort(a, start, pivot-1);
-		quickSort(a, pivot+1, end);
+		
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		int pivot=a[end];
-		int pIndex=start;
-		for(int i=start;i<end;i++) {
-			if(a[i]<=pivot) {
-				swap(a, pIndex, i);
-				pIndex++;
-			}
-		}
-		swap(a, pIndex, end);
-		return pIndex;
+		return -1;
 	}
 	private static int randomized(int[] a, int start, int end) {
-		Random r=new Random();
-		int val=r.nextInt(end-start)+start;
-		swap(a, end, val);
-		
-		return partition(a, start, end);
+		return -1;
 	}
 	private static void swap(int [] a,int i,int j) {
 		int tmp=a[i];
@@ -108,24 +89,11 @@ public class SortMasterPr {
 	}
 	
 	public static void sort(int a[],int b[]) {
-	  int j=0;
-	  for(int i=0;i<a.length;i++) {
-		  if(a[i]>b[j]) {
-			  swapAndInsersion(a, b, i, j);
-		  }
-	  }
+		
 	}
 	
 	public static void swapAndInsersion(int a[],int b[],int i,int j) {
-		int value=a[i];
-		a[i]=b[j];
-		b[j]=value;
-		int hole=j;
-		while(hole<b.length-1 && b[hole+1]<value) {
-			b[hole]=b[hole+1];
-			hole++;
-		}
-		b[hole]=value;
+	  
 		
 	}
 	

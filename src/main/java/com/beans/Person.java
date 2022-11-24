@@ -8,8 +8,17 @@ public class Person implements Serializable {
     private int age;
     private int id;
 	private Date date;
+	
+	public Person() {}
 
-    public int getId() {
+    public Person(String name, int age, int id) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.id = id;
+	}
+
+	public int getId() {
 		return id;
 	}
 
@@ -41,4 +50,11 @@ public class Person implements Serializable {
   	public void setDate(Date date) {
   		this.date = date;
   	}
+
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + ", id=" + id + ", date=" + date + "]";
+	}
+  	
+  	
   }

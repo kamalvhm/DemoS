@@ -27,7 +27,7 @@ public class TreeStCustomSort {
 		t2.add("bikoy");
 		t2.add("roli");
 
-		//System.out.print(t2);
+		System.out.print(t2);
 		
 		
 		TreeSet<StringBuffer> t3=new TreeSet<StringBuffer>(new Comparator<StringBuffer>() {
