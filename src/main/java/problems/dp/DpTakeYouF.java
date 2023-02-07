@@ -1292,7 +1292,7 @@ public static boolean wildcardMatching2(String p, String s) {
 		      }
 		    }
 
-		    return dp[0][0][m - 1];
+		    return dp[0][0][m - 1];//0th row alice starts from 0 and bob witn m-1
 	}
 
 	
@@ -1544,6 +1544,19 @@ public static boolean wildcardMatching2(String p, String s) {
 	            }
 	        }
 	        return dp[m][n];
+	        //OR THIS BELOW ONE WHERE WE TAKE CARE OF BC IN LOOP IT SELF
+//	        for(int i=0;i<m;i++){
+//	            for(int j=0;j<n;j++){
+//	                if(i==0 && j==0) dp[i][j]=1;
+//	                else {
+//	                    int val1=i-1>=0?dp[i-1][j]:0;
+//	                     int val2=j-1>=0?dp[i][j-1]:0;
+//	                     dp[i][j]=val1+val2;
+//	                 }
+//	                 
+//	            }
+//	        } 
+//	        return dp[m-1][n-1];
 	    }
 	 
 	 static int uniquePathsSpace(int m, int n){
@@ -1619,6 +1632,80 @@ public static boolean wildcardMatching2(String p, String s) {
 
 	        return dp[n - 1][3];
 	    }
+	  //This version is for when BC is idx<0 then return 0; so idx/day loop runs from 0 to n-1
+	  public static int ninjaTraining(int n, int points[][]) {
+	      int dp[][]=new int[n][4];
+
+	        for(int idx=0;idx<n;idx++){
+	            for(int last=0;last<=3;last++){
+	                    int max=0;
+	                    for(int i=0;i<3;i++){
+	                        if(last!=i){
+	                                int point=points[idx][i]+(idx-1>=0?dp[idx-1][i]:0);
+	                                max=Math.max(max,point);
+
+	                        }
+	                    }
+	                     dp[idx][last]=max;
+	            }
+	        }
+	        return dp[n-1][3];
+	   
+	    }
+	  public static int ninjaTrainingSpaceOPT(int n, int points[][]) {
+	        int prev[]=new int[4];
+	        for(int idx=0;idx<n;idx++){
+	            int temp[]=new int[4];
+	            for(int last=0;last<=3;last++){
+	                    for(int i=0;i<3;i++){
+	                        if(last!=i){
+	                                int point=points[idx][i]+(idx-1>=0?prev[i]:0);
+	                                temp[last]=Math.max(temp[last],point);
+	                        }
+	                    }
+	            }
+	            prev=temp;
+	        }
+	        return prev[3];
+	    }
+//	Call from main :-=  for(int i=0;i<m;i++){
+//          max=Math.max(max,solve(matrix,n-1,i,dp));
+//      }
+	  public static int solve2(int [][]a,int i,int j,int dp[][]){
+	        if(j<0 || j>=a[0].length)return (int)Math.pow(-10,9);;
+	        if(i==0)return a[0][j];
+	        if(dp[i][j]!=-1)return dp[i][j];
+	        int topLeft=solve2(a,i-1,j-1,dp)+a[i][j];
+	        int top=solve2(a,i-1,j,dp)+a[i][j];
+	        int topRight=solve2(a,i-1,j+1,dp)+a[i][j];
+	        return dp[i][j]=Math.max(topLeft,Math.max(top,topRight));
+	    }
+	  public static int getMaxPathSum(int[][] matrix) {
+			int n=matrix.length;
+			int m=matrix[0].length;
+			int prev[]=new int[m+1];
+
+			for(int i=0;i<m;i++){
+				prev[i]=matrix[0][i];
+			}
+
+				int max=Integer.MIN_VALUE;
+				for(int r=1;r<n;r++){
+					int curr[]=new int[m+1];
+					for(int c=0;c<m;c++){
+						int down=prev[c];
+						int left=c-1>=0?prev[c-1]:Integer.MIN_VALUE;
+						int right=c+1<m?prev[c+1]:Integer.MIN_VALUE;
+						curr[c]=Math.max(Math.max(down,right),left)+matrix[r][c];
+					}
+					prev=curr;
+				}
+				for(int i=0;i<m;i++){
+			 		max=Math.max(max,prev[i]);
+				}
+				
+			return max;	
+		}
 	//prob 6 circler houses
 	  public int CirculerRob(int[] nums) {
 	        if(nums.length==0)return 0;

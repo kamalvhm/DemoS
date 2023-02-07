@@ -31,5 +31,6 @@ public class LambdaV1to8 {
 		public int add(int a,int b);
 	}
 	
+	
 
 }

@@ -18,7 +18,6 @@ public class SortMasterPr {
 	}
 	
 	private static int[] mergeSort(int[] a) {
-		int n=a.length;
 		return a;
 	}
 	
@@ -27,11 +26,23 @@ public class SortMasterPr {
 	}
 	
 	private static void quickSort(int[] a, int start, int end) {
-		
+		if(start>=end)return;
+		int pivot=partition(a, start, end);
+		quickSort(a, start, pivot-1);
+		quickSort(a, pivot+1, end);
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		return -1;
+		int pivot=a[end];
+		int pIndex=start;
+		for(int i=start;i<end;i++) {
+			if(a[i]<pivot) {
+				swap(a, pIndex, i);
+				pIndex++;
+			}
+		} 
+		swap(a, pIndex, end);
+		return pIndex;
 	}
 	private static int randomized(int[] a, int start, int end) {
 		return -1;

@@ -96,165 +96,80 @@ public class RecursionPracticeByVerma {
 				
 	}
 	public static void print(int n) {//print 10
-		if(n==0)return;
-		print(n-1);
-		System.out.print(n+" ");
+		
 		
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {  //[4, 6, 3, 1]
-		if(list.isEmpty())return;
-		int val=list.remove(list.size()-1);
-		sortArraList(list);
-		insert(list, val);
+		
 	}
 	
 	public static void insert(ArrayList<Integer> arr,int val) {// [3,4,6] ,1
-		if(arr.isEmpty() || arr.get(arr.size()-1)<val) {
-			arr.add(val);
-			return;
-		}
-		int temp=arr.remove(arr.size()-1);
-		insert(arr, val);
-		arr.add(temp);
+		
 	}
 
 	private static void sortStack(Stack<Integer> st) { 
-		if(st.isEmpty())return;
-		int val=st.pop();
-		sortStack(st);
-		insert1(st, val);
+		
 	}
 
 
 	private static void insert1(Stack<Integer> st, int val) {
-		if(st.isEmpty() || st.peek()<val) {
-			st.push(val);
-			return;
-		}
-		int temp=st.pop();
-		insert1(st, val);
-		st.push(temp); 
+		
 	}
 	
 	private static void reverseStack(Stack<Integer> st) {// 1,3,4,6 
-		if(st.isEmpty())return;
-		int temp=st.pop();
-		reverseStack(st);
-		insertInReverse(st, temp);
+		
 	}
 	public static void insertInReverse(Stack<Integer> st,int val) {//4,3,1 ,6
-		if(st.isEmpty()) {
-			st.push(val);
-			return;
-		}
-		int temp=st.pop();
-		insertInReverse(st, val);
-		st.push(temp);
+		
 	}
 	
 	private static void deleteMiddleStack(Stack<Integer> st,int pos) {
-		if(pos==1) {
-			st.pop();
-			return;
-		}
-		int tmp=st.pop();
-		deleteMiddleStack(st, pos-1);
-		st.push(tmp);
+		
 	}
 	private static int kthSymbolGrammer(int n, int k) {
-		if(n==1 && k==1)return 0;
-		int mid=(int)Math.pow(2, n-1)/2;
-		if(k<=mid)
-			return kthSymbolGrammer(n-1, k);
-		else 
-				
-		return kthSymbolGrammer(n-1, k-mid)==0?1:0;
+		return -1;
 	}
 	
 	private static void toh(int n, String s, String d, String h) {
-		if(n==0)return;
-		toh(n-1,s,h,d);
-		System.out.println("Move "+n+" :- "+s+"->"+d);
-		toh(n-1,h,d,s);
+	
 	}
 	
 	private static void subsets(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println("SUB:- "+op);
-			return;
-		}
-		subsets(ip.substring(1), op);
-		subsets(ip.substring(1), op+ip.charAt(0));
+		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
-		if(ip.length()==0) {
-			unq.add(op);
-			return;
-		}
-		uniqueSubsets(ip.substring(1), op, unq);
-		uniqueSubsets(ip.substring(1), op+ip.charAt(0), unq);
+		
+
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println(op);
-			return;
-		}
-		permutationwithSpaces(ip.substring(1), op+ip.charAt(0));
-		if(ip.length()>1)
-		permutationwithSpaces(ip.substring(1), op+ip.charAt(0)+"_");
+	
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println(op);
-			return;
-		}
-		permutationwithCaseChange(ip.substring(1), op+Character.toLowerCase(ip.charAt(0)));
-		permutationwithCaseChange(ip.substring(1), op+Character.toUpperCase(ip.charAt(0)));
 
 	}
 
 	private static void letterPermutation(String ip, String op) {
-		if(ip.length()==0) {
-			System.out.println(op);
-			return;
-		}
-		boolean digit=Character.isDigit(ip.charAt(0));
-		if(!digit) {
-			letterPermutation(ip.substring(1), op+Character.toLowerCase(ip.charAt(0)));
-			letterPermutation(ip.substring(1), op+Character.toUpperCase(ip.charAt(0)));
-		}
-		else letterPermutation(ip.substring(1), op+ip.charAt(0));
+		
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-		if(open==0 && close==0) {
-			System.out.println(op);
-			return;
-		}
-		if(open>0)
-			balanceParanthesis(open-1, close, op+"(");
-		if(close>open)
-			balanceParanthesis(open, close-1, op+")");
+	
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {
-		if(n==0) {
-			System.out.println(op);
-			return;
+		
+
 		}
-		nBitBinary(n-1, one+1, zero, op+1);
-		if(one>zero)
-			nBitBinary(n-1, one, zero+1, op+0);
-	}
 	
 
 	private static int josephusProblem(ArrayList<Integer> list, int k,int index) {
-		if(list.size()==1) {return list.get(0);}
+		if(list.size()==1)return list.get(0);
 		index=(index+k)%list.size();
 		list.remove(index);
+		
 		return josephusProblem(list, k, index);
 	}
 }

@@ -43,15 +43,18 @@ public class ZipWithIndex {
 		list.add(new Person("C",30,3));
 		list.add(new Person("D",40,4));
 		list.add(new Person("E",50,5));
-		
+		list.add(null);
+		list.add(new Person(null,50,6));
+
 		JavaRDD<Person> rdd=jsc.parallelize(list);
-		
+		rdd=rdd.filter(r->r!=null && r.getName()!=null);
 		int batchSize = 3;
 		JavaPairRDD<Person, Long> personLongJavaPairRDD = rdd.zipWithIndex();
 		
 		
 		JavaPairRDD<Long, Person> longReadingJavaPairRDD = personLongJavaPairRDD
 				.mapToPair(r -> new Tuple2<>((r._2 / batchSize), r._1));
+		
 		List<Person> temp = new ArrayList<>();
 		JavaPairRDD<Long, List<Person>> integerListJavaPairRDD = longReadingJavaPairRDD.aggregateByKey(temp,
 				(rq0, rq1) -> {
