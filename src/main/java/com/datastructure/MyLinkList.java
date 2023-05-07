@@ -94,7 +94,7 @@ public class MyLinkList<T> {
 		     head.next_node = null; // new start tail
 		     return newRoot;
 	}
-	
+	//https://www.youtube.com/watch?v=gBTe7lFR3vc
 	//141. Linked List Cycle | https://leetcode.com/problems/linked-list-cycle/
 		public boolean hasCycle(ListNode head) {
 			if (head == null || head.next == null) {
@@ -253,6 +253,14 @@ public class MyLinkList<T> {
       newHead.next = oldHead;
       return newHead;
   }
+//   public ListNode swapPairs(ListNode head) {
+//       if(head==null || head.next==null )return head;
+//       ListNode node=swapPairs(head.next.next);
+//       head.next.next=head;
+//       head=head.next;
+//       head.next.next=node;
+//       return head;
+//   }
    //206. Reverse Linked List  #RECURSION
 //   public ListNode reverseList(ListNode head) {
 //		if(head==null)return head;

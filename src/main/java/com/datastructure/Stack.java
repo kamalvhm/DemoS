@@ -196,7 +196,7 @@ public class Stack<T> implements Iterable<T> {
 		}
 		return res;
    }
-   //856. Score of Parentheses
+   //856. Score of Parentheses | https://www.youtube.com/watch?v=rWsv46ME6lI
   public int scoreOfParentheses(String s) {
       Stack<String> st =new Stack<>();
           

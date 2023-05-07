@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.spark.sql.catalyst.expressions.Substring;
 //https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion
+//#123456789
 public class Pepcoding {
 	//EUlar Path explained :-https://www.youtube.com/watch?v=R7qja_gZrvI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=10
 	//Two Types of Recursion
@@ -223,7 +224,7 @@ public class Pepcoding {
 	  public static ArrayList<String> gss(String ip) {
 	        if(ip.isEmpty()){
 	            ArrayList<String> list=new ArrayList<String>();
-	            list.add("");
+	            list.add("");//array list size is one but the subsequence is empty in it so empty string have one subsequence that is ""
 	            return list;
 	        }
 	        ArrayList<String> arr=gss(ip.substring(1));

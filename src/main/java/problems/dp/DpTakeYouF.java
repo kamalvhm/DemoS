@@ -305,20 +305,26 @@ public class DpTakeYouF {
         }
         return maxi;
 	}
-    public static boolean possible(String s1,String s2){
-        if(s1.length()!=s2.length()+1)return false;
-        int first=0;
-        int secound=0;
-        while(first<s1.length()){//s1 is bigger by then
-            if(secound<s2.length() && s1.charAt(first)==s2.charAt(secound)){
-                first++;
-                secound++;
-            }else {
-                first++;
-            }
+    public static boolean possible(String a,String b){
+    	int m = a.length();
+        int n = b.length();
+
+        // Check if difference between length is equal to 1.
+        if (n - m != 1 || m >= n) {
+            return false;
         }
-        if(first==s1.length() && secound==s2.length())return true;
-        else return false;
+
+        int i = 0, j = 0;
+
+        // Check if 'A' is a subsequence of 'B'.
+        while (i < m && j < n) {
+            if (a.charAt(i) == b.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+
+        return i == m;
     }
     
     public List<Integer> largestDivisibleSubset(int[] nums) {
@@ -336,7 +342,7 @@ public class DpTakeYouF {
 	        for(int prev_index = 0; prev_index <i; prev_index ++){
 	            if(nums[i]%nums[prev_index]==0 && (1 + dp[prev_index]) > dp[i]){
 	                dp[i] = 1 + dp[prev_index];
-	                hash[i] = prev_index;
+	                hash[i] = prev_index;//storing previous indx in LIS chain
 	            }
 	        }
              if(dp[i]>=maxi){
@@ -1032,10 +1038,11 @@ public static boolean wildcardMatching2(String p, String s) {
 	     int n = num.length;
 
 	    int dp[][] = new int[n][tar+1];
-	    
-	    if(num[0] == 0) dp[0][0] =2;  // 2 cases -pick and not pick
+	    //THINK IN TERMS OF J if j is 0 with num[0] is zero then first two condition 
+	    if(num[0] == 0) dp[0][0] =2;  // 2 cases -pick and not pick THIS MEANS a[0]=0 and t is 0 as well so 2 
 	    else dp[0][0] = 1;  // 1 case - not pick
 	    
+	    //if j != 0 but num[0] = 0 that condition does not make sence coz we can't achive our goal 
 	    if(num[0]!=0 && num[0]<=tar) dp[0][num[0]] = 1;  // 1 case -pick
 	    
 	    for(int ind = 1; ind<n; ind++){
@@ -1062,9 +1069,9 @@ public static boolean wildcardMatching2(String p, String s) {
 	    if(ind == 0)
 	        return arr[0] == target?1:0;
 	    
-	    //if 0 allowed in array BC 1 is removed and bc two is change
+	    //if 0 allowed in array BC 1 is removed and bc two is change ex. => {0,0,1} and tar is 1 
 //	    if(ind==0){
-//	           if(arr[0]==0 && target==0)return 2;
+//	           if(arr[0]==0 && target==0)return 2;9
 //	           if(arr[0]==target || target==0)return 1;
 //	           return 0;
 //	       }  FOR TEBULATION  
@@ -1073,6 +1080,7 @@ public static boolean wildcardMatching2(String p, String s) {
 //	    
 //	    if(arr[0]!=0 && arr[0]<=target) dp[0][arr[0]] = 1;  // 1 case -pick where evere we see less value then target we can pick that
 	    //so we have to fill like that <= to fill entire bc we can pick
+	    //IMP this codition is juxt to check (arr[0]<=target) This is to ensure that a[0] is not out of bound with declared array
 	  
 	    
 	    if(dp[ind][target]!=-1)

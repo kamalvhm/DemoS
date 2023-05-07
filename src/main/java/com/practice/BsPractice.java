@@ -52,6 +52,7 @@ public class BsPractice {
 	}
 
 	private static int search(int[] a, int i) {
+	
 		return -1;
 	}
 	
@@ -64,12 +65,10 @@ public class BsPractice {
 	}
 	
 	public static int findPeakElement(int[] a) {
-		
 		return -1;
 	}
 	
 	public static int arrayRotatedcount(int[] a) { 
-	
 		return -1;
 	}
 
@@ -85,10 +84,10 @@ public class BsPractice {
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3 6
-		
+	
 		return -1;
 	}
-	
+	//first element that is greater then or equal to target
 	public static int lowerBound(int [] a,int target) {
 		int l=0,r=a.length-1;
 		int res=-1;
@@ -98,6 +97,7 @@ public class BsPractice {
 				res=a[mid];
 				r=mid-1;
 			}else l=mid+1;
+			
 		}
 		return res;
 	}
@@ -119,8 +119,16 @@ public class BsPractice {
 	
 	//UPPER BOUND PROBLEM
 	public static char nextGreaterElement(char[] a, char target) {
-		
-		return '#';
+		int l=0,r=a.length-1;
+		char res='#';
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]-'0'>=target-'0') {
+				res=a[mid];
+				r=mid-1;
+			}else l=mid+1;
+		} 
+		return res;
 		
 	} 
 	
@@ -132,7 +140,7 @@ public class BsPractice {
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {   
-		 	
+		 
 		 	return " ";
 	 }
 	 
