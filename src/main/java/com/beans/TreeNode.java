@@ -4,6 +4,7 @@ import com.datastructure.TreePrinter.PrintableNode;
 
 public class TreeNode<T> implements PrintableNode{
     public T val;
+    public long data; //for few questions data is used instead of val
     public TreeNode left;
     public TreeNode right;
     public TreeNode() {}

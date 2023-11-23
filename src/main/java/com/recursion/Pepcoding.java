@@ -17,10 +17,10 @@ public class Pepcoding {
 
 	public static void main(String[] args) {
 		
-		System.out.println("1) power(x,n) ans (16):- "+power(2,4));
+		//System.out.println("1) power(x,n) ans (16):- "+power(2,4));
 		
 		
-		int [] c= {2,3,6,9,8,3,2,6,3,4};
+		int [] c= {1,2,3,6,4,5,6};
 		//System.out.print(firstOccurence(c,0,8));
 	/*	int []arr=allIndices(c,3,0,0);
 		for(int a:arr)
@@ -32,15 +32,49 @@ public class Pepcoding {
 		printKPC("678","");
 		printpermutation("abc","");*/
 		
-		display(c, c.length-1);
-
+		//display(c, c.length-1);
+		
+		System.out.println(lastIndex(c,0,6));
+			//toh(3,10,11,12);
+		}
+	public static void toh(int n, int s, int d, int h){
+        if(n==0)return;
+        toh(n-1,s,h,d);
+        System.out.println(n+"["+s+"->"+d+"]");
+        toh(n-1,h,d,s);
+    }
+	//1) 
+	public static void printDecreasing(int n){
+        if(n==0)return;
+        System.out.println(n);
+        printDecreasing(n-1);
+    }
+	//2)  
+	public static void printIncreasing(int n){
+	    if(n==0)return;
+	    printIncreasing(n-1);
+	    System.out.println(n);
 	}
+	
+	 public static void displayArrReverse(int[] arr, int idx) {
+	        if(idx==arr.length)return;
+	        displayArrReverse(arr,idx+1); 
+	                System.out.println(arr[idx]);
+
+	    }
+
 	public static void display(int [] arr,int idx) {
 		if(idx==0)return;
 		System.out.println(arr[idx]);
 		display(arr, idx-1);
 	}
-	
+	   public static int maxOfArray(int[] arr, int idx){
+	        if(arr.length-1==idx)return arr[idx];
+	        int max=maxOfArray(arr,idx+1);
+	        if(arr[idx]>max)
+	            return arr[idx];
+	        return max;
+	    }
 	private static int  power(int x, int n) {
 		if(n==0)return 1;
 		int val=power(x,n/2);
@@ -48,6 +82,37 @@ public class Pepcoding {
 		if(n%2!=0)val=val*x;//if odd
 		return val;
 	}
+	
+	
+	 public static int firstIndex(int[] arr, int idx, int x){
+	        if(arr.length==x)return -1;
+	        if(arr[idx]==x)return idx;
+	        return firstIndex(arr,idx+1,x);
+	        
+	    }
+	    public static int lastIndex(int[] arr, int idx, int x){
+	        if(arr.length==idx)return -1;
+	        int pos=lastIndex(arr,idx+1,x);
+	        if(pos==-1){
+	            if(arr[idx]==x)return idx;
+	        }
+	        return pos;
+	    }
+	  //24 :https://www.youtube.com/watch?v=Sa5PmCFF_zI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=25
+		public static int[] allIndices(int []arr,int x,int idx,int fsf) {
+			if(idx==arr.length) {
+				return new int[fsf];
+			}
+			if(arr[idx]==x) {
+				int [] a=allIndices(arr, x, idx+1, fsf+1);
+				a[fsf]=idx;
+				return a;
+				
+			}else {
+				int [] a=allIndices(arr, x, idx+1, fsf);
+				return a;
+			}
+		}
 
 	public static ArrayList<String> printSubSeq(String s,int indx,String op,ArrayList<String> out) {
 		if(indx==s.length()) {
@@ -59,21 +124,7 @@ public class Pepcoding {
 		return out;
 	}
 
-	//24 :https://www.youtube.com/watch?v=Sa5PmCFF_zI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=25
-	public static int[] allIndices(int []arr,int x,int idx,int fsf) {
-		if(idx==arr.length) {
-			return new int[fsf];
-		}
-		if(arr[idx]==x) {
-			int [] a=allIndices(arr, x, idx+1, fsf+1);
-			a[fsf]=idx;
-			return a;
-			
-		}else {
-			int [] a=allIndices(arr, x, idx+1, fsf);
-			return a;
-		}
-	}
+	
 	
 
 	

@@ -104,27 +104,14 @@ public class Dpractice4 extends DynamicPrograming{
 
 
 	public static int solveMCM_BottomUp(int arr[],int i,int j) {
-		if(i>=j)return 0;
-		if(dp[i][j]!=-1)return dp[i][j];
-		int ans=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-		int temp=solveMCM_BottomUp(arr, i, k)+solveMCM_BottomUp(arr, k+1, j)+arr[i-1]*arr[k]*arr[j];
-		ans=Math.min(ans, temp);
-		}
-		dp[i][j]=ans;
-		return ans;
+		return 0;
+		
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
-		if(i>=j)return 0;
-		if(isPalindrom(s, i, j))return 0;
-		if(p[i][j]!=-1)return p[i][j];
+;
 		int min=Integer.MAX_VALUE;
-		for(int k=i;k<j;k++) {
-			int temp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
-			min=Math.min(min, temp);
-		}
-		p[i][j]=min;
+		
 		return min;
 	}
 
@@ -149,31 +136,20 @@ public class Dpractice4 extends DynamicPrograming{
 	 * 
 	 */
 	public static int evalExTRecursive(String s ,int i,int j,boolean isTrue) {
-		return -1;
+		return 0;
+		
 	} 
 	
 	
 	public static boolean scrambledStringRecursie(String a ,String b) {
-		if(a.length()!=b.length()) return false;
+		if(a.length()!=b.length())return false;
 		if(a.isEmpty() && b.isEmpty())return true;
-		// return scrambledMemoized(a,b);
 		return scrambledSolve(a,b);
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {
-		if(a.compareTo(b)==0)return true;
-		int n=a.length();
-		if(n<=1)return false;
+		return true;
 		
-		for(int i=1;i<n;i++) {
-			if(scrambledSolve(a.substring(0,i), b.substring(0,i)) 
-					&& scrambledSolve(a.substring(i,n), b.substring(i,n)) ||
-					scrambledSolve(a.substring(0,i),b.substring(n-i,n)) 
-					&& scrambledSolve(a.substring(i,n),b.substring(0,n-i))
-					)
-				return true;
-		}
-		return false;
 	} 
 	
 	 public static boolean scrambledMemoized(String a, String b) {
@@ -183,28 +159,18 @@ public class Dpractice4 extends DynamicPrograming{
 	 
 	 
 		private static int eggDropRecursive(int e, int f) {
-			if(f==0 || f==1)return f;
-			if(e==1)return f;
+			
 			int min=Integer.MAX_VALUE;
-			for(int k=1;k<=f;k++) {
-				int temp=eggDropRecursive(e-1, k-1)+eggDropRecursive(e, f-k)+1;
-			}
+			
 			return min;
 		}
 		
 		private static int eggDropMemoized(int e, int f) {
-			if(f==0 || f==1)return f;
-			if(e==1)return f; 
-			if(egg[e][f]!=-1)return egg[e][f]; //Change 1
+			
 			
 			int min=Integer.MAX_VALUE;
 			
-			for(int k=1;k<=f;k++) {
-				int temp=Math.max(eggDropRecursive(e-1, k-1),eggDropRecursive(e,f-k))+1;  
-			
-				min=Math.min(min, temp);
-			}
-			egg[e][f]=min; //Change 2
+		
 			return min;
 		}
 		

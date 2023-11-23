@@ -325,7 +325,7 @@ public class LongestCommanSubSequece3 {
 	//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
 	private static String longestPalindromicSubString(String e) {
 		int n=e.length();
-		int dp[][]=new int[n+1][n+1];//ith index is length and j th is end index
+		int dp[][]=new int[n+1][n+1];//i th index is length and j th is end index
 		String res="";
 		int resE=1,resL=1;//length and end index of palindrom
 		if(n==0)return res;

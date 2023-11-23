@@ -9,7 +9,7 @@ public class DpOnTrees4 {
 	 * How Dp can be appilied on trees (Identification)
 	 * 1)Diameter of binary tree
 	 * 2)Maximum Path Sum from any node to any node 
-	 * 3)Maximum path sum from leaf to leaf
+	 * 3)Maximum path sum from leaf to leaf https://www.codingninjas.com/studio/problems/maximum-path-sum-between-two-leaves_794950
 	 * 4)Diameter of N-ary tree
 	 * 
 	 * 
@@ -111,4 +111,91 @@ public class DpOnTrees4 {
 		 return temp;
 		 
 	 }
+	 
+	 
+	 //Max Path sum from leaf to leaf  https://www.codingninjas.com/studio/problems/maximum-path-sum-between-two-leaves_794950?leftPanelTabValue=SUBMISSION
+	 class Number{
+		    long num;
+		    Number(long num)
+		    {
+		        this.num = num;
+		    }
+		}
+
+		public class Solution {
+			public  long findMaxSumPathHelper(TreeNode root, Number maxPathSum) {
+				if (root == null) {
+					return -1;
+				}
+				if (root.left == null && root.right == null) {
+					return root.data;
+				}
+
+				/* 
+					Variable to store the maximum sum of the path from the current node to leaf
+				 	in the left subtree.
+				*/
+				long maxSumLeftPath = findMaxSumPathHelper(root.left, maxPathSum);
+
+				/*
+					Variable to store the maximum sum of the path from the current node to leaf
+				 	in the right subtree.
+				*/
+				long maxSumRightPath = findMaxSumPathHelper(root.right, maxPathSum);
+
+				// If the current node has both children, update the value of maxPathSum.
+				if (root.left != null && root.right != null) {
+
+					maxPathSum.num = Math.max(maxPathSum.num, maxSumLeftPath + maxSumRightPath + root.data);
+					return Math.max(maxSumLeftPath, maxSumRightPath) + root.data;
+
+				} else if (root.left == null) {
+
+					return maxSumRightPath + root.data;
+
+				} else {
+
+					return maxSumLeftPath + root.data;
+
+				}
+			}
+
+			public  long findMaxSumPath(TreeNode root) {
+				// Variable to store the maximum sum of path between two leaves for the given tree.
+				Number maxPathSum = new Number(-1L);
+				findMaxSumPathHelper(root, maxPathSum);
+				return maxPathSum.num;
+			}
+}
+		
+		
+		//ALTERNATIVE SIMPLIFIED VERSION FOR ABOVE 
+//		public static class In{
+//			 In(){}
+//		        long i=-1L;
+//		    }
+//		    
+//		
+//		
+//		public static long findMaxSumPath(TreeNode root) {
+//			In result=new In();
+//			solve(root,result);
+//			return result.i;
+//		}
+//
+//		public static long solve(TreeNode root,In result){
+//			if(root==null)return 0;
+//			if(root.left==null && root.right==null)return root.data;
+//			long left=solve(root.left,result);
+//			long right=solve(root.right,result);
+//			if(root.left!=null && root.right!=null){
+//				long temp=Math.max(left,right)+root.data;
+//				long ans=Math.max(temp,left+right+root.data);
+//				result.i=Math.max(result.i,ans);
+//				return temp;
+//			}else if(root.left==null)
+//					return right+root.data;
+//			else return left+root.data;
+//		
+//		}
 }

@@ -3,26 +3,29 @@ package com.practice;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.apache.spark.sql.execution.columnar.ARRAY;
 import org.apache.spark.util.collection.PartitionedAppendOnlyMap;
 
 import scala.annotation.bridge;
 
 public class SortMasterPr {
-
+	//TC:- O(n2)
 	private static void selectionSort(int[] a) 	{
 		int n=a.length;
 		
 	}
+	//TC:- O(n) best, O(n2) worst Inplace stable
 	private static void bubbleSort(int[] a) {
 		int n=a.length;
 		
-		
 	}
+	//TC:- O(n) best, O(n2) worst
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
 		
+		
 	}
-	
+	//TC:- O(nlogn) stable but not inplace 
 	private static int[] mergeSort(int[] a) {
 		int n=a.length;
 		return a;
@@ -32,28 +35,17 @@ public class SortMasterPr {
 		
 		return a;
 	}
-	
+	//TC:- O(nlogn) worst O(n2) In place but not stable 
 	private static void quickSort(int[] a, int start, int end) {
-		if(start>=end)return ;
-		int pivot=partition(a,start,end);
-		quickSort(a, start, pivot-1);
-		quickSort(a, pivot+1, end);
+		
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		int pivot=a[end];
-		int pIndex=start;
-		for(int i=start;i<end;i++) {
-			if(a[i]<pivot) {
-				swap(a, pIndex, i);
-				pIndex++;
-			}
-		}
-		swap(a, end, pIndex);
-		return pIndex;
+		return -1;
 	}
 	private static int randomized(int[] a, int start, int end) {
-		return -1;
+		
+		return partition(a, start, end);
 	}
 	
 	private static void countSort(int[] a) {

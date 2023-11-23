@@ -16,7 +16,7 @@ public class SortMaster {
 		if(arr==null) return;
 		for(int i=0;i<arr.length;i++) {
 			int swapIndex=i;
-			for(int j=i+1;j<arr.length;j++) {//finding min from rest of array and swaping 
+			for(int j=i+1;j<arr.length;j++) {//finding min from rest of array and swapping 
 				if(arr[j]<arr[swapIndex]) {
 					swapIndex=j;
 				}
@@ -138,6 +138,9 @@ public class SortMaster {
 		sort.sort(array4,4);
 		System.out.println(java.util.Arrays.toString(array4));
 		//Sort these sorted arrays mutually TC:- O(n*m) where n is for traverse in array a and m is to order correct in b array
+		int[] array5 = {5,4,2,1,3,5,3,2,2};
+		sort.sort(array5,5);
+		System.out.println(java.util.Arrays.toString(array5));
 		int a[]= {1,4,7,8,10};
 		int b[]= {2,3,9};
 		sort(a,b);
@@ -161,9 +164,37 @@ public class SortMaster {
 				break;
 		case 4:quickSort(array,0,array.length-1);
 		System.out.println("Quick");
+				break;
+		case 5:countSort(array);
+		System.out.println("Count");
 		}
 	}
 	
+	private static void countSort(int[] a) {
+		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+		for(int i:a) {
+			min =Math.min(min, i);
+			max=Math.max(max, i);
+		}
+		int frq[]=new int[(max-min)+1];
+		for(int i:a) {
+			frq[i-min]++;
+		}
+		//creating prefix array
+		for(int i=1;i<frq.length;i++) {
+			frq[i]=frq[i-1]+frq[i];
+		}
+		int ans[]=new int[a.length];
+		//iterate original array from last and fill positions 
+		for(int i=a.length-1;i>=0;i--) {
+			int val=a[i];
+			int index=frq[val-min]-1; 
+			ans[index]=val;
+			frq[val-min]--;
+		}
+		for(int i=0;i<ans.length;i++)
+			a[i]=ans[i];
+	}
 	
 	public static void sort(int a[],int b[]) {
 		int j=0;

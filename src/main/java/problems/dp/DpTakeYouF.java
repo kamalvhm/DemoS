@@ -393,6 +393,15 @@ public class DpTakeYouF {
     }
 	
 	//prob 42
+    
+//    public static int f(int nums[],int i,int prev,int dp[][]){
+//        if(i==nums.length)return 0;
+//        if(dp[i][prev+1]!=-1)return dp[i][prev+1]; //for quad shift where ever i see dp interaction with prev i do +1
+//        int len=f(nums,i+1,prev,dp);
+//        if(prev==-1 || nums[i]>nums[prev])
+//            len=Math.max(len,1+f(nums,i+1,i,dp));
+//        return dp[i][prev+1]=len;
+//    }
 	static int longestIncreasingSubsequence(int arr[], int n){
 	    int dp[][]=new int[n+1][n+1];
 	    for(int ind = n-1; ind>=0; ind --){
@@ -424,6 +433,38 @@ public class DpTakeYouF {
 	    }
 	    return cur[0];
 	}
+//	   public static List< Integer > printingLongestIncreasingSubsequence(int []nums, int n) {
+//		      // int n=nums.length;
+//		      
+//		       int dp[]=new int[n];
+//		       int hash[]=new int[n];
+//		       Arrays.fill(dp,1);
+//		       int max=0;
+//		       int maxPos=0;
+//
+//		       for(int i=0;i<n;i++){
+//		           hash[i]=i;
+//		           for(int j=0;j<i;j++){
+//		               if(nums[j]<nums[i] && dp[i]<dp[j]+1){
+//		                   dp[i]=dp[j]+1;
+//		                   hash[i]=j;
+//		               } 
+//		           }
+//		           if(dp[i]>max){
+//		               max=dp[i];
+//		               maxPos=i;
+//		           }
+//		       } 
+//
+//		       List<Integer> ans=new ArrayList<>();
+//		       ans.add(nums[maxPos]);
+//		       while(hash[maxPos]!=maxPos){
+//		           maxPos=hash[maxPos];
+//		           ans.add(nums[maxPos]);
+//		       }
+//
+//		       return ans;
+//		    }
 	//Printing LIS TC:-O(n2) SC:-O(N)
 	static int longestIncreasingSubsequence3(int arr[], int n){
 	    
@@ -687,7 +728,39 @@ public class DpTakeYouF {
 	   }
 	      return dp[0][1];
 	  }
-	    
+	static boolean wildcardMatchingSpaceOpt(String S1, String S2) {
+	    int n = S1.length();
+	    int m = S2.length();
+
+	    // Create two boolean arrays to store the matching results for the current and previous rows
+	    boolean[] prev = new boolean[m + 1];
+	    boolean[] cur = new boolean[m + 1];
+
+	    // Initialize the first element of prev as true
+	    prev[0] = true;
+
+	    // Iterate through S1 and S2 to fill the cur array
+	    for (int i = 1; i <= n; i++) {
+	      // Initialize the first element of cur based on whether S1 contains '*'
+	      cur[0] = isAllStars(S1, i);
+	      for (int j = 1; j <= m; j++) {
+	        if (S1.charAt(i - 1) == S2.charAt(j - 1) || S1.charAt(i - 1) == '?') {
+	          cur[j] = prev[j - 1]; // Characters match or '?' is encountered.
+	        } else {
+	          if (S1.charAt(i - 1) == '*') {
+	            cur[j] = prev[j] || cur[j - 1]; // '*' matches one or more characters.
+	          } else {
+	            cur[j] = false; // Characters don't match, and S1[i-1] is not '*'.
+	          }
+	        }
+	      }
+	      // Update prev array to store the current values
+	      prev = cur.clone();
+	    }
+
+	    return prev[m]; // The final result indicates whether S1 matches S2.
+	  }
+
 	//prob 35
 public static boolean wildcardMatching2(String p, String s) {
 		
@@ -1074,13 +1147,14 @@ public static boolean wildcardMatching2(String p, String s) {
 //	           if(arr[0]==0 && target==0)return 2;9
 //	           if(arr[0]==target || target==0)return 1;
 //	           return 0;
-//	       }  FOR TEBULATION  
+//	       }  
+	          /** FOR TEBULATION BC*/  
 //	    if(arr[0] == 0) dp[0][0] =2;  // 2 cases -pick and not pick
 //	    else dp[0][0] = 1;  // 1 case - not pick
 //	    
 //	    if(arr[0]!=0 && arr[0]<=target) dp[0][arr[0]] = 1;  // 1 case -pick where evere we see less value then target we can pick that
 	    //so we have to fill like that <= to fill entire bc we can pick
-	    //IMP this codition is juxt to check (arr[0]<=target) This is to ensure that a[0] is not out of bound with declared array
+	    //IMP this condition is just to check (arr[0]<=target) This is to ensure that a[0] is not out of bound with declared array
 	  
 	    
 	    if(dp[ind][target]!=-1)
@@ -1419,6 +1493,29 @@ public static boolean wildcardMatching2(String p, String s) {
 	        }
 	        return dp[0][0];
 	    }
+	  //Space optimisation of triangle
+//	  public int minimumTotal(List<List<Integer>> triangle) {
+//	        //return solve(triangle,0,0);
+//	        int n=triangle.size();
+//	        int m=triangle.get(n-1).size();
+//
+//	        int front[]=new int[m+1];
+//	        for(int j=0;j<triangle.get(n-1).size();j++){
+//	            front[j]=triangle.get(n-1).get(j);
+//	        }
+//
+//	        for(int i=n-2;i>=0;i--){
+//	            int curr[]=new int[m+1];
+//
+//	            for(int j=i;j>=0;j--){
+//	                int down=front[j];
+//	                int right=front[j+1];
+//	                curr[j]= Math.min(down,right)+triangle.get(i).get(j);
+//	            }
+//	            front=curr;
+//	        }
+//	        return front[0];
+//	    }
 //	   public static int minimumPathSum(int[][] triangle, int n) {
 //	       int m=triangle[n-1].length;
 //	       int dp[][]=new int [n][m];
