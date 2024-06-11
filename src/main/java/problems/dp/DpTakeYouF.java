@@ -95,7 +95,57 @@ public class DpTakeYouF {
 	        }
 	        return true;
 	    }
-	//prob 52 skip 
+	//prob 52 
+	 public static int evaluateExp(String exp) {
+
+	       int n=exp.length();
+	       long dp[][][]=new long[n][n][2];
+
+	       for(int i=n-1;i>=0;i--){
+	           for(int j=0;j<=n-1;j++){
+	        //Base case 1:
+		     if(i>j)continue;
+	               for(int isTrue=0;isTrue<=1;isTrue++){
+	                // Base case 2:
+	                if (i == j) {
+	                    if (isTrue == 1) dp[i][j][1] = exp.charAt(i)=='T'?1:0;
+	                    else dp[i][j][0] =  exp.charAt(i)=='F'?1:0;
+	                    continue;
+	                }
+	               
+	             
+	                long ways=0;
+	                for(int k=i+1;k<=j-1;k+=2){
+	                    long lT=dp[i][k-1][1];
+	                    long lF=dp[i][k-1][0];
+	                    long rT=dp[k+1][j][1];
+	                    long rF=dp[k+1][j][0];
+	                    
+	                    char ch=exp.charAt(k);
+			    if(ch=='&'){
+	                        if(isTrue==1)
+	                            ways=(ways+(lT*rT)%mod)%mod;
+	                        else ways=(ways+(lF*rF)%mod+(lT*rF)%mod+(lF*rT)%mod)%mod;
+	                    }
+	                    else if(ch=='|'){
+	                        if(isTrue==1)
+	                            ways=(ways+(lT*rT)%mod+(lT*rF)%mod+(lF*rT)%mod)%mod;
+	                        else ways=(ways+(lF*rF)%mod)%mod;
+	                    }else if(ch=='^'){
+	                        if(isTrue==1)
+	                            ways=(ways+(lT*rF)%mod+(lF*rT)%mod)%mod;
+	                        else ways=(ways+(lF*rF)%mod+(lT*rT)%mod)%mod;
+	                    
+	                    }
+	                    
+	                    }
+	                    dp[i][j][isTrue]=ways;
+	               }
+	            }
+	       }
+	       return (int)dp[0][n-1][1];
+	    }
+
 	//prob 51 Balloons
 	 public static int maxCoins(int nums[]) {
 	        int n=nums.length;
@@ -221,6 +271,36 @@ public class DpTakeYouF {
         return dp[1][N-1];
 	}
 	//Prob 47 MCM skip ans 
+	
+	
+//	public int findNumberOfLIS(int[] nums) {
+//        int n=nums.length;
+//       
+//        int dp[]=new int[n];
+//        int count[]=new int[n];
+//
+//        Arrays.fill(dp,1);
+//        int max=1;
+//        for(int i=0;i<n;i++){
+//            count[i]=1;
+//            for(int j=0;j<i;j++){
+//                if(nums[i]>nums[j] && dp[i]<dp[j]+1){
+//                    dp[i]=dp[j]+1;
+//                    count[i]=count[j];
+//                }else if(nums[i]>nums[j] && dp[i]==dp[j]+1){
+//                    count[i]+=count[j];
+//                }
+//            }
+//            if(max<dp[i]){
+//                max=dp[i];
+//            }
+//        }
+//       	int cnt=0;
+//		for(int i=0;i<n;i++){
+//			if(dp[i]==max)cnt+=count[i];
+//		}
+//		return cnt;
+//    }
 	//prob 46
 	public static int findNumberOfLIS(int n, int[] arr) {
 		int dp[]=new int [n]; 
@@ -305,6 +385,21 @@ public class DpTakeYouF {
         }
         return maxi;
 	}
+//	public static boolean possible(String s1,String s2){
+//        if(s1.length()!=s2.length()+1)return false;
+//        int first=0;
+//        int secound=0;
+//        while(first<s1.length()){//s1 is bigger by then
+//            if(secound<s2.length() && s1.charAt(first)==s2.charAt(secound)){
+//                first++;
+//                secound++;
+//            }else {
+//                first++;
+//            }
+//        }
+//        if(first==s1.length() && secound==s2.length())return true;
+//        else return false;
+//    }
     public static boolean possible(String a,String b){
     	int m = a.length();
         int n = b.length();

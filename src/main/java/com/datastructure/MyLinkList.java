@@ -95,6 +95,12 @@ public class MyLinkList<T> {
 		     return newRoot;
 	}
 	//https://www.youtube.com/watch?v=gBTe7lFR3vc
+	//Brute:- put nodes in hashset and check if contains there is cycle
+	//How if works let say slow and fast are in LL like 
+	//       S					F
+	//		_____________________	
+	//		|					|   This between F ans S is let say 10 now we are moving 1 and two steps so 10+1(slow)-2(fast) so every step its 
+	//		_____________________	moving one step closer 
 	//141. Linked List Cycle | https://leetcode.com/problems/linked-list-cycle/
 		public boolean hasCycle(ListNode head) {
 			if (head == null || head.next == null) {
@@ -202,7 +208,7 @@ public class MyLinkList<T> {
 		 public static  ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		        Stack<Integer> s1=new Stack<>();
 		        Stack<Integer> s2=new Stack<>();
-		          ListNode l=null,p=null;
+		          //ListNode l=null,p=null;
 		          
 		          while(l1!=null){
 		              s1.push(l1.val);
@@ -273,6 +279,7 @@ public class MyLinkList<T> {
 //		if(curr!= null) return reverse(curr,head);
 //		return head;
 //	}
+   //https://leetcode.com/problems/reverse-linked-list/
    public ListNode reverseList(ListNode head) {
        if(head==null || head.next==null)return head;
        

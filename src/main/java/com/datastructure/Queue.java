@@ -169,7 +169,7 @@ public class Queue<T> implements Iterable{
 	  
 	  //215. Kth Largest Element in an Array          !!!MEDIUM!!!    #*        HINT:- if Largest or smallest mentioned in problem use heaps
 	    public int findKthLargest(int[] nums, int k) {
-	        PriorityQueue<Integer> q=new PriorityQueue<Integer>();//min heap only kth lagest will remian at root rest mins will be removed as its min heap
+	        PriorityQueue<Integer> q=new PriorityQueue<Integer>();//min heap only kth largest will remain at root rest mins will be removed as its min heap
 	         for(int i:nums){
 	             q.add(i);
 	             if(q.size()>k)
@@ -197,4 +197,21 @@ public class Queue<T> implements Iterable{
 	        return res.toArray(new int[res.size()][]);
 	    }
 	 
+	    //846. Hand of Straights
+	    public boolean isNStraightHand(int[] hand, int groupSize) {
+	        if(hand.length%groupSize!=0)return false;
+	        PriorityQueue<Integer> pq=new PriorityQueue<>();
+	        for(int val:hand)
+	            pq.offer(val);
+
+	        while(!pq.isEmpty()){
+	            int smallest=pq.poll();
+	            for(int i=1;i<groupSize;i++){
+	                if(pq.remove(smallest+i)){
+	                    continue;
+	                }else return false;
+	            } 
+	        } 
+	        return pq.isEmpty();
+	    }
 }

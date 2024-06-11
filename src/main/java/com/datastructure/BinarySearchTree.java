@@ -93,7 +93,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
   private Node remove(Node node, T elem) {
 
     if (node == null) return null;
-
+//PHASE 1 : - FIND 
     int cmp = elem.compareTo(node.data);
 
     // Dig into left subtree, the value we're looking
@@ -108,11 +108,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
       // Found the node we wish to remove
     } else {
-
+    	//PHASE 2 got the elem  : Now we have 4 cases but if you think first 3 cases are taken care of below 2 condition 
       // This is the case with only a right subtree or
       // no subtree at all. In this situation just
       // swap the node we wish to remove with its right child.
-      if (node.left == null) {
+      if (node.left == null) { 
         return node.right;
 
         // This is the case with only a left subtree or
@@ -128,7 +128,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         // subtree. In this implementation I have decided to find the
         // smallest value in the right subtree which can be found by
         // traversing as far left as possible in the right subtree.
-      } else {
+      } else { //CASE 4 
 
         // Find the leftmost node in the right subtree
         Node tmp = findMin(node.right);

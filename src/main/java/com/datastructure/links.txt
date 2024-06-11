@@ -35,6 +35,9 @@ To Find target value which add up from values of two BSTs let say target is 18 t
 https://www.youtube.com/watch?v=D1Tv5cCs1d8
 hint-Inorder on BST producess sorted order on that apply two pointer to find value in one array from start and in one from end and 
 
+DS ALGO SHEET 
+https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/
+
 SPARK FILE FORMATS :-https://www.youtube.com/watch?v=oipFhroPFVM
 AMX
 Airthmetic SUM Fractions:-https://stackoverflow.com/questions/63068610/finding-arithmetic-mean-of-subarrays-efficiently-in-an-array

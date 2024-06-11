@@ -132,7 +132,7 @@ public class SlidingWindowMaster {
 	        }
 	        return ans;
 	    }
-
+//https://www.codingninjas.com/studio/problems/longest-subarray-with-sum-k_6682399?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=SUBMISSION
 	  private static int longestSubArray(int[] arr, int sum) {
 			int i=0,j=0;
 			int currentSum=0;
@@ -149,6 +149,8 @@ public class SlidingWindowMaster {
 						currentSum-=arr[i++];
 						
 					}
+					if(currentSum==sum) //just in case we match sum while reducing window 
+						max=Math.max(max, j-i+1);
 					j++;
 				}
 			}
@@ -163,7 +165,10 @@ public class SlidingWindowMaster {
 			PriorityQueue<Integer> pq=new PriorityQueue<>((b,c)->c-b);
 			
 			while(right<a.length) {
-				
+//				if(!pq.isEmpty() && a[right]>pq.peek()) {
+//	        		while(!pq.isEmpty() &&  a[right]>pq.peek())
+//	        			pq.poll();
+//	        	}
 				pq.add(a[right]);
 				
 				if(right -left+1<window)

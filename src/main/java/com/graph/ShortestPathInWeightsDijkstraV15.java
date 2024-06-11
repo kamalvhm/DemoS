@@ -21,7 +21,7 @@ public class ShortestPathInWeightsDijkstraV15 {
        int wsf;
        
        Pair(int v ,String psf,int wsf){
-           this.v=v;
+           this.v=v;	
            this.psf=psf;
            this.wsf=wsf;
        }

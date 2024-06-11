@@ -440,9 +440,132 @@ public class ArrayProblems {
         return result.toArray(new int[0][]);
     }
 	
-	//https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/
-/**	Given an unsorted array of size n. Array elements are in the range from 1 to n. One number 
-	from set {1, 2, …n} is missing and one number occurs twice in the array. Find these two numbers.*/
-	
-	
+    //https://www.codingninjas.com/studio/problems/number-of-inversions_6840276?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=SUBMISSION
+    static int count=0; 
+    public static int numberOfInversions(int []a, int n) {
+        mergesort(a);
+        return count;
+    }
+
+    public static int[] mergesort(int a[]){
+        int n=a.length; 
+        if(n<=1)return a;
+        int left[]=mergesort(Arrays.copyOfRange(a, 0, n/2));
+        int right[]=mergesort(Arrays.copyOfRange(a, n/2, n));
+        return merge(left,right,a);
+    }
+    public static int[] merge(int left[],int right[],int a[]){
+        int nL=left.length; 
+        int nR=right.length;
+        int mid=nL-1;
+        int i=0,j=0,k=0;
+        while(i<nL && j<nR){
+            if(left[i]<=right[j]){
+                a[k++]=left[i++];
+            }else {
+                count+=(mid-i+1);
+                a[k++]=right[j++];
+            }
+        }
+
+        while(i<nL)
+            a[k++]=left[i++];
+
+        while(j<nR)
+            a[k++]=right[j++]; 
+        return a;
+
+    }
+    
+
+//    public static int numberOfInversions(int []a, int n) {
+//       
+//        return  mergesort(a);
+//    }
+//
+//    public static int mergesort(int a[]){
+//        int n=a.length; 
+//        int count=0;
+//        if(n<=1)return count;
+//        int left[]=Arrays.copyOfRange(a, 0, n/2);
+//        int right[]=Arrays.copyOfRange(a, n/2, n);
+//        count+=mergesort(left);
+//        count+=mergesort(right);
+//        count+=merge(left,right,a);
+//        return count;
+//    }
+//    public static int merge(int left[],int right[],int a[]){
+//        int nL=left.length; 
+//        int nR=right.length;
+//        int mid=nL-1;
+//        int i=0,j=0,k=0;
+//        int count=0;
+//        while(i<nL && j<nR){
+//            if(left[i]<=right[j]){
+//                a[k++]=left[i++];
+//            }else {
+//                count+=(mid-i+1);
+//                a[k++]=right[j++];
+//            }
+//        }
+//
+//        while(i<nL)
+//            a[k++]=left[i++];
+//
+//        while(j<nR)
+//            a[k++]=right[j++]; 
+//        
+//        return count;
+//    }
+    
+	//Reverse Pairs
+    public static int mergeSort(int a[]){
+        int n=a.length; 
+        int count=0;
+        if(n<=1)return count;
+        int left[]=Arrays.copyOfRange(a, 0, n/2);
+        int right[]=Arrays.copyOfRange(a, n/2, n);
+        count+=mergeSort(left);
+        count+=mergeSort(right);
+        count+=countPairs(left,right);
+        merge3(left,right,a);
+        return count;
+    }
+    public static void merge3(int left[],int right[],int a[]){
+        int nL=left.length; 
+        int nR=right.length;
+        int mid=nL-1;
+        int i=0,j=0,k=0;
+
+        while(i<nL && j<nR){
+            if(left[i]<=right[j]){
+                a[k++]=left[i++];
+            }else {
+                a[k++]=right[j++];
+            }
+        }
+
+        while(i<nL)
+            a[k++]=left[i++];
+
+        while(j<nR)
+            a[k++]=right[j++]; 
+        
+    }
+
+
+    public static int countPairs(int[] a,int b[]) {
+        int n=a.length;
+        int m=b.length;
+        int mid=n-1;
+        int low=0;
+        int right = 0;
+        int cnt = 0;
+        for (int i = low; i <= mid; i++) {
+            while (right <= m-1 && a[i] > 2 * b[right]) right++;
+            cnt += (right );
+        }
+        return cnt;
+    }
+
 }

@@ -1,10 +1,10 @@
 package problems.binarysearch;
-//ALLOCATE PAGE OF BOOKS //In this type array given may not be necessorily sorted
+//ALLOCATE PAGEs OF BOOKS //In this type array given may not be necessorily sorted
 public class BsFbInt3 {
 	//https://www.youtube.com/watch?v=2JSQIhPcHQg&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=21
 	public static void main(String[] args) {
-		//values represent book pages and index represnt books we have to destribute books like that 
-		//1)every student must get atleast one and 2)[book is a unit not divisible]
+		//values in array represent book pages and index represnt books (book 1 and then 2) we have to destribute books like that 
+		//1)every student must get atleast one and 2)[book is a unit not divisible] you can not allocated half
 		//3)we can only distribute in countinues manner eg. Ist student :- 10,20 (10,30 is wrong)
 		//II :- 30,40 (20 ,40 is not countinues so wrong)
 		// BY this MINIMIZE MAX NO OF PAGES THAT ONE STUDENT READ.

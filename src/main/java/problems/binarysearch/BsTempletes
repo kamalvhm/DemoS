@@ -49,3 +49,9 @@ int binarySearch(int[] nums, int target) {
     if(nums[right] == target) return right;
     return -1;
 }
+
+
+ERRICTO VEDIOS for BS
+
+ 1) First and Last Position of X in Sorted Array https://www.youtube.com/watch?v=dVXy6hmE_0U
+ 
