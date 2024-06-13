@@ -1,43 +1,14 @@
-package com.recursion;
+package com.practice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.apache.spark.sql.catalyst.expressions.Substring;
-//https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion
-//#123456789
-public class Pepcoding {
-	//EUlar Path explained :-https://www.youtube.com/watch?v=R7qja_gZrvI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=10
-	//Two Types of Recursion
-	//1)Faith and Expectation
-	//2)Levels and Options:-https://www.youtube.com/watch?v=HVCajDe2Uus (Print Keypad Combination) and 
-	//	Print Stair Paths - Solution
-	//https://www.youtube.com/watch?v=QDBrZFROuA0&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=12
-	//https://www.youtube.com/watch?v=K5xJXbnYMBc&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=42
-	//https://www.youtube.com/watch?v=NEuYcztalew (37)
+import com.backtracking.Nqueens;
+
+
+public class RecursionPep {
 
 	public static void main(String[] args) {
-		
-		//System.out.println("1) power(x,n) ans (16):- "+power(2,4));
-		
-		
-		//int [] c= {1,2,3,6,4,5,6};
-		//System.out.print(firstOccurence(c,0,8));
-	/*	int []arr=allIndices(c,3,0,0);
-		for(int a:arr)
-			System.out.print(a+" ");
-		
-		System.out.print(printSubSeq("abc",0,"",new ArrayList<String>()));
-		System.out.print(getKPC("678"));
-		//System.out.print(getMazePaths(1,1,3,3));
-		printKPC("678","");
-		printpermutation("abc","");*/
-		
-		//display(c, c.length-1);
-		
-		//System.out.println(lastIndex(c,0,6));
-			//toh(3,10,11,12);
-		
 		System.out.println("1) print Decreasing ");
 		printDecreasing(5);
 		System.out.println();
@@ -115,26 +86,26 @@ public class Pepcoding {
 		System.out.println("27) Knight ");
 		//move knight as such it will visit all places once 
 		printKnightsTour(new int[5][5],0,0,1);
-		
-		
-		}
+	}
+	
 	public static void toh(int n, int s, int d, int h){
         if(n==0)return;
         toh(n-1,s,h,d);
-        System.out.println(n+"["+s+"->"+d+"]");
+        System.out.println("Move "+n+" from "+s+" to "+d);
         toh(n-1,h,d,s);
     }
+
 	//1) 
 	public static void printDecreasing(int n){
-        if(n==0)return;
-        System.out.println(n);
-        printDecreasing(n-1);
+      if(n==0)return;
+      System.out.print(n+" ");
+      printDecreasing(n-1);
     }
 	//2)  
 	public static void printIncreasing(int n){
-	    if(n==0)return;
-	    printIncreasing(n-1);
-	    System.out.println(n);
+	  if(n==0)return;
+	  printIncreasing(n-1);//123
+	  System.out.print(n+" ");
 	}
 	
 	public static void printIncreasingDecreasing(int n){
@@ -153,21 +124,29 @@ public class Pepcoding {
 		if(n==1)return a;
 		return a*power1(a,n-1);
 	}
+	private static int  power(int x, int n) {
+		if(n==1)return x;
+		int y=power(x,n/2);
+		y=y*y;
+		if(n%2==1)
+			y=y*x;
+		return y;
+	}
 	
+	public static void pzz(int n){
+	      if(n==0)return;
+	      System.out.print("Pre "+n+" ");
+	      pzz(n-1);
+	      System.out.print("In "+n+" ");
+	      pzz(n-1);
+	      System.out.print("post "+n+" ");
+	    }
 	 public static void displayArrReverse(int[] arr, int idx) {
 	        if(idx==arr.length)return;
 	        displayArrReverse(arr,idx+1); 
 	                System.out.println(arr[idx]);
 
 	    }
-	 
-	 private static int  power(int x, int n) {
-			if(n==0)return 1;
-			int val=power(x,n/2);
-			val=val*val;
-			if(n%2!=0)val=val*x;//if odd
-			return val;
-		}
 
 	public static void display(int [] arr,int idx) {
 		if(idx==0)return;
@@ -175,43 +154,39 @@ public class Pepcoding {
 		display(arr, idx-1);
 	}
 	   public static int maxOfArray(int[] arr, int idx){
-	        if(arr.length-1==idx)return arr[idx];
-	        int max=maxOfArray(arr,idx+1);
-	        if(arr[idx]>max)
-	            return arr[idx];
-	        return max;
+	      if(arr.length-1==idx)return arr[idx];
+	      int val=maxOfArray(arr,idx+1); 
+	      if(val<arr[idx])return arr[idx];
+	      return val;
 	    }
 	
 	
 	
 	 public static int firstIndex(int[] arr, int idx, int x){
-	        if(arr.length==x)return -1;
+	        if(idx==arr.length)return -1;
+	        int pos =firstIndex(arr, idx+1, x);
 	        if(arr[idx]==x)return idx;
-	        return firstIndex(arr,idx+1,x);
-	        
+	        return pos;  
 	    }
 	    public static int lastIndex(int[] arr, int idx, int x){
-	        if(arr.length==idx)return -1;
-	        int pos=lastIndex(arr,idx+1,x);
-	        if(pos==-1){
-	            if(arr[idx]==x)return idx;
-	        }
-	        return pos;
+	       if(idx==arr.length )return -1;
+	       int pos=lastIndex(arr, idx+1, x);
+	       if(pos==-1 && arr[idx]==x)return idx;
+	       else return pos;
 	    }
 	  //24 :https://www.youtube.com/watch?v=Sa5PmCFF_zI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=25
 		public static int[] allIndices(int []arr,int x,int idx,int fsf) {
-			if(idx==arr.length) {
-				return new int[fsf];
+			if(arr.length==idx) {
+				int res[]=new int[fsf];
+				return res;
 			}
+			int res[];
 			if(arr[idx]==x) {
-				int [] a=allIndices(arr, x, idx+1, fsf+1);
-				a[fsf]=idx;
-				return a;
-				
-			}else {
-				int [] a=allIndices(arr, x, idx+1, fsf);
-				return a;
+				res=allIndices(arr,x,idx+1,fsf+1);
+				res[fsf]=idx;
 			}
+			else res=allIndices(arr,x,idx+1,fsf); 
+			return res;
 		}
 
 	public static ArrayList<String> printSubSeq(String s,int indx,String op,ArrayList<String> out) {
@@ -219,8 +194,8 @@ public class Pepcoding {
 			out.add(op);
 			return out;
 		}
-		printSubSeq(s, indx+1, op+s.charAt(indx),out);
-		printSubSeq(s, indx+1, op,out);
+		printSubSeq(s,indx+1,op,out);
+		printSubSeq(s,indx+1,op+s.charAt(indx),out);
 		return out;
 	}
 
@@ -289,38 +264,38 @@ public class Pepcoding {
 		return paths;
 	}
 	
-	public static void printMazePath(int sr,int sc,int dr,int dc,String psf){
-		if(sr>dr && sc>dc) {	
-			return;
-		}
-		if(sr==dr && sc==dc) {	
-			System.out.print(psf);
-			return;
-		}
-		printMazePath(sr, sc+1, dr, dc,psf);
-		printMazePath(sr+1, sc, dr, dc,psf);
-	}
+//	public static void printMazePath(int sr,int sc,int dr,int dc,String psf){
+//		if(sr>dr && sc>dc) {	
+//			return;
+//		}
+//		if(sr==dr && sc==dc) {	
+//			System.out.print(psf);
+//			return;
+//		}
+//		printMazePath(sr, sc+1, dr, dc,psf);
+//		printMazePath(sr+1, sc, dr, dc,psf);
+//	}
 	
 	
-	public static void printMazePathsWithJumps(int sr,int sc,int dr,int dc,String psf){
-		if(sr==dr && sc==dc) {
-			System.out.print(psf);
-			return;
-		}
-		
-		for(int ms=1;ms<dc-sc;ms++) {
-			printMazePathsWithJumps(sr,sc+ms,dr,dc,psf+"h"+ms);
-		}
-		for(int ms=1;ms<dr-sr;ms++) {
-			printMazePathsWithJumps(sr+ms,sc,dr,dc,psf+"h"+ms);
-		}
-		for(int ms=1;ms<dc-sc;ms++) {
-			printMazePathsWithJumps(sr,sc+ms,dr,dc,psf+"v"+ms);
-		}
-		for(int ms=1;ms<dc-sc && ms<dr-sr;ms++) {
-			printMazePathsWithJumps(sr+ms,sc+ms,dr,dc,psf+"d"+ms);
-		}
-	}
+//	public static void printMazePathsWithJumps(int sr,int sc,int dr,int dc,String psf){
+//		if(sr==dr && sc==dc) {
+//			System.out.print(psf);
+//			return;
+//		}
+//		
+//		for(int ms=1;ms<dc-sc;ms++) {
+//			printMazePathsWithJumps(sr,sc+ms,dr,dc,psf+"h"+ms);
+//		}
+//		for(int ms=1;ms<dr-sr;ms++) {
+//			printMazePathsWithJumps(sr+ms,sc,dr,dc,psf+"h"+ms);
+//		}
+//		for(int ms=1;ms<dc-sc;ms++) {
+//			printMazePathsWithJumps(sr,sc+ms,dr,dc,psf+"v"+ms);
+//		}
+//		for(int ms=1;ms<dc-sc && ms<dr-sr;ms++) {
+//			printMazePathsWithJumps(sr+ms,sc+ms,dr,dc,psf+"d"+ms);
+//		}
+//	}
 	
 	public static void printpermutation(String ip,String op) {
 		if(ip.length()==0)
@@ -388,189 +363,168 @@ public class Pepcoding {
 	        return res;
 	    }
 	  //V-26
-		public static String[] codes = {"","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+	  	public static String codes[]= {"","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
 		public static ArrayList<String> getKPC(String str){
-			if(str.length()==0) {
-				ArrayList<String> bres=new ArrayList<>();
-				bres.add("");
-				return bres;
+			if(str.isEmpty()) {
+				ArrayList<String> res=new ArrayList<>();
+				res.add("");
+				return res;
 			}
-			//573
-			char cd =str.charAt(0);//5
-			String ros=str.substring(1);//73
-			
-			ArrayList<String> rres=getKPC(ros);//this will give ans for 73
-			ArrayList<String> mres=new ArrayList<>(); //Now add 5 chars with each of these 73 ans to form complete
-			for(char c:codes[cd-'0'].toCharArray()) {
-				for(String s :rres)
-					mres.add(c+s);
-			}
-			return mres;
+			char code[]=codes[str.charAt(0)-'0'].toCharArray();
+			ArrayList<String> mres=getKPC(str.substring(1));
+			ArrayList<String> res=new ArrayList<>();
+			for(String s:mres)
+				for(char ch:code)
+					res.add(ch+s);
+			return res;
 		}
 		//V-29
 		public static ArrayList<String> getStairPaths(int n) {
-	        if(n==0){
-	            ArrayList<String> list=new ArrayList<String>();
-	            list.add("");
-	            return list;
-	        }
-	        if(n<0){
-	            ArrayList<String> list=new ArrayList<>();
-	            return list;
-	        }
-	        ArrayList<String> m1=getStairPaths(n-1);
-	        ArrayList<String> m2=getStairPaths(n-2);
-	        ArrayList<String> m3=getStairPaths(n-3);
-	        ArrayList<String> res=new ArrayList<String>();
-	        for(String s:m1)
-	            res.add(1+s);
-	        for(String s:m2)
-	            res.add(2+s);
-	        for(String s:m3)
-	            res.add(3+s);
-	        
+			if(n==0) {
+				ArrayList<String> res=new ArrayList<>();
+				res.add("");
+				return res;
+			}
+			if(n<0)return new ArrayList<>();
+			ArrayList<String> one =getStairPaths(n-1);
+			ArrayList<String> two =getStairPaths(n-2);
+			ArrayList<String> three =getStairPaths(n-3);
+			ArrayList<String> res =new ArrayList<>();
+			
+			for(String o:one)
+					res.add("1"+o);
+			for(String t:two)
+				res.add("2"+t);
+			for(String th:three)
+				res.add("3"+th);
+			return res;
 
-	        return res;
 	    }
 		//V-28
 		 public static ArrayList<String> getMazePaths(int sr, int sc, int dr, int dc) {
-		        if(sr==dr && sc==dc){
-		            ArrayList<String> list=new ArrayList<>();
-		            list.add("");
-		            return list;
-		        }
-		        if(sr>dr || sc>dc)
-		            return new ArrayList<String>();
-		        ArrayList<String> vRes=getMazePaths(sr+1,sc,dr,dc);
-		        ArrayList<String> hRes=getMazePaths(sr,sc+1,dr,dc);
-		        ArrayList<String> res=new ArrayList<>();
-		        for(String s:hRes)
-		            res.add("h"+s);
-		        for(String s:vRes)
-		            res.add("v"+s);
-		      
-		        return res;
+		       if(sr==dr && sc==dc) {
+		    	   ArrayList<String> res=new ArrayList<>();
+		    	   res.add("");
+		    	   return res;
+		       }
+		       if(sr>dr || sc>dc)return new ArrayList<>();
+		       
+		       ArrayList<String> vres=getMazePaths(sr+1, sc, dr, dc);
+		       ArrayList<String> hres=getMazePaths(sr, sc+1, dr, dc);
+		       
+		       ArrayList<String> res=new ArrayList<>();
+		       for(String v:vres)
+		    	   	res.add("v"+v);
+		       for(String h:hres)
+		    	   	res.add("h"+h);
+		       return res;
 		    }
 		 
 		   //V-33
 		 public static ArrayList<String> getMazePathsWithJumps(int sr,int sc,int dr,int dc){
-				if(sr > dr || sc > dc){
-		            return new ArrayList<>();
-		        }
-
-		        if(sr == dr && sc == dc){
-		            ArrayList<String> bres = new ArrayList<>();
-		            bres.add("");
-		            return bres;
-		        }
-
-		        ArrayList<String> paths = new ArrayList<>();
-		        for(int move = 1; move <= dc - sc; move++){
-		            ArrayList<String> hpaths = getMazePathsWithJumps(sr, sc + move, dr, dc);
-		            for(String hpath: hpaths){
-		                paths.add("h" + move + hpath);
-		            }
-		        }
-		        
-		        for(int move = 1; move <= dr - sr; move++){
-		            ArrayList<String> vpaths = getMazePathsWithJumps(sr + move, sc, dr, dc);
-		            for(String vpath: vpaths){
-		                paths.add("v" + move + vpath);
-		            }
-		        }
-
-		        for(int move = 1; move <= dc - sc && move <= dr - sr; move++){
-		            ArrayList<String> dpaths = getMazePathsWithJumps(sr + move, sc + move, dr, dc);
-		            for(String dpath: dpaths){
-		                paths.add("d" + move + dpath);
-		            }
-		        }
-
-		        return paths;
+		     if(sr==dr && sc==dc) {
+		    	   ArrayList<String> res=new ArrayList<>();
+		    	   res.add("");
+		    	   return res;
+		       }
+		       
+		       ArrayList<String> path=new ArrayList<>();
+		       
+		       for(int move=1;move<=dc-sc;move++) {
+			       ArrayList<String> hpaths=getMazePathsWithJumps(sr, sc+move, dr, dc);
+			       	for(String hpath:hpaths)
+			       		path.add("h"+move+hpath);
+		       }
+		       for(int move=1;move<=dr-sr;move++) {
+			       ArrayList<String> vpaths=getMazePathsWithJumps(sr+move, sc, dr, dc);
+			       	for(String vpath:vpaths)
+			       		path.add("v"+move+vpath);
+		       }
+		       for(int move=1;move<=dc-sc && move<=dr-sr;move++) {
+			       ArrayList<String> dpaths=getMazePathsWithJumps(sr+move, sc+move, dr, dc);
+			       	for(String dpath:dpaths)
+			       		path.add("d"+move+dpath);
+		       }
+		    	   	
+		      
+		       return path;
+			 
 			}
 			//v-35
 		 public static void printSS(String ip, String op) {
-		        if(ip.length()==0){
-		            System.out.println(op);
-		            return;
-		        }
-		        printSS(ip.substring(1),op+ip.charAt(0));
-		        printSS(ip.substring(1),op);
+		       if(ip.isEmpty()) {
+		    	   System.out.print(op+",");
+		    	   return;
+		       }
+		       printSS(ip.substring(1),op);
+		       printSS(ip.substring(1),op+ip.charAt(0));
 
 		    }
 		 //V-36
 		 public static void printKPC(String que,String ans){
-				if(que.length()==0) {
-					System.out.println(ans);
-					return;
-				}
-				
-				char ch=que.charAt(0);
-				String roq=que.substring(1);
-				String codeForCh=codes[ch-'0'];
-				
-				for(int i=0;i<codeForCh.length();i++) {
-					char cho=codeForCh.charAt(i);
-					printKPC(roq,ans+cho);
-				}
-			}
+			 if(que.isEmpty()) {
+				 System.out.print(ans+", ");
+				 return;
+			 }
+			 char code[]=codes[que.charAt(0)-'0'].toCharArray();
+			 for(char ch:code) {
+				 printKPC(que.substring(1), ans+ch);
+			 }
+		}
 		 //V-37 
 		  public static void printStairPaths(int n, String path) {
-		        if(n==0){
-		            System.out.println(path);
-		            return;
-		        }
-		        if(n<0)
-		            return;
-		        printStairPaths(n-1,path+1);
-		        printStairPaths(n-2,path+2);
-		        printStairPaths(n-3,path+3);
+		      if(n==0) {
+		    	  System.out.print(path+", ");
+		    	  return;
+		      }
+		      if(n<0)return;
+			  printStairPaths(n-1,path+"1");
+			  printStairPaths(n-2,path+"2");
+			  printStairPaths(n-3,path+"3");
 
 		    }
 		  //V-38
 		    public static void printMazePaths(int sr, int sc, int dr, int dc, String psf) {
-		        if(sr==dr && sc==dc){
-		            System.out.println(psf);
-		            return;
+		        if(sr==dr && sc==dc) {
+		        	System.out.print(psf+", ");
+		        	return;
 		        }
-		        if(sr>dr || sc>dc)return;
-		        printMazePaths(sr,sc+1,dr,dc,psf+"h");
-		        printMazePaths(sr+1,sc,dr,dc,psf+"v");
+		    	if(sr>dr || sc>dc)return;
+		    	printMazePaths(sr+1,sc,dr,dc,psf+"v");
+		    	printMazePaths(sr,sc+1,dr,dc,psf+"h");
 
 		    }
 		    
 		    //V-39
-		    public static void printMazePaths2(int sr, int sc, int dr, int dc, String psf) {
-		        if(sr>dr || sc>dc)return;
-		        
-		        if(sr==dr && sc==dc){
-		            System.out.println(psf);
-		            return;
-		        }
-		        
-		    for(int i=1;i<dc;i++)
-		    	printMazePaths2(sr,sc+i,dr,dc,psf+"h"+i);
-		            
-		    for(int i=1;i<dr;i++)
-		    	printMazePaths2(sr+i,sc,dr,dc,psf+"v"+i);
-		    for(int i=1;i<dc && i<dr;i++)
-		    	printMazePaths2(sr+i,sc+i,dr,dc,psf+"d"+i);
+		    public static void printMazePathsWithJumps(int sr, int sc, int dr, int dc, String psf) {
+		    	if(sr==dr && sc ==dc) {
+		    		System.out.print(psf+" ");
+		    		return;
+		    	}
+		    	if(sr>dr || sc>dc)return;
+		    	for(int mv=1;mv<=dc-sc;mv++) {
+		    		printMazePathsWithJumps(sr,sc+mv,dr,dc,psf+"h"+mv);
+		    	}
+		    	for(int mv=1;mv<=dr-sr;mv++) {
+		    		printMazePathsWithJumps(sr+mv,sc,dr,dc,psf+"v"+mv);
+		    	}
+		    	for(int mv=1;mv<=dc-sc && mv<=dr-sr;mv++) {
+		    		printMazePathsWithJumps(sr+mv,sc+mv,dr,dc,psf+"d"+mv);
+		    	}
 		    }
 		    
 		    
 		    //V40
 		    public static void printPermutations(String str, String asf) {
-		        if(str.length()==0){
-		            System.out.println(asf);
-		            return;
-		        }
-		        
-		        for(int i=0;i<str.length();i++){
-		            char c=str.charAt(i);
-		            String left=str.substring(0,i);
-		            String right=str.substring(i+1);
-		            printPermutations(left+right,asf+c);
-		        }
+		    	if(str.isEmpty()) {
+		    		System.out.print(asf+" ");
+		    		return;
+		    	}
+		    	for(int i=0;i<str.length();i++) {
+		    		char ch=str.charAt(i);
+		    		String s=str.substring(0,i)+str.substring(i+1);
+		    		printPermutations(s, asf+ch);
+		    	}
 		    }
 		    //45
 		    public static void printEncodings(String ip,String op){
@@ -610,6 +564,8 @@ public class Pepcoding {
 				}	
 			}
 		    
+
+		    
 		    public static void printEncodings2(String ques, String ans) {
 		        if (ques.length() == 0) {
 		            System.out.println(ans);
@@ -647,11 +603,11 @@ public class Pepcoding {
 		        int w=maze[0].length;
 		        if(sr<0 || sc<0 || sr>=h || sc>=w || maze[sr][sc]==1)return;
 		        if(sr==h-1 && sc==w-1) {
-		            System.out.println(asf);
-		            return;
+		        	System.out.print(asf+", ");
+		        	return;
 		        }
 		        maze[sr][sc]=1;
-		        floodfill(maze,sr-1,sc,asf+'t');
+		        floodfill(maze,sr-1,sc,asf+"t");
 		        floodfill(maze,sr,sc-1,asf+"l");
 		        floodfill(maze,sr+1,sc,asf+"d");
 		        floodfill(maze,sr,sc+1,asf+"r");
@@ -659,71 +615,77 @@ public class Pepcoding {
 		    }
 		    
 		    public static void printTargetSumSubsets(int[] arr, int idx, String set, int sos, int tar) {
-		        if(idx==arr.length){
-		            if(sos==tar){
-		                System.out.println(set+".");
-		            }
-		            return;
-		        }
-		        printTargetSumSubsets(arr,idx+1,set+arr[idx]+", ",sos+arr[idx],tar);
-		        printTargetSumSubsets(arr,idx+1,set,sos,tar);
-
+		       if(idx==arr.length) {
+		    	   if(sos==tar) {
+		    		   System.out.println(set+".");
+		    	   }
+		    	   return;
+		       }
+		       printTargetSumSubsets(arr,idx+1,set+arr[idx]+", ",sos+arr[idx],tar);
+		       printTargetSumSubsets(arr,idx+1,set,sos,tar);
 		    }
 		    
 		    public static void printNQueens(int[][] chess, String qsf, int r) {
-		        if(r==chess.length){
-		            System.out.println(qsf+".");
-		            return;
-		        }
-		        
-		        for(int c=0;c<chess[0].length;c++){
-		            if(isSafe(chess,r,c)){
-		                chess[r][c]=1;
-		                printNQueens(chess,qsf+r+"-"+c+", ",r+1);
-		                chess[r][c]=0;
-		            }
-		        }
+		       if(r==chess.length) {
+		    	   System.out.println(qsf+".");
+		    	   return;
+		       }
+		    	for(int c=0;c<chess[0].length;c++) {
+		    		if( isSafe(chess, r, c)) {
+		    			chess[r][c]=1;
+		    			printNQueens(chess, qsf+"q"+r+"-"+c+" ", r+1);
+		    			chess[r][c]=0;
+		    		}
+		    	}
 		    }
 		    
 		    public static boolean isSafe(int grid[][],int r,int c){
-		        for(int i=r-1,j=c;i>=0;i--)
-		            {
-		                if(grid[i][j]==1)return false;
-		            }
-		            
-		          for(int i=r-1,j=c-1;i>=0 && j>=0;i--,j--)
-		        {
-		                if(grid[i][j]==1)return false;
-		        }
-		        
-		           for(int i=r-1,j=c+1;i>=0 && j<grid.length;i--,j++)
-		        {
-		                if(grid[i][j]==1)return false;
-		        }
-		        return true;
+
+		       for(int i=r-1,j=c;i>=0;i--) {
+		    	   if(grid[i][j]==1)return false;
+		       }
+		       for(int i=r-1,j=c-1;i>=0 && j>=0;i--,j--) {
+		    	   if(grid[i][j]==1)return false;
+		       }
+		       for(int i=r-1,j=c+1;i>=0 && j<grid.length;i--,j++) {
+		    	   if(grid[i][j]==1)return false;
+		       }
+		       return true;
 		    }
 		    
 		    public static void printKnightsTour(int[][] chess, int r, int c, int move) {
-		        int h=chess.length;
-		        int w=chess[0].length;
-		        if(r<0 || c<0 || r>=h || c>=w || chess[r][c]>0)return;
-		        if(move==chess.length*chess.length){
-		            chess[r][c]=move;
-		            //displayBoard(chess);
-		            chess[r][c]=0;
-		            return;
-		        }
-		        chess[r][c]=move;
-		        printKnightsTour(chess,r-2,c+1,move+1);
-		        printKnightsTour(chess,r-1,c+2,move+1);
-		        printKnightsTour(chess,r+1,c+2,move+1);
-		        printKnightsTour(chess,r+2,c+1,move+1);
-		        printKnightsTour(chess,r+2,c-1,move+1);
-		        printKnightsTour(chess,r+1,c-2,move+1);
-		        printKnightsTour(chess,r-1,c-2,move+1);
-		        printKnightsTour(chess,r-2,c-1,move+1);
-		        chess[r][c]=0;
+		      
+		    	if(r<0 || c<0 || r>=chess.length || c>=chess[0].length || chess[r][c]>0)return;
+		    	if(move==chess.length*chess.length) {
+		    		chess[r][c]=move;
+		    		displayBoard(chess);
+		    		chess[r][c]=0;
+		    		return;
+		    	}
+		    	
+		    	chess[r][c]=move;
+		    	printKnightsTour(chess,r-2,c+1,move+1);
+		    	printKnightsTour(chess,r-1,c+2,move+1);
+		    	printKnightsTour(chess,r+1,c+2,move+1);
+		    	printKnightsTour(chess,r+2,c+1,move+1);
+		    	printKnightsTour(chess,r+2,c-1,move+1);
+		    	printKnightsTour(chess,r+1,c-2,move+1);
+		    	printKnightsTour(chess,r-1,c-2,move+1);
+		    	printKnightsTour(chess,r-2,c-1,move+1);
+		    	chess[r][c]=0;
+
 		    }
+
+			private static void displayBoard(int[][] chess) {
+				for(int i=0;i<chess.length;i++) {
+					for(int j=0;j<chess[0].length;j++) {
+						System.out.print(chess[i][j]+" ");
+					}
+					System.out.println();
+				}
+				System.out.println();
+			}
 			
 	
+
 }
