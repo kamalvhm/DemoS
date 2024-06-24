@@ -5,11 +5,292 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
 
+import com.cleanup.Utils;
+
 public class PepBackTrackingSolutions {
 //https://nados.io/content/recursion-and-backtracking-for-intermediate-330
 //https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/recursion-and-backtracking
+	public static String max_value="0";
+	public static int minDiff=Integer.MAX_VALUE;
+	public static String ans19="";
 	public static void main(String[] args) {
+
+		System.out.println("1) Abbreviation 3 2p 1e1 1ep p2 p1p pe1 pep ");
+		solution("pep","",0,0);System.out.println();
+		System.out.println("----------------------------------------");
 		
+		System.out.println("2) Nqueen Branch and bound");
+		int n=4;
+		boolean[][] chess=new boolean[n][n];
+		nqueen(chess,0,new boolean[n],new boolean[2*n-1],new boolean[2*n-1]);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("3) Max score");
+		String [] words= {"dog","cat","dad","good"};//return subset of that such that char frq should match frq and score is max
+		char [] letters= {'a','b','c','d','d','d','g','o','o'};
+		int [] score= {1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0};
+		int farr[]=new int[score.length];
+		for(char ch:letters)
+			farr[ch-'a']++;
+		System.out.println("SCORE 23 :- "+maxscore(words,farr,score,0));
+		System.out.println("----------------------------------------");
+
+		System.out.println("4)  Josephus problem (3) "+Josephus(5,3));
+		System.out.println("----------------------------------------");
+		
+		System.out.println("5)  Laxicographical order print for 10 and below");
+		for(int i=1;i<=9;i++) 
+			dfs(i,10);
+		System.out.println("----------------------------------------");
+		
+		int[][]grid= {{10,2,0},{0,0,0},{0,6,2}};//small pockets of gold collect max
+		boolean [][] visited=new boolean[grid.length][grid.length];
+		int max=0;
+		for(int i=0;i<grid.length;i++) {
+			for(int j=0;j<grid[0].length;j++) {
+				if(grid[i][j]!=0 && visited[i][j]==false) {
+					ArrayList<Integer> bag=new ArrayList<>();
+					dfs(grid,i,j,visited,bag);
+					int sum=0;
+					for(int b:bag)
+						sum+=b;
+					max=Math.max(max, sum);
+				}
+				
+			}
+		}
+		System.out.println("6)  GoldMine- (12)"+max);
+		
+		System.out.println("----------------------------------------");
+		int[][] board= {{3,0,6,5,0,8,4,0,0},
+						{5,2,0,0,0,0,0,0,0},
+						{0,8,7,0,0,0,0,3,1},
+						{0,0,3,0,1,0,0,8,0},
+						{9,0,0,8,6,3,0,0,5},
+						{0,5,0,0,9,0,6,0,0},
+						{1,3,0,0,0,0,2,5,0},
+						{0,0,0,0,0,0,0,7,4},
+						{0,0,5,2,0,6,3,0,0}};
+		System.out.println("7)  Sudoku ");
+		solveSudoku(board, 0, 0);
+
+		System.out.println("----------------------------------------");
+		char[][] arr= {{'+','-','+','+','+','+','+','+','+','+'},
+					   {'+','-','+','+','+','+','+','+','+','+'},
+					   {'+','-','+','+','+','+','+','+','+','+'},
+					   {'+','-','-','-','-','-','+','+','+','+'},
+					   {'+','-','+','+','+','-','+','+','+','+'},
+					   {'+','-','+','+','+','-','+','+','+','+'},
+					   {'+','+','+','+','+','-','+','+','+','+'},
+					   {'+','+','-','-','-','-','-','-','+','+'},
+					   {'+','+','+','+','+','-','+','+','+','+'},
+					   {'+','+','+','+','+','-','+','+','+','+'}};
+		String wordsArr[]= {"DELHI","ICELAND","LONDON","ANKARA"};
+		
+		System.out.println("8)  crossword puzzle ");
+		solution(arr, wordsArr, 0);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("9)  Criptographic");//map char to numbers(0,9) such that str1+str2=str3;
+		String str1="send",str2="more",str3="money",unique="";
+		HashMap<Character,Integer> charInMap=new HashMap<>();
+		for(char ch:str1.toCharArray()){
+			if(!charInMap.containsKey(ch)) {
+				charInMap.put(ch, -1);
+				unique+=ch;
+			}
+		}
+		for(char ch:str2.toCharArray()){
+			if(!charInMap.containsKey(ch)) {
+				charInMap.put(ch, -1);
+				unique+=ch;
+			}
+		}
+		for(char ch:str3.toCharArray()){
+			if(!charInMap.containsKey(ch)) {
+				charInMap.put(ch, -1);
+				unique+=ch;
+			}
+		}
+		boolean usedNumbers[]=new boolean[10];
+		Criptographic(unique,0,charInMap,usedNumbers,str1,str2,str3);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("10)  Friends Pairing");// N no of friends given return total ways to return all subsets with pairs and single 
+		//every friend is having two option akela ayega ya koi or no k sath pair m 
+		int friends=3;
+		boolean[] used=new boolean[n];
+		friendsPairing(1, friends, used, "");
+		System.out.println("----------------------------------------");
+		
+		
+		System.out.println("11)  k partition ");
+		//N =3 and partition them(non empty) in to 2(k) partitions 
+		ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+		for(int i=0;i<2;i++)ans.add(new ArrayList<>());
+		partitionKsubsets(1,3,2,0,ans);
+		System.out.println("----------------------------------------");
+		
+		
+		System.out.println("12)  palindrom partition ");
+		String input="aaaabbbb";
+		HashMap<Character,Integer> fmap=new HashMap<>();
+		for(char ch:input.toCharArray())
+			fmap.put(ch, fmap.getOrDefault(ch, 0)+1);
+		Character oddc = null;
+		int odds = 0;
+		int len = 0;
+		for (Character ch : fmap.keySet()) {
+			int frq = fmap.get(ch);
+			if (frq % 2 == 1) {
+				oddc = ch;
+				odds++;
+			}
+			fmap.put(ch, frq / 2);
+			len += frq / 2;
+		}
+		if (odds > 1)
+			return;
+		generatepw(1,len,fmap,oddc,"");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("13)  palindromPartition ");
+		
+		palindromPartition("abaaba","");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("14)  Equal Sum partition ");
+		ArrayList<ArrayList<Integer>> ans1=new ArrayList<>();
+		int k14=4;
+		for(int i=0;i<k14;i++)ans1.add(new ArrayList<>());
+		int [] arr14= {1,2,3,4,5,6,7,8};
+		int sum=0;
+		for(int i:arr14)
+			sum+=i;
+		int subSetSum[]=new int[k14];
+		
+		solution(arr14,0,8,4,subSetSum,0, ans1);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("15)  pattern Matching");
+		
+		solution("graphtreegraph","pep",new HashMap<Character,String>(),"pep");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("16)   Word Break");
+		HashSet<String> dict=new HashSet<>();
+		dict.add("micro");
+		dict.add("soft");
+		dict.add("hi");
+		dict.add("ring");
+		dict.add("microsoft");
+		wordBreak("microsofthiring","",dict);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("17)   Remove Invalid Parenthesis");
+		HashSet<String> hs=new HashSet<>();
+		String ip="()())()";
+		int getMin=getMin(ip);
+		
+		RemoveInvalidParanthesis(ip,getMin,hs);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("18)  Maximum Number after K Swaps ");
+		
+		largestNoAfterKSwap("1234567",4);System.out.println(" Ans:- "+max_value);
+		System.out.println("----------------------------------------"+max_value);
+		
+		System.out.println("19)   Tug of War");
+		int a19[]= {6,1,2,3,4,5};
+		tugOfWar(a19,0,new ArrayList<>(),new ArrayList<>(),0,0);System.out.println("[6, 1, 3] [2, 4, 5] Ans:- "+ans19);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("20)   Permutation I");
+		permutations(new int[3], 1, 2);//4 boxes and 3 items
+		System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("21)   Combination I");
+		combinations(1, 3, 0, 2, "");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("22)   Permutation II");
+		permutations(1,3,new int[2],0,2,"");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("23)   Combination II");
+		combinations(new int[3], 1, 2, -1);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("24)   permutation of String  (box on level) 'aabb' ");
+		HashMap<Character,Integer> hm24=new HashMap<>();
+		hm24.put('a', 2);hm24.put('b', 2);
+		generateWords(1, 4, hm24, "");System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("25)   Permutation of String  (item on level) 'aabb'");
+		HashMap<Character,Integer> hm25=new HashMap<>();
+		hm25.put('a', -1);hm25.put('b', -1);
+		generateWords(0, "aabb",new Character[4] ,hm25);System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("26)  Word K selection 'abcabc' select 2 (box on level 'abc' is box)");//need to create 2 length word with DISTINCT chars 
+		//so it becomes select 2 from 'abc'
+		combination(0,"abc",0,2,"");System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("27)   Word K selection 'abcabc' select 2 (item on level)");//spot will behave like item 
+		solve("abc",1,2,-1,""); System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("28)   K length word 1 (box on level)");
+		solve(0,"abc",0,2,new Character[2]);System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("29)   K length word 1 (Item on level)");
+		solve(0,2,"abc",new HashSet<Character>(),"");System.out.println();
+		System.out.println("----------------------------------------");
+		
+		System.out.println("30)   Queens Combinations I- 2d As 2d - Box Chooses");
+		queensCombinations(0,2,0,0,"");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("31)   Queens Permutation I- 2d As 2d - Queen Chooses");
+		queensPermutations(0,2,new int[2][2]);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("32)   Queen Permutation II- 2d As 2d Box chooses");
+		queensPermutations(0,2,0,0,"",new boolean[2]);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("33)   Queens Combinations II- 2d As 2d - Queen Chooses");
+		queensCombinations(0,2,new boolean[2][2],0,-1);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("34)   Queens Combinations I- 2d As 1d - Queen Chooses");
+		queensCombinations(0,2,new boolean[2][2],-1);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("35)   N-Queens Combination Problem (Skip)");
+		IsQueenSafe(new boolean[2][2],0,0);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("36)   N-Queens Permutation ");
+		nqueens(0,4,new int[4][4]);
+		System.out.println("----------------------------------------");
+		
+		System.out.println("37)   Knight Tour (skip)");
+		
+		System.out.println("----------------------------------------");
+		
+		
+		System.out.println("38)   Coin Change I");
+		coinChange(0,new int[]{2,3,5,6,7},0,12,"");
+		System.out.println("----------------------------------------");
+		
+		System.out.println("39)   Coin Change II");
+		coinChange2(0,new int[]{2,3,5,6,7},0,12,"");
+		System.out.println("----------------------------------------");
 
 	}
 	
@@ -56,10 +337,10 @@ public class PepBackTrackingSolutions {
 		  }
 	   
 	   //V-3 Max Score 
-		public static int solution(String[] words, int[] farr, int[] score, int idx) {
+		public static int maxscore(String[] words, int[] farr, int[] score, int idx) {
 			 if(idx==words.length)return 0;
 
-			 int sno=solution(words,farr,score,idx+1);
+			 int sno=maxscore(words,farr,score,idx+1);
 			 String word=words[idx];
 			 boolean flag=true;
 			 int yScore=0;
@@ -71,7 +352,7 @@ public class PepBackTrackingSolutions {
 			 } 
 			 int syes=0;
 			 if(flag){
-			     syes=yScore+solution(words,farr,score,idx+1);
+			     syes=yScore+maxscore(words,farr,score,idx+1);
 			 }
 			 for(char ch:word.toCharArray()){
 			     farr[ch-'a']++;
@@ -80,9 +361,9 @@ public class PepBackTrackingSolutions {
 		}
 		
 		//V-4 Josephus
-		 public static int solution(int n, int k){
+		 public static int Josephus(int n, int k){
 			    if(n==1)return 0;
-			    int x=solution(n-1,k);
+			    int x=Josephus(n-1,k);
 			    int y=(x+k)%n;
 			    return y;
 	   }
@@ -98,21 +379,34 @@ public class PepBackTrackingSolutions {
 		 * for(int i=0;i<h;i++){ for(int j=0;j<w;j++){ if(a[i][j]>0){
 		 * max=Math.max(maxGold,dfs(a,i,j)); } } }
 		 */
-	 	public static int dfs(int [][] grid,int r,int c){
-		    if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]==0)
-		        return 0;
-		    int count=grid[r][c];
-		    grid[r][c]=0;
-		    count+=dfs(grid,r+1,c);
-		    count+=dfs(grid,r-1,c); 
-		    count+=dfs(grid,r,c+1); 
-		    count+=dfs(grid,r,c-1); 
-		    return count;
-		}
+//	 	public static int dfs(int [][] grid,int r,int c){
+//		    if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]==0)
+//		        return 0;
+//		    int count=grid[r][c];
+//		    grid[r][c]=0;
+//		    count+=dfs(grid,r+1,c);
+//		    count+=dfs(grid,r-1,c); 
+//		    count+=dfs(grid,r,c+1); 
+//		    count+=dfs(grid,r,c-1); 
+//		    return count;
+//		}
+	    
+	 	
+	 	public static void dfs(int [][] grid,int r,int c,boolean [][]visited,ArrayList<Integer> bag){
+	 	   if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]==0
+	 			   || visited[r][c]==false)return;
+	 	   bag.add(grid[r][c]);
+	 	   visited[r][c]=true;
+	 	   dfs(grid,r+1,c,visited,bag);
+	 	   dfs(grid,r-1,c,visited,bag);
+	 	   dfs(grid,r,c+1,visited,bag);
+	 	   dfs(grid,r,c-1,visited,bag);
+
+	 	}
 	 	//v-7 Sudoku 
 	 	 public static void solveSudoku(int[][] board, int i, int j) {
 	 	    if(i==board.length){
-	 	        //display(board);
+	 	        Utils.display(board);
 	 	        return;
 	 	    }
 	 	    int nr=0,nc=0;
@@ -234,7 +528,7 @@ public class PepBackTrackingSolutions {
 	       }
 	   }
 	   //V-9Criptographic 
-		public static void solution(String unique, int idx, HashMap<Character, Integer> charIntMap,
+		public static void Criptographic(String unique, int idx, HashMap<Character, Integer> charIntMap,
 				boolean[] usedNumbers, String s1, String s2, String s3) {
 
 			if (idx == unique.length()) {
@@ -259,7 +553,7 @@ public class PepBackTrackingSolutions {
 				if (usedNumbers[i] == false) {
 					usedNumbers[i] = true;
 					charIntMap.put(ch, i);
-					solution(unique, idx + 1, charIntMap, usedNumbers, s1, s2, s3);
+					Criptographic(unique, idx + 1, charIntMap, usedNumbers, s1, s2, s3);
 					usedNumbers[i] = false;
 					charIntMap.put(ch, -1);
 				}
@@ -274,7 +568,7 @@ public class PepBackTrackingSolutions {
 			return Integer.parseInt(num);
 		}
 	    //V-10 Friends Pairing
-		  public static void solution(int i, int n, boolean[] used, String asf) {
+		  public static void friendsPairing(int i, int n, boolean[] used, String asf) {
 		      if(i>n){
 		          //System.out.println(counter+"."+asf);
 		          //counter++;
@@ -282,14 +576,14 @@ public class PepBackTrackingSolutions {
 		      }
 		    
 		    if(used[i])
-		      solution(i+1,n,used,asf);
+		    	friendsPairing(i+1,n,used,asf);
 		    else{
 		        used[i]=true;
-		        solution(i+1,n,used,asf+"("+i+") ");
+		        friendsPairing(i+1,n,used,asf+"("+i+") ");
 		        for(int j=i+1;j<=n;j++){
 		            if(used[j]==false){
 		                used[j]=true;
-		                solution(i+1,n,used,asf+"("+i+","+j+") ");
+		                friendsPairing(i+1,n,used,asf+"("+i+","+j+") ");
 		                used[j]=false;
 		            }
 		        }
@@ -298,7 +592,7 @@ public class PepBackTrackingSolutions {
 		  }
 		  //V-11 partition K subsets
 		   static int counter=1;
-			public static void solution(int i, int n, int k, int rssf, ArrayList<ArrayList<Integer>> ans) {
+			public static void partitionKsubsets(int i, int n, int k, int rssf, ArrayList<ArrayList<Integer>> ans) {
 				   if(i>n){
 				       if(rssf==k){
 				           	 System.out.print(counter+". ");
@@ -312,11 +606,11 @@ public class PepBackTrackingSolutions {
 				   for(int j=0;j<ans.size();j++){
 				       if(ans.get(j).size()>0){
 				           ans.get(j).add(i);
-				           solution(i+1,n,k,rssf,ans);
+				           partitionKsubsets(i+1,n,k,rssf,ans);
 				           ans.get(j).remove(ans.get(j).size()-1);
 				       }else {
 				           ans.get(j).add(i);
-				           solution(i+1,n,k,rssf+1,ans);
+				           partitionKsubsets(i+1,n,k,rssf+1,ans);
 				           ans.get(j).remove(ans.get(j).size()-1);
 				           break;
 				       }
@@ -351,7 +645,7 @@ public class PepBackTrackingSolutions {
 				}
 			}
 		//V-13 Palindrom Partitioning of String
-			public static void solution(String str, String asf) {
+			public static void palindromPartition(String str, String asf) {
 				if(str.isEmpty()){
 				    System.out.println(asf);
 				    return;
@@ -360,7 +654,7 @@ public class PepBackTrackingSolutions {
 				    String prefix=str.substring(0,i+1);
 				    String ros=str.substring(i+1);
 				    //if(isPalindrom(prefix)){
-				        solution(ros,asf+"("+prefix+") ");
+				    palindromPartition(ros,asf+"("+prefix+") ");
 				    //}
 				}
 			}
