@@ -85,8 +85,8 @@ public class Dpractice3 {
 			At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
 		 */
 		System.out.println("17)Minimum ASCII Delete Sum for Two Strings (231) :-"+minimumDeleteSum(s5,s6,s5.length(),s6.length()));
-		String s7 = "ALDBCEBCD", s8 = "ABCD";//Output : 3 "ACD" is longest subsequence of S8 which is substring of s7.
-		System.out.println("7)Length of longest subsequence of a which is substring in b (3):-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
+		String s7 = "ABCD", s8 = "BACDBDCD";//Output : 3 "ACD" is longest subsequence of s7 which is substring of s8.
+		System.out.println("7)Length of longest subsequence of a which is substring in b :-"+longestOfAinB(s7,s8,s7.length(),s8.length()));
 		String s9 = "GeeksforGeeks", s10 = "Gks";//find the number of times the second string occurs in the first string, whether continuous or discontinuous.
 		//SAME AS DistinctSubsequences
 		System.out.println("9)count how many times a appear as subsequence in b (4) :-"+DistinctSubsequences(s9,s10,s9.length(),s10.length()));
@@ -98,9 +98,10 @@ public class Dpractice3 {
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
 		if(n==0 || m==0)return 0;
 		if(dp[n][m]!=-1)return dp[n][m];
-		if(x.charAt(n-1)==y.charAt(m-1))return dp[n][m]= 1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
+		if(x.charAt(n-1)==y.charAt(m-1))
+			return dp[n][m]=1+LCS_Simple_recursive_Code(x, y, n-1, m-1);
 		else
-		return  dp[n][m]= Math.max(LCS_Simple_recursive_Code(x, y, n-1, m), LCS_Simple_recursive_Code(x, y, n, m-1));
+		return dp[n][m]=Math.max(LCS_Simple_recursive_Code(x, y, n-1, m), LCS_Simple_recursive_Code(x, y, n, m-1));
 	}
 	
 	
@@ -110,8 +111,8 @@ public class Dpractice3 {
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<m+1;j++) {
 				if(x.charAt(i-1)==y.charAt(j-1))
-					 t[i][j]=1+ t[i-1][j-1];
-				else  t[i][j]=Math.max( t[i-1][j],  t[i][j-1]);
+					t[i][j]=1+t[i-1][j-1];
+				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 			}
 		}
 		return t[n][m];
@@ -122,9 +123,9 @@ public class Dpractice3 {
 		int max =0;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<m+1;j++) {
-				if(x.charAt(i-1)==y.charAt(j-1)) {
+				if(x.charAt(i-1)==y.charAt(j-1))
 					t[i][j]=1+t[i-1][j-1];
-				}else t[i][j]=0;
+				else t[i][j]=0;
 				max=Math.max(max, t[i][j]);
 			}
 		}
@@ -141,10 +142,10 @@ public class Dpractice3 {
 					t[i][j]=1+t[i-1][j-1];
 				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 			}
-		} 
+		}
 		
-		int i=n,j=m; StringBuffer sb=new StringBuffer();
-
+		int i=n,j=m;
+		StringBuffer sb=new StringBuffer();
 		while(i>0 && j>0) {
 			if(x.charAt(i-1)==y.charAt(j-1)) {
 				sb.insert(0, x.charAt(i-1));
@@ -162,48 +163,51 @@ public class Dpractice3 {
 		 	int n= x.length();
 	        int m = y.length();
 	        int[][] t = new int[n+1][m+1];
-	        for(int i=1;i<n+1;i++) {
-	        	for(int j=1;j<m+1;j++) {
-	        		if(x.charAt(i-1)==y.charAt(j-1))
-	        			t[i][j]=1+t[i-1][j-1];
-	        		else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-	        	}
-	        }
 	        StringBuffer sb=new StringBuffer();
-	        int i=n,j=m;
-	        while(i>0 && j>0) {
-	        	if(x.charAt(i-1)==y.charAt(j-1)) {
-	        		sb.insert(0, x.charAt(i-1));
-	        		i--;
-	        		j--;
-	        	}else if(t[i-1][j]>t[i][j-1]) {
-	        		sb.insert(0, x.charAt(i-1));
-	        		i--;
-	        	}else {
-	        		sb.insert(0, y.charAt(j-1));
-	        		j--;
-	        	}
-	        }
-	        while(i>0) {
-	        	sb.insert(0, x.charAt(i-1));
-        		i--;
-	        }
-	        while(j>0) {
-	        	sb.insert(0, y.charAt(j-1));
-        		j--;
-	        }
+
+	        for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1))
+						t[i][j]=1+t[i-1][j-1];
+					else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+				}
+			}
+			
+			int i=n,j=m;
+			while(i>0 && j>0) {
+				if(x.charAt(i-1)==y.charAt(j-1)) {
+					sb.insert(0, x.charAt(i-1));
+					i--;
+					j--;
+				}else if(t[i-1][j]>t[i][j-1]) {
+					sb.insert(0, x.charAt(i-1));
+					i--;
+				}
+				else {
+					sb.insert(0, y.charAt(j-1));
+					j--;
+				}
+			}
+			while(i>0) {
+				sb.insert(0, x.charAt(i-1));
+				i--;
+			}
+			while(j>0) {
+				sb.insert(0, y.charAt(j-1));
+				j--;
+			}
 	        return sb.toString();
 	    }
 	 
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
-			int t[][]=new int [n+1][m+1];  
+			int t[][]=new int[n+1][m+1];
 			for(int i=1;i<n+1;i++) {
 				for(int j=1;j<m+1;j++) {
 					if(x.charAt(i-1)==y.charAt(j-1) && i!=j)
 						t[i][j]=1+t[i-1][j-1];
 					else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
-				} 
+				}
 			}
 			return t[n][m];
 		}
@@ -211,43 +215,38 @@ public class Dpractice3 {
 	 public static int editDistance(String x,String y,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	        
+	        for(int i=0;i<n+1;i++)
+	        	t[0][i]=t[i][0]=i;
 	        
-	        for(int i=0;i<n+1;i++) {
-	        	t[i][0]=i;
-	        } 
-	        for(int j=0;j<m+1;j++)
-	        	t[0][j]=j;
-	        
-	        for(int i=1;i<n+1;i++) {
-	        	for(int j=1;j<m+1;j++) {
-	        		if(x.charAt(i-1)==y.charAt(j-1))
-	        			t[i][j]=t[i-1][j-1];
-	        		else t[i][j]=Math.min(Math.min(t[i-1][j], t[i][j-1]), t[i-1][j-1])+1;
-	        	}
-	        }
+	       for(int i=1;i<n+1;i++) {
+	    	   for(int j=1;j<m+1;j++) {
+	    		   if(x.charAt(i-1)==y.charAt(j-1))t[i][j]=t[i-1][j-1];
+	    		   else t[i][j]=Math.min(Math.min(t[i-1][j], t[i][j-1]), t[i-1][j-1])+1;
+	    	   }
+	       }
 	        return t[n][m];
 	    }
 	 
 	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
 		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
-			if(n==0 && m>0)return 0;
-			if(n>=0 && m==0)return 1;
-			if(s.charAt(n-1)==t.charAt(m-1))return DistinctSubsequencesR(s, t, n-1, m-1);
-			else 
+			 if(m==0)return 1;
+			 if(n==0)return 0;
+			 if(s.charAt(n-1)!=t.charAt(m-1))return DistinctSubsequencesR(s, t, n-1, m);
+			 else 
 			return DistinctSubsequencesR(s, t, n-1, m-1)+DistinctSubsequencesR(s, t, n-1, m);
 	    }
 		 
 		public static int DistinctSubsequences(String x ,String y,int n,int m){
 		      int t[][]=new int [n+1][m+1];
-		     for(int i=0;i<n+1;i++)
-		    	 	t[i][0]=1;
-		     for(int i=1;i<n+1;i++) {
-		    	 for(int j=1;j<m+1;j++) {
-		    		 if(x.charAt(i-1)==y.charAt(j-1))
-		    			 t[i][j]=t[i-1][j-1];
-		    		 else t[i][j]=t[i-1][j-1]+t[i-1][j];
-		    	 }
-		     }
+		      
+		      for(int i=0;i<m+1;i++)
+		    	  t[0][i]=1;
+		      for(int i=1;i<n+1;i++) {
+		    	  for(int j=1;j<m+1;j++) {
+		    		  if(x.charAt(i-1)!=y.charAt(j-1))t[i][j]=t[i-1][j];
+		    		  else t[i][j]=t[i-1][j-1]+t[i-1][j];
+		    	  }
+		      }
 		      return t[n][m];
 		    }
 		//https://www.youtube.com/watch?v=5SrTJ4D9hKw&t=399s | Prior -https://www.youtube.com/watch?v=OjaUemQyDmw
@@ -256,16 +255,15 @@ public class Dpractice3 {
 			int t[][]=new int[n+1][n+1];
 			String res="";
 			int resE=1,resL=1;
-			for(int i=0;i<n+1;i++) t[0][i]=t[1][i]=1;
-			
-			for(int i=2;i<n+1;i++) {
-				for(int j=i;j<n+1;j++) {
-					if(e.charAt(i-1)==e.charAt(j-1) && t[i-2][j-1]==1) {
+			for(int i=0;i<=n;i++)
+					t[0][i]=t[1][i]=1;
+			for(int i=2;i<=n;i++) {
+				for(int j=i;j<=n;j++) {
+					if(e.charAt(j-1)==e.charAt(j-i) && t[i-2][j-1]==1) {
 						t[i][j]=1;
-						resL=i;
 						resE=j;
-
-					}else dp[i][j]=0;
+						resL=i;
+					}
 				}
 			}
 			return e.substring(resE-resL,resE);
@@ -274,22 +272,27 @@ public class Dpractice3 {
 		//CODE SAME AS LCS JUST ADD ANSCII AT EVERY STEP
 		public static int minimumDeleteSum(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
-	        
-	        for(int i=1;i<n+1;i++) 
-	        	t[i][0]=(int) s1.charAt(i-1);
-	        
+	        for(int i=1;i<n+1;i++)
+	        	t[i][0]=t[i-1][0]+(int)s1.charAt(i-1);
 	        for(int j=1;j<m+1;j++)
-	        	t[0][j]=(int) s2.charAt(j-1);
+	        	t[0][j]=t[0][j-1]+(int)s2.charAt(j-1);
 	        
 	        for(int i=1;i<n+1;i++) {
 	        	for(int j=1;j<m+1;j++) {
 	        		if(s1.charAt(i-1)==s2.charAt(j-1))
 	        			t[i][j]=t[i-1][j-1];
-	        		else t[i][j]=Math.min(t[i-1][j]+s1.charAt(i-1), t[i][j-1]+s2.charAt(j-1));
+	        		else t[i][j]=Math.min(t[i-1][j]+(int)s1.charAt(i-1), t[i][j-1]+s2.charAt(j-1));
 	        	}
 	        }
+	       
 	        return t[n][m];
 	    }
+		public static int longestOfAinR(String x,String y,int n,int m) {
+			int t[][]=new int [n+1][m+1];  
+			int max=0;
+			
+			return max;
+		}
 		//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
 		public static int longestOfAinB(String x,String y,int n,int m) {
 			int t[][]=new int [n+1][m+1];  
@@ -297,11 +300,12 @@ public class Dpractice3 {
 			for(int i=1;i<n+1;i++) {
 				for(int j=1;j<m+1;j++) {
 					if(x.charAt(i-1)==y.charAt(j-1)) {
-						t[i][j]=t[i-1][j-1]+1;
-					}
-					else t[i][j]=t[i][j-1];
-					max=Math.max(max, t[i][j]);
+						t[i][j]=1+t[i-1][j-1];
 
+						max=Math.max(max, t[i][j]);
+
+					}
+					else t[i][j]=t[i-1][j];
 				}
 			}
 			
@@ -329,13 +333,14 @@ public class Dpractice3 {
 	        int dp [] =new int[nums.length];
 	        int max=1;
 	        Arrays.fill(dp, 1);
-	        for(int i=0;i<nums.length;i++) {
+	        for(int i=1;i<nums.length;i++) {
 	        	for(int j=0;j<i;j++) {
-	        		if(nums[j]<nums[i] && dp[j]+1>dp[i]) {
+	        		if(nums[j]<nums[i] && dp[i]<dp[j]+1) {
 	        			dp[i]=dp[j]+1;
 	        		}
-	        		max=Math.max(max, dp[i]);
-	        	} 
+	        	}
+        		max=Math.max(max, dp[i]);
+
 	        }
 	        return max;
 	    }

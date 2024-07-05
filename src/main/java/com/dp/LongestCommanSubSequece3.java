@@ -375,6 +375,25 @@ public class LongestCommanSubSequece3 {
         }
         return t[n][m];
     }
+	
+	static int longestOfAinB_R(String X, String Y, int n, int m) {
+
+		// Base Case
+		if (n == 0 || m == 0)
+			return 0;
+
+		// Calls on smaller inputs
+
+		// if the last char of both Strings are equal
+		if (X.charAt(n - 1) == Y.charAt(m - 1)) {
+			return 1 + longestOfAinB_R(X, Y, n - 1, m - 1);
+		}
+
+		// if the last char of both Strings are not equal
+		else {
+			return longestOfAinB_R(X, Y, n - 1, m); //Not reducing substring
+		}
+	}
 	//https://www.geeksforgeeks.org/find-length-longest-subsequence-one-string-substring-another-string/
 	public static int longestOfAinB(String x,String y,int n,int m) {
 		int t[][]=new int [m+1][n+1];  
@@ -386,7 +405,7 @@ public class LongestCommanSubSequece3 {
 					max=Math.max(max, t[i][j]);
 				}else {
 					// Else copy the previous value in the 
-					t[i][j]=t[i][j-1]; //Only change from LCS (As we need subString from x so only one condition applied here )
+					t[i][j]=t[i][j-1]; //Only change from LCS (As we need subString from y so only one condition applied here )
 				}
 			}
 		}

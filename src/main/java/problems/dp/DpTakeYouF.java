@@ -271,8 +271,49 @@ public class DpTakeYouF {
         return dp[1][N-1];
 	}
 	//Prob 47 MCM skip ans 
-	
-	
+	//Palindrom Partitioning
+	 static int f(int i, int n, String str, int[] dp) {
+	        // Base case:
+	        if (i == n) return 0;
+
+	        if (dp[i] != -1) return dp[i];
+	        int minCost = Integer.MAX_VALUE;
+	        // String[i...j]
+	        for (int j = i; j < n; j++) {
+	            if (isPalindrome(i, j, str)) {
+	                int cost = 1 + f(j + 1, n, str, dp);
+	                minCost = Math.min(minCost, cost);
+	            }
+	        }
+	        return dp[i] = minCost;
+	    }
+	 static boolean isPalindrome(int i, int j, String s) {
+	        while (i < j) {
+	            if (s.charAt(i) != s.charAt(j)) return false;
+	            i++;
+	            j--;
+	        }
+	        return true;
+	    }
+
+	 static int palindromePartitioning2(String str) {
+	        int n = str.length();
+	        int[] dp = new int[n + 1];
+	        dp[n] = 0;
+	        for (int i = n - 1; i >= 0; i--) {
+	            int minCost = Integer.MAX_VALUE;
+	            // String[i...j]
+	            for (int j = i; j < n; j++) {
+	                if (isPalindrome(i, j, str)) {
+	                    int cost = 1 + dp[j + 1];
+	                    minCost = Math.min(minCost, cost);
+	                }
+	            }
+	            dp[i] = minCost;
+	        }
+	        return dp[0] - 1;
+	    }
+
 //	public int findNumberOfLIS(int[] nums) {
 //        int n=nums.length;
 //       
@@ -823,6 +864,36 @@ public class DpTakeYouF {
 	   }
 	      return dp[0][1];
 	  }
+	//Space optimization Tc O(N*2) SC O(1);
+	 static long getMaximumProfit(long[] Arr, int n) {
+	        // Create arrays 'ahead' and 'cur' to store the maximum profit ahead and current profit
+	        long[] ahead = new long[2];
+	        long[] cur = new long[2];
+
+	        // Base condition: If we have no stocks to buy or sell, profit is 0
+	        ahead[0] = ahead[1] = 0;
+
+	        long profit = 0;
+
+	        // Iterate through the array in reverse to calculate the maximum profit
+	        for (int ind = n - 1; ind >= 0; ind--) {
+	            for (int buy = 0; buy <= 1; buy++) {
+	                if (buy == 0) { // We can buy the stock
+	                    profit = Math.max(0 + ahead[0], -Arr[ind] + ahead[1]);
+	                }
+
+	                if (buy == 1) { // We can sell the stock
+	                    profit = Math.max(0 + ahead[1], Arr[ind] + ahead[0]);
+	                }
+	                cur[buy] = profit;
+	            }
+
+	            // Update the 'ahead' array with the current profit values
+	            System.arraycopy(cur, 0, ahead, 0, 2);
+	        }
+	        return cur[0]; // The maximum profit is stored in 'cur[0]'
+	    }
+
 	static boolean wildcardMatchingSpaceOpt(String S1, String S2) {
 	    int n = S1.length();
 	    int m = S2.length();
@@ -924,7 +995,8 @@ public static boolean wildcardMatching2(String p, String s) {
 		  }
 
 		  static int wildcardMatching(String S1, String S2) {
-
+//			  String S1 = "ab*cd";
+//			    String S2 = "abdefcd";
 		    int n = S1.length();
 		    int m = S2.length();
 
@@ -1129,6 +1201,17 @@ public static boolean wildcardMatching2(String p, String s) {
 	        }
 	        return dp[n-1][x]!=Integer.MAX_VALUE-1?dp[n-1][x]:-1;
 	    }
+	 
+//	   public static int solve(int []wt, int n,int w){
+//	        if(w==0)return 0;
+//	        if(n==0)return Integer.MAX_VALUE-1;
+//
+//	        int nontake=solve(wt,n-1,w);
+//	        int take=Integer.MAX_VALUE-1; 
+//	        if(wt[n-1]<=w)
+//	            take=1+solve(wt,n,w-wt[n-1]);
+//	        return Math.min(take,nontake);
+//	    }
 
 	//prob 19  solve(weight,value,n-1,maxWeight,dp);
 	static int knapsackUtil(int[] wt,int[] val, int ind, int W,int[][] dp){
@@ -1188,6 +1271,26 @@ public static boolean wildcardMatching2(String p, String s) {
         
         return prev[w];
     }
+//    static int countPartitions(int d,int[] arr){
+//        int n = arr.length;
+//        int totSum = 0;
+//        for(int i=0; i<arr.length;i++){
+//            totSum += arr[i];
+//        }
+//        
+//        //Checking for edge cases
+//        if(totSum-d<0) return 0;
+//        if((totSum-d)%2==1) return 0;
+//        
+//        int s2 = (totSum-d)/2;
+//        
+//        int dp[][] = new int[n][s2+1];
+//        
+//        for(int row[]: dp)
+//        Arrays.fill(row,-1);
+//        
+//        return countPartitions(n-1,s2,arr,dp);
+//    }
 	//prob 18
 	 static int mod =(int)(Math.pow(10,9)+7);
 		public static int countPartitions(int n, int d, int[] arr) {
@@ -1333,6 +1436,11 @@ public static boolean wildcardMatching2(String p, String s) {
 		    
 		    if(arr[0]<=k)
 		        dp[0][arr[0]] = true;
+		    
+		    //or above condition can be written as CONDITION IS WRONG
+//		    for(int j=0;j<=k;j++){
+//	            if(j<arr.length && arr[j]==j)dp[0][j]=true;
+//	        }
 		    
 		    for(int ind = 1; ind<n; ind++){
 		        for(int target= 1; target<=k; target++){
@@ -1502,7 +1610,7 @@ public static boolean wildcardMatching2(String p, String s) {
 	            dp[0][j]=matrix[0][j];
 	        }
 	        for(int i=1;i<n;i++){
-	            for(int j=0;j<n;j++){//as posible column values start from 0 
+	            for(int j=0;j<n;j++){//as possible column values start from 0 
 	                int ld=Integer.MAX_VALUE,rd=Integer.MAX_VALUE;
 	                int up=dp[i-1][j];
 	                if(j-1>=0)
