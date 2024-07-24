@@ -72,5 +72,52 @@ public class SpreadInfectionV14 {
       }
       System.out.println(count);
    }
+//https://leetcode.com/problems/rotting-oranges/
+   
+   public int orangesRotting(int[][] grid) {
+       int h=grid.length;
+       int w=grid[0].length;
+       boolean [][] visited=new boolean[h][w];
 
+       ArrayDeque<Pair2> q=new ArrayDeque<>();
+       int ones=0;
+       for(int i=0;i<h;i++){
+           for(int j=0;j<w;j++){
+               if(grid[i][j]==2){
+                   q.offer(new Pair2(i,j,0));
+               }else if(grid[i][j]==1)
+                   ones++; 
+           }
+       }
+       int count=0;
+       while(!q.isEmpty()){
+           Pair2 rem=q.removeFirst();
+           if(visited[rem.r][rem.c])continue;
+           visited[rem.r][rem.c]=true;
+           count=rem.t;
+           if(rem.t>0)
+               ones--;
+           if(rem.r+1<grid.length && grid[rem.r+1][rem.c]==1)
+               q.offer(new Pair2(rem.r+1,rem.c,rem.t+1));
+           if(rem.r-1>=0 && grid[rem.r-1][rem.c]==1)
+               q.offer(new Pair2(rem.r-1,rem.c,rem.t+1));
+           if(rem.c+1<grid[0].length && grid[rem.r][rem.c+1]==1)
+               q.offer(new Pair2(rem.r,rem.c+1,rem.t+1));
+           if(rem.c-1>=0 && grid[rem.r][rem.c-1]==1)
+               q.offer(new Pair2(rem.r,rem.c-1,rem.t+1));
+       }
+
+       return ones==0?count:-1;
+   }
+
+   static class Pair2{
+       int r;
+       int c;
+       int t;
+       Pair2 (int r,int c,int t){
+           this.r=r;
+           this.c=c;
+           this.t=t;
+       }
+   }
 }

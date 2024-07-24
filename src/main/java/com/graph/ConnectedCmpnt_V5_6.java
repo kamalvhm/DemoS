@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class ConnectedCmpnt_V5 {
+public class ConnectedCmpnt_V5_6 {
 
 	 static class Edge {
 	      int src;
@@ -96,7 +96,32 @@ public class ConnectedCmpnt_V5 {
 		  island(grid,i,j-1,visited);
 		  island(grid,i,j+1,visited);
 	   }
-	   
+	   //547. Number of Provinces
+	   public int findCircleNum(int[][] isConnected) {
+	        int vtces=isConnected.length;
+	        boolean [] visited=new boolean[vtces];
+	        int count=0;
+	        for(int v=0;v<vtces;v++){
+	            if(visited[v]==false){
+	                dfs(isConnected,v,visited);
+	                count++;
+	            }
+	        } 
+
+	        return count;
+	    }
+	    public static void dfs(int[][] graph,int src,boolean [] visited ){
+	        visited[src]=true;
+	        for(int i=0;i<graph[src].length;i++){
+	            if(graph[src][i]==1 && src!=i){//avoiding self edges 
+	                int edge=i;
+	            if(visited[edge]==false)
+	                dfs(graph,edge,visited);
+	            }
+	            
+	        }
+
+	    }
 	   
 	   
 

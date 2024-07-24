@@ -83,6 +83,7 @@ public class GraphCycle_V12 {
        return false;
    }
    //DFS way for undirected graph || https://www.techiedelight.com/check-undirected-graph-contains-cycle-not/
+   //take you forward https://www.youtube.com/watch?v=zQ3zgFypzX4
    public static boolean dfs(ArrayList<Edge>[] graph,int src,boolean visited[],int parent)  
    { 
        visited[src]=true;
@@ -92,6 +93,7 @@ public class GraphCycle_V12 {
                 return true;
                 
            }
+          //Mean nbr is visited and its not where i came from like i came from 0>1>2>3 now 3 nbr is 0 visited but its not 2
         // if `nbr` is visited already, and `nbr` is not a parent
            else if (e.nbr != parent) //this means where i came from (parent) and my nbr is same so cycle (THIS CONDITION FOR DIRECTED NOT TRUE FOR THIS -ABOVE is GOOD)
                 return true; // we found a back-edge (cycle)

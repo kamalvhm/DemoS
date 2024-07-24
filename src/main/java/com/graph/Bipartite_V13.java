@@ -14,7 +14,7 @@ public class Bipartite_V13 {
          this.wt = wt;
       }
    }
-   static class Pair{
+   static class Pair {
        int v;
        String psf;
        int level;
