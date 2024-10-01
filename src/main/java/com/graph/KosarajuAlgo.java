@@ -26,7 +26,7 @@ public class KosarajuAlgo {
 //Function to find number of strongly connected components in the graph.
 	public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj) {
 		int[] vis = new int[V];
-		Stack<Integer> st = new Stack<Integer>();
+		Stack<Integer> st = new Stack<Integer>(); //stack will store according to there finishing time (sorted)
 		for (int i = 0; i < V; i++) {
 			if (vis[i] == 0) {
 				dfs(i, vis, adj, st);

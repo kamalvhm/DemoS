@@ -67,33 +67,143 @@ public class SlidingWindowPractice {
 	}
 	
 	private static int firstNegative(int[] arr, int window) {
-		
+		int i=0,j=0;
+		List<Integer> neg=new ArrayList<>();
+		while(j<arr.length) {
+			if(arr[j]<0) {
+				neg.add(arr[j]);
+			}
+			if(j-i+1<window)
+				j++;
+			else if(j-i+1==window) {
+			if(!neg.isEmpty())
+				System.out.print(neg.get(0)+"");
+				if(neg.contains(arr[i])) {
+					neg.remove(0);
+				}
+				i++;
+				j++;
+			}
+		}
 		return 1;
 	}
 
 	//https://leetcode.com/problems/find-all-anagrams-in-a-string/
 	  public static List<Integer> findAnagrams(String s, String p) {
-		  	
-	       return new ArrayList<Integer> ();
+			List<Integer> ans=new ArrayList<>();
+		  	int i=0,j=0;
+		  	HashMap<Character,Integer> hm=new HashMap<>();
+		  	for(char ch:p.toCharArray())
+		  		hm.put(ch, hm.getOrDefault(ch, 0)+1);
+		  	int count=hm.size();
+		  	while(j<s.length()) {
+		  		char ch=s.charAt(j);
+		  		if(hm.containsKey(ch)) {
+		  			int val=hm.get(ch);
+		  			hm.put(ch, --val);
+		  			if(val==0) 
+		  				count--;
+		  		}
+		  		if(j-i+1<p.length()) 
+		  			j++;
+		  		
+		  		else if(j-i+1==p.length()) {
+		  			if(count==0)
+		  				ans.add(i);
+		  			char lch=s.charAt(i);
+		  			if(hm.containsKey(lch)) {
+		  				int val=hm.get(lch);
+		  				if(val==0)
+		  					count++;
+		  				hm.put(lch, ++val);
+
+		  			}
+		  			i++;
+		  			j++;
+		  			
+		  		}
+		  	}
+		  		
+		  	return ans;
 	    }
 	  
 		private static List<Integer> maximumInWindow(int nums[],int k){
 	        ArrayList<Integer> ans=new ArrayList<>();
-	      
+	        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+	        int i=0,j=0;
+	        while(j<nums.length) {
+	        	pq.offer(nums[j]);
+	        	if(j-i+1<k)
+	        		j++;
+	        	else if(j-i+1==k) {
+	        		if(pq.size()>0) {
+	        			ans.add(pq.peek());
+	        		}
+	        		int val=nums[i];
+	        		if(pq.contains(val)) {
+	        			pq.remove(val);
+	        		}
+	        		i++;
+	        		j++;
+	        	}
+	        	
+	        }
 			return ans;
 		}
 
 
 	  private static int longestSubArray(int[] arr, int k) {
 			int max=0;
-			
+			int sum=0;
+			int i=0,j=0;
+			while(j<arr.length) {
+				sum+=arr[j];
+				if(sum<k)
+					j++;
+				else if(sum>=k) {
+					if(sum==k)
+						max=Math.max(max, j-i+1);
+					while(sum>k) {
+						sum-=arr[i];
+						i++;
+					}
+					j++;
+				}
+			}
 			return max;
 		}
 
 	
 	private static String largestSubStringWithKUnique(String s, int k) {
 			String res="";
-			
+			HashMap<Character,Integer> hm=new HashMap<>();
+			int i=0,j=0;
+			int max=0;
+			while(j<s.length()) {
+				char ch=s.charAt(j);
+				hm.put(ch, hm.getOrDefault(ch, 0)+1);
+				if(hm.size()<k)
+					j++;
+				else if(hm.size()==k) {
+					if(j-i+1>max) {
+						max=j-i+1;
+						res=s.substring(i,j+1);
+					}
+					j++;
+				}else if(hm.size()>k) {
+					while(hm.size()>k) {
+						char lch=s.charAt(i);
+						if(hm.containsKey(lch)) {
+							int val=hm.get(lch);
+							if(--val==0)
+								hm.remove(lch);
+							else hm.put(lch, val);
+						}
+						i++;
+					}
+					j++;
+				}
+			}
 			return res;
 	}
 		
@@ -102,13 +212,9 @@ public class SlidingWindowPractice {
 		HashMap<Character,Integer> map=new HashMap<>();
 		int max=0;
 		while(j<s.length()) {
-			char rch=s.charAt(j);
-			map.put(rch, map.getOrDefault(rch, 0)+1);
-			if(map.size()==j-i+1) {
-				max=Math.max(max, j-i+1);
-				j++;
-			}
-			else if(map.size()<j-i+1) {
+			char ch=s.charAt(j);
+			map.put(ch, map.getOrDefault(ch, 0)+1);
+			if(map.size()<j-i+1) {
 				while(map.size()<j-i+1) {
 					char lch=s.charAt(i);
 					int val=map.get(lch);
@@ -117,6 +223,10 @@ public class SlidingWindowPractice {
 					else map.put(lch, val);
 					i++;
 				}
+				j++;
+			}
+			else if(map.size()==j-i+1) {
+				max=Math.max(max,j-i+1);
 				j++;
 			}
 		}

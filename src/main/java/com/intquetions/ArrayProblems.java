@@ -24,8 +24,8 @@ public class ArrayProblems {
 	public static void main(String[] args) {
 		//CONVERSION 
 		int[] nums={4,3,2,7,8,2,3,1};
-		List ip= Arrays.asList(nums);
-		Integer[] numsAgain=(Integer[])ip.toArray();
+		//List ip= Arrays.asList(nums);
+		//Integer[] numsAgain=(Integer[])ip.toArray();
         
        int [] a= {4,3,2,7,8,2,3,1};
        System.out.println(largestValueInArrayWITHDEVIDEANDCONQUER(a,0,a.length-1));
@@ -52,14 +52,29 @@ public class ArrayProblems {
       // a2 b2 c2 d2 e2 - a2 e2 b2 c2 d2 e2 will give b2-e2 by solving math of both we can solve this but here we will discuss 
       //swap sort where we will arrange array such that i index contains i+1 value  so start from 0 nd check if its on correct spot if not swap this 
       //with correct spot https://leetcode.com/problems/find-the-duplicate-number/
-      System.out.print(findDupUsingSlowFast(ar));
+      //System.out.print(findDupUsingSlowFast(ar));
       
       
-      
-      
+      int arr[]= {2,7,1,4,1,7,8,2,8};
+      System.out.println("Find All duplicates"+findAllDuplicates(arr));     
 	}
 	
 	
+    private static ArrayList<Integer> findAllDuplicates(int[] arr) {
+    	ArrayList<Integer> ans=new ArrayList<>();
+    	int n=arr.length;
+    	for(int i=0;i<n;i++) {
+    		arr[arr[i]%n]+=n;
+    	}
+    	for(int i=0;i<n;i++) {
+    		if(arr[i]/n>1) {
+    			ans.add(i);
+    		}
+    	}
+		return ans;
+	}
+
+
 		//448. Find All Numbers Disappeared in an Array
 		public static List<Integer> findDisappearedNumbers(int[] nums) {
         boolean[] stateArray = new boolean[nums.length + 1];

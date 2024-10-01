@@ -1,8 +1,10 @@
 package com.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class UnionFindTakeU {
 
@@ -26,7 +28,7 @@ public class UnionFindTakeU {
             int row = operators[i][0];
             int col = operators[i][1];
             if (vis[row][col] == 1) {
-                ans.add(cnt);
+                ans.add(cnt);//just to store ans of already visited node in case of duplicate query 
                 continue;
             }
             vis[row][col] = 1;
@@ -112,6 +114,41 @@ public class UnionFindTakeU {
         }
         return mx;
     }
+    
+    //1202. Smallest String With Swaps https://www.youtube.com/watch?v=O3jr8HOpkUU
+    /**         01234
+	    Example edabc [0,2][0,3][1,4];
+	    first we group all list in to uniot find which results
+	    0->0 parent
+	    2->0
+	    3->0  so [0,2,3] is in one group chars for these is [e,a,b]
+	    similierly 1->1 and 4->1 so [1,4] in one group [d,c]
+	    we sort chars from these groups and form our ans 
+	    we iterate input chars and if index is 0,2,3 we pick sorted chars from first group 
+	    and if index is 1,4 we pick chars from secound group so ans = adbec
+	*/
+	public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
+		int n = s.length();
+		DisjointSet ds = new DisjointSet(n);
+		for (List<Integer> pair : pairs) {
+			ds.unionBySize(pair.get(0), pair.get(1));
+		}
+		HashMap<Integer, PriorityQueue<Character>> map = new HashMap<>();
+		for (int i = 0; i < n; i++) {
+			int parent = ds.findUPar(i);
+			PriorityQueue<Character> pq = map.getOrDefault(parent, new PriorityQueue<>());
+			pq.offer(s.charAt(i));
+			map.putIfAbsent(parent, pq);
+		}
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < n; i++) {
+			int parent = ds.findUPar(i);
+			PriorityQueue<Character> pq = map.get(parent);
+			sb.append(pq.poll());
+		}
+		return sb.toString();
+
+	}
 
 }
 
