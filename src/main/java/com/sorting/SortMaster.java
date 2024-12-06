@@ -141,6 +141,12 @@ public class SortMaster {
 		int[] array5 = {5,4,2,1,3,5,3,2,2};
 		sort.sort(array5,5);
 		System.out.println(java.util.Arrays.toString(array5));
+		
+		int[] array6 = {213,97,718,123,3};
+		sort.sort(array6,6);
+		System.out.println(java.util.Arrays.toString(array6));
+		
+		System.out.println("Sort Two array using Insersion");
 		int a[]= {1,4,7,8,10};
 		int b[]= {2,3,9};
 		sort(a,b);
@@ -167,31 +173,74 @@ public class SortMaster {
 				break;
 		case 5:countSort(array);
 		System.out.println("Count");
+				break;
+		case 6:redixSort(array);
+		System.out.println("Redix");
+				break;
 		}
 	}
-	
-	private static void countSort(int[] a) {
+	//https://www.youtube.com/watch?v=a5e7RgCdel0
+	private void redixSort(int[] array) {
+		int max=Integer.MIN_VALUE;
+		for(int i:array)
+			max=Math.max(max, i);
+		
+		int exp=1;
+		while(exp<=max) {
+			countVariationForRedix(array, exp);
+			exp=exp*10;
+		}
+	}
+	private static void countVariationForRedix(int[] a,int exp) {
 		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
-		for(int i:a) {
+		for(int i:a) {               
 			min =Math.min(min, i);
 			max=Math.max(max, i);
 		}
-		int frq[]=new int[(max-min)+1];
-		for(int i:a) {
-			frq[i-min]++;
+		int frq[]=new int[10];   //Change 1:- frq can be of size 10 as we are sorting digit wise in redix at a time
+		//Change 2 Min will be zero as digit can very from 0 to 9 
+		//change 3 :- where ever you are using a[i] now you have to get the digit from a[i] using exp so =a[i]/exp%10
+		for(int i=0;i<a.length;i++) {
+			frq[a[i]/exp%10]++;
 		}
-		//creating prefix array
+		
 		for(int i=1;i<frq.length;i++) {
 			frq[i]=frq[i-1]+frq[i];
 		}
 		int ans[]=new int[a.length];
-		//iterate original array from last and fill positions 
+		
 		for(int i=a.length-1;i>=0;i--) {
-			int val=a[i];
-			int index=frq[val-min]-1; 
-			ans[index]=val;
-			frq[val-min]--;
+			int pos=frq[a[i]/exp%10]-1;
+			ans[pos]=a[i];
+			frq[a[i]/exp%10]--;
 		}
+		
+		for(int i=0;i<ans.length;i++)
+			a[i]=ans[i];
+	}
+	//Check In Recursion notes :- https://www.youtube.com/watch?v=p-OyKUgIrx4
+	private static void countSort(int[] a) {
+		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+		for(int i:a) {               //Step1:-compute min and max
+			min =Math.min(min, i);
+			max=Math.max(max, i);
+		}
+		int frq[]=new int[(max-min)+1];   //Step2:- compute Frq Array
+		for(int i=0;i<a.length;i++) {
+			frq[a[i]-min]++;
+		}
+		//Step2:-creating prefix array
+		for(int i=1;i<frq.length;i++) {
+			frq[i]=frq[i-1]+frq[i];
+		}
+		int ans[]=new int[a.length];
+		//iterate original array from last and fill positions in ans 
+		for(int i=a.length-1;i>=0;i--) {
+			int index=frq[a[i]-min]-1; 
+			ans[index]=a[i];
+			frq[a[i]-min]--;
+		}
+		// Now fill all values back into original array
 		for(int i=0;i<ans.length;i++)
 			a[i]=ans[i];
 	}

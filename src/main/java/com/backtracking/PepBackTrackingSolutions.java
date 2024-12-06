@@ -570,8 +570,8 @@ public class PepBackTrackingSolutions {
 	    //V-10 Friends Pairing
 		  public static void friendsPairing(int i, int n, boolean[] used, String asf) {
 		      if(i>n){
-		          //System.out.println(counter+"."+asf);
-		          //counter++;
+		          System.out.println(counter+"."+asf);
+		          counter++;
 		          return;
 		      }
 		    

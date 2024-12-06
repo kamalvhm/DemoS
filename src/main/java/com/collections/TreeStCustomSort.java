@@ -27,7 +27,7 @@ public class TreeStCustomSort {
 		t2.add("bikoy");
 		t2.add("roli");
 
-		System.out.print(t2);
+		System.out.println(t2);
 		
 		
 		TreeSet<StringBuffer> t3=new TreeSet<StringBuffer>(new Comparator<StringBuffer>() {
@@ -45,7 +45,7 @@ public class TreeStCustomSort {
 		t3.add(new StringBuffer("kapil"));
 		t3.add(new StringBuffer("bikoy"));
 		t3.add(new StringBuffer("roli"));
-		System.out.print(t3);
+		System.out.println(t3);
 		
 		//PriorityQueue Also can be used
 		PriorityQueue<String> queue = new PriorityQueue<>(new Comparator<String>() {

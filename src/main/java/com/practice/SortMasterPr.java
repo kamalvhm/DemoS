@@ -9,25 +9,32 @@ import org.apache.spark.util.collection.PartitionedAppendOnlyMap;
 import scala.annotation.bridge;
 
 public class SortMasterPr {
-	//TC:- O(n2)
+	//TC:- O(n2) inplace ,but not stable
 	private static void selectionSort(int[] a) 	{
 		int n=a.length;
 	
+		
+	
 	}
 	//TC:- O(n) best, O(n2) worst Inplace stable
+	//execute N passes in every pass push largest elements to end of array
 	private static void bubbleSort(int[] a) {
 		int n=a.length;
 		
 	}
 	//TC:- O(n) best, O(n2) worst
+	//divide array in two part  5 | 4 2 3   sorted and unsorted  
+	//now pick element from unsorted part and place it sorted part
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
+		
+		
 		
 	}
 	//TC:- O(nlogn) stable but not inplace 
 	private static int[] mergeSort(int[] a) {
 		int n=a.length;
-		return a; 
+		return a;
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {	
@@ -35,54 +42,21 @@ public class SortMasterPr {
 		return a;
 	}
 	//TC:- O(nlogn) worst O(n2) In place but not stable 
+	//select a pivot (can be any let say end) now arrang remaining element such that  all small goes left and all big goes right
 	private static void quickSort(int[] a, int start, int end) {
-		if(start>=end)return;
-		int pivot=partition(a, start, end);
-		quickSort(a, start, pivot-1);
-		quickSort(a, pivot+1, end);
+		
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		int pivot=a[end];
-		int pIndex=start;
-		for(int i=start;i<end;i++) {
-			if(a[i]<pivot) {
-				swap(a, pIndex, i);
-				pIndex++;
-			}
-		}
-		swap(a, pIndex, end);
-		return pIndex;
+		
+		return start;
 	}
 	private static int randomized(int[] a, int start, int end) {
-		
-		return partition(a, start, end);
+		return -1;
 	}
 	
 	private static void countSort(int[] a) {
-		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
-		for(int i:a) {
-			min =Math.min(min, i);
-			max=Math.max(max, i);
-		}
-		int frq[]=new int[(max-min)+1];
-		for(int i:a) {
-			frq[i-min]++;
-		}
-		//creating prefix array
-		for(int i=1;i<frq.length;i++) {
-			frq[i]=frq[i-1]+frq[i];
-		}
-		int ans[]=new int[a.length];
-		//iterate original array from last and fill positions 
-		for(int i=a.length-1;i>=0;i--) {
-			int val=a[i];
-			int index=frq[val-min]-1; 
-			ans[index]=val;
-			frq[val-min]--;
-		}
-		for(int i=0;i<ans.length;i++)
-			a[i]=ans[i];
+		
 	}
 	
 	private static void swap(int [] a,int i,int j) {
@@ -113,6 +87,11 @@ public class SortMasterPr {
 		int[] array5 = {5,4,2,1,3,5,3,2,2};
 		sort.sort(array5,5);
 		System.out.println(java.util.Arrays.toString(array5));
+		int[] array6 = {213,97,718,123,3};
+		sort.sort(array6,6);
+		System.out.println(java.util.Arrays.toString(array6));
+		
+		System.out.println("Sort Two array using Insersion");
 		int a[]= {1,4,7,8,10};
 		int b[]= {2,3,9};
 		sort(a,b);
@@ -140,7 +119,18 @@ public class SortMasterPr {
 				break;
 		case 5:countSort(array);
 		System.out.println("Count");
+				break;
+		case 6:redixSort(array);
+		System.out.println("Redix");
+				break;
 		}
+		
+	}
+	
+	private void redixSort(int[] array) {
+		
+	}
+	private static void countVariationForRedix(int[] a,int exp) {
 		
 	}
 	
