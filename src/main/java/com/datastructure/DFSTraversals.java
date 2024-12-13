@@ -13,6 +13,7 @@ class Nodee {
 		left = right = null;
 	}
 }
+//Time Complexcity :-  O(V + E)
 //NOTE:- IN BINARY SEARCH TREE (Remmeber in BSt not in below tree) INORDER TRAVERSAL ALSWAYS GiVES SORTED ORDER
 public class DFSTraversals {
 

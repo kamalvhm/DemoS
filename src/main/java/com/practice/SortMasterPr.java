@@ -56,8 +56,66 @@ public class SortMasterPr {
 	}
 	
 	private static void countSort(int[] a) {
+		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+		for(int i:a) {
+			min=Math.min(min, i);
+			max=Math.max(max,i);
+		}
+		
+		int frq[]=new int[max-min+1];
+		for(int i=0;i<a.length;i++){
+			frq[a[i]-min]++;
+		}
+		for(int i=1;i<frq.length;i++) {
+			frq[i]=frq[i]+frq[i-1];
+		}
+		int ans[]=new int[a.length];
+		for(int i=a.length-1;i>=0;i--) {
+			int pos=frq[a[i]-min]-1;
+			ans[pos]=a[i];
+			frq[a[i]-min]--;
+		}
+		
+		for(int i=0;i<ans.length;i++)
+			a[i]=ans[i];
+	}
+	
+	private void redixSort(int[] array) {
+		int max=Integer.MIN_VALUE; 
+		for(int i:array)
+			max=Math.max(max, i);
+		int exp=1;
+		while(exp<=max) {
+			countVariationForRedix(array, exp);
+			exp*=10;
+		}
 		
 	}
+	private static void countVariationForRedix(int[] a,int exp) {
+		int max=Integer.MIN_VALUE;
+		for(int i:a) {
+			max=Math.max(max,i);
+		}
+		
+		int frq[]=new int[10];
+		for(int i=0;i<a.length;i++){
+			frq[a[i]/exp%10]++;
+		}
+		for(int i=1;i<frq.length;i++) {
+			frq[i]=frq[i]+frq[i-1];
+		}
+		int ans[]=new int[a.length];
+		for(int i=a.length-1;i>=0;i--) {
+			int pos=frq[a[i]/exp%10]-1;
+			ans[pos]=a[i];
+			frq[a[i]/exp%10]--;
+		}
+		
+		for(int i=0;i<ans.length;i++)
+			a[i]=ans[i];
+		
+	}
+	
 	
 	private static void swap(int [] a,int i,int j) {
 		int tmp=a[i];
@@ -84,7 +142,7 @@ public class SortMasterPr {
 		sort.sort(array4,4);
 		System.out.println(java.util.Arrays.toString(array4));
 		//Sort these sorted arrays mutually TC:- O(n*m) where n is for traverse in array a and m is to order correct in b array
-		int[] array5 = {5,4,2,1,3,5,3,2,2};
+		int[] array5 = {5,4,2,3,5,3,8,2};
 		sort.sort(array5,5);
 		System.out.println(java.util.Arrays.toString(array5));
 		int[] array6 = {213,97,718,123,3};
@@ -127,12 +185,6 @@ public class SortMasterPr {
 		
 	}
 	
-	private void redixSort(int[] array) {
-		
-	}
-	private static void countVariationForRedix(int[] a,int exp) {
-		
-	}
 	
 	public static void sort(int a[],int b[]) {
 		int j=0;

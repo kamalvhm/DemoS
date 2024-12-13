@@ -17,6 +17,10 @@ public class Heapsort implements InplaceSort {
     for (int i = Math.max(0, (n / 2) - 1); i >= 0; i--) {
       sink(ar, n, i);
     }
+//    The current code stops after the heapify step. Without the extraction phase, the elements remain in heap order, not sorted order. For example:
+//
+//    	Given [5, 3, 8, 4, 1, 7, 2], the heapified array might look like [1, 3, 2, 4, 5, 7, 8] (Min-Heap), but this is not sorted.
+//    	Sorting requires repeatedly extracting the minimum and placing it in its correct position. so next step is for same
 
     // Sorting bit
     for (int i = n - 1; i >= 0; i--) {

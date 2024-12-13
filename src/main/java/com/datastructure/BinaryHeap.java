@@ -42,7 +42,17 @@ public class BinaryHeap<T extends Comparable<T>> {
     heap.addAll(elems);
 
     // Heapify process, O(n)
+//   The loop for heapify starts from Math.max(0, (heapSize / 2) - 1) because:
+//    Nodes at indices greater than (heapSize / 2) - 1) are leaf nodes, which don't need sinking.
+//    The last non-leaf node is at index (heapSize / 2) - 1)
     for (int i = Math.max(0, (heapSize / 2) - 1); i >= 0; i--) sink(i);
+    
+//    Why O(n)?
+//    		>>Leaf nodes require no sinking: Half the nodes (at the bottom level) are leaves and require no work.
+//    		>>Shallow levels require less work: Nodes closer to the root have fewer descendants, so the sinking process is faster for them.
+//    		Summing the work:
+//    		>>Each level of the binary tree contributes O(nodes at that level×height of sinking)
+//    		The total work sums to O(n).
   }
 
   // Returns true/false depending on if the priority queue is empty
