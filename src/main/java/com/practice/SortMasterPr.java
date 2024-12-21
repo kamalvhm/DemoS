@@ -56,14 +56,13 @@ public class SortMasterPr {
 	}
 	
 	private static void countSort(int[] a) {
-		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+		int max=Integer.MIN_VALUE,min=Integer.MAX_VALUE;
 		for(int i:a) {
-			min=Math.min(min, i);
 			max=Math.max(max,i);
+			min=Math.min(min, i);
 		}
-		
 		int frq[]=new int[max-min+1];
-		for(int i=0;i<a.length;i++){
+		for(int i=0;i<a.length;i++) {
 			frq[a[i]-min]++;
 		}
 		for(int i=1;i<frq.length;i++) {
@@ -75,13 +74,14 @@ public class SortMasterPr {
 			ans[pos]=a[i];
 			frq[a[i]-min]--;
 		}
-		
-		for(int i=0;i<ans.length;i++)
+		for(int i=0;i<ans.length;i++) {
 			a[i]=ans[i];
+		}
 	}
 	
+	
 	private void redixSort(int[] array) {
-		int max=Integer.MIN_VALUE; 
+		int max=Integer.MIN_VALUE;
 		for(int i:array)
 			max=Math.max(max, i);
 		int exp=1;
@@ -93,24 +93,20 @@ public class SortMasterPr {
 	}
 	private static void countVariationForRedix(int[] a,int exp) {
 		int max=Integer.MIN_VALUE;
-		for(int i:a) {
-			max=Math.max(max,i);
-		}
-		
+		for(int i:a)
+			max=Math.max(max, i);
 		int frq[]=new int[10];
-		for(int i=0;i<a.length;i++){
+		for(int i=0;i<a.length;i++)
 			frq[a[i]/exp%10]++;
-		}
 		for(int i=1;i<frq.length;i++) {
 			frq[i]=frq[i]+frq[i-1];
 		}
-		int ans[]=new int[a.length];
+		int ans[]=new int [a.length];
 		for(int i=a.length-1;i>=0;i--) {
 			int pos=frq[a[i]/exp%10]-1;
 			ans[pos]=a[i];
 			frq[a[i]/exp%10]--;
 		}
-		
 		for(int i=0;i<ans.length;i++)
 			a[i]=ans[i];
 		

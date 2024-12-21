@@ -20,7 +20,7 @@ public class DpTakeYouF {
 		//System.out.println("House Robber "+houseRobber(a,a.length-1,dp));
 		//System.out.println("House Robber "+houseRobberSpace(a));
 		int b[][]= {{10,50,1},{5,100,11}};
-		//System.out.println("Ninja "+ninjaTraining(b));
+		//System.out.println("Ninja "+ninjaTraining(b)); 
 		
 		String aa[]= {"a","abc","ab"};
 	    Arrays.sort(aa,new Comparator<String>() {
@@ -964,13 +964,7 @@ public static boolean wildcardMatching2(String p, String s) {
         return dp[n][m];
         
 	}
-	 static boolean isAllStars(String S1, int i) {
-		    for (int j = 0; j <= i; j++) {
-		      if (S1.charAt(j) != '*')
-		        return false;
-		    }
-		    return true;
-		  }
+	
 
 		  static int wildcardMatchingUtil(String S1, String S2, int i, int j, int[][] dp) {
 
@@ -1006,6 +1000,14 @@ public static boolean wildcardMatching2(String p, String s) {
 		    return wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp);
 
 		  }
+		  
+		  static boolean isAllStars(String S1, int i) {
+			    for (int j = 0; j <= i; j++) {
+			      if (S1.charAt(j) != '*')
+			        return false;
+			    }
+			    return true;
+			  }
 	//prob 34
 	  public static int editDistance(String s1, String s2) {
 	        int n=s1.length();
@@ -1500,6 +1502,27 @@ public static boolean wildcardMatching2(String p, String s) {
 	        return prev[k];
 	    }
 	    
+//	 public int solve(int [][]grid,int i,int j1,int j2,HashMap<String,Integer> map){
+//	        if(j1<0 || j1>=grid[0].length || j2<0 || j2>=grid[0].length)
+//	            return 0;
+//	        if(i==grid.length)return 0;
+//	        String key=i+"-"+j1+"-"+j2;
+//	        if(map.containsKey(key))return map.get(key);
+//	        int max=0;
+//	        for(int k=-1;k<2;k++){
+//	            for(int l=-1;l<2;l++){
+//	                int ans=0;
+//	                 if(j1==j2){
+//	                        ans=grid[i][j1]+solve(grid,i+1,j1+k,j2+l,map); 
+//	                    }else {
+//	                        ans=grid[i][j1]+grid[i][j2]+solve(grid,i+1,j1+k,j2+l,map);
+//	                    }
+//	                    max=Math.max(max,ans);
+//	            }
+//	        }
+//	        map.put(key,max);
+//	        return max;
+//	    }
 	//prob 13 int dp[][][] = new int[n][m][m]; CALL  maxChocoUtil(0, 0, m - 1, n, m, grid, dp);
 	static int maxChocoUtil(int i, int j1, int j2, int n, int m, int[][] grid, 
 			  int[][][] dp) {
@@ -1579,7 +1602,44 @@ public static boolean wildcardMatching2(String p, String s) {
 
 		    return dp[0][0][m - 1];//0th row alice starts from 0 and bob witn m-1
 	}
-
+	 
+	 public int maximumChocolatesSpaceOptimisation(int n, int m, int grid[][]) {
+	      //int dp[][][] = new int[n+1][m][m];
+	    //   for(int dd[][]:dp)
+	    //     for(int d[]:dd)
+	    //         Arrays.fill(d,-1);
+	    //   return solve(grid,0,0,grid[0].length-1,dp);
+	    
+	     int[][] front = new int[m][m];
+	    
+	    for(int i=n-1;i>=0;i--){
+	        int[][] curr = new int[m][m];
+	        for(int j1=0;j1<m;j1++){
+	            for(int j2=0;j2<m;j2++){
+	                int max=0;
+	                for(int k=-1;k<2;k++){
+	                    for(int l=-1;l<2;l++){
+	                        if(j1+k<0 || j1+k>=m || j2+l<0 || j2+l>=m ){
+	                            curr[j1][j2]=0;
+	                            continue;
+	                        }
+	                        int ans=0;
+	                         if(j1==j2){
+	                                ans=grid[i][j1]+front[j1+k][j2+l]; 
+	                            }else {
+	                                ans=grid[i][j1]+grid[i][j2]+front[j1+k][j2+l];
+	                            }
+	                            max=Math.max(max,ans);
+	                    }
+	                }
+	                curr[j1][j2]=max;
+	            }
+	        }
+	        front=curr;
+	    }
+	    return front[0][m-1];
+	      
+	    }
 	
 	//prob 12 https://leetcode.com/problems/minimum-falling-path-sum/submissions/
 	 public int minFallingPathSum(int[][] matrix) {
@@ -1894,7 +1954,8 @@ public static boolean wildcardMatching2(String p, String s) {
 		}
 	 
 	//prob 7 (CHECK TUF.JAVA )https://www.codingninjas.com/codestudio/problems/ninja-s-training_3621003?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos
-	public static int ninjaTraining(int task[][], int day, int last, HashMap<String, Integer> map) {
+	//CALLED:- ninjaTraining(points,n-1,3,new HashMap<String,Integer>());
+	 public static int ninjaTraining(int task[][], int day, int last, HashMap<String, Integer> map) {
 		if (day == 0) {
 			int max = 0;
 			for (int c = 0; c < task[day].length; c++) {
