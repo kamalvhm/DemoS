@@ -72,6 +72,20 @@ public class DpTakeYouF {
 	        return maxArea;
 	    }
 	//Prob 53
+	 static int f(int i, int n, String str) {
+	        // Base case:
+	        if (i == n) return 0;
+
+	        int minCost = Integer.MAX_VALUE;
+	        // String[i...j]
+	        for (int j = i; j < n; j++) {
+	            if (isPalindrome(i, j, str)) {
+	                int cost = 1 + f(j + 1, n, str);
+	                minCost = Math.min(minCost, cost);
+	            }
+	        }
+	        return minCost;
+	    }
 	public static int palindromePartitioning(String str) {
         int dp[][]=new int[str.length()][str.length()];
         int n=str.length();

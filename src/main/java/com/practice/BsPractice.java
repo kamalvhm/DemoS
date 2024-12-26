@@ -60,16 +60,15 @@ public class BsPractice {
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]==i)return mid;
-			else if(a[mid]<i)
-				l=mid+1;
+			else if(a[mid]<i)l=mid+1;
 			else r=mid-1;
-		} 
+		}
 		return -1;
 	}
 	
 	public static int bsfirst(int [] a,int i) { 
-		int l=0,r=a.length-1;
 		int index=-1;
+		int l=0,r=a.length-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]>=i) {
@@ -81,8 +80,8 @@ public class BsPractice {
 	}
 	
 	public static int bslast(int [] a,int i) {
-		int l=0,r=a.length-1;
 		int index=-1;
+		int l=0,r=a.length-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]<=i) {
@@ -92,7 +91,7 @@ public class BsPractice {
 		}
 		return index;
 	}
-	
+
 	public static int findPeakElement(int[] a) {
 		int l=0,r=a.length-1;
 		while(l<r) {
@@ -103,6 +102,20 @@ public class BsPractice {
 		}
 		return l;
 	}
+	//by Erricto 
+//	 public int findPeakElement(int[] nums) {
+//	        int l=0,r=nums.length-1;
+//	        int ans=-1;
+//	        while(l<=r){
+//	            int mid=l+(r-l)/2;
+//	            if(mid==0 || nums[mid]>nums[mid-1]){
+//	                ans=mid;
+//	                l=mid+1;
+//	            }else r=mid-1;
+//	        }
+//	        return ans;
+//	        
+//	    }
 	
 	public static int arrayRotatedcount(int[] a) { 
 		int l=0,r=a.length-1;
@@ -116,22 +129,21 @@ public class BsPractice {
 				r=mid-1;
 			}
 		}
-		return l;
+		return ans;
 	}
 
 	public static int bsInfiniteArray(int[] a, int target) {
 		int start=0,end=1;
-		while(a[end]<target) {
+		while(end<a.length && target>a[end]) {
 			start=end;
-			end=end*2;
+			end*=2;
 		}
 		while(start<=end) {
-			int mid=start+(end-start)/2;
+			int mid=start+(end-start )/2;
 			if(a[mid]==target)return mid;
-			else if(a[mid]<target)
-					start=mid+1;
+			else if(a[mid]<target)start=mid+1;
 			else end=mid-1;
-		} 
+		}
 		
 		return -1;
 	}
@@ -139,10 +151,9 @@ public class BsPractice {
 	public static int searchBsInDescArray(int [] a,int target) {
 		int l=0,r=a.length-1;
 		while(l<=r) {
-			int mid=l+(r-l)/2;
+			int mid=l+(r-l)/2; 
 			if(a[mid]==target)return mid;
-			else if(a[mid]<target)
-					r=mid-1;
+			if(a[mid]<target)r=mid-1;
 			else l=mid+1;
 		}
 		return -1;
@@ -151,24 +162,23 @@ public class BsPractice {
 	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3 | 6
 		int l=0,r=a.length-1;
 		int first=a[0];
-		
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			
-			boolean im_big=a[mid]>=first;
-			boolean target_big=target>first;
-			
-			if(im_big==target_big) {
+			if(a[mid]==target)return mid;
+			boolean i_m_big=first<=a[mid];
+			boolean targetIsBig=first<=target;
+			if(i_m_big==targetIsBig) {
 				if(a[mid]==target)return mid;
-				else if(a[mid]<target)
-					l=mid+1;
-				else r=mid-1;
-			}else if(im_big) {
+				else if(a[mid]>target)
+					r=mid-1;
+				else l=mid+1;
+			}else if(i_m_big) {
 				l=mid+1;
 			}else r=mid-1;
 		}
 		return -1;
 	}
+
 	//first element that is greater then or equal to target
 	public static int lowerBound(int [] a,int target) {
 		int l=0,r=a.length-1;
@@ -185,10 +195,10 @@ public class BsPractice {
 	
 	//floor =greatest element less then target if target not present 
 	public static int bsfloorofTarget(int [] a,int target) {
-		int l=0,r=a.length-1;
 		int ans=-1;
+		int l=0,r=a.length-1;
 		while(l<=r) {
-			int mid=l+(r-l)/2;
+			int mid=l+(r-l)/2; 
 			if(a[mid]<=target) {
 				ans=a[mid];
 				l=mid+1;
@@ -203,9 +213,8 @@ public class BsPractice {
 		char res='#';
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			char val=a[mid];
-			if(val>=target) {
-				res=val;
+			if(a[mid]>=target) {
+				res=a[mid];
 				r=mid-1;
 			}else l=mid+1;
 		}
@@ -222,11 +231,10 @@ public class BsPractice {
 	 //74. Search a 2D Matrix
 	 public static String Search2DArray(int[][] a,int target) {   
 		 	int i=0,j=a[0].length-1;
-		 	while(i>=0 && i<a.length && j>=0 && j<a[0].length) {
+		 	while(i>=0 && j>=0 && i<a.length && j<a[0].length) {
 		 		if(a[i][j]==target)return i+"-"+j;
-		 		else if(a[i][j]>target)
-		 			j--;
-		 		else i++;
+		 		else if(a[i][j]<target)i++;
+		 		else j--;
 		 	}
 		 	return " ";
 	 }
