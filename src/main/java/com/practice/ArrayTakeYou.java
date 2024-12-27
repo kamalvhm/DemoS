@@ -120,8 +120,312 @@ public class ArrayTakeYou {
 		System.out.print("32) Merge two sorted arrays without extra space :- ");
 		merge(qA32a,qA32a.length,qA32b,qA32b.length);
 		System.out.println(""+Arrays.toString(qA32a)+"- And- "+Arrays.toString(qA32b));
+		
+		int [] qA33= {2, 2};
+		System.out.println("33) Find the repeating and missing number  :- "+findTwoElement(qA33));
+		
+		long [] qA34= {2, 4, 1, 3, 5};
+		System.out.println("34) Count Inversions [3]:- "+inversionCount(qA34));
+		
+		int [] qA35= {1,3,2,3,1};
+		System.out.println("35) Reverse Pairs [2]:- "+reversePairs(qA35));
+		
+		int [] qA36= {2,3,-2,4};
+		System.out.println("36) Maximum Product Subarray [6]:- "+reversePairs(qA35));
 
 	}
+	
+	  public int maxProduct(int[] nums) {
+//		  int maxProduct=Integer.MIN_VALUE;
+//	        for(int i=0;i<nums.length;i++){
+//	            int product=1;
+//	            for(int j=i;j<nums.length;j++){
+//	                product*=nums[j];
+//	                maxProduct=Math.max(maxProduct,product);
+//	            }
+//	        }
+//	        return maxProduct;
+	        int n=nums.length;
+	        int max=Integer.MIN_VALUE;
+	        int prefix=1,sufix=1;
+	        for(int i=0;i<n;i++){
+	            prefix=prefix*nums[i];
+	            sufix=sufix*nums[n-i-1];
+	            max=Math.max(max,prefix);
+	            max=Math.max(max,sufix);
+
+	            if(prefix==0)prefix=1;
+	            if(sufix==0)sufix=1;
+
+	        }
+	       
+	        return max;
+	    }
+/**	 public int maxProduct(int[] nums) {  //other solution with two loops
+	        int n=nums.length;
+	        int max=Integer.MIN_VALUE;
+	        int prefix=1,sufix=1;
+	        for(int i=0;i<n;i++){
+	            prefix=prefix*nums[i];
+	            max=Math.max(max,prefix);
+	            if(prefix==0)prefix=1;
+	        }
+	        for(int i=n-1;i>=0;i--){
+	            sufix=sufix*nums[i];
+	            max=Math.max(max,sufix);
+	            if(sufix==0)sufix=1;
+	        }
+	        return max;
+	    }  **/
+	
+	    public static int reversePairs(int[] nums) {
+	         cnt=0;
+	         mergeSort(nums);
+	         return (int)cnt;
+	    }
+	    public static int[] mergeSort(int a[]){
+	        int n=a.length;
+	        if(n<=1)return a;
+	        int left[]=mergeSort(Arrays.copyOfRange(a,0,n/2));
+	        int right[]=mergeSort(Arrays.copyOfRange(a,n/2,n));
+	        countPair(left,right);
+	        return merge(left,right,a);
+	    }
+	    
+	    public static int[] merge(int left[],int right[],int[] a){
+	        int i=0,j=0,k=0;
+	        int nL=left.length;
+	        int nR=right.length;
+	        
+	        while(i<nL && j<nR) {
+	            if(right[j]<left[i]){
+	                a[k++]=right[j++];
+	            }else {
+	               a[k++]=left[i++];
+	            }
+	        }
+	        
+	        while(i<nL)
+	            a[k++]=left[i++];
+	        while(j<nR)
+	            a[k++]=right[j++];
+	       
+	        return a;
+	    }
+
+	    public static void countPair(int left[],int right[]){
+	        int nL=left.length;
+	        int nR=right.length;
+	        int j=0;
+	        for(int i=0;i<nL;i++){ //traversing left arr
+	            while(j<nR && left[i]>(2*(double)right[j]))
+	                j++;
+	            cnt+=j;
+	        }
+	    }
+	    
+	  /**   Other Version 
+	    	   
+	        public int reversePairs(int[] nums) {
+	             return mergeSort(nums);
+	        }
+
+	      public static int mergeSort(int a[]){
+	            int n=a.length; 
+	            int count=0;
+	            if(n<=1)return count;
+	            int left[]=Arrays.copyOfRange(a, 0, n/2);
+	            int right[]=Arrays.copyOfRange(a, n/2, n);
+	            count+=mergeSort(left);
+	            count+=mergeSort(right);
+	            count+=countPairs(left,right);
+	            merge(left,right,a);
+	            return count;
+	        }
+	        public static void merge(int left[],int right[],int a[]){
+	            int nL=left.length; 
+	            int nR=right.length;
+	            int mid=nL-1;
+	            int i=0,j=0,k=0;
+
+	            while(i<nL && j<nR){
+	                if(left[i]<=right[j]){
+	                    a[k++]=left[i++];
+	                }else {
+	                    a[k++]=right[j++];
+	                }
+	            }
+
+	            while(i<nL)
+	                a[k++]=left[i++];
+
+	            while(j<nR)
+	                a[k++]=right[j++]; 
+	            
+	        }
+
+
+	        public static int countPairs(int[] a,int b[]) {
+	            int n=a.length;
+	            int m=b.length;
+	            int mid=n-1;
+	            int low=0;
+	            int right = 0;
+	            int cnt = 0;
+	            for (int i = low; i <= mid; i++) {
+	                while (right <= m-1 && a[i] > 2*(double) b[right]) right++;
+	                cnt += (right );
+	            }
+	            return cnt;
+	        }
+
+	    */
+//	int count=0;  //brute count inversions
+//    for(int i=0;i<arr.length;i++){
+//        for(int j=i+1;j<arr.length;j++){
+//            if(arr[i]>arr[j])count++;
+//        }
+//    }
+//    return count;
+    static long cnt=0;
+    static long inversionCount(long arr[]) {
+        cnt=0;
+         mergeSort(arr);
+         return cnt;
+    }
+    
+    public static long[] mergeSort(long a[]){
+        int n=a.length;
+        if(n<=1)return a;
+        long left[]=mergeSort(Arrays.copyOfRange(a,0,n/2));
+        long right[]=mergeSort(Arrays.copyOfRange(a,n/2,n));
+        return merge(left,right,a);
+    }
+    
+    public static long[] merge(long left[],long right[],long[] a){
+        int i=0,j=0,k=0;
+        int nL=left.length;
+        int nR=right.length;
+        //int cnt=0;
+        while(i<nL && j<nR){
+            if(right[j]<left[i]){  // make sure equal is not added in count
+                  cnt+=(nL-i);
+                //System.out.println("CNT >> "+cnt);
+                a[k++]=right[j++];
+            }else {
+               a[k++]=left[i++];
+            }
+        }
+        
+        while(i<nL)
+            a[k++]=left[i++];
+        while(j<nR)
+            a[k++]=right[j++];
+        //return cnt;
+        return a;
+    }
+	 static ArrayList<Integer> findTwoElement(int nums[]) {
+	        int n=nums.length;
+/**	        int missing=-1,repeating=-1;
+	        for(int i=1;i<=n;i++){
+	            int cnt=0;
+	            for(int j=0;j<nums.length;j++){
+	                if(nums[j]==i)cnt++;
+	            
+	            }
+	            if(cnt==2)repeating=i;
+	            if(cnt==0)missing=i; 
+	           	if(repeating!=-1 && missing !=-1)break;
+
+	        }
+	        Integer[]res=new Integer[]{repeating,missing};
+	        ArrayList<Integer> ans=new ArrayList<>(); 
+	        for(int i:res)
+	            ans.add(i);
+	        return ans;
+	*/        
+/**	        ArrayList<Integer> ans=new ArrayList<>(); //Tc O(2N) Sc: O(N)
+ 	        int hash[]=new int[n+1];
+	        for(int i=0;i<n;i++){
+	            hash[nums[i]]++;
+	        }
+	        int repeating=-1,missing=-1;
+	        for(int i=1;i<=n;i++){
+	            if(hash[i]==2)repeating=i;
+	            else if(hash[i]==0)missing=i;
+	            
+	            if(repeating!=-1 && missing !=-1)break;
+	        }
+	        ans.add(repeating);
+	        ans.add(missing); 
+	        return ans;  */
+	        
+	        //find s-sn and s2-s2n;
+	        long sn=(n*(n+1))/2;
+	        long s2n=(n*(n+1)*(2*n+1))/6;
+	        
+	        long s=0,s2=0;
+	        for(int i=0;i<n;i++){
+	            s+=nums[i];
+	            s2+=(long)nums[i]*(long)nums[i];//to avoid overflow
+	        }
+	        
+	         long val1=s-sn;   //x-y   Equation 1
+	         long val2=s2-s2n;  //x2-y2
+	         val2=val2/val1;    // divide x2-y2/x-y  this will give x+y  Equation 2
+	         
+	         long x=(val1+val2)/2;  //adding both equations x-y and x+y with result 2X
+	         long y=x-val1; //putting in Equation 1   
+	         
+	        ArrayList<Integer> ans=new ArrayList<>();
+	        ans.add((int)x);
+	        ans.add((int)y);
+	        return ans;
+	        
+	/**        int xr=0;  check with bit manupulatino
+	        for(int i=0;i<n;i++){  
+	            xr=xr^arr[i];//xor All elements
+	            xr=xr^(i+1);// xor 1 to n
+	        }
+	        
+	        //Find Changing bit from right if set or not  
+	        int bitNo=0;
+	        while(true){
+	            if((xr & (1<<bitNo))!=0)
+	                 break;
+	            bitNo++;
+	        }
+	        int zero=0,one=1;//devide in groups 
+	        for(int i=0;i<n;i++){
+	            if((arr[i] & (1<<bitNo))){ //one club
+	                one=one^arr[i];
+	            }else { //zero club
+	                zero=zero^arr[i];
+	            }
+	        }
+	        for(int i=1;i<=n;i++){  //same thing for 1to N 
+	             if((arr[i] & (1<<bitNo))){ //one club
+	                one=one^i;
+	            }else { //zero club
+	                zero=zero^i;
+	            }
+	        }
+	        
+	        int cnt=0;//check which no is missing and repeating
+	        for(int i=0;i<n;i++){
+	            if(arr[i]==zero)cnt++;
+	        }
+	        ArrayList<Integer> ans=new ArrayList<>();
+	        if(cnt==0)//means zero is missing
+	        {
+	            ans.add(one); 
+	            ans.add(zero); 
+	        }else {
+	            ans.add(zero);
+	            ans.add(one);
+	        }
+	        return ans; */
+	    }
 	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
 //		  int ans[]=new int[m+n];
 //	        int i=0,j=0,k=0;
@@ -301,7 +605,7 @@ public class ArrayTakeYou {
 	    }
 	
 	 public static List<Integer> majorityElementII(int[] nums) {
-//		   List<Integer> list=new ArrayList<>();
+		   List<Integer> list=new ArrayList<>();
 //	        for(int i=0;i<nums.length;i++){
 //	            if(list.size()==0 || list.contains(nums[i])==false){
 //	                int cnt=0;
@@ -315,7 +619,7 @@ public class ArrayTakeYou {
 //	                        
 //	                }
 //	            }
-//	            if(list.size()==2)break;
+//	            if(list.size()==2)break;  //Because at most we can have only 2 elements
 //	        }
 //	        return list;
 //		  List<Integer> ans=new ArrayList<>();
