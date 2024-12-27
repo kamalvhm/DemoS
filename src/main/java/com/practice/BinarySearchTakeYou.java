@@ -1,30 +1,265 @@
 package com.practice;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 public class BinarySearchTakeYou {
 
 	public static void main(String[] args) {
 		
 		
-		System.out.print("1) Sqrt of a no [5] :- "+sqrt(28));
+		System.out.println("1) Sqrt of a no [5] :- "+sqrt(28));
 		
-		System.out.print("2) Find the Nth root of a number using binary search [3]:- "+nthRoot(3,27));
+		System.out.println("2) Find the Nth root of a number using binary search [3]:- "+nthRoot(3,27));
 		
 		int qA3[]= {3,6,7,11};
-		System.out.print("3) Koko Eating Bananas [4]:- "+minEatingSpeed(qA3,8));
+		System.out.println("3) Koko Eating Bananas [4]:- "+minEatingSpeed(qA3,8));
 
 		int qA4[]= {1,10,3,10,2};
-		System.out.print("4) Minimum Number of Days to Make m Bouquets [3]:- "+minDays(qA4,3,1));
+		System.out.println("4) Minimum Number of Days to Make m Bouquets [3]:- "+minDays(qA4,3,1));
 		
 		int qA5[]= {1,2,5,9};
-		System.out.print("5)Find the Smallest Divisor Given a Threshold [5]:- "+smallestDivisor(qA5,6));
+		System.out.println("5)Find the Smallest Divisor Given a Threshold [5]:- "+smallestDivisor(qA5,6));
 		
 		int qA6[]= {1,2,3,4,5,6,7,8,9,10};
-		System.out.print("6)Find the Smallest Divisor Given a Threshold [15]:- "+shipWithinDays(qA6,5));
+		System.out.println("6)Find the Smallest Divisor Given a Threshold [15]:- "+shipWithinDays(qA6,5));
 
 		int qA7[]= {2,3,4,7,11};//[1,5,6,8,9,10,12,13,...]. 
-		System.out.print("7)Find the Smallest Divisor Given a Threshold [9]:- "+findKthPositive(qA7,5));
+		System.out.println("7)Find the kth missing Possitive No  [9]:- "+findKthPositive(qA7,5));
+		
+		int qA8[]= {0,3,4,7,10,9};//Place All cows like that min distance between then is maximum
+		System.out.println("8)Aggresive Cows [3]:- "+aggresiveCows(qA8,4));
+		
+		int qA9[]= {25,46,28,49,24};
+		ArrayList<Integer> list=new ArrayList<>();
+		for(int ti:qA9)list.add(ti);
+		System.out.println("9)Book Allocation [71]:- "+findPages(list,4));
+		
+		int qA10[]= {7,2,5,10,8};
+		System.out.println("10)Split Arrays [18]:- "+splitArray(qA10,2));
+		
+		int qA11[]= {1,2,3,4,5,6,7};
+		//array reprents quardinates of gas station you need to place K new gas station such that minimize max distance between two 
+		//gas stations  https://www.naukri.com/code360/problems/minimise-max-distance_7541449
+		System.out.println("11) Minimize Max Distance between Gas Station [0.5]:- "+MinimiseMaxDistance(qA10,6));
 	}
+	
+	    public static double MinimiseMaxDistanceOpt(int []arr, int k){
+	        int n = arr.length; // size of the array
+	        double low = 0;
+	        double high = 0;
+
+	        //Find the maximum distance:
+	        for (int i = 0; i < n - 1; i++) {
+	            high = Math.max(high, (double)(arr[i + 1] - arr[i]));
+	        }
+
+	        //Apply Binary search:
+	        double diff = 1e-6 ;
+	        while (high - low > diff) {
+	            double mid = (low + high) / (2.0);
+	            int cnt = numberOfGasStationsRequired(mid, arr);
+	            if (cnt > k) {
+	                low = mid;
+	            } else {
+	                high = mid;
+	            }
+	        }
+	        return high;
+	    }
+
+	     public static int numberOfGasStationsRequired(double dist, int[] arr) {
+	        int n = arr.length; // size of the array
+	        int cnt = 0;
+	        for (int i = 1; i < n; i++) {
+	            int numberInBetween = (int)((arr[i] - arr[i - 1]) / dist);
+	            //checking exact divible then need to reduce 1 
+	            if ((arr[i] - arr[i - 1]) == (dist * numberInBetween)) {
+	                numberInBetween--;
+	            }
+	            cnt += numberInBetween;
+	        }
+	        return cnt;
+	    }
+
+	//Better apporach
+	 public static double MinimiseMaxDistanceBetter(int []arr, int k){
+	        int n=arr.length;
+	        int howMany[]=new int[n-1];
+	        PriorityQueue<Pair> pq=new PriorityQueue<>((a, b) -> Double.compare(b.dist, a.dist));
+	        for(int i=0;i<n-1;i++){
+	              pq.offer(new Pair(arr[i+1]-arr[i],i));
+	        }
+	        for(int gas=1;gas<=k;gas++){
+	            Pair curr=pq.poll();
+	            int index=curr.index;
+	            howMany[index]++;
+
+	            double diff=arr[index+1]-arr[index];
+	            double sectionLen=diff/(howMany[index]+1);
+	            pq.offer(new Pair(sectionLen,index));
+	        } 
+	       
+	        return pq.poll().dist;
+	    }
+
+
+	    private static class Pair {
+	        double dist;
+	        int index;
+
+	        Pair(double dist,int index){
+	            this.dist=dist;
+	            this.index=index;
+	        }
+
+
+	    }
+	    public static double MinimiseMaxDistance(int []arr, int K){
+	        int n=arr.length;
+	        int howMany[]=new int[n-1];
+	        for(int gas=1;gas<=K;gas++){
+	            double maxValue=-1;
+	            int maxInd=-1;
+	            for(int i=0;i<n-1;i++){
+	                double diff=arr[i+1]-arr[i];
+	                double sectionLen=diff/((double)howMany[i]+1);
+	                if(maxValue<sectionLen){
+	                    maxValue=sectionLen;
+	                    maxInd=i;
+	                }
+	            }
+	            howMany[maxInd]++;
+	        }
+
+	        double maxAns=-1;  //find max distance between two now 
+	        for(int i=0;i<n-1;i++){
+	            double sectionLen=(arr[i+1]-arr[i])/((double)howMany[i]+1);
+	            maxAns=Math.max(maxAns,sectionLen);
+	        }
+	        return maxAns;
+	    }
+
+	public static int splitArray(int[] nums, int k) {
+	        int n=nums.length;
+	        if(k>n)return -1;
+	        int max=0;
+	        int total=0;
+	        for(int i:nums){
+	            total+=i;
+	            max=Math.max(max,i);
+	        }
+	        int l=max,r=total;
+	        int ans=-1;
+	        while(l<=r){
+	            int mid=l+(r-l)/2;
+	            int pg=allocate(nums,mid);
+	            if(pg<=k){
+	                ans=mid;
+	                r=mid-1;
+	            }else l=mid+1;
+	        }
+	        return ans;
+	    }
+
+	    public static int allocate(int a[],int mid){
+	        int count=1,pages=0;
+	        for(int i=0;i<a.length;i++){
+	            if(a[i]+pages>mid){
+	                count++;
+	                pages=a[i];
+	            }else pages+=a[i];
+	        }
+	        return count;
+	    }
+	   public static int findPages(ArrayList<Integer> arr, int m) {
+		   int n=arr.size();
+	       if(m>n)return -1;
+	       int total=0,max=0;
+	       for(int i:arr){
+	           max=Math.max(max,i);
+	           total+=i;
+	       }
+//	       for(int i=max;i<=total;i++){
+//	            int students=isValid(arr,st,i);
+//	            if(students<=m)return i;
+//
+//	        }
+	       int low=max,high=total;
+	       int ans=-1;
+	       while(low<=high){
+	           int mid=low+(high-low)/2;
+	           int stdnt=fun(arr,mid);
+	           if(stdnt<=m){
+	               ans=mid;
+	               high=mid-1; 
+	           }else {
+	              low=mid+1;
+	           }
+	       }
+	       return ans;
+	    }
+
+	    public static int fun(ArrayList<Integer> arr,int pages){
+	        int count=0,stdent=1;
+	        for(int i=0;i<arr.size();i++){
+	            if(arr.get(i)+count>pages){
+	                stdent++;
+	                count=arr.get(i);
+	            }else count+=arr.get(i);
+	        }
+	        return stdent;
+	    } 
+	
+	private static int aggresiveCows(int[] a, int cow) {
+		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+		Arrays.sort(a);
+		for(int i:a) {
+			min=Math.min(min, i);
+			max=Math.max(max, i);
+		}
+
+//		for(int i=1;i<=max-min;i++) {
+//			if(canWePlaceCows(a,cow,i))continue;
+//			else return i-1;
+//		}
+		int l=1,r=max-min; 
+		int ans=-1;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			boolean canPlace= canWePlaceCows(a,cow,mid);
+			if(canPlace) {
+				ans=mid;
+				l=mid+1;
+			}else r=mid-1;
+		}
+		return ans;
+	}
+
+
+	private static boolean canWePlaceCows(int[] a, int cow, int distance) {
+		int placed=1,prev=0;
+		for(int i=1;i<a.length;i++) {
+			if(a[i]-a[prev]>=distance) {
+				placed++;
+				prev=i;
+			}
+		} 
+		if(placed>=cow)return true;
+		return false;
+	}
+
+
 	public static int findKthPositive(int[] arr, int k) {
+//		 if(k<arr[0])return k;
+//	        int val=k;
+//	        for(int i=0;i<arr.length;i++){
+//	            if(arr[i]<=val)val++;
+//	            else break;
+//	        } 
+//	        if(val==k)return arr.length;
+//	        return val;
         int l=0,r=arr.length-1;
         while(l<=r){
             int mid=l+(r-l)/2;

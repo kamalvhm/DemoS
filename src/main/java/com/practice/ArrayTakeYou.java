@@ -2,9 +2,11 @@ package com.practice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class ArrayTakeYou {
 
@@ -45,7 +47,7 @@ public class ArrayTakeYou {
 		
 		int [] qA10= {1,1,2,3,3,2,5};
 		System.out.println("10) Find No Apear once in array [5] :- "+noApearOnce(qA10));
-		
+		/**PREFIX SUM */
 		int [] qA11= {1,2,3,1,1,1,4,2,3};
 		System.out.println("11) Longest SubArray with Sum K=3 [3] :- "+longestSubArray(qA11, 3));
 		
@@ -84,10 +86,10 @@ public class ArrayTakeYou {
 		rotate(qA22);
 		
 		System.out.println("23) Print the matrix in spiral manner  [[7,4,1],[8,5,2],[9,6,3]] :- "+spiralOrder(qA22));
-		
+		/**PREFIX SUM */
 		int [] qA24= {1,2,3,-3,1,1,1,4,2,-3};
 		System.out.println("24) Count SubArray with Sum k=3  [8] :- "+subarraySum(qA24,3));
-		
+		/**PREFIX SUM */
 		int [] qA24a= {1,3,5};//prefixSum add on question https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/
 		System.out.println("24) count of subarrays with an odd sum [5] [[1],[1,3],[1,3,5],[3],[3,5],[5]] :- "+countOddSumSubarrays(qA24a));
 
@@ -102,13 +104,113 @@ public class ArrayTakeYou {
 		
 		int [] qA28= {3,2,3};
 		System.out.println("28) 4-Sum Problem :- "+threeSum(qA27));
-		
+		/**PREFIX SUM */
 		int [] qA29= {15 ,-2, 2, -8, 1, 7, 10, 23};
 		System.out.println("29) Largest subarray with 5 sum :- "+maxLen(qA29));
+		/**PREFIX SUM */
+		int [] qA30= {4, 2, 2, 6, 4};
+		ArrayList<Integer> list=new ArrayList<>();
+		for(int i:qA30)list.add(i);
+		System.out.println("30) Count Subarray with given XOR [4] :- "+subArrayXor(list,6));
 		
-		Integer [] qA30= {4, 2, 2, 6, 4};
-		System.out.println("30) Count Subarray with given XOR [4] :- "+subArrayXor((ArrayList<Integer>) Arrays.asList(qA30),6));
+		int [][] intervals= {{1,3},{2,6},{8,10},{15,18}};
+		System.out.println("31) Merge Intervals [[1,6],[8,10],[15,18]] :- "+merge(intervals));
+		int qA32a[]= {1,2,3,0,0} ,qA32b[]= {2,5};
+		
+		System.out.print("32) Merge two sorted arrays without extra space :- ");
+		merge(qA32a,qA32a.length,qA32b,qA32b.length);
+		System.out.println(""+Arrays.toString(qA32a)+"- And- "+Arrays.toString(qA32b));
+
 	}
+	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
+//		  int ans[]=new int[m+n];
+//	        int i=0,j=0,k=0;
+//	        while(i<n && j<m){
+//	            if(a[i]<b[j]){
+//	                ans[k++]=a[i++];
+//	            }else {
+//	                ans[k++]=b[j++];
+//	            }
+//	        }
+//	        while(i<n)
+//	            ans[k++]=a[i++];
+//	        while(j<m)
+//	            ans[k++]=b[j++];
+//
+//	        n=a.length;
+//	        m=b.length;
+//	        for(int l=0;l<ans.length;l++){
+//	            if(l<n)a[l]=ans[l];
+//	            else b[l-n]=ans[l];
+//	        }
+		  n=arr1.length;
+	         // Declare 2 pointers:
+	        int left = n - 1;
+	        int right = 0;
+
+	        // Swap the elements until arr1[left] is
+	        // smaller than arr2[right]:
+	        while (left >= 0 && right < m) {
+	            if (arr1[left]==0 || arr1[left] > arr2[right]) {
+	                int temp = arr1[left];
+	                arr1[left] = arr2[right];
+	                arr2[right] = temp;
+	                left--;
+	                right++;
+	            } else {
+	                break;
+	            }
+	        }
+
+	        // Sort arr1[] and arr2[] individually:
+	        Arrays.sort(arr1);
+	        Arrays.sort(arr2);
+
+	    }
+
+	
+//	 public int[][] merge(int[][] intervals) {
+//	        ArrayList<int[]> ans=new ArrayList<>();
+//	        Arrays.sort(intervals,new Comparator<int[]>(){
+//	            public int compare(int []a,int []b){
+//	                return a[0]-b[0];
+//	            }
+//	        });//nlogn
+//	        int start=intervals[0][0];
+//	        int end=intervals[0][1];
+//	        for(int i=0;i<intervals.length;i++){//O(N)
+//	            int [] curr=intervals[i];
+//	            if(end>=curr[0]){
+//	                end=Math.max(end,curr[1]);
+//	            }else {
+//	                ans.add(new int[]{start,end});
+//	                start=curr[0];
+//	                end=curr[1];
+//	            }
+//	        }
+//	        ans.add(new int[]{start,end });
+//	        return ans.toArray(new int[ans.size()][]);
+//	    }
+	
+	 public static int[][] merge(int[][] intervals) {
+	        ArrayList<int[]> ans=new ArrayList<>();
+	        PriorityQueue<int[]> pq =new PriorityQueue<>(new Comparator<int[]>(){
+	            public int compare(int a[],int b[]){
+	                return a[0]-b[0];
+	            }
+	        });
+	        for(int []interval:intervals)
+	            pq.offer(interval);  //Time nlogn  O(N) Space
+	        
+	        while(!pq.isEmpty()){  //O(N)
+	            int []curr=pq.poll();
+	            while(!pq.isEmpty() && curr[1]>=pq.peek()[0]){
+	                curr[1]=Math.max(curr[1],pq.poll()[1]);
+	            }
+	            ans.add(curr);
+	        }
+	        return ans.toArray(new int[ans.size()][]);
+	    }
 	
 	 public static int subArrayXor(ArrayList<Integer> A, int B) {
 //		 int count=0;
@@ -399,7 +501,20 @@ public class ArrayTakeYou {
 	    }
 	 
 	public static void rotate(int[][] matrix) {
-
+//		   int n=matrix.length;
+//	        int m=matrix[0].length;
+//	        int ans[][]=new int[n][m];
+//	        for(int i=0;i<n;i++) {
+//	        	for(int j=0;j<m;j++) {
+//	        		ans[j][n-1-i]=matrix[i][j];
+//	        	}
+//	        }
+//	        
+//	        for(int i=0;i<n;i++) {
+//	        	for(int j=0;j<m;j++) {
+//	        		matrix[i][j]=ans[i][j];
+//	        	}
+//	        }
         int n=matrix.length;
         int m=matrix[0].length;
         //transpose 
@@ -491,13 +606,14 @@ public class ArrayTakeYou {
     			leaders.add(arr[i]);
     			max=arr[i];
     		}
+
     	}
     	return leaders;
     }
 	 public static int [] nextPermutation(int[] nums) {
 	        int ind=-1;
 	        int n=nums.length;
-	        for(int i=n-2;i>=0;i--){
+	        for(int i=n-2;i>=0;i--){ //this loop ensures array is sorted in last step
 	            if(nums[i+1]>nums[i]){
 	                ind=i;
 	                break;
@@ -505,6 +621,7 @@ public class ArrayTakeYou {
 	        }
 	        if(ind==-1){
 	            reverse(nums,0,n-1);
+	            return nums;
 	        }else {
 	            for(int i=n-1;i>ind;i--){
 	                if(nums[i]>nums[ind]){
@@ -672,6 +789,26 @@ public class ArrayTakeYou {
 	        return new int[]{-1,-1};
 	    }
 	private static int longestSubArray(int[] a,int k) {
+//		int len=0;
+//		for(int i=0;i<a.length;i++) {
+//			for(int j=i;j<a.length;j++) {
+//				int sum=0; 
+//				for(int k=i;k<=j;k++) {
+//					sum+=a[k];
+//				}
+//				if(sum==s)
+//					len=Math.max(len, j-i+1);
+//			}
+//		}
+//		int len=0;
+//		for(int i=0;i<a.length;i++) {
+//			int sum=0; 
+//			for(int j=i;j<a.length;j++) {
+//				sum+=a[j];
+//				if(sum==s)
+//					len=Math.max(len, j-i+1);
+//			}
+//		}
 		HashMap<Integer,Integer> hm=new HashMap<>();
 		int sum=0,maxlen=0;
 		for(int i=0;i<a.length;i++) {
@@ -710,6 +847,16 @@ public class ArrayTakeYou {
 	
 	private static int missingNo(int[] a) {
 	   int n=a.length;
+//	   for(int i=0;i<n;i++) {
+//			boolean found=false;
+//			for(int j=0;j<n;j++) {
+//				if(a[j]==i) {
+//					found=true;
+//					break;
+//				}
+//			}
+//			if(found==false)return i; 
+//		}
 //	        int sum=(n*(n+1))/2;
 //	        int arrSum=0;
 //	        for(int i=0;i<a.length;i++)
