@@ -1,4 +1,4 @@
-package com.practice;
+package com.take;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -131,11 +131,11 @@ public class ArrayTakeYou {
 		System.out.println("35) Reverse Pairs [2]:- "+reversePairs(qA35));
 		
 		int [] qA36= {2,3,-2,4};
-		System.out.println("36) Maximum Product Subarray [6]:- "+reversePairs(qA35));
+		System.out.println("36) Maximum Product Subarray [6]:- "+maxProduct(qA36));
 
 	}
 	
-	  public int maxProduct(int[] nums) {
+	  public static int maxProduct(int[] nums) {
 //		  int maxProduct=Integer.MIN_VALUE;
 //	        for(int i=0;i<nums.length;i++){
 //	            int product=1;
