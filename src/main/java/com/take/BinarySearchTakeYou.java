@@ -96,7 +96,7 @@ public class BinarySearchTakeYou {
 	            int index=curr.index;
 	            howMany[index]++;
 
-	            double diff=arr[index+1]-arr[index];
+	            double diff=arr[index+1]-arr[index];//we didn't use diff from pq because we are putting modified len in it not the original
 	            double sectionLen=diff/(howMany[index]+1);
 	            pq.offer(new Pair(sectionLen,index));
 	        } 

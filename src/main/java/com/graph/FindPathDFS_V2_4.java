@@ -1,6 +1,7 @@
 package com.graph;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -33,7 +34,11 @@ public class FindPathDFS_V2_4 {
 	      }
 	   }
 	   public static void main(String[] args) throws Exception {
-	      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	     // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	      
+	   // Read the graph input from a file
+	        String filePath = "src/main/resources/graph/graph1.txt";
+	        BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
 	      
 	      /**
 	       * 	7
@@ -50,15 +55,15 @@ public class FindPathDFS_V2_4 {
 				6
 	       */
 
-	      int vtces = Integer.parseInt(br.readLine());
+	      int vtces = Integer.parseInt(fileReader.readLine());
 	      ArrayList<Edge>[] graph = new ArrayList[vtces];
 	      for(int i = 0; i < vtces; i++){
 	         graph[i] = new ArrayList<>();
 	      }
 
-	      int edges = Integer.parseInt(br.readLine());
+	      int edges = Integer.parseInt(fileReader.readLine());
 	      for(int i = 0; i < edges; i++){
-	         String[] parts = br.readLine().split(" ");
+	         String[] parts = fileReader.readLine().split(" ");
 	         int v1 = Integer.parseInt(parts[0]);
 	         int v2 = Integer.parseInt(parts[1]);
 	         int wt = Integer.parseInt(parts[2]);
@@ -66,21 +71,27 @@ public class FindPathDFS_V2_4 {
 	         graph[v2].add(new Edge(v2, v1, wt));
 	      }
 
-	      int src = Integer.parseInt(br.readLine());
-	      int dest = Integer.parseInt(br.readLine());
+	      int src = Integer.parseInt(fileReader.readLine());
+	      int dest = Integer.parseInt(fileReader.readLine());
+	      System.out.println("Src"+src+" dest"+dest);
+	      fileReader.close();
 	      //V-2
 	      // write your code here
 	      boolean[] visited =new boolean[vtces];
 	      boolean path=hasPath(graph, src, dest,visited);
-	      System.out.println(path);
+	      System.out.println("1) Path Exist dfs:- "+path);
 	      //V-3
+	      visited=new boolean[vtces];
+	      System.out.println("2) All Path  dfs:- ");
 	      allPath(graph, src, dest,visited,src+"");
 	      
 	      int criteria=40;//for ceil and floor 
 	      int k=3;
 	      //v-4
+	      visited=new boolean[vtces];
 	      multiSolver(graph, src, dest,visited,criteria,k,src+"",0);
 	      
+	      System.out.println("2)MultiSolver  dfs:- ");
 	      System.out.println("Smallest Path (0123456@36)= " + spath + "@" + spathwt);
 	      System.out.println("Largest Path (0346@50)= " + lpath + "@" + lpathwt);
 	      System.out.println("(03456@48) Just Larger Path than   " + criteria + " = " + cpath + "@" + cpathwt);
@@ -108,7 +119,7 @@ public class FindPathDFS_V2_4 {
 	//V-3   //Basic DFS traversal
 	public static void allPath(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited,String psf) {
 		if (src == dest) {  //>>>1
-			System.out.println(psf);
+			System.out.println("Path:- "+psf);
 			return ;
 		}
 		visited[src] = true;//>>>2

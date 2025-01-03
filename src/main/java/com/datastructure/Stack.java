@@ -107,9 +107,10 @@ public class Stack<T> implements Iterable<T> {
         int[] left = new int[n];
         int[] right = new int[n];
 
-        java.util.Stack<Integer> stack = new java.util.Stack<>();  
+        java.util.Stack<Integer> stack = new java.util.Stack<>();   //Computing previous smaller value for current pos 
         //using the stack to find the last number which smaller than heights[i]
-        for(int i=0; i<n; i++) { //we are keeping increaing sequence only in stack 
+        for(int i=0; i<n; i++) { //we are keeping increaing sequence only in stack  means 3,6,5, 8, 4,  for thirt pos we will pop 6  3 and 5 is increasing seq but 5<6 so pop 6 
+        	//because for 8 previous smaller will be 5 (6 can never be so we pop 6) and for 4 (3 will be prev smaller)
             while(!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
                 stack.pop();
             }
@@ -145,6 +146,20 @@ public class Stack<T> implements Iterable<T> {
     }
   
 //SEMILIAR :-503. Next Greater Element II https://www.youtube.com/watch?v=Du881K7Jtk8  TC:- O(n)
+//  public int[] nextGreaterElements(int[] nums) {  //Brute
+//      int n=nums.length;
+//      int[] nextG=new int[n];
+//      Arrays.fill(nextG,-1);
+//      for(int i=0;i<2*n;i++){
+//          for(int j=i+1;j<2*n;j++){
+//              if(nums[j%n]>nums[i%n]){
+//                  nextG[i%n]=nums[j%n];
+//                  break;
+//              }
+//          }
+//      }
+//      return nextG; 
+//  }
 	public int[] nextGreaterElements(int[] nums) {
 		int right[] = new int[nums.length];
 		Stack<Integer> st = new Stack<>();
@@ -169,7 +184,7 @@ public class Stack<T> implements Iterable<T> {
 		return right;
 	}
   
-  //1717. Maximum Score From Removing Substrings
+  //1717. Maximum Score From Removing Substrings  just DRY RUN 
   public int maximumGain(String s, int x, int y) {
       char first = x > y ? 'a' : 'b', secound = x > y ? 'b' : 'a';
 		int max = Math.max(x, y), min = Math.min(x, y);

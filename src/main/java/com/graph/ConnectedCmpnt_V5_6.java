@@ -71,7 +71,7 @@ public class ConnectedCmpnt_V5_6 {
 	        		   }
 	        	   }
 	           }
-	           System.out.print(count);
+	           System.out.print("[3]:-"+count);
 	          
 	     
 	   }

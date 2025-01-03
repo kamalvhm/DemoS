@@ -132,7 +132,35 @@ public class ArrayTakeYou {
 		
 		int [] qA36= {2,3,-2,4};
 		System.out.println("36) Maximum Product Subarray [6]:- "+maxProduct(qA36));
+		
+		// To prectice concept check if given no is palindrom https://leetcode.com/problems/palindrome-number/
+		System.out.println("1441:- "+isPalindorm(1441));
+		System.out.println("121:- "+isPalindorm(121));
+		System.out.println("14431:- "+isPalindorm(14431));
 
+	}
+	
+	public static boolean isPalindorm(int nums)
+	{
+		int rev=0;
+		int x=nums;
+//		while(x>0) {
+//			rev=rev+x%10; 
+//			x=x/10;
+//			if(x>0)
+//				rev=rev*10;
+//		}
+//		System.out.println(">>"+rev);
+//		return nums==rev;
+		while(x>rev) {
+			rev=rev+x%10;
+			x=x/10;
+			if(x>rev)
+				rev=rev*10;
+		}
+		int oddLen=rev/10;
+
+		return x==rev || oddLen==x;
 	}
 	
 	  public static int maxProduct(int[] nums) {

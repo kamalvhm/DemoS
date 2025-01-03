@@ -56,7 +56,34 @@ public class ArrayProblems {
       
       
       int arr[]= {2,7,1,4,1,7,8,2,8};
-      System.out.println("Find All duplicates"+findAllDuplicates(arr));     
+      System.out.println("Find All duplicates"+findAllDuplicates(arr));  
+      
+      System.out.println("1441:- "+isNoPalindorm(1441));
+		System.out.println("121:- "+isNoPalindorm(121));
+		System.out.println("14431:- "+isNoPalindorm(14431));
+	}
+	
+	public static boolean isNoPalindorm(int nums)
+	{
+		int rev=0;
+		int x=nums;
+//		while(x>0) {  //brute
+//			rev=rev+x%10; 
+//			x=x/10;
+//			if(x>0)
+//				rev=rev*10;
+//		}
+//		System.out.println(">>"+rev);
+//		return nums==rev;
+		while(x>rev) {
+			rev=rev+x%10;
+			x=x/10;
+			if(x>rev)
+				rev=rev*10;
+		}
+		int oddLen=rev/10;
+
+		return x==rev || oddLen==x;
 	}
 	
 	

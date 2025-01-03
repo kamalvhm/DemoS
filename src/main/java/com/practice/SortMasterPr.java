@@ -56,37 +56,15 @@ public class SortMasterPr {
 	}
 	
 	private static void countSort(int[] a) {
-		int max=Integer.MIN_VALUE,min=Integer.MAX_VALUE;
-		for(int i:a) {
-			max=Math.max(max, i);
-			min=Math.min(i, min);
-		}
-		int frq[]=new int[max-min+1];
-		for(int i=0;i<a.length;i++) {
-			frq[a[i]-min]++;
-		}
-		for(int i=1;i<frq.length;i++) {
-			frq[i]=frq[i]+frq[i-1];
-		}
-		int ans[]=new int[a.length];
-		for(int i=a.length-1;i>=0;i--) {
-			int pos=frq[a[i]-min]-1;
-			ans[pos]=a[i];
-			frq[a[i]-min]--;
-		}
-		for(int i=0;i<ans.length;i++)
-			a[i]=ans[i];
 		
 	}
 	
 	
 	private void redixSort(int[] array) {
-		int max=Integer.MIN_VALUE;
 		
 		
 	}
 	private static void countVariationForRedix(int[] a,int exp) {
-		
 		
 	}
 	
