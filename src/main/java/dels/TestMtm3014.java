@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.collections.ListUtils;
+class TestMtm3014 {
+/*
 import javafx.util.Pair;
 
 class TestMtm3014 {
@@ -75,7 +77,7 @@ class TestMtm3014 {
   public static void main(String[] args) {
     List<Pair<Integer, Integer>> lstRecalc = new ArrayList<Pair<Integer, Integer>>();
     List<Pair<Integer, Integer>> lstPv = new ArrayList<Pair<Integer, Integer>>();
-
+*/
     // Test 1
 //    lstRecalc.add(new Pair(2, 3));
 //    lstRecalc.add(new Pair(3, 4));
@@ -198,26 +200,26 @@ class TestMtm3014 {
 ////  lstPv.add(new Pair(8, 9));
 
   // Test 10
-  lstRecalc.add(new Pair(2, 3));
-  lstRecalc.add(new Pair(3, 4));
-  lstRecalc.add(new Pair(4, 5));
-  lstRecalc.add(new Pair(5, 6));
-
-  lstPv.add(new Pair(1, 2));
-  lstPv.add(new Pair(2, 3));
-  lstPv.add(new Pair(3, 4));
-  lstPv.add(new Pair(4, 5));
-  lstPv.add(new Pair(5, 6));
-  lstPv.add(new Pair(6, 7));
+//  lstRecalc.add(new Pair(2, 3));
+//  lstRecalc.add(new Pair(3, 4));
+//  lstRecalc.add(new Pair(4, 5));
+//  lstRecalc.add(new Pair(5, 6));
+//
+//  lstPv.add(new Pair(1, 2));
+//  lstPv.add(new Pair(2, 3));
+//  lstPv.add(new Pair(3, 4));
+//  lstPv.add(new Pair(4, 5));
+//  lstPv.add(new Pair(5, 6));
+//  lstPv.add(new Pair(6, 7));
 //  lstPv.add(new Pair(7, 8));
 //  lstPv.add(new Pair(8, 9));
 
 
     // Recalcs
-    System.out.println("RecalcFiltered "+getConsequitiveSubArrays(splitList(lstPv, lstRecalc)));
-    System.out.println("Recalc Done "+getConsequitiveSubArrays(intersectList(lstRecalc, lstPv)));
-
-    //FpC's
-    System.out.println("FPCs "+getConsequitiveSubArrays(lstPv));
-  }
+//    System.out.println("RecalcFiltered "+getConsequitiveSubArrays(splitList(lstPv, lstRecalc)));
+//    System.out.println("Recalc Done "+getConsequitiveSubArrays(intersectList(lstRecalc, lstPv)));
+//
+//    //FpC's
+//    System.out.println("FPCs "+getConsequitiveSubArrays(lstPv));
+//  }
 }

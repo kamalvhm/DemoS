@@ -94,7 +94,7 @@ public class ArrayTakePr {
 		System.out.println("24) Count SubArray with Sum k=3  [8] :- "+subarraySum(qA24,3));
 		/**PREFIX SUM */
 		int [] qA24a= {1,3,5};//prefixSum add on question https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/
-		System.out.println("24) count of subarrays with an odd sum [5] [[1],[1,3],[1,3,5],[3],[3,5],[5]] :- "+countOddSumSubarrays(qA24a));
+		System.out.println("24) count of subarrays with an odd sum [4] [[1],[3],[5],[1,3,5]] :- "+countOddSumSubarrays(qA24a));
 
 		//Variation 1 :- for r=6 and c=3 find element nCr(5,2) //called by n-1 and c-1 if nCr was given
 		System.out.println("25) Paskal's Triangle print row  [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]] :- "+generate(5));
@@ -123,57 +123,157 @@ public class ArrayTakePr {
 		merge(qA32a,qA32a.length,qA32b,qA32b.length);
 		System.out.println(""+Arrays.toString(qA32a)+"- And- "+Arrays.toString(qA32b));
 
+		int [] qA33= {2, 2};
+		System.out.println("33) Find the repeating and missing number  [2, 1]:- "+findTwoElement(qA33));
+		
+		long [] qA34= {2, 4, 1, 3, 5};
+		System.out.println("34) Count Inversions [3]:- "+inversionCount(qA34));
+		
+		int [] qA35= {1,3,2,3,1};
+		System.out.println("35) Reverse Pairs [2]:- "+reversePairs(qA35));
+		
+		int [] qA36= {2,3,-2,4};
+		System.out.println("36) Maximum Product Subarray [6]:- "+maxProduct(qA36));
+		
+		// To prectice concept check if given no is palindrom https://leetcode.com/problems/palindrome-number/
+		System.out.println("1441:- "+isPalindorm(1441));
+		System.out.println("121:- "+isPalindorm(121));
+		System.out.println("14431:- "+isPalindorm(14431));
+
 	}
-	 public static int countOddSumSubarrays(int[] arr) {
-		 	int n=arr.length;
-		 	return n;
+	
+	public static boolean isPalindorm(int nums)
+	{
+		int x=nums;
+		int rev=0;
+		while(x>rev) {
+			rev=rev+x%10;
+			x=x/10;
+			if(x>rev)
+				rev*=10;
+
+		}
+		return rev==x || (rev/10==x);
+	}
+	
+	  public static int maxProduct(int[] nums) {
+
+	        int n=nums.length;
+	        int max=Integer.MIN_VALUE;
+	        int prefix=1,sufix=1;
+	        for(int i=0;i<n;i++){
+	            prefix=prefix*nums[i];
+	            sufix=sufix*nums[n-i-1];
+	            max=Math.max(max,prefix);
+	            max=Math.max(max,sufix);
+
+	            if(prefix==0)prefix=1;
+	            if(sufix==0)sufix=1;
+
+	        }
+	       
+	        return max;
 	    }
-	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
-//		  int ans[]=new int[m+n];
-//	        int i=0,j=0,k=0;
-//	        while(i<n && j<m){
-//	            if(a[i]<b[j]){
-//	                ans[k++]=a[i++];
-//	            }else {
-//	                ans[k++]=b[j++];
-//	            }
-//	        }
-//	        while(i<n)
-//	            ans[k++]=a[i++];
-//	        while(j<m)
-//	            ans[k++]=b[j++];
-//
-//	        n=a.length;
-//	        m=b.length;
-//	        for(int l=0;l<ans.length;l++){
-//	            if(l<n)a[l]=ans[l];
-//	            else b[l-n]=ans[l];
-//	        }
 
-	         // Declare 2 pointers:
-	        int left = n - 1;
-	        int right = 0;
-
-	        // Swap the elements until arr1[left] is
-	        // smaller than arr2[right]:
-	        while (left >= 0 && right < m) {
-	            if (arr1[left] > arr2[right]) {
-	                int temp = arr1[left];
-	                arr1[left] = arr2[right];
-	                arr2[right] = temp;
-	                left--;
-	                right++;
-	            } else {
-	                break;
+	
+	    public static int reversePairs(int[] nums) {
+	         cnt=0;
+	         mergeSort(nums);
+	         return (int)cnt;
+	    }
+	    public static int[] mergeSort(int a[]){
+	        int n=a.length;
+	        if(n<=1)return a;
+	        int left[]=mergeSort(Arrays.copyOfRange(a,0,n/2));
+	        int right[]=mergeSort(Arrays.copyOfRange(a,n/2,n));
+	        countPair(left,right);
+	        return merge(left,right,a);
+	    }
+	    
+	    public static int[] merge(int left[],int right[],int[] a){
+	        int i=0,j=0,k=0;
+	        int nL=left.length;
+	        int nR=right.length;
+	        
+	        while(i<nL && j<nR) {
+	            if(right[j]<left[i]){
+	                a[k++]=right[j++];
+	            }else {
+	               a[k++]=left[i++];
 	            }
 	        }
-
-	        // Sort arr1[] and arr2[] individually:
-	        Arrays.sort(arr1);
-	        Arrays.sort(arr2);
-
+	        
+	        while(i<nL)
+	            a[k++]=left[i++];
+	        while(j<nR)
+	            a[k++]=right[j++];
+	       
+	        return a;
 	    }
 
+	    public static void countPair(int left[],int right[]){
+	        int nL=left.length;
+	        int nR=right.length;
+	        int j=0;
+	        for(int i=0;i<nL;i++){ //traversing left arr
+	            while(j<nR && left[i]>(2*(double)right[j]))
+	                j++;
+	            cnt+=j;
+	        }
+	    }
+	    
+	 
+    static long cnt=0;
+    static long inversionCount(long arr[]) {
+        cnt=0;
+         mergeSort(arr);
+         return cnt;
+    }
+    
+    public static long[] mergeSort(long a[]){
+        int n=a.length;
+        if(n<=1)return a;
+        long left[]=mergeSort(Arrays.copyOfRange(a,0,n/2));
+        long right[]=mergeSort(Arrays.copyOfRange(a,n/2,n));
+        return merge(left,right,a);
+    }
+    
+    public static long[] merge(long left[],long right[],long[] a){
+        int i=0,j=0,k=0;
+       
+        return a;
+    }
+    
+	 public static int countOddSumSubarrays(int[] arr) {
+		 	int n=arr.length;
+
+		        return 1;
+	    }
+	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
+
+
+
+	    }
+	  static ArrayList<Integer> findTwoElement(int nums[]) {
+	        int n=nums.length;
+	        int s=0,s2=0;
+	        int sn=(n*(n+1))/2;
+	        int s2n=(n*(2*n+1)*(n+1))/6;
+	        for(int i=0;i<n;i++) {
+	        	s+=nums[i];
+	        	s2+=nums[i]*nums[i];
+	        }
+	        int val1=s-sn;  //x-y where x is missing and y is repeating;
+	        int val2=s2-s2n; //x2-y2 
+	        val2=val2/val1; //x+y=5
+	        long x=(val1+val2)/2;
+	        long y=val2-x;
+	        ArrayList<Integer> ans=new ArrayList<>();
+	        ans.add((int)x);
+	        ans.add((int)y);
+	        return ans;
+	        //return new ArrayList<>();
+	    }
 	
 	 public static int[][] merge(int[][] intervals) {
 	        ArrayList<int[]> ans=new ArrayList<>();
@@ -232,9 +332,9 @@ public class ArrayTakePr {
 	     
 	        return res;
 	    }
-	public static int subarraySum(int[] nums, int k) {
+	public static int subarraySum(int[] nums, int s) {
 		int n=nums.length;int cnt=0;
-		
+	
 		return cnt;
     }
 	
@@ -247,16 +347,20 @@ public class ArrayTakePr {
 
         int n=matrix.length;
         int m=matrix[0].length;
+        
        
-        
-        
-
+//        for(int i=0;i<n;i++) {
+//        	for(int j=0;j<m;j++) {
+//        		System.out.print(matrix[i][j]+", ");
+//        	}
+//        	System.out.println();
+//        }
     }
 	
 	  public static int longestConsecutive(int[] nums) {
 		 int n=nums.length;
-		
-		 return -1;
+		 int largest=0;
+		 return largest;
 	  }
 	
     private static boolean search(int[] nums,int k) {
@@ -273,51 +377,47 @@ public class ArrayTakePr {
 	
 	 public static int [] nextPermutation(int[] nums) {
 		 int n =nums.length;
-		
-	        return nums;
+		 
+	     return nums;
 	    }
 	 public static int[] rearrangeArray(int[] nums) {
 	        int n=nums.length;
 	        int ans[]=new int[n];
-	       
+	 
 	        return ans;
 	    }
 	
 	public static int maxProfit(int[] prices) {
      int profit=0;
-     int min=Integer.MAX_VALUE;;
-     for(int i=0;i<prices.length;i++) {
-    	 if(min>prices[i])min=prices[i];
-    	 else profit=Math.max(profit, prices[i]-min);
-     }
+    
      return profit;
 
  }
 	public static void maxSubArrayPrint(int[] nums) {
-		
-	 			System.out.println("");
+			
+		 	System.out.println("");
 	    }
 	
 	 public static int maxSubArray(int[] nums) {
 		 	int globalMax=nums[0],sum=0;
-		 
+		 	
 		 	return globalMax;
 	    }
 	
 	 public static int majorityElement(int[] nums) {
 		 	int n=nums.length;
-		 
+		 	
 	        return -1;
 	    }
 	
 	public static int[] sortColors(int[] nums) {
         int n=nums.length;
-       
+     
         return nums;
     }
 
 	 public static int[] twoSum(int[] nums, int target) {
-	      
+		 	
 	        return new int[]{-1,-1};
 	    }
 
@@ -329,12 +429,14 @@ public class ArrayTakePr {
 	}
 
 	private static int noApearOnce(int[] a) {
-		return 1;
+		return -1;
 	}
 	
 
 	private static int ConsecutiveOnce(int[] a) {
-		return 1;
+		int count=0;
+		
+		return count;
 	}
 
 
@@ -348,7 +450,7 @@ public class ArrayTakePr {
 
 	private static void intersectionTwoArray(int[] a, int[] b) {
 		ArrayList<Integer> intersection=new ArrayList<>();
-		
+	
 		System.out.println(intersection);
 	}
 	
@@ -366,6 +468,7 @@ public class ArrayTakePr {
 
 	private static void unionTwoArray(int[] a, int[] b) {
 		ArrayList<Integer> union=new ArrayList<>();
+		
 		System.out.println(union);
 	}
 	
@@ -373,7 +476,20 @@ public class ArrayTakePr {
 
 	private static void moveZeros(int[] a) {
 		int n=a.length;
-	
+		int j =-1; 
+		for(int i=0;i<n;i++) {
+			if(a[i]==0) {
+				j=i;
+				break;
+			}
+		}
+		if(j==-1)return;
+		for(int i=j+1;i<n;i++) {
+			if(a[i]>0) {
+				swap(a,i,j);
+				j++;
+			}
+		}
 	}
 	
 	private static void swap(int a[],int i,int j) {
@@ -383,6 +499,7 @@ public class ArrayTakePr {
 	} 
 	
 	private static void rotate(int[] a,int k) {
+		
 		int n=a.length; 
 		
 
@@ -414,6 +531,7 @@ public class ArrayTakePr {
 
 	public static int secoundLargest(int[] a) {
 		int largest=0,secound=0;
+		
 		
 		
 		return secound;

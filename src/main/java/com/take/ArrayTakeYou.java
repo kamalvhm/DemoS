@@ -91,7 +91,7 @@ public class ArrayTakeYou {
 		System.out.println("24) Count SubArray with Sum k=3  [8] :- "+subarraySum(qA24,3));
 		/**PREFIX SUM */
 		int [] qA24a= {1,3,5};//prefixSum add on question https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/
-		System.out.println("24) count of subarrays with an odd sum [5] [[1],[1,3],[1,3,5],[3],[3,5],[5]] :- "+countOddSumSubarrays(qA24a));
+		System.out.println("24) count of subarrays with an odd sum [4] [[1],[3],[5],[1,3,5]] :- "+countOddSumSubarrays(qA24a));
 
 		//Variation 1 :- for r=6 and c=3 find element nCr(5,2) //called by n-1 and c-1 if nCr was given
 		System.out.println("25) Paskal's Triangle print row  [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]] :- "+generate(5));
@@ -371,7 +371,8 @@ public class ArrayTakeYou {
 	        for(int i:res)
 	            ans.add(i);
 	        return ans;
-	*/        
+	*/ 
+	        
 /**	        ArrayList<Integer> ans=new ArrayList<>(); //Tc O(2N) Sc: O(N)
  	        int hash[]=new int[n+1];
 	        for(int i=0;i<n;i++){

@@ -2,12 +2,12 @@ package com.graph;
 import java.io.*;
 import java.util.*;
 //UNION FIND 
-class DisjointSet {
+public class DisjointSet {
     List<Integer> rank = new ArrayList<>();
     List<Integer> parent = new ArrayList<>();
     List<Integer> size = new ArrayList<>();
     public DisjointSet(int n) {
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i <= n; i++) { //in case one base indexing so upto n
             rank.add(0);
             parent.add(i);
             size.add(1);
@@ -31,7 +31,7 @@ class DisjointSet {
             parent.set(ulp_u, ulp_v);
         } else if (rank.get(ulp_v) < rank.get(ulp_u)) {
             parent.set(ulp_v, ulp_u);
-        } else {
+        } else {  //both have same rank then rank increase and set any 
             parent.set(ulp_v, ulp_u);
             int rankU = rank.get(ulp_u);
             rank.set(ulp_u, rankU + 1);
