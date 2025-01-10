@@ -277,13 +277,24 @@ public class ArrayTakePr {
 	
 	 public static int[][] merge(int[][] intervals) {
 	        ArrayList<int[]> ans=new ArrayList<>();
-	    
+	        PriorityQueue<int[]> q=new PriorityQueue<>((a,b)->a[0]-b[0]);
+	        for(int[] it:intervals)
+	        	q.offer(it);
+	        while(!q.isEmpty()) {
+	        	int curr[]=q.poll();
+	        	while(!q.isEmpty() && curr[1]>=q.peek()[0]) {
+	        		curr[1]=Math.max(curr[1], q.poll()[1]);
+	        	}
+	        	ans.add(curr);
+	        }
 	        return ans.toArray(new int[ans.size()][]);
 	    }
 	
 	 public static int subArrayXor(ArrayList<Integer> A, int B) {
-		 return -1;
-	    }
+		 int count=0;
+	
+		 return count;
+	  }
 	static int maxLen(int arr[]) {
 
         return -1;

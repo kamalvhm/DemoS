@@ -2,6 +2,7 @@ package com.take;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -102,8 +103,8 @@ public class ArrayTakeYou {
 		int [] qA27= {3,2,3};
 		System.out.println("27) 3 SUM :- "+threeSum(qA27));
 		
-		int [] qA28= {3,2,3};
-		System.out.println("28) 4-Sum Problem :- "+threeSum(qA27));
+		int [] qA28= {3,2,3,5};
+		System.out.println("28) 4-Sum Problem :- "+fourSum(qA27,13));
 		/**PREFIX SUM */
 		int [] qA29= {15 ,-2, 2, -8, 1, 7, 10, 23};
 		System.out.println("29) Largest subarray with 5 sum :- "+maxLen(qA29));
@@ -593,6 +594,35 @@ public class ArrayTakeYou {
             }else hm.put(sum,i);
         }
         return max;
+	    }
+	  public static List<List<Integer>> fourSum(int[] nums, int target) {
+	         HashSet<List<Integer>> ans=new HashSet<>();
+	         int n=nums.length; 
+	         Arrays.sort(nums);
+	        for(int i=0;i<n;i++){
+	            //if(i>0 && nums[i]==nums[i-1])continue;
+	            for(int j=i+1;j<n;j++){
+	                    //if(j>i+1 && nums[j]==nums[j-1])continue;
+	                    int lo=j+1,hi=n-1;
+	                    while(lo<hi){
+	                        long val=nums[i];
+	                        val+=nums[lo];
+	                        val+=nums[hi];
+	                        val+=nums[j];
+	                        if(val==target){
+	                            List<Integer> trip=Arrays.asList(new Integer[]{nums[i],nums[lo],nums[hi],nums[j]});
+	                            Collections.sort(trip);
+	                            ans.add(trip);
+	                            lo++;
+	                            while(lo<hi && nums[lo]==nums[lo-1])lo++;
+	                            hi--;
+	                            while(lo<hi && nums[hi]==nums[hi+1])hi--;
+	                        }else if(val<target)lo++;
+	                        else hi--; 
+	                    }
+	            }
+	        }
+	        return new ArrayList<>(ans);
 	    }
 	 public static  List<List<Integer>> threeSum(int[] nums) {
 //		  int n=nums.length;
