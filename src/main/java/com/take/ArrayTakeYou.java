@@ -107,7 +107,7 @@ public class ArrayTakeYou {
 		System.out.println("28) 4-Sum Problem :- "+fourSum(qA27,13));
 		/**PREFIX SUM */
 		int [] qA29= {15 ,-2, 2, -8, 1, 7, 10, 23};
-		System.out.println("29) Largest subarray with 5 sum :- "+maxLen(qA29));
+		System.out.println("29) Largest subarray with sum 0 [5] :- "+maxLen(qA29));
 		/**PREFIX SUM */
 		int [] qA30= {4, 2, 2, 6, 4};
 		ArrayList<Integer> list=new ArrayList<>();
@@ -165,15 +165,15 @@ public class ArrayTakeYou {
 	}
 	
 	  public static int maxProduct(int[] nums) {
-//		  int maxProduct=Integer.MIN_VALUE;
-//	        for(int i=0;i<nums.length;i++){
-//	            int product=1;
-//	            for(int j=i;j<nums.length;j++){
-//	                product*=nums[j];
-//	                maxProduct=Math.max(maxProduct,product);
-//	            }
-//	        }
-//	        return maxProduct;
+/**		  int maxProduct=Integer.MIN_VALUE;
+	        for(int i=0;i<nums.length;i++){
+	            int product=1;
+	            for(int j=i;j<nums.length;j++){
+	                product*=nums[j];
+	                maxProduct=Math.max(maxProduct,product);
+	            }
+	        }
+	        return maxProduct; */
 	        int n=nums.length;
 	        int max=Integer.MIN_VALUE;
 	        int prefix=1,sufix=1;
@@ -412,7 +412,8 @@ public class ArrayTakeYou {
 	        ans.add((int)y);
 	        return ans;
 	        
-	/**        int xr=0;  check with bit manupulatino
+	/**       
+	  		int xr=0;  check with bit manupulatino
 	        for(int i=0;i<n;i++){  
 	            xr=xr^arr[i];//xor All elements
 	            xr=xr^(i+1);// xor 1 to n
@@ -457,26 +458,26 @@ public class ArrayTakeYou {
 	        return ans; */
 	    }
 	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
-//		  int ans[]=new int[m+n];
-//	        int i=0,j=0,k=0;
-//	        while(i<n && j<m){
-//	            if(a[i]<b[j]){
-//	                ans[k++]=a[i++];
-//	            }else {
-//	                ans[k++]=b[j++];
-//	            }
-//	        }
-//	        while(i<n)
-//	            ans[k++]=a[i++];
-//	        while(j<m)
-//	            ans[k++]=b[j++];
-//
-//	        n=a.length;
-//	        m=b.length;
-//	        for(int l=0;l<ans.length;l++){
-//	            if(l<n)a[l]=ans[l];
-//	            else b[l-n]=ans[l];
-//	        }
+/**		  int ans[]=new int[m+n];
+	        int i=0,j=0,k=0;
+	        while(i<n && j<m){
+	            if(a[i]<b[j]){
+	                ans[k++]=a[i++];
+	            }else {
+	                ans[k++]=b[j++];
+	            }
+	        }
+	        while(i<n)
+	            ans[k++]=a[i++];
+	        while(j<m)
+	            ans[k++]=b[j++];
+
+	        n=a.length;
+	        m=b.length;
+	        for(int l=0;l<ans.length;l++){
+	            if(l<n)a[l]=ans[l];
+	            else b[l-n]=ans[l];
+	        } */
 		  n=arr1.length;
 	         // Declare 2 pointers:
 	        int left = n - 1;
@@ -625,21 +626,21 @@ public class ArrayTakeYou {
 	        return new ArrayList<>(ans);
 	    }
 	 public static  List<List<Integer>> threeSum(int[] nums) {
-//		  int n=nums.length;
-//	        HashSet<List<Integer>> hs=new HashSet<>();
-//	        for(int i=0;i<n;i++){
-//	            for(int j=i+1;j<n;j++){
-//	                for(int k=j+1;k<n;k++){
-//	                    int val=nums[i]+nums[j]+nums[k];
-//	                    if(val==0){
-//	                        List<Integer> triplet=Arrays.asList(new Integer[]{nums[i],nums[j],nums[k]});
-//	                        Collections.sort(triplet);
-//	                        hs.add(triplet);
-//	                    } 
-//	                }
-//	            }
-//	        }
-//	        return new ArrayList<>(hs);
+/**		  int n=nums.length;
+	        HashSet<List<Integer>> hs=new HashSet<>();
+	        for(int i=0;i<n;i++){
+	            for(int j=i+1;j<n;j++){
+	                for(int k=j+1;k<n;k++){
+	                    int val=nums[i]+nums[j]+nums[k];
+	                    if(val==0){
+	                        List<Integer> triplet=Arrays.asList(new Integer[]{nums[i],nums[j],nums[k]});
+	                        Collections.sort(triplet);
+	                        hs.add(triplet);
+	                    } 
+	                }
+	            }
+	        }
+	        return new ArrayList<>(hs);  */
 	        List<List<Integer>> ans=new ArrayList<>();
 	        Arrays.sort(nums);
 	        for(int i=0;i<nums.length;i++){
@@ -665,37 +666,37 @@ public class ArrayTakeYou {
 	
 	 public static List<Integer> majorityElementII(int[] nums) {
 		   List<Integer> list=new ArrayList<>();
-//	        for(int i=0;i<nums.length;i++){
-//	            if(list.size()==0 || list.contains(nums[i])==false){
-//	                int cnt=0;
-//	                for(int j=0;j<nums.length;j++){
-//	                    if(nums[i]==nums[j])
-//	                        cnt++;
-//	                    if(cnt>Math.floor(nums.length/3)){
-//	                        list.add(nums[i]);
-//	                        break;
-//	                    }
-//	                        
-//	                }
-//	            }
-//	            if(list.size()==2)break;  //Because at most we can have only 2 elements
-//	        }
-//	        return list;
-//		  List<Integer> ans=new ArrayList<>();
-//	        HashMap<Integer,Integer> hm=new HashMap<>();
-//	        int n=nums.length;
-//	        int treshold=(int)Math.floor(n/3);
-//
-//	        for(int i=0;i<n;i++){
-//	            int val=nums[i];
-//	            hm.put(val,hm.getOrDefault(val,0)+1);
-//
-//	            if(hm.get(val)>treshold && ans.contains(val)==false)
-//	                ans.add(val);
-//	            if(ans.size()==2)break;
-//
-//	        }
-//	        return ans;
+/**	        for(int i=0;i<nums.length;i++){
+	            if(list.size()==0 || list.contains(nums[i])==false){
+	                int cnt=0;
+	                for(int j=0;j<nums.length;j++){
+	                    if(nums[i]==nums[j])
+	                        cnt++;
+	                    if(cnt>Math.floor(nums.length/3)){
+	                        list.add(nums[i]);
+	                        break;
+	                    }
+	                        
+	                }
+	            }
+	            if(list.size()==2)break;  //Because at most we can have only 2 elements
+	        }
+	        return list;
+		  List<Integer> ans=new ArrayList<>();
+	        HashMap<Integer,Integer> hm=new HashMap<>();
+	        int n=nums.length;
+	        int treshold=(int)Math.floor(n/3);
+
+	        for(int i=0;i<n;i++){
+	            int val=nums[i];
+	            hm.put(val,hm.getOrDefault(val,0)+1);
+
+	            if(hm.get(val)>treshold && ans.contains(val)==false)
+	                ans.add(val);
+	            if(ans.size()==2)break;
+
+	        }
+	        return ans;   */
 	        List<Integer> ans=new ArrayList<>();
 	        int n=nums.length;
 	        int floor=(int)Math.floor(n/3);
@@ -864,22 +865,21 @@ public class ArrayTakeYou {
 	    }
 	 
 	public static void rotate(int[][] matrix) {
-//		   int n=matrix.length;
-//	        int m=matrix[0].length;
-//	        int ans[][]=new int[n][m];
-//	        for(int i=0;i<n;i++) {
-//	        	for(int j=0;j<m;j++) {
-//	        		ans[j][n-1-i]=matrix[i][j];
-//	        	}
-//	        }
-//	        
-//	        for(int i=0;i<n;i++) {
-//	        	for(int j=0;j<m;j++) {
-//	        		matrix[i][j]=ans[i][j];
-//	        	}
-//	        }
-        int n=matrix.length;
-        int m=matrix[0].length;
+		   int n=matrix.length;
+	        int m=matrix[0].length;
+/**	        int ans[][]=new int[n][m];
+	        for(int i=0;i<n;i++) {
+	        	for(int j=0;j<m;j++) {
+	        		ans[j][n-1-i]=matrix[i][j];
+	        	}
+	        }
+	        
+	        for(int i=0;i<n;i++) {
+	        	for(int j=0;j<m;j++) {
+	        		matrix[i][j]=ans[i][j];
+	        	}
+	        }  */
+       
         //transpose 
         for(int i=0;i<n;i++){
             for(int j=i+1;j<m;j++){
@@ -904,34 +904,33 @@ public class ArrayTakeYou {
     }
 	
 	  public static int longestConsecutive(int[] nums) {
-//	        int n=nums.length;
-//		  int max=0;
-//			 for(int i=0;i<n;i++) {
-//				 int count=1;
-//				 int x=nums[i];
-//				 while(search(nums,x+1)) {
-//					 count++;
-//					 x=x+1;
-//				 }
-//				 max=Math.max(max, count);
-//			 }
-//			 return max;
+	        int n=nums.length;
+/**		  int max=0;
+			 for(int i=0;i<n;i++) {
+				 int count=1;
+				 int x=nums[i];
+				 while(search(nums,x+1)) {
+					 count++;
+					 x=x+1;
+				 }
+				 max=Math.max(max, count);
+			 }
+			 return max;
 		  
-//	        if(n==0)return 0;
-//	        Arrays.sort(nums);
-//	        int countCurr=0,lastSmaller=Integer.MIN_VALUE,longest=1;
-//	        for(int i=0;i<n;i++){
-//	            if(nums[i]-1==lastSmaller){
-//	                lastSmaller=nums[i];
-//	                countCurr++;
-//	            }else if(nums[i]!=lastSmaller){
-//	                lastSmaller=nums[i];
-//	                countCurr=1;
-//	            }
-//	            longest=Math.max(longest,countCurr);
-//	        }
-//	        return longest;
-		  int n=nums.length;
+	        if(n==0)return 0;
+	        Arrays.sort(nums);
+	        int countCurr=0,lastSmaller=Integer.MIN_VALUE,longest=1;
+	        for(int i=0;i<n;i++){
+	            if(nums[i]-1==lastSmaller){
+	                lastSmaller=nums[i];
+	                countCurr++;
+	            }else if(nums[i]!=lastSmaller){
+	                lastSmaller=nums[i];
+	                countCurr=1;
+	            }
+	            longest=Math.max(longest,countCurr);
+	        }
+	        return longest; */
 	        if(n==0)return 0;
 	        int max=1;
 	        HashSet<Integer> hs=new HashSet<>();
@@ -1000,19 +999,19 @@ public class ArrayTakeYou {
 	    }
 	 public static int[] rearrangeArray(int[] nums) {
 	        int n=nums.length;
-//	        int pos[]=new int[n/2];
-//	        int neg[]=new int[n/2];
-//	        int j=0,k=0;
-//	        for(int i=0;i<nums.length;i++){
-//	            if(nums[i]>=0)
-//	                pos[j++]=nums[i];
-//	            else neg[k++]=nums[i];
-//	        }
-//
-//	        for(int i=0;i<n/2;i++){
-//	            nums[i*2]=pos[i];
-//	            nums[i*2+1]=neg[i];
-//	        }
+/**	        int pos[]=new int[n/2];
+	        int neg[]=new int[n/2];
+	        int j=0,k=0;
+	        for(int i=0;i<nums.length;i++){
+	            if(nums[i]>=0)
+	                pos[j++]=nums[i];
+	            else neg[k++]=nums[i];
+	        }
+
+	        for(int i=0;i<n/2;i++){
+	            nums[i*2]=pos[i];
+	            nums[i*2+1]=neg[i];
+	        } */
 	        int ans[]=new int[n];
 	        int pos=0;
 	        int neg=1;
@@ -1152,26 +1151,26 @@ public class ArrayTakeYou {
 	        return new int[]{-1,-1};
 	    }
 	private static int longestSubArray(int[] a,int k) {
-//		int len=0;
-//		for(int i=0;i<a.length;i++) {
-//			for(int j=i;j<a.length;j++) {
-//				int sum=0; 
-//				for(int k=i;k<=j;k++) {
-//					sum+=a[k];
-//				}
-//				if(sum==s)
-//					len=Math.max(len, j-i+1);
-//			}
-//		}
-//		int len=0;
-//		for(int i=0;i<a.length;i++) {
-//			int sum=0; 
-//			for(int j=i;j<a.length;j++) {
-//				sum+=a[j];
-//				if(sum==s)
-//					len=Math.max(len, j-i+1);
-//			}
-//		}
+/**		int len=0;
+		for(int i=0;i<a.length;i++) {
+			for(int j=i;j<a.length;j++) {
+				int sum=0; 
+				for(int k=i;k<=j;k++) {
+					sum+=a[k];
+				}
+				if(sum==s)
+					len=Math.max(len, j-i+1);
+			}
+		}
+		int len=0;
+		for(int i=0;i<a.length;i++) {
+			int sum=0; 
+			for(int j=i;j<a.length;j++) {
+				sum+=a[j];
+				if(sum==s)
+					len=Math.max(len, j-i+1);
+			}
+		} */
 		HashMap<Integer,Integer> hm=new HashMap<>();
 		int sum=0,maxlen=0;
 		for(int i=0;i<a.length;i++) {
