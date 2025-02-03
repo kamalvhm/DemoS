@@ -137,9 +137,9 @@ public class ArrayTakePr {
 		System.out.println("36) Maximum Product Subarray [6]:- "+maxProduct(qA36));
 		
 		// To prectice concept check if given no is palindrom https://leetcode.com/problems/palindrome-number/
-		System.out.println("1441:- "+isPalindorm(1441));
-		System.out.println("121:- "+isPalindorm(121));
-		System.out.println("14431:- "+isPalindorm(14431));
+		System.out.println("1441 true :- "+isPalindorm(1441));
+		System.out.println("121 true :- "+isPalindorm(121));
+		System.out.println("14431 false:- "+isPalindorm(14431));
 
 	}
 	 public static String twoDArrayToString(int[][] arr) {
@@ -164,7 +164,18 @@ public class ArrayTakePr {
 
 	public static boolean isPalindorm(int nums)
 	{
-		return false;
+		int x=nums;
+		int rev=0;
+		while(x>rev) {
+			rev+=x%10;
+			x=x/10;
+			if(x>rev)
+				rev*=10;
+		}
+		System.out.println("X:- "+x+" rev "+rev);
+		int odd=rev/10;
+		return x==rev || x==odd;
+		
 	}
 	
 	  public static int maxProduct(int[] nums) {

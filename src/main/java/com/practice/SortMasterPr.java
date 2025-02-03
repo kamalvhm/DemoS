@@ -12,7 +12,6 @@ public class SortMasterPr {
 	//TC:- O(n2) inplace ,but not stable
 	private static void selectionSort(int[] a) 	{
 		int n=a.length;
-	
 		
 	
 	}
@@ -27,9 +26,7 @@ public class SortMasterPr {
 	//now pick element from unsorted part and place it sorted part
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
-		
-		
-		
+
 	}
 	//TC:- O(nlogn) stable but not inplace 
 	private static int[] mergeSort(int[] a) {
@@ -38,7 +35,7 @@ public class SortMasterPr {
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {	
-		
+	
 		return a;
 	}
 	//TC:- O(nlogn) worst O(n2) In place but not stable 
@@ -48,24 +45,69 @@ public class SortMasterPr {
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		
-		return start;
+		return 1;
 	}
 	private static int randomized(int[] a, int start, int end) {
-		return -1;
+		return 1;
 	}
 	
 	private static void countSort(int[] a) {
+		int n=a.length;
+		int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+		for(int i:a) {
+			min=Math.min(min, i);
+			max=Math.max(max, i);
+		}
 		
+		int frq[]=new int[max-min+1];
+		for(int i=0;i<n;i++) {
+			frq[a[i]-min]++;
+		}
+		for(int i=1;i<frq.length;i++) {
+			frq[i]=frq[i]+frq[i-1];
+		}
+		int ans[]=new int[n];
+		for(int i=a.length-1;i>=0;i--) {
+			int pos=frq[a[i]-min]-1;
+			ans[pos]=a[i];
+			frq[a[i]-min]--;
+		}
+		for(int i=0;i<n;i++) {
+			a[i]=ans[i];
+		}
 	}
 	
 	
 	private void redixSort(int[] array) {
-		
+		int max=Integer.MIN_VALUE;
+		for(int i:array)
+			max=Math.max(max, i);
+		int exp=1;
+		while(exp<=max) {
+			countVariationForRedix(array, exp);
+			exp=exp*10;
+		}
 		
 	}
 	private static void countVariationForRedix(int[] a,int exp) {
-		
+		int n=a.length;
+	
+		int frq[]=new int[10];
+		for(int i=0;i<n;i++) {
+			frq[a[i]/exp%10]++;
+		}
+		for(int i=1;i<frq.length;i++) {
+			frq[i]=frq[i]+frq[i-1];
+		}
+		int ans[]=new int[n];
+		for(int i=a.length-1;i>=0;i--) {
+			int pos=frq[a[i]/exp%10]-1;
+			ans[pos]=a[i];
+			frq[a[i]/exp%10]--;
+		}
+		for(int i=0;i<n;i++) {
+			a[i]=ans[i];
+		}
 	}
 	
 	
