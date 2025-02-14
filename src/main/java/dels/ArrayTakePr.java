@@ -106,7 +106,7 @@ public class ArrayTakePr {
 		System.out.println("27) 3 SUM :- "+threeSum(qA27));
 		
 		int [] qA28= {3,2,3,1,5};
-		System.out.println("28) 4-Sum Problem :- "+fourSum(qA28,13));
+		System.out.println("28) 4-Sum Problem for sum 13 [2,3,3,5]:- "+fourSum(qA28,13));
 		/**PREFIX SUM */
 		int [] qA29= {15 ,-2, 2, -8, 1, 7, 10, 23};
 		System.out.println("29) Largest subarray with sum 0 [5]:- "+maxLen(qA29));
@@ -164,17 +164,16 @@ public class ArrayTakePr {
 
 	public static boolean isPalindorm(int nums)
 	{
-		int x=nums;
 		int rev=0;
+		int x=nums;
 		while(x>rev) {
-			rev+=x%10;
+			rev=rev+x%10;
 			x=x/10;
 			if(x>rev)
-				rev*=10;
+				rev=rev*10;
 		}
-		System.out.println("X:- "+x+" rev "+rev);
-		int odd=rev/10;
-		return x==rev || x==odd;
+		int oddDigits=rev/10;
+		return x==rev || x==oddDigits;
 		
 	}
 	
@@ -249,51 +248,42 @@ public class ArrayTakePr {
 		    return count;
 	    }
 	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
-		
+		 
 	    }
 	  static ArrayList<Integer> findTwoElement(int nums[]) {
 	        int n=nums.length;
 	        ArrayList<Integer> ans=new ArrayList<>();
 	        int xr=0;
-	        for(int i=0;i<nums.length;i++) {
+	        for(int i=0;i<n;i++) {
 	        	xr^=nums[i];
 	        	xr^=(i+1);
 	        }
-	        int bitNo=0;
-	        while(true) {
-	        	if((xr & (1<<bitNo))!=0)break;
-	        	bitNo++;
-	        }
-
-	        int zero=0,one=0;
-	        for(int i=0;i<nums.length;i++) {
-	        	if((nums[i] & (1<<bitNo))==0) {
-	        		one^=nums[i];
-	        	}
-	        	else {
-	        		zero^=nums[i];
+	        int ind=-1;
+	        for(int i=31;i>=0;i--) {
+	        	if((xr & (1<<i))!=0) {
+	        		ind=i;
+	        		break;
 	        	}
 	        }
-	      
-
+	        int set=0,notSet=0;
+	        for(int i=0;i<n;i++) {
+	        	if((nums[i]&(1<<ind))!=0)set^=nums[i];
+	        	else notSet^=nums[i];
+	        }
 	        for(int i=1;i<=n;i++) {
-	        	if((i & (1<<bitNo))==0) {
-	        		one^=i;
-	        	}
-	        	else {
-	        		zero^=i;
-	        	}
+	        	if((i&(1<<ind))!=0)set^=i;
+	        	else notSet^=i;
 	        }
-	        ans.add(zero);
-	        ans.add(one);
+	        ans.add(set);
+	        ans.add(notSet); 
 	        return ans;
 	    }
 	
 	 public static int[][] merge(int[][] intervals) {
 	        ArrayList<int[]> ans=new ArrayList<>();
-	      
+
 	        return ans.toArray(new int[ans.size()][]);
-	    }
+ 	     }
 	
 	 public static int subArrayXor(ArrayList<Integer> A, int B) {
 		 int count=0;
@@ -308,14 +298,14 @@ public class ArrayTakePr {
 	  }
 	 public static  List<List<Integer>> threeSum(int[] nums) {
 		 	List<List<Integer>> ans=new ArrayList<>();
-		
-	        return ans;
+		 	int n=nums.length;
+		 	return ans;
 	    }
 	
 	
 	 public static List<Integer> majorityElementII(int[] nums) {
 	        List<Integer> ans=new ArrayList<>();
-	     
+	        
 	        return ans;
 	  }
 		
@@ -338,7 +328,7 @@ public class ArrayTakePr {
 	     
 	        return res;
 	    }
-	public static int subarraySum(int[] nums, int k) {
+	public static int subarraySum(int[] nums, int s) {
 		int n=nums.length;int cnt=0;
 		
 		return cnt;
@@ -348,14 +338,13 @@ public class ArrayTakePr {
 	        List<Integer> result=new ArrayList<>();
 	        int n=matrix.length;
 	        int m=matrix[0].length;
-	       
+	     
 	        return result;
 	    }
 	public static void rotate(int[][] matrix) {
 
         int n=matrix.length;
         int m=matrix[0].length;
-        
         
 //        for(int i=0;i<n;i++) {
 //        	for(int j=0;j<m;j++) {
@@ -367,8 +356,7 @@ public class ArrayTakePr {
 	
 	  public static int longestConsecutive(int[] nums) {
 		 int n=nums.length;
-		 int largest=0;
-		
+		 int largest=1;
 		 return largest;
 	  }
 	
@@ -380,7 +368,7 @@ public class ArrayTakePr {
 
 	static ArrayList<Integer> leaders(int a[]) {
     	ArrayList<Integer> ans=new ArrayList<>();
-    	
+ 
     	return ans;
     }
 	
@@ -391,7 +379,6 @@ public class ArrayTakePr {
 	 public static int[] rearrangeArray(int[] nums) {
 	        int n=nums.length;
 	        int ans[]=new int[n];
-	      
 	        return ans;
 	 }
 	
@@ -401,10 +388,12 @@ public class ArrayTakePr {
      return profit;
 
  }
+
 	public static void maxSubArrayPrint(int[] nums) {
-	
-		 	System.out.println("");
-	    }
+		int globalMax = nums[0], sum = 0;
+		
+		System.out.println("");
+	}
 	
 	 public static int maxSubArray(int[] nums) {
 		 	int globalMax=nums[0],sum=0;
@@ -430,10 +419,10 @@ public class ArrayTakePr {
 	        return new int[]{-1,-1};
 	    }
 
-	private static int longestSubArray(int[] a,int k) {
+	private static int longestSubArray(int[] a,int s) {
 		int n=a.length;
 		int len=0;
-		
+	
 		return len;
 	}
 
@@ -455,7 +444,6 @@ public class ArrayTakePr {
 
 	private static int missingNo(int[] a) {
 		int n=a.length; 
-		
 		return -1;
 	}
 
@@ -483,7 +471,7 @@ public class ArrayTakePr {
 
 	private static void unionTwoArray(int[] a, int[] b) {
 		ArrayList<Integer> union=new ArrayList<>();
-		
+	
 		System.out.println(union);
 	}
 	
@@ -503,8 +491,6 @@ public class ArrayTakePr {
 	private static void rotate(int[] a,int k) { //1,2,3,4,5
 												// 0 1 2 3 4  k=2
 		int n=a.length; 
-
-		
 	}
 		
 		private static void reverse(int a[],int i,int j) {
@@ -520,7 +506,6 @@ public class ArrayTakePr {
 	
 	private static int removeDuplicate(int[] a) {
 		int i=0;
-		
 		return i;
 	}
 
@@ -533,8 +518,9 @@ public class ArrayTakePr {
 
 	public static int secoundLargest(int[] a) {
 		int largest=0,secound=0;
-		
+	
 		return secound;
+		
     }
 
 }

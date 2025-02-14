@@ -84,8 +84,6 @@ public class RecursionPracticeByVerma {
 				
 	}
 	public static void print(int n) {//print 10
-		
-		
 	}
 
 	private static void sortArraList(ArrayList<Integer> list) {  //[4, 6, 3, 1]
@@ -124,6 +122,7 @@ public class RecursionPracticeByVerma {
 	}
 	
 	private static void subsets(String ip, String op) {
+
 		
 	}
 	private static void uniqueSubsets(String ip, String op,HashSet<String> unq) {
@@ -132,7 +131,7 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void permutationwithSpaces(String ip, String op) {
-	
+		
 	}
 
 	private static void permutationwithCaseChange(String ip, String op) {
@@ -140,11 +139,10 @@ public class RecursionPracticeByVerma {
 	}
 
 	private static void letterPermutation(String ip, String op) {
-		
 	}
 	
 	private static void balanceParanthesis(int open, int close, String op) {
-	
+		
 	}
 	
 	private static void nBitBinary(int n, int one, int zero,String op) {

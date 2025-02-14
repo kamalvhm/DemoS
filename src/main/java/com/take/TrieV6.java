@@ -9,13 +9,14 @@ public class TrieV6 {
         Collections.sort(arr);
         ArrayList<ArrayList<Integer>> offlineQueries=new ArrayList<>();
         int m=queries.size();
-        for(int i=0;i<m;i++){
+        for(int i=0;i<m;i++){   // O(M)
             ArrayList<Integer> temp=new ArrayList<Integer>();
             temp.add(queries.get(i).get(1));
             temp.add(queries.get(i).get(0));
             temp.add(i);
             offlineQueries.add(temp); 
-        }
+        } 
+        //O(MlogM)
         Collections.sort(offlineQueries,new Comparator<ArrayList<Integer>>(){
             public int compare(ArrayList<Integer> a,ArrayList<Integer> b){
                 return a.get(0).compareTo(b.get(0));
@@ -26,8 +27,9 @@ public class TrieV6 {
         Trie3 trie=new Trie3();
         ArrayList<Integer> ans=new ArrayList<>();
         for(int i=0;i<m;i++)ans.add(-1);
-        for(int i=0;i<m;i++){
-            while(ind<n && arr.get(ind)<=offlineQueries.get(i).get(0)){
+        //O(M * 32 + N * 32 (due to inner while))
+        for(int i=0;i<m;i++){   
+            while(ind<n && arr.get(ind)<=offlineQueries.get(i).get(0)){   // O(N)
                 trie.insert(arr.get(ind));
                 ind++;
             }

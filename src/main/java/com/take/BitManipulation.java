@@ -47,7 +47,15 @@ public class BitManipulation {
 
 	}
 	
-	private static int divide(int divident, int divisor) {
+//	int x=divisor;  //we need to achive this with bit manupulation 
+//	int multiplier=1,cnt=0;
+//	while(x<=dividend) {
+//		x=x*multiplier;
+//		multiplier*=2;
+//		cnt++;
+//	} 
+//	return cnt; 
+	/**		private static int divide(int divident, int divisor) {
 		if(divident==divisor)return 1;
 		boolean sign=true;
 		if(divident>=0 && divisor<0)sign=false;
@@ -65,9 +73,9 @@ public class BitManipulation {
 		if(quotient==(1<<31) && !sign)return Integer.MIN_VALUE;
 
 		return sign?quotient:(-1*quotient);
-	}
+	} */
 	
-/**	public int divide(int dividend, int divisor) {
+	public static int divide(int dividend, int divisor) {
         if (dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
         if (dividend == Integer.MIN_VALUE && divisor == 1) return Integer.MIN_VALUE;
 
@@ -89,7 +97,7 @@ public class BitManipulation {
         }
 
         return negative ? -quotient : quotient;
-    } */
+    } 
 
 	private static int xorRange(int l, int r) {
 //		int ans=0;
