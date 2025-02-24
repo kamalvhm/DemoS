@@ -77,25 +77,18 @@ public class DPractice {
 	
 	private static int knapsack1(int[] wt, int[] val, int w, int n) {
 		if(w==0 || n==0)return 0;
-		if(dp[w][n]!=-1)return dp[w][n];
 		if(wt[n-1]<=w)
-			return dp[w][n]=Math.max(val[n-1]+knapsack1(wt, val, w-wt[n-1], n-1),knapsack1(wt, val, w, n-1));
-		else 
-		return dp[w][n]=knapsack1(wt, val, w, n-1);
+			return Math.max(val[n-1]+knapsack(wt, val, w-wt[n-1], n-1), knapsack(wt, val, w, n-1));
+		else return knapsack(wt, val, w, n-1);
 	}
 
 	private static int knapsack(int[] wt, int[] val, int w, int n) {
 		int t[][]=new int[n+1][w+1];
-		
-		for(int j=0;j<w+1;j++)
-				t[0][j]=0;
-		for(int i=0;i<n+1;i++)
-				t[i][0]=0;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<w+1;j++) {
-				 if(wt[i-1]<=j)
-					 t[i][j]=Math.max(val[i-1]+t[i-1][j-wt[i-1]], t[i-1][j]);
-				 else t[i][j]=t[i-1][j];
+				if(wt[i-1]<=j)
+					t[i][j]=Math.max(val[i-1]+t[i-1][j-wt[i-1]] , t[i-1][j]);
+				else t[i][j]=t[i-1][j];
 			}
 		}
 		return t[n][w];
@@ -103,22 +96,21 @@ public class DPractice {
 
 	public static boolean subsetSum(int[] arr, int sum, int n) {
 		boolean dp[][]=new boolean[n+1][sum+1];
-		
 		for(int i=0;i<n+1;i++)
 			dp[i][0]=true;
-		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
 				if(arr[i-1]<=j)
-					dp[i][j]=dp[i-1][j-arr[i-1]] || dp[i-1][j];
+					dp[i][j]=dp[i-1][j] || dp[i-1][j-arr[i-1]];
 				else dp[i][j]=dp[i-1][j];
 			}
 		}
+		
 		return dp[n][sum];
 	}
 
 	public static boolean equalSum(int[] arr, int n) {
-		int total=0;
+		int total=0; 
 		for(int i:arr)
 			total+=i;
 		if(total%2!=0)return false;
@@ -128,10 +120,10 @@ public class DPractice {
 	public static int countSubsetSum(int[] arr, int sum, int n) {
 		int dp[][]=new int[n+1][sum+1];
 		for(int i=0;i<n+1;i++)
-			dp[i][0]=1; 
+			dp[i][0]=1;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
-				if(arr[i-1]<=j) 
+				if(arr[i-1]<=j)
 					dp[i][j]=dp[i-1][j-arr[i-1]]+dp[i-1][j];
 				else dp[i][j]=dp[i-1][j];
 			}
@@ -144,31 +136,30 @@ public class DPractice {
 	public static int minimumSubsetSumDiff(int[] arr, int n) {
 		int total=0;
 		for(int i:arr)
-				total+=i;
-		boolean t[][]=subsetSumToReturnTable(arr, total, n);
+			total+=i;
+		boolean t[][]=subsetSumToReturnTable(arr,total,n);
 		int min=Integer.MAX_VALUE;
-		for(int i=1;i<total/2;i++) {
-			if(t[n][i]==true) {
-				min=Math.min(min, total-2*i);
-			} 
-		}
+		for(int i=0;i<total/2;i++) {
+			if(t[n-1][i])
+				min=Math.min(min, total-2*i);	
+		}	
 		return min;
 
 	}
 
 	public static boolean[][] subsetSumToReturnTable(int[] arr, int sum, int n) {
-		boolean t[][] = new boolean[n + 1][sum + 1];
-		for(int i=0;i<n+1;i++) {
-			t[i][0]=true;
-		}
+		boolean dp[][]=new boolean[n+1][sum+1];
+		for(int i=0;i<n+1;i++)
+			dp[i][0]=true;
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<sum+1;j++) {
 				if(arr[i-1]<=j)
-					t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
-				else t[i][j]=t[i-1][j];
- 			}
+					dp[i][j]=dp[i-1][j] || dp[i-1][j-arr[i-1]];
+				else dp[i][j]=dp[i-1][j];
+			}
 		}
-		return t;
+		
+		return dp;
 	}
 
 	public static int noOfSubsetforGivenDiff(int[] arr, int diff, int n) {
@@ -182,29 +173,22 @@ public class DPractice {
 
 	public static int unboundedKnapsack(int[] wt, int[] val, int w, int n) {
 		int t[][] = new int[n + 1][w + 1];
-		
-		
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<w+1;j++) {
-				if(wt[i-1]<=j)
-					t[i][j]=Math.max(val[i-1]+t[i][j-wt[i-1]],t[i-1][j]);
+				if(wt[i-1]<=j) 
+					t[i][j]=Math.max(val[i-1]+t[i][j-wt[i-1]], t[i-1][j]);
 				else t[i][j]=t[i-1][j];
+				
 			}
 		}
+		
+		
 		return t[n][w];
 	}
 
 	public static int coinChangeI(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
-		for(int i=0;i<n+1;i++)
-			t[i][0]=1;
-		for(int i=1;i<n+1;i++){
-			for(int j=1;j<sum+1;j++) {
-				if(coin[i-1]<=j) {
-					t[i][j]=t[i][j-coin[i-1]]+t[i-1][j];
-				}else t[i][j]=t[i-1][j];
-			}
-		}	
+		
 		return t[n][sum];
 	}
 
@@ -213,16 +197,6 @@ public class DPractice {
 	private static int coinChangeII(int[] coin, int sum, int n) {
 		int t[][] = new int[n + 1][sum + 1];
 		
-		for(int j=0;j<sum+1;j++)
-				t[0][j]=Integer.MAX_VALUE-1;
-		
-		for(int i=1;i<n+1;i++) {
-			for(int j=1;j<sum+1;j++) {
-				if(coin[i-1]<=j)
-					t[i][j]=Math.min(t[i][j-coin[i-1]], t[i-1][j])+1;
-				else t[i][j]=t[i-1][j];
-			}
-		}
 		return t[n][sum];
 	}
 

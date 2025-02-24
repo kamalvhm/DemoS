@@ -51,8 +51,8 @@ public class BFS_Test3 {
 				0
 				6
 	       */
-		
-		String filePath="src/graph/graph3.txt";
+		//src/main/resources/graph/graph2.txt
+		String filePath="src/main/resources/graph/graph3.txt";
 		BufferedReader fr=new BufferedReader(new FileReader(filePath));
 		int vtces=Integer.parseInt(fr.readLine());
 		

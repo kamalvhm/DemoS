@@ -43,7 +43,33 @@ public class BinarySearchTakeYou {
 		//array reprents quardinates of gas station you need to place K new gas station such that minimize max distance between two 
 		//gas stations  https://www.naukri.com/code360/problems/minimise-max-distance_7541449
 		System.out.println("11) Minimize Max Distance between Gas Station [0.5]:- "+MinimiseMaxDistance(qA10,6));
+		
+		String [] arr= {"boo", "go", "goo", "goog", "google", "hello"};
+		//sorted List given of words  and a prefix 'go' find count of all string which starts with prefix
+		System.out.println("12) Count prefix in given Array:- "+countWordsWithPrefix(arr,"go"));
+		
 	}
+	 public static int countWordsWithPrefix(String[] words, String prefix) {
+		 int start=lowerBound(words,prefix);
+		 int end=lowerBound(words,prefix+"{");// '{' is the next character after 'z'
+		 return end-start;
+		 
+	 }
+	 public static int lowerBound(String words[],String prefix) {
+		 int n=words.length;
+		 int ans=-1;
+		 int l=0,r=n-1;
+		 while(l<=r) {
+			 int mid=l+(r-l)/2;
+			 if(words[mid].compareTo(prefix) >= 0) {
+				 ans=mid;
+				 r=mid-1;
+			 }else l=mid+1;
+		 }
+		 
+		 return ans;
+		 
+	 }
 	
 	    public static double MinimiseMaxDistanceOpt(int []arr, int k){
 	        int n = arr.length; // size of the array

@@ -138,8 +138,62 @@ public class ArrayTakeYou {
 		System.out.println("1441:- "+isPalindorm(1441));
 		System.out.println("121:- "+isPalindorm(121));
 		System.out.println("14431:- "+isPalindorm(14431));
+		
+		//Given array will have range 0 to n-1 to 1 to n for below two questions and these are interchangable 
+		int [] qA37= {2,7,1,4,7,8,2,8,6};//find all dulplicates int array range 0 to n-1;
+		System.out.println("37) Find all duplicates in array  [2, 7, 8]"+findDulicates(qA37));
+		
+		int [] qA38= {4,3,2,7,8,2,3,1};// array range 1 to n-1;
+		System.out.println("38) Find all disapeared nos in array  [5,6]"+findDisappearedNumbers(qA38));
+
 
 	}
+	
+	 public static List<Integer> findDisappearedNumbers(int[] nums) {
+		 List<Integer> ans=new ArrayList<>();
+	        for(int i=0;i<nums.length;){
+	            int index=nums[i]-1;
+	            if(index>=0 && index<nums.length && nums[index]!=nums[i]){
+	                swap(nums,i,index);
+	            }else i++;
+	        }
+	        for(int i=0;i<nums.length;i++){
+	            if(nums[i]!=(i+1)){
+	                ans.add((i+1));
+	            }
+	        }
+	        return ans;
+	   }
+	
+	private static String findDulicates(int a[]) {
+	/**	 List<Integer> ans=new ArrayList<>();
+	        for(int i=0;i<nums.length;){
+	            int index=nums[i]-1;
+	            if(index>=0 && index<nums.length && nums[index]!=nums[i]){
+	                swap(nums,i,index);
+	            }else i++;
+	        }
+	        for(int i=0;i<nums.length;i++){
+	            if(nums[i]!=(i+1)){
+	                ans.add(nums[i]);
+	            }
+	        }
+	        return ans.toString();  */
+		int n=a.length;
+		for(int i=0;i<n;i++) {
+			a[a[i]%n]+=n;
+		} 
+		HashSet<Integer> allDuplicates=new HashSet<>();
+		for(int i=0;i<n;i++) {
+			int val=a[i]%n;
+			int cnt=a[val]/n;
+			if(cnt==2)
+				allDuplicates.add(val);
+		}
+		System.out.println("allDuplicates:- "+allDuplicates);
+		return "";
+	}
+
 	
 	public static boolean isPalindorm(int nums)
 	{
