@@ -45,7 +45,7 @@ public class SlidingWindowMaster {
 			String t="TTA";//return subString size minwindow which contain all letters of t string(atleast) no matter continues or discontinues;
 			System.out.println("9)Minimum Window SubString (6):-"+minWindowSubString(s3,t));
 		//10 Subarray Product Less Than K 713. Subarray Product Less Than K  (IMP PATTERN) https://leetcode.com/problems/subarray-product-less-than-k/
-		int nums = {10,5,2,6};
+		int[] nums = {10,5,2,6};
 		System.out.println("10)Subarray Product Less Than K (?):-"+numSubarrayProductLessThanK(nums,100));
 
 		// Above pattern is also applied in 1004. Max Consecutive Ones III https://leetcode.com/problems/max-consecutive-ones-iii/description/
