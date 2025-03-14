@@ -2,15 +2,24 @@ package com.graph;
 
 import java.util.*;
 
+class Node {
+    int data;
+    List<Integer> outEdges;
+
+    Node(int data) {
+        this.data = data;
+        this.outEdges = new ArrayList<>();
+    }
+}
 
 public class GraphCodec {
-    
+
     // Encode the graph into a list of integers
-    public List<Integer> encode(Node node, Map<Integer, Node> graph) {
+    public List<Integer> encode(Node node) {
         List<Integer> encoded = new ArrayList<>();
         Queue<Node> queue = new LinkedList<>();
         Set<Integer> visited = new HashSet<>();
-
+        
         queue.add(node);
         visited.add(node.data);
 
@@ -22,7 +31,7 @@ public class GraphCodec {
             for (int neighbor : curr.outEdges) {
                 encoded.add(neighbor);
                 if (!visited.contains(neighbor)) {
-                    queue.add(graph.get(neighbor));
+                    queue.add(new Node(neighbor)); // Just storing ID, real nodes will be reconstructed in decode
                     visited.add(neighbor);
                 }
             }
@@ -35,7 +44,7 @@ public class GraphCodec {
     public Node decode(List<Integer> encoded) {
         if (encoded.isEmpty()) return null;
 
-        Map<Integer, Node> graph = new HashMap<>();
+        Map<Integer, Node> nodeMap = new HashMap<>();
         Queue<Integer> queue = new LinkedList<>();
         int i = 0;
 
@@ -43,13 +52,13 @@ public class GraphCodec {
             int nodeId = encoded.get(i++);
             int edgeCount = encoded.get(i++);
 
-            Node node = graph.getOrDefault(nodeId, new Node(nodeId));
-            graph.put(nodeId, node);
+            Node node = nodeMap.getOrDefault(nodeId, new Node(nodeId));
+            nodeMap.put(nodeId, node);
 
             for (int j = 0; j < edgeCount; j++) {
                 int neighborId = encoded.get(i++);
-                Node neighbor = graph.getOrDefault(neighborId, new Node(neighborId));
-                graph.put(neighborId, neighbor);
+                Node neighbor = nodeMap.getOrDefault(neighborId, new Node(neighborId));
+                nodeMap.put(neighborId, neighbor);
 
                 node.outEdges.add(neighborId);
             }
@@ -57,43 +66,35 @@ public class GraphCodec {
             queue.add(nodeId);
         }
 
-        return graph.get(encoded.get(0)); // Return the root node
+        return nodeMap.get(encoded.get(0)); // Return the root node
     }
 
     // Helper function to print the graph
-    public static void printGraph(Node node, Map<Integer, Node> graph) {
+    public static void printGraph(Node node) {
         Queue<Node> queue = new LinkedList<>();
         Set<Integer> visited = new HashSet<>();
-        
+        Map<Integer, Node> nodeMap = new HashMap<>();
         queue.add(node);
         visited.add(node.data);
-        
+        nodeMap.put(node.data, node);
+
         while (!queue.isEmpty()) {
             Node curr = queue.poll();
             System.out.println("Node: " + curr.data + " -> " + curr.outEdges);
-            
+
             for (int neighbor : curr.outEdges) {
                 if (!visited.contains(neighbor)) {
-                    queue.add(graph.get(neighbor));
+                    Node neighborNode = nodeMap.getOrDefault(neighbor, new Node(neighbor));
+                    nodeMap.put(neighbor, neighborNode);
+                    queue.add(neighborNode);
                     visited.add(neighbor);
                 }
             }
         }
     }
-
-class Node {
-    int data;
-    List<Integer> outEdges;
-
-    Node(int data) {
-        this.data = data;
-        this.outEdges = new ArrayList<>();
-    }
-}
     //You have a class Node as below how to write endcode and decode method for this graph
     public static void main(String[] args) {
         // Sample graph creation
-        Map<Integer, Node> graph = new HashMap<>();
         Node node1 = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(3);
@@ -103,17 +104,12 @@ class Node {
         node1.outEdges.add(3);
         node2.outEdges.add(4);
         node3.outEdges.add(4);
-        
-        graph.put(1, node1);
-        graph.put(2, node2);
-        graph.put(3, node3);
-        graph.put(4, node4);
 
         GraphCodec codec = new GraphCodec();
-        List<Integer> encoded = codec.encode(node1, graph);
+        List<Integer> encoded = codec.encode(node1);
         System.out.println("Encoded: " + encoded);
 
         Node decodedRoot = codec.decode(encoded);
-        printGraph(decodedRoot, graph);
+        printGraph(decodedRoot);
     }
 }
