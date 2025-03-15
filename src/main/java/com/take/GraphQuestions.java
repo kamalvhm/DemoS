@@ -33,7 +33,7 @@ public class GraphQuestions {
 	                int adjr = row + dr[ind];
 	                int adjc = col + dc[ind];
 	                if (isValid(adjr, adjc, n, m)) {
-	                    if (vis[adjr][adjc] == 1) {
+	                    if (vis[adjr][adjc] == 1) { //NBR should be visitied already
 	                        int nodeNo = row * m + col;
 	                        int adjNodeNo = adjr * m + adjc;
 	                        if (ds.findUPar(nodeNo) != ds.findUPar(adjNodeNo)) {
@@ -66,4 +66,7 @@ public class GraphQuestions {
 	        
 	        //Output: 1 1 2 1 1 2 2 2 3 3 1 1
 	    }
+	    
+	  
+
 }

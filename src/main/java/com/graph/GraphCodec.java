@@ -22,11 +22,11 @@ public class GraphCodec {
         List<Integer> encoded = new ArrayList<>();
         Queue<Node> queue = new LinkedList<>();
         Set<Integer> visited = new HashSet<>();
-        Map<Integer, Node> nodeMap = new HashMap<>();
+       // Map<Integer, Node> nodeMap = new HashMap<>();
 
         queue.add(node);
         visited.add(node.data);
-        nodeMap.put(node.data, node);
+       // nodeMap.put(node.data, node);
 
         while (!queue.isEmpty()) {
             Node curr = queue.poll();
@@ -38,7 +38,7 @@ public class GraphCodec {
                 if (!visited.contains(neighbor.data)) {
                     visited.add(neighbor.data);
                     queue.add(neighbor);
-                    nodeMap.put(neighbor.data, neighbor);
+                   // nodeMap.put(neighbor.data, neighbor);
                 }
             }
         }
