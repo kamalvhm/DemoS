@@ -141,7 +141,57 @@ public class ArrayTakePr {
 		System.out.println("121 true :- "+isPalindorm(121));
 		System.out.println("14431 false:- "+isPalindorm(14431));
 
+		//Given array will have range 0 to n-1 to 1 to n for below two questions and these are interchangable 
+				int [] qA37= {2,7,1,4,7,8,2,8,6};//find all dulplicates int array range 0 to n-1;
+				System.out.println("37) Find all duplicates in array  [2, 7, 8]"+findDulicates(qA37));
+				
+				int [] qA38= {4,3,2,7,8,2,3,1};// array range 1 to n-1;
+				System.out.println("38) Find all disapeared nos in array  [5,6]"+findDisappearedNumbers(qA38));
 	}
+	 public static List<Integer> findDisappearedNumbers(int[] nums) {
+		 List<Integer> ans=new ArrayList<>();
+	       for(int i=0;i<nums.length;) {
+	    	   int index=nums[i]-1;
+	    	   if(index>=0 && index<nums.length && nums[index]!=nums[i])
+	    		   	swap(nums,index,i);
+	    	   else i++;
+	       }
+	       for(int i=0;i<nums.length;i++) {
+	    	   if(nums[i]!=i+1)
+	    		   ans.add(i+1);
+	       }
+	       return ans;
+	   }
+	
+	private static String findDulicates(int a[]) {
+	/**	 List<Integer> ans=new ArrayList<>();
+	        for(int i=0;i<nums.length;){
+	            int index=nums[i]-1;
+	            if(index>=0 && index<nums.length && nums[index]!=nums[i]){
+	                swap(nums,i,index);
+	            }else i++;
+	        }
+	        for(int i=0;i<nums.length;i++){
+	            if(nums[i]!=(i+1)){
+	                ans.add(nums[i]);
+	            }
+	        }
+	        return ans.toString();  */
+		int n=a.length;
+		for(int i=0;i<n;i++) {
+			a[a[i]%n]+=n;
+		} 
+		HashSet<Integer> allDuplicates=new HashSet<>();
+		for(int i=0;i<n;i++) {
+			int val=a[i]%n;
+			int cnt=a[val]/n;
+			if(cnt==2)
+				allDuplicates.add(val);
+		}
+		System.out.println("allDuplicates:- "+allDuplicates);
+		return "";
+	}
+
 	 public static String twoDArrayToString(int[][] arr) {
 	        StringBuilder sb = new StringBuilder();
 	        sb.append("["); // Start with an opening bracket
@@ -164,16 +214,16 @@ public class ArrayTakePr {
 
 	public static boolean isPalindorm(int nums)
 	{
-		int rev=0;
 		int x=nums;
-		while(x>rev) {
-			rev=rev+x%10;
+		int res=0;
+		while(x>res) {
+			res=res+x%10;
 			x=x/10;
-			if(x>rev)
-				rev=rev*10;
+			if(x>res)
+				res=res*10;
 		}
-		int oddDigits=rev/10;
-		return x==rev || x==oddDigits;
+		int oddLen=res/10;
+		return x==res || x==oddLen;
 		
 	}
 	
@@ -253,29 +303,7 @@ public class ArrayTakePr {
 	  static ArrayList<Integer> findTwoElement(int nums[]) {
 	        int n=nums.length;
 	        ArrayList<Integer> ans=new ArrayList<>();
-	        int xr=0;
-	        for(int i=0;i<n;i++) {
-	        	xr^=nums[i];
-	        	xr^=(i+1);
-	        }
-	        int ind=-1;
-	        for(int i=31;i>=0;i--) {
-	        	if((xr & (1<<i))!=0) {
-	        		ind=i;
-	        		break;
-	        	}
-	        }
-	        int set=0,notSet=0;
-	        for(int i=0;i<n;i++) {
-	        	if((nums[i]&(1<<ind))!=0)set^=nums[i];
-	        	else notSet^=nums[i];
-	        }
-	        for(int i=1;i<=n;i++) {
-	        	if((i&(1<<ind))!=0)set^=i;
-	        	else notSet^=i;
-	        }
-	        ans.add(set);
-	        ans.add(notSet); 
+	       
 	        return ans;
 	    }
 	

@@ -2,6 +2,8 @@ package com.take;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+
 import com.graph.DisjointSet;
 
 public class GraphQuestions {
@@ -67,6 +69,44 @@ public class GraphQuestions {
 	        //Output: 1 1 2 1 1 2 2 2 3 3 1 1
 	    }
 	    
+	    
+	    public static String getAlienLanguage(String []dictionary, int k) {
+	        ArrayList<ArrayList<Integer>> grp=new ArrayList<>();
+	        for(int i=0;i<k;i++)grp.add(new ArrayList<>());
+	        for(int i=0;i<dictionary.length-1;i++){
+	            String s1=dictionary[i];
+	            String s2=dictionary[i+1];
+	            int len=Math.min(s1.length(),s2.length());
+	            for(int j=0;j<len;j++){
+	                if(s1.charAt(j)!=s2.charAt(j)){
+	                    grp.get(s1.charAt(j)-'a').add(s2.charAt(j)-'a');
+	                    break; 
+	                }
+	            }
+	        } 
+	        Stack<Integer> st=new Stack<>();
+	        boolean []vis=new boolean[k];
+	        for(int i=0;i<k;i++){
+	            if(vis[i]==false){
+	                dfs(grp,i,vis,st);
+	            }
+	        }
+	        StringBuffer sb=new StringBuffer();
+	        while(!st.isEmpty()){
+	            char ch=(char)(st.pop()+'a');
+	            sb.append(ch);
+	        }
+	        return sb.toString();
+	    }
+	    public static void dfs( ArrayList<ArrayList<Integer>> grp,int src,boolean vis[],Stack<Integer> st){
+	        vis[src]=true;
+	        for(int nbr:grp.get(src)){
+	            if(vis[nbr]==false){
+	                dfs(grp,nbr,vis,st);
+	            }
+	        }
+	        st.push(src);
+	    }
 	  
 
 }

@@ -102,19 +102,19 @@ class LRUCache {
 		// it will store a key (1) with value 10 in the
 		// cache.
 		cache2.set(2, 20);
-		System.out.println("Value for the key: 1 is " + cache2.get(1)); // returns 10
+		System.out.println("\t >>>>>>>>>> Value for the key: 1 is " + cache2.get(1)); // returns 10
 
 		// evicts key 2 and store a key (3) with
 		// value 30 in the cache.
 		cache2.set(3, 30);
 
-		System.out.println("Value for the key: 2 is " + cache2.get(2)); // returns -1 (not found)
+		System.out.println("\t >>>>>>>>>> Value for the key: 2 is " + cache2.get(2)); // returns -1 (not found)
 
 		// evicts key 1 and store a key (4) with
 		// value 40 in the cache.
 		cache2.set(4, 40);
-		System.out.println("Value for the key: 1 is " + cache2.get(1)); // returns -1 (not found)
-		System.out.println("Value for the key: 3 is " + cache2.get(3)); // returns 30
-		System.out.println("Value for the key: 4 is " + cache2.get(4)); // return 40
+		System.out.println("\t >>>>>>>>>> Value for the key: 1 is " + cache2.get(1)); // returns -1 (not found)
+		System.out.println("\t >>>>>>>>>> Value for the key: 3 is " + cache2.get(3)); // returns 30
+		System.out.println("\t >>>>>>>>>> Value for the key: 4 is " + cache2.get(4)); // return 40
     }
 }

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 class abc {
 	
-	
+	 
 	public static void main(String[] args) {
 //		long dp[]=new long[51];
 //		Arrays.fill(dp, -1);
@@ -42,10 +42,34 @@ class abc {
 		 * String a[]= {"ab","abc","cd","def","abcd","ef","c"};
 		 * System.out.println("CANN:- "+allConstruct2(a,"dbcdef"));
 		 */
-
+//		int num=20;
+//		switch(num) {
+//			case 10:System.out.println("10");
+//			//break;
+//			case 20:System.out.println("20");
+//			//break;
+//			case 30:System.out.println("30");
+//			//break;
+//			default:System.out.println("DEF");
+//		}
+		
+		int c[]= {4,3,5,1,2};
+		System.out.print(large(c,0,c.length-1));
 		
 	}
 	
+
+
+
+
+	private static int  large(int[] c, int start, int end) {
+		if(start==end)return c[0];
+		int half=(start+end)/2;
+		int val1=large(c, start, half);
+		int val2=large(c, half+1, end);
+		return Math.max(val1, val2);
+	}
+
 
 
 

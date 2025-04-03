@@ -110,5 +110,10 @@ public class HashMap<K,V>{
 		table=newTable;
 		
 	}
+
+	public boolean containsKey(char pch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

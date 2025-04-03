@@ -51,7 +51,7 @@ public class BinarySearchTakeYou {
 	}
 	 public static int countWordsWithPrefix(String[] words, String prefix) {
 		 int start=lowerBound(words,prefix);
-		 int end=lowerBound(words,prefix+"{");// '{' is the next character after 'z'
+		 int end=lowerBound(words,prefix+"{");// '{' is the next character after 'z' z is 122 and 123 is {
 		 return end-start;
 		 
 	 }
