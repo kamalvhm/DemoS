@@ -16,7 +16,7 @@ class Node {
 }
 
 public class GraphCodec {
-
+	
     // Encode the graph into a list of integers
     public List<Integer> encode(Node node) {
         List<Integer> encoded = new ArrayList<>();
