@@ -3,14 +3,10 @@ package dels;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-
-import org.apache.zookeeper.server.quorum.Leader;
 
 public class ArrayTakePr { 
 
@@ -127,7 +123,7 @@ public class ArrayTakePr {
 		int [] qA33= {4,3,6,2,1,1};
 		System.out.println("33) Find the repeating and missing number  [1, 5]:- "+findTwoElement(qA33));
 		
-		long [] qA34= {2, 4, 1, 3, 5};
+		long [] qA34= {2, 4, 1, 3, 5}; //https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
 		System.out.println("34) Count Inversions [3]:- "+inversionCount(qA34));
 		
 		int [] qA35= {1,3,2,3,1};
@@ -164,31 +160,20 @@ public class ArrayTakePr {
 	   }
 	
 	private static String findDulicates(int a[]) {
-	/**	 List<Integer> ans=new ArrayList<>();
-	        for(int i=0;i<nums.length;){
-	            int index=nums[i]-1;
-	            if(index>=0 && index<nums.length && nums[index]!=nums[i]){
-	                swap(nums,i,index);
-	            }else i++;
-	        }
-	        for(int i=0;i<nums.length;i++){
-	            if(nums[i]!=(i+1)){
-	                ans.add(nums[i]);
-	            }
-	        }
-	        return ans.toString();  */
 		int n=a.length;
-		for(int i=0;i<n;i++) {
-			a[a[i]%n]+=n;
-		} 
-		HashSet<Integer> allDuplicates=new HashSet<>();
-		for(int i=0;i<n;i++) {
-			int val=a[i]%n;
-			int cnt=a[val]/n;
-			if(cnt==2)
-				allDuplicates.add(val);
+		for(int i=0;i<n;) {
+			int index=a[i]-1;
+			if(index>=0 && a[index]!=a[i]) {
+				int tmp=a[index];
+				a[index]=a[i];
+				a[i]=tmp;
+			}else i++;
 		}
-		System.out.println("allDuplicates:- "+allDuplicates);
+		StringBuffer sb=new StringBuffer();
+		for(int i=0;i<n;i++) {
+			if(a[i]!=i+1) sb.append(a[i]+",>> ");
+		}
+		System.out.println(sb.toString());
 		return "";
 	}
 
@@ -214,16 +199,7 @@ public class ArrayTakePr {
 
 	public static boolean isPalindorm(int nums)
 	{
-		int x=nums;
-		int res=0;
-		while(x>res) {
-			res=res+x%10;
-			x=x/10;
-			if(x>res)
-				res=res*10;
-		}
-		int oddLen=res/10;
-		return x==res || x==oddLen;
+		return false;
 		
 	}
 	
@@ -231,8 +207,7 @@ public class ArrayTakePr {
 
 	        int n=nums.length;
 	        int max=Integer.MIN_VALUE;
-	       
-	       
+	      
 	        return max;
 	    }
 
@@ -294,12 +269,12 @@ public class ArrayTakePr {
 	 public static int countOddSumSubarrays(int[] arr) {
 		 	int n=arr.length;
 		 	int count=0;
-		 	
+		 
 		    return count;
 	    }
 	  public static  void merge(int[] arr1, int n, int[] arr2, int m) {
-		 
-	    }
+		
+	  }
 	  static ArrayList<Integer> findTwoElement(int nums[]) {
 	        int n=nums.length;
 	        ArrayList<Integer> ans=new ArrayList<>();
@@ -309,7 +284,8 @@ public class ArrayTakePr {
 	
 	 public static int[][] merge(int[][] intervals) {
 	        ArrayList<int[]> ans=new ArrayList<>();
-
+	        
+	        
 	        return ans.toArray(new int[ans.size()][]);
  	     }
 	
@@ -358,7 +334,7 @@ public class ArrayTakePr {
 	    }
 	public static int subarraySum(int[] nums, int s) {
 		int n=nums.length;int cnt=0;
-		
+	
 		return cnt;
     }
 	
@@ -366,13 +342,14 @@ public class ArrayTakePr {
 	        List<Integer> result=new ArrayList<>();
 	        int n=matrix.length;
 	        int m=matrix[0].length;
-	     
+	      
 	        return result;
 	    }
 	public static void rotate(int[][] matrix) {
 
         int n=matrix.length;
         int m=matrix[0].length;
+       
         
 //        for(int i=0;i<n;i++) {
 //        	for(int j=0;j<m;j++) {
@@ -396,12 +373,14 @@ public class ArrayTakePr {
 
 	static ArrayList<Integer> leaders(int a[]) {
     	ArrayList<Integer> ans=new ArrayList<>();
- 
+    	
     	return ans;
     }
 	
 	 public static int [] nextPermutation(int[] nums) {
 		 int n =nums.length;
+		 int ind=-1;
+		
 	     return nums;
 	  }
 	 public static int[] rearrangeArray(int[] nums) {
@@ -431,7 +410,7 @@ public class ArrayTakePr {
 	
 	 public static int majorityElement(int[] nums) {
 		 	int n=nums.length;
-		 	
+		 
 	        return -1;
 	    }
 	
@@ -450,22 +429,21 @@ public class ArrayTakePr {
 	private static int longestSubArray(int[] a,int s) {
 		int n=a.length;
 		int len=0;
-	
+		
 		return len;
 	}
 
 	private static int noApearOnce(int[] a) {
 		int xor=0;
-		
 		return xor;
 	}
 	
 
 	private static int ConsecutiveOnce(int[] a) {
 		int count=0;
+		int max=0;
 		
-		
-		return count;
+		return max;
 	}
 
 
@@ -499,7 +477,7 @@ public class ArrayTakePr {
 
 	private static void unionTwoArray(int[] a, int[] b) {
 		ArrayList<Integer> union=new ArrayList<>();
-	
+		
 		System.out.println(union);
 	}
 	
@@ -518,7 +496,8 @@ public class ArrayTakePr {
 	
 	private static void rotate(int[] a,int k) { //1,2,3,4,5
 												// 0 1 2 3 4  k=2
-		int n=a.length; 
+		int n=a.length;
+	
 	}
 		
 		private static void reverse(int a[],int i,int j) {
@@ -534,6 +513,7 @@ public class ArrayTakePr {
 	
 	private static int removeDuplicate(int[] a) {
 		int i=0;
+		
 		return i;
 	}
 
@@ -545,9 +525,9 @@ public class ArrayTakePr {
 	}
 
 	public static int secoundLargest(int[] a) {
-		int largest=0,secound=0;
-	
-		return secound;
+		int largest=0,second=0;
+		
+		return second;
 		
     }
 

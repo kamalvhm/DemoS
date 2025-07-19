@@ -180,7 +180,7 @@ public class ArrayTakeYou {
 	        }
 	        return ans.toString();  */
 		int n=a.length;
-		for(int i=0;i<n;i++) {
+		for(int i=0;i<n;i++) {  // counting no and updating +n for each count
 			a[a[i]%n]+=n;
 		} 
 		HashSet<Integer> allDuplicates=new HashSet<>();
