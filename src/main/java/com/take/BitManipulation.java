@@ -156,19 +156,19 @@ public class BitManipulation {
 		return xor;
 	}
 
-	private static List<List<Integer>> powerSet(int[] a) {
-		int n=a.length;
-		int totalNoSubsets=1<<n; //2 power n by left shif
-		List<List<Integer>> ans=new ArrayList<>();
-		for(int num=0;num<=totalNoSubsets-1;num++) {  //iterating all decimal numbers
-			List<Integer> subset=new ArrayList<>();
-			for(int i=0;i<n;i++) { //check bits set or not one by one
-				if((num&(1<<i))!=0)subset.add(a[i]);
+		private static List<List<Integer>> powerSet(int[] a) {
+			int n=a.length;
+			int totalNoSubsets=1<<n; //2 power n by left shif
+			List<List<Integer>> ans=new ArrayList<>();
+			for(int num=0;num<=totalNoSubsets-1;num++) {  //iterating all decimal numbers
+				List<Integer> subset=new ArrayList<>();
+				for(int i=0;i<n;i++) { //check bits set or not one by one
+					if((num&(1<<i))!=0)subset.add(a[i]);
+				}
+				ans.add(subset);
 			}
-			ans.add(subset);
+			return ans;
 		}
-		return ans;
-	}
 
 	private static int noOfBitsFlip(int start, int goal) {
 		int ans=start^goal;
