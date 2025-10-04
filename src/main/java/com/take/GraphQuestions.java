@@ -58,7 +58,7 @@ public class GraphQuestions {
 	        };
 
 	        GraphQuestions obj = new GraphQuestions();
-	        List<Integer> ans = obj.numOfIslands(n, m, operators);
+	        List<Integer> ans = obj.numOfIslands1(n, m, operators);
 
 	        int sz = ans.size();
 	        for (int i = 0; i < sz; i++) {
@@ -108,5 +108,39 @@ public class GraphQuestions {
 	        st.push(src);
 	    }
 	  
+	    public List<Integer> numOfIslands1(int n, int m, int[][] operators) {
+	    	List<Integer> ans=new ArrayList<>();
+	    	int cnt=0;
+	    	boolean[][]visited=new boolean[n][m];
+	    	DisjointSet ds=new DisjointSet(n*m);
+	    	for(int op[]:operators) {
+	    		int i=op[0];
+	    		int j=op[1];
+	    		if(visited[i][j]) {
+	    			ans.add(cnt); 
+	    			continue;
+	    		}
+	    		visited[i][j]=true;
+	    		cnt++;
+	    		for(int dir[]:directions) {
+	    			int r=dir[0]+i;
+	    			int c=dir[1]+j;
+	    			if(r>=0 && c>=0 && r<n && c<m) {
+	    				if(visited[r][c]==true) {
+	    					int cellNo=i*m+j;
+	    					int adjCellno=r*m+c;
+	    					if(ds.findUPar(cellNo)!=ds.findUPar(adjCellno)) {
+	    						ds.unionByRank(cellNo,adjCellno);
+	    						cnt--;
+	    					}
+	    				}
+	    			} 
+	    		}
+	    		ans.add(cnt);
+	    		
+	    	}
+	    	return ans;
+	    }
+	    int directions[][]={{0,1},{1,0},{0,-1},{-1,0}};
 
 }

@@ -199,14 +199,14 @@ public class ArrayTakeYou {
 	{
 		int rev=0;
 		int x=nums;
-//		while(x>0) {
-//			rev=rev+x%10; 
-//			x=x/10;
-//			if(x>0)
-//				rev=rev*10;
-//		}
-//		System.out.println(">>"+rev);
-//		return nums==rev;
+/**		while(x>0) {
+			rev=rev+x%10; 
+			x=x/10;
+			if(x>0)
+				rev=rev*10;
+		}
+		System.out.println(">>"+rev);
+		return nums==rev;   */
 		while(x>rev) {
 			rev=rev+x%10;
 			x=x/10;
@@ -558,28 +558,28 @@ public class ArrayTakeYou {
 	    }
 
 	
-//	 public int[][] merge(int[][] intervals) {
-//	        ArrayList<int[]> ans=new ArrayList<>();
-//	        Arrays.sort(intervals,new Comparator<int[]>(){
-//	            public int compare(int []a,int []b){
-//	                return a[0]-b[0];
-//	            }
-//	        });//nlogn
-//	        int start=intervals[0][0];
-//	        int end=intervals[0][1];
-//	        for(int i=0;i<intervals.length;i++){//O(N)
-//	            int [] curr=intervals[i];
-//	            if(end>=curr[0]){
-//	                end=Math.max(end,curr[1]);
-//	            }else {
-//	                ans.add(new int[]{start,end});
-//	                start=curr[0];
-//	                end=curr[1];
-//	            }
-//	        }
-//	        ans.add(new int[]{start,end });
-//	        return ans.toArray(new int[ans.size()][]);
-//	    }
+/**	 public int[][] merge(int[][] intervals) {
+	        ArrayList<int[]> ans=new ArrayList<>();
+	        Arrays.sort(intervals,new Comparator<int[]>(){
+	            public int compare(int []a,int []b){
+	                return a[0]-b[0];
+	            }
+	        });//nlogn
+	        int start=intervals[0][0];
+	        int end=intervals[0][1];
+	        for(int i=0;i<intervals.length;i++){//O(N)
+	            int [] curr=intervals[i];
+	            if(end>=curr[0]){
+	                end=Math.max(end,curr[1]);
+	            }else {
+	                ans.add(new int[]{start,end});
+	                start=curr[0];
+	                end=curr[1];
+	            }
+	        }
+	        ans.add(new int[]{start,end });
+	        return ans.toArray(new int[ans.size()][]);
+	    } **/
 	
 	 public static int[][] merge(int[][] intervals) {
 	        ArrayList<int[]> ans=new ArrayList<>();
@@ -602,16 +602,16 @@ public class ArrayTakeYou {
 	    }
 	
 	 public static int subArrayXor(ArrayList<Integer> A, int B) {
-//		 int count=0;
-//	        int n=A.size();
-//	        for(int i=0;i<n;i++){
-//	            int xor=0;
-//	            for(int j=i;j<n;j++){
-//	                xor^=A.get(j);
-//	                if(xor==B)count++;
-//	            }
-//	        }
-//	    return count;
+	/**	 int count=0;
+	        int n=A.size();
+	        for(int i=0;i<n;i++){
+	            int xor=0;
+	            for(int j=i;j<n;j++){
+	                xor^=A.get(j);
+	                if(xor==B)count++;
+	            }
+	        }
+	    return count; **/
 	        int xor=0,cnt=0;
 	        HashMap<Integer,Integer> hm=new HashMap<>();
 	        hm.put(0,1);
@@ -628,16 +628,16 @@ public class ArrayTakeYou {
 	static int maxLen(int arr[]) {
 //	       int len=0;
 	       int n=arr.length;
-//	       for(int i=0;i<n;i++){
-//	           int sum=0;
-//	           for(int j=i;j<n;j++){
-//	               sum+=arr[j];
-//	               if(sum==0){
-//	                   len=Math.max(len,j-i+1);
-//	               }
-//	           }
-//	       }
-//	       return len;
+/**	       for(int i=0;i<n;i++){
+	           int sum=0;
+	           for(int j=i;j<n;j++){
+	               sum+=arr[j];
+	               if(sum==0){
+	                   len=Math.max(len,j-i+1);
+	               }
+	           }
+	       }
+	       return len; */
 		HashMap<Integer,Integer> hm=new HashMap<>();
         int sum=0,max=0;
         for(int i=0;i<n;i++){
@@ -1144,16 +1144,16 @@ public class ArrayTakeYou {
 	    }
 	
 	 public static int majorityElement(int[] nums) {
-//		 int n=nums.length;
-//	        HashMap<Integer,Integer> map=new HashMap<>();
-//	        for(int i:nums)
-//	            map.put(i,map.getOrDefault(i,0)+1);
-//
-//	        for(Integer key:map.keySet()){
-//	            int frq=map.get(key);
-//	            if(frq>n/2)return key;
-//	        }
-//	        return -1;
+/**		 int n=nums.length;
+	        HashMap<Integer,Integer> map=new HashMap<>();
+	        for(int i:nums)
+	            map.put(i,map.getOrDefault(i,0)+1);
+
+	        for(Integer key:map.keySet()){
+	            int frq=map.get(key);
+	            if(frq>n/2)return key;
+	        }
+	        return -1; */
 	        int ele=-1,cnt=0;
 	        for(int i=0;i<nums.length;i++){
 	            if(cnt==0){
@@ -1263,21 +1263,21 @@ public class ArrayTakeYou {
 	
 	private static int missingNo(int[] a) {
 	   int n=a.length;
-//	   for(int i=0;i<n;i++) {
-//			boolean found=false;
-//			for(int j=0;j<n;j++) {
-//				if(a[j]==i) {
-//					found=true;
-//					break;
-//				}
-//			}
-//			if(found==false)return i; 
-//		}
-//	        int sum=(n*(n+1))/2;
-//	        int arrSum=0;
-//	        for(int i=0;i<a.length;i++)
-//	            arrSum+=a[i];
-//	        return Math.abs(sum-arrSum);
+/**	   for(int i=0;i<n;i++) {
+			boolean found=false;
+			for(int j=0;j<n;j++) {
+				if(a[j]==i) {
+					found=true;
+					break;
+				}
+			}
+			if(found==false)return i; 
+		}
+	        int sum=(n*(n+1))/2;
+	        int arrSum=0;
+	        for(int i=0;i<a.length;i++)
+	            arrSum+=a[i];
+	        return Math.abs(sum-arrSum); */
 		int xor1=0,xor2=0;
 		for(int i=0;i<a.length;i++) {
 			xor2^=a[i];
@@ -1290,28 +1290,29 @@ public class ArrayTakeYou {
 	private static void intersectionTwoArray(int[] a, int[] b) {
 		
 		ArrayList<Integer> intersection=new ArrayList<>();
-//		boolean []visited=new boolean[b.length];
-//		for(int i=0;i<a.length;i++) {
-//			for(int j=0;j<b.length;j++) {
-//				if(a[i]==b[j] && visited[j]==false) {
-//					intersection.add(a[i]);
-//					visited[j]=true;
-//					break;
-//				}
-//				if(b[j]>a[i])break;
-//			}
-//			
-//		}
- //USING Binery Search
-//		boolean []visited=new boolean[b.length];
-//		for(int i=0;i<a.length;i++) {
-//			int found=bs(b,a[i]);
-//			if(found!=-1 && visited[found]==false) {
-//				intersection.add(a[i]);
-//				visited[found]=true;
-//			}
-//			
-//		}
+		/**
+		boolean []visited=new boolean[b.length];
+		for(int i=0;i<a.length;i++) {
+			for(int j=0;j<b.length;j++) {
+				if(a[i]==b[j] && visited[j]==false) {
+					intersection.add(a[i]);
+					visited[j]=true;
+					break;
+				}
+				if(b[j]>a[i])break;
+			}
+			
+		}
+ 		USING Binery Search
+		boolean []visited=new boolean[b.length];
+		for(int i=0;i<a.length;i++) {
+			int found=bs(b,a[i]);
+			if(found!=-1 && visited[found]==false) {
+				intersection.add(a[i]);
+				visited[found]=true;
+			}
+			
+		} */
 		/**OPTIMAL */
 		int i=0,j=0;
 		while(i<a.length && j<b.length) {
@@ -1409,6 +1410,7 @@ public class ArrayTakeYou {
 //		int j=0;
 //		for(int i=n-k;i<n;i++)
 //			a[i]=temp[i-(n-k)];
+		
 //		for(int i=n-k;i<n;i++) //right rotation
 //			temp[i-(n-k)]=a[i];
 //		for(int i=n-k-1;i>=0;i--)

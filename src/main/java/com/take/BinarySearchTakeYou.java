@@ -48,6 +48,11 @@ public class BinarySearchTakeYou {
 		//sorted List given of words  and a prefix 'go' find count of all string which starts with prefix
 		System.out.println("12) Count prefix in given Array:- "+countWordsWithPrefix(arr,"go"));
 		
+		/**  question links 
+		 * 1)lower Bound https://www.naukri.com/code360/problems/lower-bound_8165382
+		 * 2) upper bound https://www.naukri.com/code360/problems/implement-upper-bound_8165383
+		 */
+		
 	}
 	 public static int countWordsWithPrefix(String[] words, String prefix) {
 		 int start=lowerBound(words,prefix);

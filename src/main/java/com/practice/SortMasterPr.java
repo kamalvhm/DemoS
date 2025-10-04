@@ -12,6 +12,14 @@ public class SortMasterPr {
 	//TC:- O(n2) inplace ,but not stable
 	private static void selectionSort(int[] a) 	{
 		int n=a.length;
+		for(int  i=0;i<n;i++) {
+			int select=i;
+			for(int j=i+1;j<n;j++) {
+				if(a[j]<a[select])
+					select=j;
+			}
+			swap(a,i,select);
+		}
 		
 	
 	}
@@ -19,36 +27,82 @@ public class SortMasterPr {
 	//execute N passes in every pass push largest elements to end of array
 	private static void bubbleSort(int[] a) {
 		int n=a.length;
+		for(int k=1;k<n;k++) {
+			boolean flag=true;
+			for(int i=0;i<n-k;i++) {
+				if(a[i]>a[i+1]) {
+					swap(a,i,i+1);
+					flag=false;
+				}
+			}
+			if(flag)
+				break;
+		}
 		
 	}
-	//TC:- O(n) best, O(n2) worst
+	//TC:- O(n) best, O(n2) worst Inplace and stable
 	//divide array in two part  5 | 4 2 3   sorted and unsorted  
 	//now pick element from unsorted part and place it sorted part
 	private static void insertionSort(int[] a) { //1 4 5 7
 		int n=a.length;
-
+		for(int i=0;i<n;i++) {
+			int value=a[i];
+			int hole=i;
+			while(hole>0 && a[hole-1]>value) {
+				a[hole]=a[hole-1];
+				hole--;
+			}
+			a[hole]=value;
+		}
 	}
 	//TC:- O(nlogn) stable but not inplace 
 	private static int[] mergeSort(int[] a) {
 		int n=a.length;
-		return a;
+		if(n<=1)return a;
+		int left[]=mergeSort(Arrays.copyOfRange(a, 0, n/2));
+		int right[]=mergeSort(Arrays.copyOfRange(a, n/2, n));
+		return merge(left,right,a);
 	}
 	
 	private static int[] merge(int[] left, int[] right,int [] a) {	
-	
+		int nL=left.length,nR=right.length;
+		int i=0,j=0,k=0;
+		while(i<nL && j<nR) {
+			if(left[i]<right[j]) {
+				a[k++]=left[i++];
+			}else a[k++]=right[j++];
+		}
+		while(i<nL)
+			a[k++]=left[i++];
+		while(j<nR)
+			a[k++]=right[j++];
 		return a;
 	}
 	//TC:- O(nlogn) worst O(n2) In place but not stable 
 	//select a pivot (can be any let say end) now arrang remaining element such that  all small goes left and all big goes right
 	private static void quickSort(int[] a, int start, int end) {
-		
+		if(start>=end)return;
+		int pivot=randomized(a,start,end); 
+		quickSort(a,start,pivot-1);
+		quickSort(a,pivot+1,end);
 	}
 	
 	private static int partition(int[] a, int start, int end) {
-		return 1;
+		int pivot=a[end];
+		int pIndex=start;
+		for(int i=start;i<end;i++) {
+			if(a[i]<pivot) {
+				swap(a,i,pIndex);
+				pIndex++;
+			}
+		}
+		swap(a,pIndex,end);
+		return pIndex;
 	}
 	private static int randomized(int[] a, int start, int end) {
-		return 1;
+		int pivot=new Random().nextInt(end-start)+start;
+		swap(a,end,pivot);
+		return partition(a,start,end);
 	}
 	
 	private static void countSort(int[] a) {
@@ -58,7 +112,6 @@ public class SortMasterPr {
 			min=Math.min(min, i);
 			max=Math.max(max, i);
 		}
-		
 		int frq[]=new int[max-min+1];
 		for(int i=0;i<n;i++) {
 			frq[a[i]-min]++;
@@ -67,14 +120,13 @@ public class SortMasterPr {
 			frq[i]=frq[i]+frq[i-1];
 		}
 		int ans[]=new int[n];
-		for(int i=a.length-1;i>=0;i--) {
-			int pos=frq[a[i]-min]-1;
-			ans[pos]=a[i];
+		for(int i=n-1;i>=0;i--) {
+			int ind=frq[a[i]-min]-1;
+			ans[ind]=a[i];
 			frq[a[i]-min]--;
 		}
-		for(int i=0;i<n;i++) {
+		for(int i=0;i<n;i++)
 			a[i]=ans[i];
-		}
 	}
 	
 	
@@ -85,29 +137,24 @@ public class SortMasterPr {
 		int exp=1;
 		while(exp<=max) {
 			countVariationForRedix(array, exp);
-			exp=exp*10;
+			exp*=10;
 		}
-		
 	}
 	private static void countVariationForRedix(int[] a,int exp) {
 		int n=a.length;
-	
 		int frq[]=new int[10];
-		for(int i=0;i<n;i++) {
-			frq[a[i]/exp%10]++;
-		}
-		for(int i=1;i<frq.length;i++) {
+		for(int i=0;i<n;i++)
+			frq[(a[i]/exp)%10]++;
+		for(int i=1;i<frq.length;i++) 
 			frq[i]=frq[i]+frq[i-1];
-		}
 		int ans[]=new int[n];
-		for(int i=a.length-1;i>=0;i--) {
-			int pos=frq[a[i]/exp%10]-1;
-			ans[pos]=a[i];
-			frq[a[i]/exp%10]--;
+		for(int i=n-1;i>=0;i--) {
+			int ind=frq[(a[i]/exp)%10]-1;
+			ans[ind]=a[i];
+			frq[(a[i]/exp)%10]--;
 		}
-		for(int i=0;i<n;i++) {
+		for(int i=0;i<n;i++)
 			a[i]=ans[i];
-		}
 	}
 	
 	

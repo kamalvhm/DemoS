@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.time.MonthDay;
 
 public class GoogleQuestions {
-	//1) encode and decode a graph check GraphCodec.java in com.graph 
+	//i) First round was code and entry system where event is id,entry()true/false and time need to tell at any moment cound of max persons in building 
+	//ii) BS question
+	//3) encode and decode a graph check GraphCodec.java in com.graph 
 	
-/** 2) Design an algorithm to manage birthday reminders for your family tree. You are given a genealogical tree representing your direct ancestors, rooted at you. 
+/** 4) Design an algorithm to manage birthday reminders for your family tree. You are given a genealogical tree representing your direct ancestors, rooted at you. 
 	Each person in the tree has a name and birthday. Your task is to implement a function) that sets an alarm for the next upcoming birthday in the family tree. 
 	After that birthday passes, alarmNextBirthday() should be called again to set an alarm for the subsequent upcoming birthday, and so on.
 	*/
