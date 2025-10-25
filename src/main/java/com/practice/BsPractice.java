@@ -57,64 +57,117 @@ public class BsPractice {
 
 	private static int search(int[] a, int i) {
 		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]==i)return mid;
+			else if(a[mid]<i)l=mid+1;
+			else r=mid-1;
+		}
 		
 		return -1;
 	}
 	
 	public static int bsfirst(int [] a,int i) { 
 		int index=-1;
-	
+		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>=i) {
+				index=mid;
+				r=mid-1;
+			}else l=mid+1;
+		}
 		return index;
 	}
 	
 	public static int bslast(int [] a,int i) {
 		int index=-1;
-		
+		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]<=i) {
+				index=mid;
+				l=mid+1;
+			}else r=mid-1;
+		}
 		return index;
 	}
 
 	public static int findPeakElement(int[] a) {
 		int l=0,r=a.length-1;
 		int ans=-1;
-		
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(mid==0 || a[mid]>a[mid-1]) {
+				ans=mid;
+				l=mid+1;
+			}else r=mid-1;
+		} 
 		return ans;
 	}
 	//by Erricto 
-//	 public int findPeakElement(int[] nums) {
-//	        int l=0,r=nums.length-1;
-//	        int ans=-1;
-//	        while(l<=r){
-//	            int mid=l+(r-l)/2;
-//	            if(mid==0 || nums[mid]>nums[mid-1]){
-//	                ans=mid;
-//	                l=mid+1;
-//	            }else r=mid-1;
-//	        }
-//	        return ans;
-//	        
-//	    }
+/**	 public int findPeakElement(int[] nums) {
+	        int l=0,r=nums.length-1;
+	        int ans=-1;
+	        while(l<=r){
+	            int mid=l+(r-l)/2;
+	            if(mid==0 || nums[mid]>nums[mid-1]){
+	                ans=mid;
+	                l=mid+1;
+	            }else r=mid-1;
+	        }
+	        return ans;
+	        
+	    } */
 	
 	public static int arrayRotatedcount(int[] a) { 
 		int l=0,r=a.length-1;
 		int ans=-1;
-		
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>a[a.length-1])
+				l=mid+1;
+			else {
+				ans=mid;
+				r=mid-1;
+			}
+		}
 		return ans;
 	}
 
 	public static int bsInfiniteArray(int[] a, int target) {
+		int end=0,start=0;
 		
 		return -1;
 	}
 	
 	public static int searchBsInDescArray(int [] a,int target) {
 		int l=0,r=a.length-1;
-		
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]==target)return mid;
+			if(a[mid]<target)r=mid-1;
+			else l=mid+1;
+		}
 		return -1;
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3 | 6
 		int l=0,r=a.length-1;
-	
+		int first=a[0];
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			int val=a[mid];
+			if(val==target)return mid;
+			boolean i_mBig=val>first;
+			boolean targetBig=target>first;
+			if(i_mBig==targetBig) {
+				if(val<target)l=mid+1;
+				else r=mid-1;
+			}else if(i_mBig) {
+				l=mid+1;
+			} else r=mid-1;
+		}
 		return -1;
 	}
 
@@ -122,13 +175,27 @@ public class BsPractice {
 	public static int lowerBound(int [] a,int target) {
 		int l=0,r=a.length-1;
 		int ans=-1;
-	
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>=target) {
+				ans=a[mid];
+				r=mid-1;
+			}else l=mid+1;
+		}
 		return ans;
 	}
 	
 	//floor =greatest element less then target if target not present 
 	public static int bsfloorofTarget(int [] a,int target) {
 		int ans=-1;
+		int l=0,r=a.length-1;
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]<=target) {
+				ans=a[mid];
+				l=mid+1;
+			}else r=mid-1;
+		}
 		
 		return ans;
 	}
@@ -137,7 +204,13 @@ public class BsPractice {
 	public static char nextGreaterElement(char[] a, char target) {
 		int l=0,r=a.length-1;
 		char res='#';
-		
+		while(l<=r) {
+			int mid=l+(r-l)/2;
+			if(a[mid]>=target) {
+				res=a[mid];
+				r=mid-1;
+			}else l=mid+1;
+		}
 		return res;
 		
 	} 
