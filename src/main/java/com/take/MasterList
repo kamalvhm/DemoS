@@ -1,14 +1,17 @@
 ########################### 1) LinkedList #######################
 	*** i) Learn 1 D LL 
-			1.
-			2.
-			3.
-			4.
+			1.https://www.geeksforgeeks.org/problems/linked-list-insertion-at-beginning/1  
+			  https://www.geeksforgeeks.org/problems/linked-list-insertion-1587115620/1
+			2.http://leetcode.com/problems/delete-node-in-a-linked-list/description/
+			3.https://www.geeksforgeeks.org/problems/delete-a-node-in-single-linked-list/1 
+			  https://www.geeksforgeeks.org/problems/deletion-at-the-end-of-a-linked-list/1
+			4.https://www.geeksforgeeks.org/problems/count-nodes-of-linked-list/1
+			5.https://www.geeksforgeeks.org/problems/search-in-linked-list-1664434326/1
 	
 	*** ii) Learn Doubly D LL
-			1.https://www.geeksforgeeks.org/problems/linked-list-insertion-1587115620/1
+			1.https://www.geeksforgeeks.org/problems/insert-a-node-in-doubly-linked-list/1
 			2.https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1
-			
+			3.https://www.geeksforgeeks.org/problems/reverse-a-doubly-linked-list/1
 	
 	*** iii) Medium Problems of LL
 			1.https://leetcode.com/problems/middle-of-the-linked-list/
@@ -69,7 +72,17 @@
 	*** iii) BS on 2D Array
 			1) https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1
 			2) https://leetcode.com/problems/search-a-2d-matrix/
-			3) 
+			3) https://leetcode.com/problems/search-a-2d-matrix-ii/
+			4) https://leetcode.com/problems/find-a-peak-element-ii/
 
+########################### 3) Stack and Queue #######################
+	*** i) Intro
+			1) https://www.geeksforgeeks.org/problems/implement-stack-using-array/1
+			2) https://www.geeksforgeeks.org/problems/implement-stack-using-linked-list/1
+			3) https://www.geeksforgeeks.org/problems/implement-queue-using-linked-list/0
+			4) https://leetcode.com/problems/implement-stack-using-queues/submissions/1821284762/
+			5) https://leetcode.com/problems/implement-queue-using-stacks/
+			6)
+			7)
 
 

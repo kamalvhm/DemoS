@@ -20,7 +20,7 @@ public class MyLinkList<T> {
 	
 	
 	public void add(T t) {
-		if(st_node.next_node==null && st_node.getT()==null) {
+		if(st_node.next_node==null && st_node.getT()==null) {// if we have empty first node (assigned in constructer)
 			st_node.setT(t);
 			size++;
 			return;
