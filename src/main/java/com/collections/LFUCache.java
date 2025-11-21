@@ -3,166 +3,197 @@ package com.collections;
 import java.util.HashMap;
 import java.util.Map;
 //460. LFU Cache
-//https://www.dineshonjava.com/least-frequently-used-lfu-cache-implementation/
-public class LFUCache {
-	private class Node {
-		
-		long key;
-		long value;
-		int frequency;
-		Node prev;
-		Node next;
-	 
-	    public Node(long key, long value, int frequency){
-	        this.key   = key;
-	        this.value = value;
-	        this.frequency = frequency;
-	    }
-	}
-	/**************LFU***************/
-	Node head;
-	Node tail;
-	Map<Long, Node> map = null;
-	int capacity = 0;
 
-	public LFUCache(int capacity) {
-		this.capacity = capacity;
-		this.map = new HashMap<>();
-	}
-
-	public long get(long key) {
-
-		if (map.get(key) == null) {
-			return -1;
-		}
-
-		Node item = map.get(key);
-		// move to right position according to frequency
-		removeNode(item);
-		item.frequency = item.frequency+1;
-		addNodeWithUpdatedFrequency(item);
-
-		return item.value;
-	}
-
-	public void put(Long key, int value) {
-
-		if (map.containsKey(key)) {
-			Node item = map.get(key);
-			item.value = value;
-			item.frequency = item.frequency + 1;
-			// move to right position according to frequency
-			removeNode(item);
-			addNodeWithUpdatedFrequency(item);
-		} else {
-			if (map.size() >= capacity) {
-				// delete head with least frequency and least recently used
-				map.remove(head.key);
-				removeNode(head);
-			}
-
-			// move to right position according to frequency
-			Node node = new Node(key, value, 1);
-			addNodeWithUpdatedFrequency(node);
-			map.put(key, node);
-		}
-	}
-
-	private void removeNode(Node node) {
-
-		if (node.prev != null) {
-			node.prev.next = node.next;
-		} else {
-			head = node.next;
-		}
-
-		if (node.next != null) {
-			node.next.prev = node.prev;
-		} else {
-			tail = node.prev;
-		}
-	}
-
-	private void addNodeWithUpdatedFrequency(Node node) {
-        
-		if (tail != null && head != null) {
-			Node temp = head;
-			while(temp != null) {
-				if(temp.frequency > node.frequency) {
-					if(temp == head) {
-						node.next = temp;
-						temp.prev = node;
-						head = node;
-						break;
-					}else {
-						node.next = temp;
-						node.prev = temp.prev;
-						temp.prev.next = node;
-						node.prev = temp.prev;
-						break;
-					}
-				}else {
-					temp = temp.next;
-					if(temp == null) {
-						tail.next = node;
-						node.prev = tail;
-						node.next = null;
-						tail = node;
-						break;
-					}
-				}
-			}
-		} else {
-			tail = node;
-			head = tail;
-		}
-	}
-	/**************TEST***************/
-	public static void main(String[] args) {
-		
-		System.out.println("Going to test the LFU Cache Implementation"); 
-		
-		LFUCache cache = new LFUCache(5);
-		
-		//Storing first value 10 with key (1) in the cache with default frequency. 
-        cache.put(1l, 10);  
-        
-      //Storing second value 20 with key (2) in the cache with default frequency. 
-        cache.put(2l, 20);
-        
-      //Storing third value 30 with key (3) in the cache with default frequency. 
-        cache.put(3l, 30);
-        
-      //Storing fourth value 40 with key (4) in the cache with default frequency. 
-        cache.put(4l, 40);
-        
-      //Storing fifth value 50 with key (5) in the cache with default frequency. 
-        cache.put(5l, 50);
-        
-        
-        System.out.println("Value for the key: 1 is " +  
-                           cache.get(1)); // returns 10 and increased frequency
-  
-      // evicts key 2 and store a key (6) with value 60 in the cache  with default frequency. 
-        cache.put(6l, 60);  
-  
-        System.out.println("Value for the key: 2 is " +  
-                cache.get(2)); // returns -1 (not found) 
-  
-        //evicts key 3 and store a key (7) with value 70 in the cache with default frequency. 
-        cache.put(7l, 70); 
-        
-        System.out.println("Value for the key: 3 is " + 
-               cache.get(3)); // returns -1 (not found) 
-        
-        System.out.println("Value for the key: 4 is " +  
-                           cache.get(4)); // returns 40 
-        
-        System.out.println("Value for the key: 5 is " + 
-                           cache.get(5)); // return 50 
-		
-	}
-
+/* To implement a node in doubly linked list that will store data items */
+class DLLNode {
+    int key, value, cnt;
+    DLLNode next;
+    DLLNode prev;
+    
+    DLLNode(int _key, int _value) {
+        key = _key;
+        value = _value;
+        cnt = 1;
+    }
 }
+
+// To implement the doubly linked list
+class List {
+    int size; // Size 
+    DLLNode head; // Dummy head
+    DLLNode tail; // Dummy tail
+    
+    // Constructor
+    List() {
+        head = new DLLNode(0, 0);
+        tail = new DLLNode(0, 0);
+        head.next = tail;
+        tail.prev = head;
+        size = 0;
+    }
+    
+    // Function to add node in front
+    void addFront(DLLNode node) {
+    	DLLNode temp = head.next;
+        node.next = temp;
+        node.prev = head;
+        head.next = node;
+        temp.prev = node;
+        size++;
+    }
+    
+    // Function to remove node from the list
+    void removeNode(DLLNode delnode) {
+    	DLLNode prevNode = delnode.prev;
+    	DLLNode nextNode = delnode.next;
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+        size--;
+    }
+}
+
+// Class to implement LFU cache
+class LFUCache {
+    private Map<Integer, DLLNode> keyNode; // Hashmap to store the key-nodes pairs
+    private Map<Integer, List> freqListMap; // Hashmap to maintain the lists with different frequencies
+    private int maxSizeCache; // Max size of cache
+    private int minFreq; // To store the frequency of least frequently used data-item
+    private int curSize; // To store current size of cache
+    
+    // Constructor
+    public LFUCache(int capacity) {
+        maxSizeCache = capacity;
+        minFreq = 0;
+        curSize = 0;
+        keyNode = new HashMap<>();
+        freqListMap = new HashMap<>();
+    }
+    
+    // Method to update frequency of data-items
+    private void updateFreqListMap(DLLNode node) {
+        // Remove from Hashmap
+        keyNode.remove(node.key);
+        
+        // Update the frequency list hashmap
+        freqListMap.get(node.cnt).removeNode(node);
+        
+        // If node was the last node having its frequency
+        if (node.cnt == minFreq && freqListMap.get(node.cnt).size == 0) {
+            // Update the minimum frequency
+            minFreq++;
+        }
+        
+        // Creating a dummy list for next higher frequency
+        List nextHigherFreqList = new List();
+        
+        // If the next higher frequency list already exists
+        if (freqListMap.containsKey(node.cnt + 1)) {
+            // Update pointer to already existing list
+            nextHigherFreqList = freqListMap.get(node.cnt + 1);
+        }
+        
+        // Increment the count of data-item
+        node.cnt += 1;
+        
+        // Add the node in front of higher frequency list
+        nextHigherFreqList.addFront(node);
+        
+        // Update the frequency list map
+        freqListMap.put(node.cnt, nextHigherFreqList);
+        keyNode.put(node.key, node);
+    }
+    
+    // Method to get the value of key from LFU cache
+    public int get(int key) {
+        // Return the value if key exists
+        if (keyNode.containsKey(key)) {
+        	DLLNode node = keyNode.get(key); // Get the node
+            int val = node.value; // Get the value
+            updateFreqListMap(node); // Update the frequency
+            // Return the value
+            return val;
+        }
+        // Return -1 if key is not found
+        return -1;
+    }
+    
+    // Method to insert key-value pair in LFU cache
+    public void put(int key, int value) {
+        /* If the size of Cache is 0, 
+        no data-items can be inserted */
+        if (maxSizeCache == 0) {
+            return;
+        }
+        
+        // If key already exists
+        if (keyNode.containsKey(key)) {
+            // Get the node
+        	DLLNode node = keyNode.get(key);
+            // Update the value
+            node.value = value;
+            // Update the frequency
+            updateFreqListMap(node);
+        } else {
+            // If cache limit is reached
+            if (curSize == maxSizeCache) {
+                // Remove the least frequently used data-item
+                List list = freqListMap.get(minFreq);
+                keyNode.remove(list.tail.prev.key);
+                
+                // Update the frequency map
+                freqListMap.get(minFreq).removeNode(list.tail.prev);
+                // Decrement the current size of cache
+                curSize--;
+            }
+            // Increment the current cache size
+            curSize++;
+            
+            // Adding new value to the cache
+            minFreq = 1; // Set its frequency to 1
+            
+            // Create a dummy list
+            List listFreq = new List();
+            
+            // If the list already exists
+            if (freqListMap.containsKey(minFreq)) {
+                // Update the pointer to already present list
+                listFreq = freqListMap.get(minFreq);
+            }
+            
+            // Create the node to store data-item
+            DLLNode node = new DLLNode(key, value);
+            
+            // Add the node to dummy list
+            listFreq.addFront(node);
+            
+            // Add the node to Hashmap
+            keyNode.put(key, node);
+            
+            // Update the frequency list map
+            freqListMap.put(minFreq, listFreq);
+        }
+    }
+    
+    public static void main(String[] args) {
+        // LFU Cache
+        LFUCache cache = new LFUCache(2);
+        
+        // Queries
+        cache.put(1, 1);
+        cache.put(2, 2);
+        System.out.print(cache.get(1) + " ");
+        cache.put(3, 3);
+        System.out.print(cache.get(2) + " ");
+        System.out.print(cache.get(3) + " ");
+        cache.put(4, 4);
+        System.out.print(cache.get(1) + " ");
+        System.out.print(cache.get(3) + " ");
+        System.out.print(cache.get(4) + " ");
+    }
+    
+}
+
+
+  
 
  

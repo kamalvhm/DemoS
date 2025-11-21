@@ -375,21 +375,24 @@ public class PepBackTrackingSolutions {
 			        dfs(10*i+j,n);
 			    }
 	     }
-		/*V-6 GoldMine 
-		 * for(int i=0;i<h;i++){ for(int j=0;j<w;j++){ if(a[i][j]>0){
-		 * max=Math.max(maxGold,dfs(a,i,j)); } } }
-		 */
-//	 	public static int dfs(int [][] grid,int r,int c){
-//		    if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]==0)
-//		        return 0;
-//		    int count=grid[r][c];
-//		    grid[r][c]=0;
-//		    count+=dfs(grid,r+1,c);
-//		    count+=dfs(grid,r-1,c); 
-//		    count+=dfs(grid,r,c+1); 
-//		    count+=dfs(grid,r,c-1); 
-//		    return count;
-//		}
+		/**V-6 GoldMine 
+		  for(int i=0;i<h;i++){ 
+		  	for(int j=0;j<w;j++){
+		  	 	if(a[i][j]>0){
+		  			max=Math.max(maxGold,dfs(a,i,j)); 
+		  	} } }
+		 
+	 	public static int dfs(int [][] grid,int r,int c){
+		    if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]==0)
+		        return 0;
+		    int count=grid[r][c];
+		    grid[r][c]=0;
+		    count+=dfs(grid,r+1,c);
+		    count+=dfs(grid,r-1,c); 
+		    count+=dfs(grid,r,c+1); 
+		    count+=dfs(grid,r,c-1); 
+		    return count;
+		} */
 	    
 	 	
 	 	public static void dfs(int [][] grid,int r,int c,boolean [][]visited,ArrayList<Integer> bag){
