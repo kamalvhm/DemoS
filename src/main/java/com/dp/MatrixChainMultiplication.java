@@ -126,6 +126,19 @@ public class MatrixChainMultiplication extends DynamicPrograming{
 		}
 		return ans;
 	}
+	
+	public int f(String s,int i,int n,int dp[]){ //font partition way
+	       if(i==n)return 0;
+	       if(dp[i]!=-1)return dp[i];
+	       int min=Integer.MAX_VALUE;
+	       for(int j=i;j<n;j++){
+	            if(Utils.isPalindrom(s,i,j)){
+	                int cost=1+f(s,j+1,n,dp);
+	                min=Math.min(min,cost);
+	            }
+	       }
+	       return dp[i]=min;
+	    }
 
 	//V-37
 	private static int palindrom_partitioningBottomUp(String s, int i, int j) {
@@ -266,6 +279,53 @@ public class MatrixChainMultiplication extends DynamicPrograming{
 	      map.put(key, ans); //CHANGE
 		 return ans;
 	} 
+	
+	
+	static int evalExTBottomUp2(String s) {
+        // code here
+        int n =s.length();
+        int dp[][][]=new int[n+1][n+1][2];
+        // for(int dd[][]:dp)
+        //     for(int d[]:dd)
+        //     Arrays.fill(d,-1);
+        // return f(s,0,n-1,true,dp);
+        for(int i=0;i<n;i+=2){
+            dp[i][i][0]=s.charAt(i)=='F'?1:0;
+            dp[i][i][1]=s.charAt(i)=='T'?1:0;
+        }
+        
+        for(int i=n-1;i>=0;i-=2){
+            for(int j=i+2;j<n;j+=2){
+                    int countT=0,countF=0;
+                    for(int k=i+1;k<j;k+=2){
+                        int leftTrue=dp[i][k-1][1];
+                        int leftFalse=dp[i][k-1][0];
+                        int rightTrue=dp[k+1][j][1];
+                        int rightFalse=dp[k+1][j][0];
+            
+                        char ch=s.charAt(k);
+                        if(ch=='|'){
+                            countT+=leftTrue*rightTrue+leftTrue*rightFalse+leftFalse*rightTrue;
+                             countF+=leftFalse*rightFalse;
+                        }else if(ch=='&'){
+                            countT+=leftTrue*rightTrue;
+                             countF+=leftFalse*rightFalse+leftTrue*rightFalse+leftFalse*rightTrue;
+                        }else if(ch=='^'){
+                            countT+=leftTrue*rightFalse+leftFalse*rightTrue;
+                             countF+=leftFalse*rightFalse+leftTrue*rightTrue;  
+                        }
+            
+                    }
+                    dp[i][j][1]=countT;
+                    dp[i][j][0]=countF;
+
+                
+            }
+        }
+        return dp[0][n-1][1];
+      
+        
+    }
 	
 	public static boolean scrambledStringRecursie(String a ,String b) {
 		if(a.length()!=b.length()) return false;

@@ -103,5 +103,187 @@
 			3)
 			4) https://leetcode.com/problems/lru-cache/
 			5) https://leetcode.com/problems/lfu-cache/description/
+			
+########################### 4) Binary Tree #######################
+	*** i) Check introductory questions like representation of BT ans Traversals
 
+	*** ii) Medium
+			1) https://leetcode.com/problems/maximum-depth-of-binary-tree/submissions/1840871201/
+			2) https://leetcode.com/problems/balanced-binary-tree/description/
+			3) https://leetcode.com/problems/diameter-of-binary-tree/submissions/1840971773/
+			4) https://leetcode.com/problems/binary-tree-maximum-path-sum/
+			5) https://leetcode.com/problems/same-tree/description/
+			6) https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+			7) https://leetcode.com/problems/boundary-of-binary-tree/description/  [locked]
+			8) https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/
+			9) TOP VIEW  and Bottom View of Binary Tree
+			10) https://leetcode.com/problems/binary-tree-right-side-view/description/
+			11) https://leetcode.com/problems/symmetric-tree/
+			
+	*** iii) Hard
+			1) https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1
+			2) https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+			3) https://leetcode.com/problems/maximum-width-of-binary-tree/description/
+			4) https://www.geeksforgeeks.org/problems/children-sum-parent/1  or https://www.naukri.com/code360/problems/children-sum-property_8357239?leftPanelTabValue=PROBLEM
+			   or https://leetcode.com/problems/root-equals-sum-of-children/
+			5) https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+			6) https://www.geeksforgeeks.org/problems/burning-tree/1
+			7) https://leetcode.com/problems/count-complete-tree-nodes/description/
+			8) Requirements needed to construct a Unique Binary Tree | Theory  
+			9) https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+			10)https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
+			11)https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
+			12)https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+			https://leetcode.com/problems/binary-tree-preorder-traversal/description/
+			13)https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
+			
+########################### 5) Binary Search Tree #######################
+	*** i) Concept	
+			1)https://leetcode.com/problems/search-in-a-binary-search-tree/
+			2)https://www.geeksforgeeks.org/problems/max-and-min-element-in-binary-tree/1 for BST >> https://www.geeksforgeeks.org/problems/minimum-element-in-bst/1
 
+	*** ii) Practice
+			1) https://www.geeksforgeeks.org/problems/implementing-ceil-in-bst/1 or https://www.naukri.com/code360/problems/ceil-from-bst_920464
+			2) https://www.geeksforgeeks.org/problems/floor-in-bst/1
+			3) https://leetcode.com/problems/insert-into-a-binary-search-tree/
+			4) https://leetcode.com/problems/delete-node-in-a-bst/description/
+			5) https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+			6) https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
+			7) https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/
+			8) https://www.geeksforgeeks.org/problems/inorder-successor-in-bst/1
+			9) https://leetcode.com/problems/binary-search-tree-iterator/description/
+			10) https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/
+			11) https://leetcode.com/problems/recover-binary-search-tree/description/
+			12) https://www.geeksforgeeks.org/problems/largest-bst/1 or https://www.naukri.com/code360/problems/size-of-largest-bst-in-binary-tree_893103
+			
+########################### 5) DP #######################
+	*** i) 1D DP
+			1) https://leetcode.com/problems/climbing-stairs/	
+			2) https://www.geeksforgeeks.org/problems/geek-jump/1 or https://www.naukri.com/code360/problems/frog-jump_3621012?leftPanelTabValue=PROBLEM
+			3) https://leetcode.com/problems/frog-jump-ii/
+			4) https://leetcode.com/problems/house-robber/description/
+			5) https://leetcode.com/problems/house-robber-ii/
+			
+	*** ii) 2D/3D DP
+			1) https://www.naukri.com/code360/problems/ninja%E2%80%99s-training_3621003
+			2) https://leetcode.com/problems/unique-paths/
+			3) https://leetcode.com/problems/unique-paths-ii/description/
+			4) https://leetcode.com/problems/minimum-path-sum/
+			5) https://leetcode.com/problems/triangle/description/
+			6) https://leetcode.com/problems/minimum-falling-path-sum/
+			7) https://www.naukri.com/code360/problems/ninja-and-his-friends_3125885
+			
+	*** iii) DP on subsequence
+			1) https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
+			2) https://leetcode.com/problems/partition-equal-subset-sum/description/
+			3) https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/description/ (IGNORE THIS)
+			4) https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1
+			5) https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1
+			6) https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
+			7) https://leetcode.com/problems/coin-change/description/
+			8) https://leetcode.com/problems/target-sum/
+			9) https://leetcode.com/problems/coin-change-ii/description/
+			10)https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
+			11)	https://www.geeksforgeeks.org/problems/rod-cutting0840/1
+			
+	*** iv) DP on Strings 	
+			1) https://leetcode.com/problems/longest-common-subsequence/
+			2) https://www.naukri.com/code360/problems/print-longest-common-subsequence_8416383
+			3) https://www.geeksforgeeks.org/problems/longest-common-substring1452/1
+			4) https://leetcode.com/problems/longest-palindromic-subsequence/description/
+			5) https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+			6) https://leetcode.com/problems/shortest-common-supersequence/
+			7) https://leetcode.com/problems/distinct-subsequences/
+			8) https://leetcode.com/problems/edit-distance/
+			9) https://leetcode.com/problems/wildcard-matching/
+
+			
+	*** v) DP on Stocks 
+			1) https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+			2) https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/
+			3) https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/
+			4) https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/
+			5) https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
+			6) https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/
+	
+	*** vi) DP on LIS 		
+			1) https://leetcode.com/problems/longest-increasing-subsequence/
+			2) https://www.geeksforgeeks.org/problems/printing-longest-increasing-subsequence/1
+			3) https://leetcode.com/problems/largest-divisible-subset/description/
+			4) https://leetcode.com/problems/longest-string-chain/
+			5) https://www.geeksforgeeks.org/problems/longest-bitonic-subsequence0824/1
+			6) https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/
+		
+	*** vii) MCM DP 	
+			1) https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+			2) https://leetcode.com/problems/minimum-cost-to-cut-a-stick/description/
+			3) https://leetcode.com/problems/burst-balloons/
+			4) https://www.geeksforgeeks.org/problems/boolean-parenthesization5610/1
+			5) https://leetcode.com/problems/partition-array-for-maximum-sum/
+
+	*** vii) MCM DP 	
+			1) https://leetcode.com/problems/maximal-rectangle/
+			2) https://leetcode.com/problems/count-square-submatrices-with-all-ones/	
+		
+########################### 5) Graph #######################	
+
+	*** i) Intro
+			*Graph Types ,Representation,
+			1) https://www.geeksforgeeks.org/problems/connected-components-in-an-undirected-graph/1
+			2) https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+			3) https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1
+			
+	*** ii) BFS/DFS problems
+			1) https://leetcode.com/problems/number-of-provinces/description/
+			2) https://www.geeksforgeeks.org/problems/connected-components-in-an-undirected-graph/1
+			3) https://leetcode.com/problems/rotting-oranges/
+			4) https://leetcode.com/problems/flood-fill/submissions/406596585/
+			5) https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1  [BFS & NEXT DFS also same]
+			6) https://leetcode.com/problems/01-matrix/
+			7) https://leetcode.com/problems/surrounded-regions/
+			8) https://leetcode.com/problems/number-of-enclaves/description/
+			9) https://leetcode.com/problems/word-ladder/description/
+			10)
+			11)
+			12)
+			13)
+			14)
+			15)
+	
+	*** iii) Topo sort and problems 
+			1)
+			2)
+			3)
+			4)
+			5)
+			6)
+			7)
+	*** iv) Shortest path problems 
+			1)
+			2)
+			3)
+			4)
+			5)
+			6)
+			7)
+	*** v) MSP problems 
+			1)
+			2)
+			3)
+			4)
+			5)
+			6)
+			7)
+	*** vi) Other problems 
+			1)
+			2)
+			3)
+			4)
+			5)
+			6)
+			7)
+			
+		 
+
+			
+			

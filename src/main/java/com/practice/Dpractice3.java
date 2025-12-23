@@ -72,7 +72,7 @@ public class Dpractice3 {
 
 		String e3="rabbbit";
 		String e4="rabbit";//there are 3 ways you can generate "rabbit" from e3.so return 3
-		System.out.println("16)Distinct Subsequences (3):-"+DistinctSubsequencesR(e3,e4,e3.length(),e4.length()));
+		System.out.println("16)Distinct Subsequences (3):-"+DistinctSubsequences(e3,e4,e3.length(),e4.length()));
 		
 		String s4="babad"; //Ans :-aba
 		System.out.println("11)Longest palindromic substring (aba):-"+longestPalindromicSubString(s4));
@@ -97,9 +97,10 @@ public class Dpractice3 {
 	//FIRST STEP :return comman letter length from both strings x = abc ,y= bcdc then return 3 as abc is common in both
 	public static int LCS_Simple_recursive_Code(String x,String y,int n,int m) {
 		if(n==0 || m==0)return 0;
+		if(dp[n][m]!=-1)return dp[n][m];
 		if(x.charAt(n-1)==y.charAt(m-1))
-			return 1+LCS_Simple_recursive_Code(x,y,n-1,m-1);
-		else return Math.max(LCS_Simple_recursive_Code(x,y,n,m-1), LCS_Simple_recursive_Code(x,y,n-1,m));
+			return dp[n][m]=1+LCS_Simple_recursive_Code(x,y,n-1,m-1);
+		return dp[n][m]=Math.max(LCS_Simple_recursive_Code(x, y,n-1,m),LCS_Simple_recursive_Code(x,y,n,m-1));
 	}
 	
 	
@@ -109,7 +110,7 @@ public class Dpractice3 {
 		for(int i=1;i<n+1;i++) {
 			for(int j=1;j<m+1;j++) {
 				if(x.charAt(i-1)==y.charAt(j-1))
-					t[i][j]=t[i-1][j-1]+1;
+						t[i][j]=1+t[i-1][j-1];
 				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 			}
 		}
@@ -119,7 +120,14 @@ public class Dpractice3 {
 	public static int LongestCommonSubString(String x,String y,int n,int m) {
 		int t[][]=new int[n+1][m+1];
 		int max =0;
-		
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<m+1;j++) {
+				if(x.charAt(i-1)==y.charAt(j-1))
+					t[i][j]=1+t[i-1][j-1];
+				else t[i][j]=0;
+				max=Math.max(max, t[i][j]);
+			}
+		}
 		return max;
 	}
 	
@@ -130,7 +138,7 @@ public class Dpractice3 {
 			for(int j=1;j<m+1;j++) {
 				if(x.charAt(i-1)==y.charAt(j-1))
 					t[i][j]=1+t[i-1][j-1];
-				else t[i][j]=Math.max(t[i-1][j], t[i-1][j]);
+				else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 			}
 		}
 		
@@ -155,11 +163,12 @@ public class Dpractice3 {
 	        int[][] t = new int[n+1][m+1];
 	        for(int i=1;i<n+1;i++) {
 	        	for(int j=1;j<m+1;j++) {
-	        		if(x.charAt(i-1)==y.charAt(j-1)) 
+	        		if(x.charAt(i-1)==y.charAt(j-1))
 	        			t[i][j]=1+t[i-1][j-1];
 	        		else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
 	        	}
 	        }
+	        
 	        StringBuffer sb=new StringBuffer();
 	        int i=n,j=m;
 	        while(i>0 && j>0) {
@@ -170,27 +179,36 @@ public class Dpractice3 {
 	        	}else if(t[i-1][j]>t[i][j-1]) {
 	        		sb.insert(0, x.charAt(i-1));
 	        		i--;
-	        	}else {
+	        	}
+	        	else {
 	        		sb.insert(0, y.charAt(j-1));
+
 	        		j--;
 	        	}
 	        }
+	       
 	        while(i>0) {
 	        	sb.insert(0, x.charAt(i-1));
-        		i--;
+	        	i--;
 	        }
+	        
 	        while(j>0) {
 	        	sb.insert(0, y.charAt(j-1));
-        		j--;
+	        	j--;
 	        }
-	       
 	        return sb.toString();
 	    }
 	 
 	 public static int LongestRepeatingSubSequence(String x,String y) {
 		    int n=x.length(),m=y.length();
 			int t[][]=new int[n+1][m+1];
-			
+			for(int i=1;i<n+1;i++) {
+				for(int j=1;j<m+1;j++) {
+					if(x.charAt(i-1)==y.charAt(j-1) && i!=j)
+						t[i][j]=1+t[i-1][j-1];
+					else t[i][j]=Math.max(t[i-1][j], t[i][j-1]);
+				}
+			}
 			return t[n][m];
 		}
 	
@@ -199,12 +217,13 @@ public class Dpractice3 {
 	        for(int i=0;i<n+1;i++)
 	        	t[i][0]=i;
 	        for(int j=0;j<m+1;j++)
-	        	t[0][j]=j; 
+	        	t[0][j]=j;
+	        
 	        for(int i=1;i<n+1;i++) {
 	        	for(int j=1;j<m+1;j++) {
 	        		if(x.charAt(i-1)==y.charAt(j-1))
-	        			t[i][j]=t[i-1][j-1];
-	        		else t[i][j]=Math.min(t[i-1][j], Math.min(t[i][j-1], t[i-1][j-1]))+1; 
+	        				t[i][j]=t[i-1][j-1];
+	        		else t[i][j]=Math.min(t[i-1][j], Math.min(t[i][j-1], t[i-1][j-1]))+1;
 	        	}
 	        }
 	       
@@ -214,16 +233,24 @@ public class Dpractice3 {
 	//115. Distinct Subsequences | https://www.youtube.com/watch?v=HtLVAvIGikU  
 		 public static int DistinctSubsequencesR(String s ,String t,int n,int m){
 			 if(m==0)return 1;
-			 if(n==0)return 0; 
+			 if(n==0)return 0;
 			 if(s.charAt(n-1)==t.charAt(m-1))
-				 return DistinctSubsequencesR(s,t,n-1,m-1)+DistinctSubsequencesR(s,t,n-1,m);
+				 return DistinctSubsequencesR(s,t,n-1,m-1) + DistinctSubsequencesR(s,t,n-1,m);
 			 else 
-			 return DistinctSubsequencesR(s,t,n-1,m);
+			return DistinctSubsequencesR(s,t,n-1,m);
 	    }
 		 
 		public static int DistinctSubsequences(String x ,String y,int n,int m){
 		      int t[][]=new int [n+1][m+1];
-		      
+		      for(int i=0;i<n+1;i++)
+		    	  t[i][0]=1;
+		      for(int i=1;i<n+1;i++) {
+		    	  for(int j=1;j<m+1;j++) {
+		    		  if(x.charAt(i-1)==y.charAt(j-1))
+		    			  t[i][j]=t[i-1][j-1]+t[i-1][j];
+		    		  else t[i][j]=t[i-1][j];
+		    	  }
+		      }
 		    
 		      return t[n][m];
 		    }
@@ -231,22 +258,24 @@ public class Dpractice3 {
 		private static String longestPalindromicSubString(String e) {
 			int n=e.length();
 			int t[][]=new int[n+1][n+1];
+			int dp[][]=new int[n+1][n+1];//i th index is length and j th is end index
 			String res="";
-			int resE=1,resL=1;
+			int resE=1,resL=1;//length and end index of palindrom
+			if(n==0)return res;
+			
 			for(int i=0;i<n+1;i++) {
-				t[0][i]=1;
-				t[1][i]=1;
+				dp[0][i]=1;
+				dp[1][i]=1;
 			}
-			for(int i=2;i<n+1;i++) {
-				for(int j=i;j<n+1;j++) {
-					if(e.charAt(j-1)==e.charAt(j-i) && t[i-2][j-1]==1) {
-						t[i][j]=1;
-						resL=i; 
+			for(int i=2;i<n+1;i++) { //len
+				for(int j=i;j<n+1;j++) { //end index
+					if(e.charAt(j-1)==e.charAt(j-i) && dp[i-2][j-1]==1) {
+						dp[i][j]=1;
+						resL=i;
 						resE=j;
-					}else t[i][j]=0;
+					}else dp[i][j]=0;
 				}
 			}
-			
 			return e.substring(resE-resL,resE);
 		}
 		
@@ -254,6 +283,19 @@ public class Dpractice3 {
 		public static int minimumDeleteSum(String s1,String s2,int n,int m){
 	        int t[][]=new int [n+1][m+1];
 	       
+	        for(int i=1;i<n+1;i++) 
+	        	t[i][0]=t[i-1][0]+(int)s1.charAt(i-1);
+	        for(int j=1;j<m+1;j++) 
+	        	t[0][j]=t[0][j-1]+(int)s2.charAt(j-1);
+	        
+	        for(int i=1;i<n+1;i++) {
+	        	for(int j=1;j<m+1;j++) {
+	        		if(s1.charAt(i-1)==s2.charAt(j-1))
+	        			t[i][j]=t[i-1][j-1];
+	        		else t[i][j]=Math.min(t[i-1][j]+(int)s1.charAt(i-1), t[i][j-1]+(int)s2.charAt(j-1));
+	        	}
+	        }
+	        
 	        return t[n][m];
 	    }
 		public static int longestOfAinR(String x,String y,int n,int m) {
@@ -292,7 +334,14 @@ public class Dpractice3 {
 	        int dp [] =new int[nums.length];
 	        int max=1;
 	        Arrays.fill(dp, 1);
-	       
+	        for(int i=0;i<nums.length;i++) {
+	        	for(int j=0;j<i;j++) {
+	        		if(nums[j]<nums[i] && dp[i]<dp[j]+1) {
+	        			dp[i]=dp[j]+1;
+	        		}
+	        		max=Math.max(max, dp[i]);
+	        	}
+	        }
 	        return max;
 	    }
 }

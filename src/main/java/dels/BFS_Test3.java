@@ -2,8 +2,10 @@ package dels;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 
 public class BFS_Test3 {
 	static class Edge{
@@ -22,12 +24,17 @@ public class BFS_Test3 {
 	static class Pair implements Comparable<Pair>{
 		String psf;
 		int wsf;
+		int v;
+
 		
 		Pair(String psf,int wsf){
 			this.psf=psf;
 			this.wsf=wsf;
 		}
-		
+		Pair(int v,String psf){
+			this.psf=psf;
+			this.v=v;
+		}
 		
 
 		@Override
@@ -81,7 +88,20 @@ public class BFS_Test3 {
 		dfs(graph,src,visited,src+"", src);
 		
 		
-
+		ArrayDeque<Pair> q=new ArrayDeque<>();
+		boolean []visited2=new boolean[vtces];
+		q.offer(new Pair(src,src+""));
+		while(!q.isEmpty()) {//rM*wA*
+			Pair rem=q.poll();
+			if(visited2[rem.v])continue;
+			visited2[rem.v]=true;
+			System.out.println(rem.v+" @ "+rem.psf);
+			for(Edge e:graph[rem.v]) {
+				if(visited2[e.nbr]==false) {
+					q.offer(new Pair(e.nbr,rem.psf+e.nbr));
+				}
+			}
+		}
 		
 	}
 	

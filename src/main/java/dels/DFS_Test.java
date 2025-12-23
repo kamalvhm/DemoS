@@ -57,8 +57,8 @@ public class DFS_Test {
 				0
 				6
 	       */
-		
-		String filePath="src/graph/graph1.txt";
+		//src\main\resources\graph\graph1.txt
+		String filePath="src/main/resources/graph/graph1.txt";
 		BufferedReader fr=new BufferedReader(new FileReader(filePath));
 		int vtces=Integer.parseInt(fr.readLine());
 		

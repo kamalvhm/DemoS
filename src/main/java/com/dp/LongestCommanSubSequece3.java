@@ -577,4 +577,27 @@ public class LongestCommanSubSequece3 {
 	        return t[n][m];
 	       // return solve(0,0,s,p);
 	    }
+	 
+	 public boolean isMatch3(String s, String p) {
+	        int n=s.length();
+	        int m=p.length();
+	        int dp[][]=new int[n+1][m+1];
+
+	        dp[n][m]=1;
+	        for(int i=m-1;i>=0;i--){
+	            if(p.charAt(i)=='*')
+	                dp[n][i]=dp[n][i+1];
+	        }
+	        for(int i=n-1;i>=0;i--){
+	            for(int j=m-1;j>=0;j--){
+	                if(p.charAt(j)!='*'){
+	                    if(s.charAt(i)==p.charAt(j) || p.charAt(j)=='?')
+	                         dp[i][j]=dp[i+1][j+1];
+	                }else {
+	                     dp[i][j]=(dp[i+1][j]==1 || dp[i][j+1]==1)?1:0;
+	                }
+	            }
+	        }
+	        return dp[0][0]==1?true:false;
+	    }
 }

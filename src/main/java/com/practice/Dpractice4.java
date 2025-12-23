@@ -78,7 +78,7 @@ public class Dpractice4 extends DynamicPrograming{
 			System.out.println("6)Scramble 7u (true) ans:- "+scrambledStringRecursie(a,b)); 
 			int eggs=3,floor=5; //IP:-Eggs and floor given we need to identify threshold floor from which if we throw egg it will not break 
 			//we have to apply best technique in worst case to minimize no of attempts to find threshold floor
-			System.out.println("7)Egg Dropping Problem (3) ans:- "+eggDropRecursive(eggs,floor)); 
+			System.out.println("7)Egg Dropping Problem (3) ans:- "+eggDropMemoized(eggs,floor)); 
 			
 			  int mat[][] =
 			        {
@@ -98,14 +98,6 @@ public class Dpractice4 extends DynamicPrograming{
 			       
 	}
 
-	
-	
-	
-
-
-
-	
-
 
 
 
@@ -120,18 +112,19 @@ public class Dpractice4 extends DynamicPrograming{
 	}
 
 	private static int palindrom_partitioning_recursive(String s, int i, int j) {
-		if(i>=j)return 0 ;
+		if(i>=j)return 0;
 		if(isPalindrom(s, i, j))return 0;
+		if(dp[i][j]!=-1)return dp[i][j];
 		int ans=Integer.MAX_VALUE;
 		for(int k=i;k<j;k++) {
 			int temp=palindrom_partitioning_recursive(s, i, k)+palindrom_partitioning_recursive(s, k+1, j)+1;
 			ans=Math.min(ans, temp);
 		}
-		return ans;
+		return dp[i][j]=ans;
 	}
 
 	private static boolean isPalindrom(String s, int i, int j) {
-		while(i<j) {
+		while(i<j){
 			if(s.charAt(i++)!=s.charAt(j--))return false;
 		}
 		return true;
@@ -157,51 +150,57 @@ public class Dpractice4 extends DynamicPrograming{
 				return s.charAt(i)=='T'?1:0;
 			else return s.charAt(i)=='F'?1:0;
 		}
-		int count=0;
+		int ans=0;
 		for(int k=i+1;k<j;k+=2) {
 			int leftTrue=evalExTRecursive(s, i, k-1, true);
 			int leftFalse=evalExTRecursive(s, i, k-1, false);
 			int rightTrue=evalExTRecursive(s, k+1, j, true);
 			int rightFalse=evalExTRecursive(s, k+1, j, false);
 			
-			char ch=s.charAt(k);
-			if(ch=='&') {
+			char c=s.charAt(k);
+			 if(c=='&') {
+					if(isTrue)
+						ans+=leftTrue*rightTrue;
+					else ans+=leftFalse*rightFalse+leftFalse*rightTrue+leftTrue*rightFalse;
+			} else if(c=='|') {
 				if(isTrue)
-					count+=leftTrue*rightTrue;
-				else count+=leftFalse*rightTrue+leftTrue*rightFalse+leftFalse*rightFalse;
+					ans+=leftTrue*rightTrue+leftFalse*rightTrue+leftTrue*rightFalse;
+				else ans+=leftFalse*rightFalse;
 			}
-			 if(ch=='|') {
+			else if(c=='^') {
 				if(isTrue)
-					count+=leftTrue*rightTrue+leftFalse*rightTrue+leftTrue*rightFalse;
-				else count+=leftFalse*rightFalse;
+					ans+=leftFalse*rightTrue+leftTrue*rightFalse;
+				else ans+=leftTrue*rightTrue+leftFalse*rightFalse;
 			}
-			 if(ch=='^') {
-				if(isTrue)
-					count+=leftFalse*rightTrue+leftTrue*rightFalse;
-				else count+=leftTrue*rightTrue+leftFalse*rightFalse;
-			}
-		}
-		return count ;
+		} 
+		return ans;
 		
 	} 
 	
 	
 	public static boolean scrambledStringRecursie(String a ,String b) {
-		if(a.compareTo(b)==0)return true;
-		if(a.length()<=1)return false;//we have one length ans that too is not equal
-	    boolean flag=false;
-	    int n=a.length();
-	    for(int i=1;i<n;i++) {
-	    	if(scrambledStringRecursie(a.substring(0,i),b.substring(n-i,n)) && scrambledStringRecursie(a.substring(i,n),b.substring(0,n-i))
-	    			|| scrambledStringRecursie(a.substring(0,i),b.substring(0,i)) && scrambledStringRecursie(a.substring(i,n),b.substring(i,n))){
-	    		flag=true;
-	    	}
-	    }
-		return flag;
+		if(a.length()!=b.length())return false;
+		if(a.isEmpty() && b.isEmpty())return true;
+		
+		return true;
 	} 
 	
 	public static boolean scrambledSolve(String a ,String b) {
-		return true;
+		if(a.compareTo(b)==0)return true;
+		if(a.length()<=1)return false;
+		int n=a.length();//both are equal by now
+		boolean flag=false;
+		for(int i=1;i<n;i++) {
+			if(scrambledSolve(a.substring(0,i),b.substring(n-i,n)) 
+					&& scrambledSolve(a.substring(i,n),b.substring(0,n-i))
+					|| scrambledSolve(a.substring(0,i),b.substring(0,i)) 
+					&& scrambledSolve(a.substring(i,n),b.substring(i,n))){
+						flag=true;
+						break;
+					}
+			
+		}
+		return flag;
 		
 	} 
 	
@@ -212,22 +211,19 @@ public class Dpractice4 extends DynamicPrograming{
 	 
 	 
 		private static int eggDropRecursive(int e, int f) {
-			if(f==0 || f==1)return f;
-			if(e==1)return f;
-			int min=Integer.MAX_VALUE;
-			for(int k=1;k<=f;k++) {
-				int temp=Math.max(eggDropRecursive(e-1, k-1),eggDropRecursive(e, f-k))+1;
-				min=Math.min(min, temp);
-			}
-			return min;
+			return -1;
 			
 		}
 		
 		private static int eggDropMemoized(int e, int f) {
-			
+			if(f==0 || f==1)return f;
+			if(e==1)return f; 
 			
 			int min=Integer.MAX_VALUE;
-			
+			for(int k=1;k<=f;k++) {
+				int temp=Math.max(eggDropMemoized(e-1,k-1), eggDropMemoized(e,f-k))+1;
+				min=Math.min(min, temp);
+			}
 		
 			return min;
 		}

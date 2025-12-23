@@ -1,5 +1,4 @@
-package com.take;
-
+package com.practice;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.Stack;
 import java.util.TreeMap;
 
 import com.beans.TreeNode;
-import com.datastructure.TreePrinter;
 
 public class BinarySearchTreeTakeYou {
 	//Add other if needed questions not availabe are added so far
@@ -26,7 +24,7 @@ public class BinarySearchTreeTakeYou {
 		tree.right.right.left= new TreeNode(9);
 		tree.right.right.left.left= new TreeNode(10);
 		tree.right.right.left.right= new TreeNode(11);
-		System.out.print(TreePrinter.getTreeDisplay(tree));
+		//System.out.print(TreePrinter.getTreeDisplay(tree));
 		
 		System.out.println("1)Boundary Traversal in Binary Tree 1,2,3,4,5,6,10,11,9,8,7");
 		BoudaryTraversal(tree);
@@ -34,50 +32,45 @@ public class BinarySearchTreeTakeYou {
 	
 	    public static void BoudaryTraversal(TreeNode root){
 	       ArrayList<Integer> trav=new ArrayList<>();
-	       traverseLeft(root,trav);
-	       //inorder(root,trav);
-	      // traverseRightReverse(root,trav);
+	       traverseLeft(root,trav); 
+	       inorder(root,trav);
+	       traverseRightReverse(root,trav);
 	       System.out.println(trav);
 	    }
 	    
 	    public static void traverseLeft(TreeNode root,ArrayList<Integer> trav) {
-//	    	if(root==null)return;
-//	    	if(root.left==null && root.right==null)return;
-//	    	trav.add((Integer)root.val);
-//	    	if(root.left!=null)
-//	    		traverseLeft(root.left,trav);
-//	    	else traverseLeft(root.right,trav);
-	    	TreeNode curr=root;
-	    	while(curr!=null) {
-	    		if(!isLeaf(curr))trav.add((Integer)curr.val);
-	    		if(curr.left!=null)
-	    			curr=curr.left;
-	    		else curr=curr.right;
-	    	}
+	    	 TreeNode curr=root;
+	    	 while(curr!=null) {
+	    		 if(!isLeaf(curr))
+	    			 trav.add((int)curr.val);
+	    		 if(curr.left==null)
+	    			 curr=curr.right;
+	    		 else 
+	    		 curr=curr.left;
+	    	 }
 	    }
 	    
 	    public static void inorder(TreeNode root,ArrayList<Integer> trav) {
 	    	if(root==null)return;
 	    	inorder(root.left,trav);
-	    		if(root.left==null && root.right==null)
-		    		trav.add((Integer)root.val);
-	    	inorder(root.right,trav);
+	    	if(isLeaf(root))
+	    		trav.add((int)root.val);
+	    	inorder(root.right,trav); 
 	    }
 
 	    public static void traverseRightReverse(TreeNode root,ArrayList<Integer> trav) {
-	    	TreeNode curr=root.right;
 	    	Stack<Integer> st=new Stack<>();
-	    	
+	    	TreeNode curr=root.right;
 	    	while(curr!=null) {
-	    		if(!isLeaf(curr))st.push((Integer)curr.val); 
-	    		if(curr.left!=null)
+	    		if(!isLeaf(curr))
+	    			st.push((int)curr.val);
+	    		if(curr.right==null)
 	    			curr=curr.left;
-	    		else curr=curr.right;
+	    		else 
+	    		curr=curr.right;
 	    	}
-	    	
-	    	while(!st.isEmpty()) {
+	    	while(!st.isEmpty())
 	    		trav.add(st.pop());
-	    	}
 	    	
 	    }
 	    
