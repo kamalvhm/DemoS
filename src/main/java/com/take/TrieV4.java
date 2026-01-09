@@ -14,7 +14,7 @@ public static int countDistinctSubstrings(String s)
 		return trie.getDistinctCount()+1;
 	}
 
-	// Can be written with Trie class also alternatively 
+	// Can be written without Trie class also alternatively 
 	public static int countDistinctSubstrings2(String s) {
 		Node1 root = new Node1();
 		int n = s.length();

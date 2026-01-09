@@ -51,7 +51,7 @@ public class TrieV5 {
 			for(int i=31;i>=0;i--){
 				int bit=(num>>i) & 1;
 				if(node.containsKey(1-bit)){ // this will toggle (opposite) bit as we have single bit
-					maxNum=maxNum | (1<<i);  //set ith bit as its possible
+					maxNum=maxNum | (1<<i);  //set ith bit as its possible exist in the trie so xor of num and opposite will result set in maxNum
 					node=node.get(1-bit);	//move node
 				}else {
 					node=node.get(bit); //not possible so keep default 0

@@ -1204,6 +1204,7 @@ public class ArrayTakeYou {
 	        }
 	        return new int[]{-1,-1};
 	    }
+	 //https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
 	private static int longestSubArray(int[] a,int k) {
 /**		int len=0;
 		for(int i=0;i<a.length;i++) {

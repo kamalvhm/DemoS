@@ -1,7 +1,10 @@
 package com.take;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 import com.graph.DisjointSet;
@@ -142,5 +145,55 @@ public class GraphQuestions {
 	    	return ans;
 	    }
 	    int directions[][]={{0,1},{1,0},{0,-1},{-1,0}};
+	    
+	    //https://www.naukri.com/code360/problems/distinct-islands_630460?leftPanelTabValue=PROBLEM
+	    /**
+	     * 
+		 	1 1 0 0 0 
+			1 1 0 0 0
+			0 0 0 1 1
+			0 0 0 1 1   
+			for this n this example, we have two islands and they are the same as 
+			we can translate one island onto another island, so our answer should be 1.
+	     */
+	    public static int distinctIsland(int [][] arr, int n, int m) 
+		{
+			HashSet<String> unqCodes=new HashSet<>();
+	        for(int i=0;i<n;i++){
+	            for(int j=0;j<m;j++){
+	                if(arr[i][j]==1){ //from every place where is 1 go redially level wise and store unique codes for directions
+	                    unqCodes.add(bfs(arr,i,j));
+	                }
+	            }
+	        }
+	        return unqCodes.size();
+		}
+
+
+	    public static String bfs(int grid[][],int n,int m){
+	        StringBuffer sb=new StringBuffer();
+	        Queue<int[]> q=new LinkedList<>();
+	        q.offer(new int[]{n,m});
+	        while(!q.isEmpty()){
+	            int size=q.size();
+	            for(int i=0;i<size;i++){
+	                int []rem=q.poll();
+	                for(int dir[]:direction){
+	                    int r=rem[0]+dir[0];
+	                    int c=rem[1]+dir[1];
+	                    if(r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]!=1){
+	                        sb.append(0); 
+	                        continue;
+	                    }
+	                    grid[r][c]=2; // first traverse is from 0,0 so we are marking nbr to 2 so that per island we can add 
+	                    q.offer(new int[]{r,c});
+	                    sb.append(dir[2]);
+	                }
+	            }
+	        }
+	        return sb.toString();
+	    }
+
+	    static int direction[][]={{1,0,1},{-1,0,2},{0,1,3},{0,-1,4}}; //row column and direction code
 
 }

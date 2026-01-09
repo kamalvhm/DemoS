@@ -9,6 +9,7 @@ import scala.xml.dtd.impl.WordExp.Letter;
 
 public class SlidingWindowPractice {
 	//@link{com.cleanup.SlidingWindowMaster}
+	//https://www.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
 	public static void main(String[] args) {
 		//1)Return Maximum sum of subArray element of size 3 from below array;
 			int [] arr1= {2,3,5,9,7,1};
@@ -47,7 +48,7 @@ public class SlidingWindowPractice {
 		 
 			
 	}
-	
+	//https://leetcode.com/problems/sliding-window-maximum/ or
 	private static int maxInSubArray(int[] arr, int window) {
 		int i=0,j=0;
 		int currentSum=0;
@@ -65,7 +66,20 @@ public class SlidingWindowPractice {
 		}
 		return max;
 	}
-	
+	//Brute
+//	public ArrayList<Integer> maxOfSubarrays(int[] arr, int k) {
+//        ArrayList<Integer> ans=new ArrayList<>();
+//        int n=arr.length;
+//		for(int i=0;i<=n-k;i++) {
+//			int max=0;
+//			for(int j=i;j<i+k;j++) {
+//				max=Math.max(max, arr[j]);
+//			}
+//			ans.add(max);
+//		}
+//		return ans;
+//    }
+	//https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1  or https://www.naukri.com/code360/problems/first-negative-integer-in-every-window-of-size-k_1164406
 	private static int firstNegative(int[] arr, int window) {
 		int i=0,j=0;
 		List<Integer> neg=new ArrayList<>();

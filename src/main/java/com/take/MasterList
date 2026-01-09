@@ -156,7 +156,7 @@
 			11) https://leetcode.com/problems/recover-binary-search-tree/description/
 			12) https://www.geeksforgeeks.org/problems/largest-bst/1 or https://www.naukri.com/code360/problems/size-of-largest-bst-in-binary-tree_893103
 			
-########################### 5) DP #######################
+########################### 6) DP #######################
 	*** i) 1D DP
 			1) https://leetcode.com/problems/climbing-stairs/	
 			2) https://www.geeksforgeeks.org/problems/geek-jump/1 or https://www.naukri.com/code360/problems/frog-jump_3621012?leftPanelTabValue=PROBLEM
@@ -225,7 +225,7 @@
 			1) https://leetcode.com/problems/maximal-rectangle/
 			2) https://leetcode.com/problems/count-square-submatrices-with-all-ones/	
 		
-########################### 5) Graph #######################	
+########################### 7) Graph #######################	
 
 	*** i) Intro
 			*Graph Types ,Representation,
@@ -243,45 +243,91 @@
 			7) https://leetcode.com/problems/surrounded-regions/
 			8) https://leetcode.com/problems/number-of-enclaves/description/
 			9) https://leetcode.com/problems/word-ladder/description/
-			10)
-			11)
-			12)
-			13)
-			14)
-			15)
-	
+			10) https://leetcode.com/problems/word-ladder-ii/description/ or(USE THIS==>) https://www.geeksforgeeks.org/problems/word-ladder-ii/1
+			11) https://www.geeksforgeeks.org/problems/number-of-distinct-islands/1  (Check CODE on GFG) or https://www.naukri.com/code360/problems/distinct-islands_630460?leftPanelTabValue=PROBLEM
+			12) https://leetcode.com/problems/is-graph-bipartite/
+			13) https://leetcode.com/problems/course-schedule/description/
+			
 	*** iii) Topo sort and problems 
-			1)
-			2)
-			3)
-			4)
-			5)
-			6)
-			7)
+			1) https://www.geeksforgeeks.org/problems/topological-sort/1 or https://www.naukri.com/code360/problems/topological-sort_982938
+			2) TOPO SORT using kahns algo 
+			3) https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1 or  http://naukri.com/code360/problems/detect-cycle-in-a-directed-graph_1062626
+			4) https://leetcode.com/problems/course-schedule/
+			5) https://leetcode.com/problems/course-schedule-ii/
+			6) https://leetcode.com/problems/find-eventual-safe-states/
+			7) https://www.geeksforgeeks.org/problems/alien-dictionary/1 or https://www.naukri.com/code360/problems/alien-dictionary_630423
+	
 	*** iv) Shortest path problems 
-			1)
-			2)
-			3)
-			4)
-			5)
-			6)
-			7)
+			1) https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1
+			2) https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1 or https://www.naukri.com/code360/problems/shortest-path-in-dag_8381897?leftPanelTabValue=PROBLEM
+			3) https://leetcode.com/problems/shortest-path-in-binary-matrix/submissions/1865585977/
+			4) https://leetcode.com/problems/path-with-minimum-effort/description/
+			5) https://leetcode.com/problems/cheapest-flights-within-k-stops/
+			6) https://leetcode.com/problems/network-delay-time/
+			7) https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/
+			8) https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1
+			9) https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1 or https://www.naukri.com/code360/problems/bellmon-ford_2041977
+			10) https://www.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1 or https://www.naukri.com/code360/problems/flloyd-warshall_2041979
+			11) https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
+			
 	*** v) MSP problems 
-			1)
-			2)
-			3)
-			4)
-			5)
-			6)
-			7)
+			1) https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1 or https://www.naukri.com/code360/problems/prim-s-mst_1095633?leftPanelTabValue=SOLUTION
+			2) https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1   (By rank and size)
+			3) https://www.naukri.com/code360/problems/minimum-spanning-tree_631769?leftPanelTabValue=SUBMISSION
+			4) https://leetcode.com/problems/number-of-operations-to-make-network-connected/
+			5) https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/
+			6) https://leetcode.com/problems/accounts-merge/description/
+			7) check GraphQuestions.java https://www.naukri.com/code360/problems/largest-island_840701?leftPanelTabValue=SUBMISSION
+			8) https://leetcode.com/problems/making-a-large-island/description/
+			9) https://leetcode.com/problems/swim-in-rising-water/description/
+
 	*** vi) Other problems 
-			1)
+			1) https://leetcode.com/problems/critical-connections-in-a-network/discuss/382385/find-bridges-in-a-graph
 			2)
 			3)
-			4)
-			5)
-			6)
-			7)
+			
+########################### 8) Trie #######################
+	*** i) Intro
+			1) https://leetcode.com/problems/implement-trie-prefix-tree/description/ or https://www.geeksforgeeks.org/problems/trie-insert-and-search0651/1
+				https://www.naukri.com/code360/problems/implement-trie_631356
+			
+	***ii) Intro
+			1) Trie 2 implementation  https://www.naukri.com/code360/problems/implement-trie_1387095
+			2) https://www.geeksforgeeks.org/problems/longest-valid-word-with-all-prefixes/1
+			3) https://www.geeksforgeeks.org/problems/count-of-distinct-substrings/1 or https://www.naukri.com/code360/problems/count-distinct-substrings_985292
+			4) https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/submissions/1870217756/
+			5) https://leetcode.com/problems/maximum-xor-with-an-element-from-array/
+			
+########################### 9) Sliding Window #######################
+
+	*** i) V
+			1) 4th and 1 is almost same 
+			2) https://www.naukri.com/code360/problems/first-negative-integer-in-every-window-of-size-k_1164406 or https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1
+			3) https://www.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1
+			4) https://leetcode.com/problems/sliding-window-maximum/
+			5) https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1   (Contains Negative so diffrent PRFIX SUM?)
+			6) https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1
+			7) https://www.geeksforgeeks.org/problems/length-of-the-longest-substring3036/1
+			8) Skip
+			9) https://leetcode.com/problems/minimum-window-substring/
+			
+	*** ii) T
+			1) https://leetcode.com/problems/longest-substring-without-repeating-characters/submissions/1873963373/
+			2) https://leetcode.com/problems/max-consecutive-ones-iii/description/
+			3) https://www.naukri.com/code360/problems/fruits-and-baskets_985356?leftPanelTabValue=PROBLEM or https://leetcode.com/problems/fruit-into-baskets/submissions/1875329477/
+			4) https://leetcode.com/problems/longest-repeating-character-replacement/description/
+			5) https://leetcode.com/problems/binary-subarrays-with-sum/submissions/1876276418/   (Prefix SUM also works)
+			6) https://leetcode.com/problems/count-number-of-nice-subarrays/description/
+			7) https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
+			8) https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/
+			9) https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1 or https://www.naukri.com/code360/problems/distinct-characters_2221410
+			10)	https://leetcode.com/problems/subarrays-with-k-different-integers/submissions/1877502767/	
+			11)
+			
+########################### 10) String #######################
+		//study from Coder Army :-https://www.youtube.com/watch?v=sODA1BzFvsE
+		1) LPS in KMP https://www.geeksforgeeks.org/problems/longest-prefix-suffix2527/1
+		2) https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
 			
 		 
 
