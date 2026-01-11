@@ -12,14 +12,22 @@ public class StringProblems {
 		StringProblems sol = new StringProblems();
 
         // Define text and pattern
-        String text = "ababcababcabc";
-        String pattern = "abc";
+//        String text = "ababcababcabc";
+//        String pattern = "abc";\
+		String text = "aaaab";
+        String pattern = "aaab";
 
         // Call the KMP function
         List<Integer> matches = sol.KMP(text, pattern);
 
         // Print the result
-        System.out.println("Pattern found at indices: " + matches);
+        System.out.println("1) Pattern found at indices: " + matches);
+        
+        
+		String circular = "cdeabroab";
+        String pattern1 = "abcde";
+        System.out.println("1) Pattern found in circular string: " + sol.searchInCircular(circular,pattern1));
+
 	}
 	
 	
@@ -89,5 +97,10 @@ public class StringProblems {
         return result;
     }
 
+    
+    public  boolean searchInCircular(String a,String b) {
+    	String c=a+a;//add twice to make circular
+    	return KMP(c,b).size()>0;
+    }
 
 }

@@ -44,9 +44,22 @@ public class BitManipulation {
 		System.out.println("17) Xor for Range 4 to 7 & (0):- "+xorRange(4,7));
 
 		System.out.println("18) Divide two No (3):- "+divide(13,4));
+		
+		System.out.println("19) Find First duplicate Character in string (c):- "+duplicate("abcdefcb"));
+
 
 	}
 	
+	private static char duplicate(String s) {
+		int mask=0;
+		for(int i=0;i<s.length();i++) {
+			int bit=s.charAt(i)-'a';
+			if((mask & (1<<bit))!=0)return s.charAt(i);
+			mask=mask | (1<<bit);
+		}
+		return '#';
+	}
+
 //	int x=divisor;  //we need to achive this with bit manupulation 
 //	int multiplier=1,cnt=0;
 //	while(x<=dividend) {

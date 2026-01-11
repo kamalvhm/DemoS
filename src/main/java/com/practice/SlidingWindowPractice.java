@@ -118,7 +118,7 @@ public class SlidingWindowPractice {
 		  			if(val==0) 
 		  				count--;
 		  		}
-		  		if(j-i+1<p.length()) 
+		  		if(j-i+1<p.length()) //window size should be fixed so can't check with count ,from count we will check only ans
 		  			j++;
 		  		
 		  		else if(j-i+1==p.length()) {
@@ -139,6 +139,35 @@ public class SlidingWindowPractice {
 		  	}
 		  		
 		  	return ans;
+	    }
+	  //anagram alternate 
+	  int search(String pat, String txt) {
+	        int cnt=0,l=0;
+	        HashMap<Character,Integer> map=new HashMap<>();
+	        for(char ch:pat.toCharArray()){
+	            map.put(ch,map.getOrDefault(ch,0)+1);
+	        }
+	        int count=map.size();
+	        for(int r=0;r<txt.length();r++){
+	            char chr=txt.charAt(r);
+	            if(map.containsKey(chr)){
+	                map.put(chr,map.get(chr)-1);
+	                if(map.get(chr)==0)count--;
+	            }
+	            if(r-l+1==pat.length()){
+	                if(count==0)
+	                    cnt++;
+	                char chl=txt.charAt(l);
+	                if(map.containsKey(chl)){
+	                    map.put(chl,map.get(chl)+1);
+	                    if(map.get(chl)==1)count++;
+	                }
+	                l++;
+	            }
+	        }
+	        
+	        return cnt;
+	        
 	    }
 	  
 		private static List<Integer> maximumInWindow(int nums[],int k){
@@ -221,6 +250,28 @@ public class SlidingWindowPractice {
 			return res;
 	}
 		
+	//Optimized version
+	 public int longestKSubstr(String s, int k) {
+			int max=-1,l=0;
+			HashMap<Character,Integer> map=new HashMap<>();
+			for(int r=0;r<s.length();r++) {
+				char chr=s.charAt(r);
+				map.put(chr, map.getOrDefault(chr, 0)+1);
+				if(map.size()>k){
+				    char chl=s.charAt(l);
+				    if(map.containsKey(chl)){
+				        map.put(chl,map.get(chl)-1);
+				        if(map.get(chl)==0)map.remove(chl);
+				    }
+				    l++;
+				}
+				if(map.size()==k)
+				    max=Math.max(max,r-l+1);
+			}
+			return max;
+     
+     
+ }
 	public static int LongestSubStringWithAllUnique(String s) {
 		int i=0,j=0;
 		HashMap<Character,Integer> map=new HashMap<>();
