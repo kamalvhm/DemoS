@@ -11,23 +11,21 @@ public class StringProblems {
 		 // Create object of Solution class
 		StringProblems sol = new StringProblems();
 
-        // Define text and pattern
-//        String text = "ababcababcabc";
-//        String pattern = "abc";\
-		String text = "aaaab";
-        String pattern = "aaab";
-
-        // Call the KMP function
-        List<Integer> matches = sol.KMP(text, pattern);
-
-        // Print the result
-        System.out.println("1) Pattern found at indices: " + matches);
-        
-        
-		String circular = "cdeabroab";
-        String pattern1 = "abcde";
-        System.out.println("1) Pattern found in circular string: " + sol.searchInCircular(circular,pattern1));
-
+		String txt="abaasddgcfsdfasgcfxccggfds"; //7,15
+		String pat="gcf";
+  
+        System.out.println("1)  Pattern found at indices: [7, 15]:-"+sol.kmp(txt, pat));
+		
+		
+		//return count of char needed to be inserted to make string palindrom for example in below we need to insert PS
+		System.out.println("2) Make pl (2): "+sol.solveBrute("ROORSP"));
+		
+		String txt2="cdeabroab",pat2="abcde";//txt2 is a circluar string find if pattern exist in string;
+		
+		System.out.println("3) circular search (true): "+sol.searchCircular(txt2,pat2));
+		
+		String a="abcd",b="cdabcdab"; //return how many times string a needs to be repeated just so that string b becomes substring of string a;
+		System.out.println("4) Repeated String Match (3): "+sol.repeatStringMatch(a,b));
 	}
 	
 	
@@ -56,13 +54,13 @@ public class StringProblems {
     }
 
     // Function to perform KMP pattern searching
-    public List<Integer> KMP(String text, String pattern) {
+    public ArrayList<Integer> kmp(String text, String pattern) {
 
         // Preprocess the pattern to get LPS array
         int[] lps = computeLPS(pattern);
 
         // Result list to store indices where pattern is found
-        List<Integer> result = new ArrayList<>();
+        ArrayList<Integer> result = new ArrayList<>();
 
         // Indices for text and pattern
         int first = 0, second = 0;
@@ -100,7 +98,74 @@ public class StringProblems {
     
     public  boolean searchInCircular(String a,String b) {
     	String c=a+a;//add twice to make circular
-    	return KMP(c,b).size()>0;
+    	return kmp(c,b).size()>0;
     }
+    
+    private int repeatStringMatch(String a, String b) {
+		int cnt=0;
+		StringBuffer sb=new StringBuffer();
+		while(sb.length()<b.length()) {
+			sb.append(a);
+			cnt++;
+		}
+		ArrayList<Integer> check=kmp(sb.toString(),b); 
+		if(check.size()==0) {
+			cnt++;
+			sb.append(a);
+			check=kmp(sb.toString(),b);
+			if(check.size()==0)return -1;
+		}
+		return cnt;
+	}
+
+	private boolean searchCircular(String txt, String pat) {
+		String circular=txt+txt;
+		System.out.println(">>"+circular);
+		ArrayList<Integer> ans=kmp(circular, pat);
+		return ans.size()>0;
+	}
+
+	public int solve(String s) {
+		StringBuffer sb=new StringBuffer(s);
+		String str=s+"$"+sb.reverse().toString();
+		int n=str.length(); 
+		int lps[]=new int[n];
+		int pre=0,suf=1;
+		while(suf<n) {
+			if(s.charAt(pre)==s.charAt(suf)) {
+				lps[suf]=pre+1;
+				pre++;
+				suf++;
+			}else {
+				if(pre==0) {
+					lps[suf]=0;
+					suf++;
+				}else 
+					pre=lps[pre-1];
+			}
+		}
+		return s.length()-lps[n-1];
+	}
+	public int solveBrute(String s) {
+		int cnt=0;
+		int i=0,j=s.length()-1;
+		while(i<j) {
+			if(!isPalindrom(s,i,j)) {
+				cnt++;
+				j--;
+			}else {
+				i++;
+				j--;
+			}
+		}
+		return cnt;
+	}
+	
+	public boolean isPalindrom(String s,int i,int j) {
+		while(i<j) {
+			if(s.charAt(i++)!=s.charAt(j--))return false;
+		}
+		return true;
+	}
 
 }

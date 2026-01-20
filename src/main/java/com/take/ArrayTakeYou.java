@@ -1404,20 +1404,20 @@ public class ArrayTakeYou {
 //		a[n-1]=temp;
 		if(k>n)k=k%n;
 		int temp[]=new int[k];
-//		for(int i=0;i<k;i++)  //left rotation brute
-//			temp[i]=a[i];
-//		for(int i=k;i<n;i++)
-//			a[i-k]=a[i];
-//		int j=0;
-//		for(int i=n-k;i<n;i++)
-//			a[i]=temp[i-(n-k)];
+/**		for(int i=0;i<k;i++)  //left rotation brute
+			temp[i]=a[i];
+		for(int i=k;i<n;i++)
+			a[i-k]=a[i];
+		int j=0;
+		for(int i=n-k;i<n;i++)
+			a[i]=temp[i-(n-k)]; */
 		
-//		for(int i=n-k;i<n;i++) //right rotation
-//			temp[i-(n-k)]=a[i];
-//		for(int i=n-k-1;i>=0;i--)
-//			a[i+k]=a[i];
-//		for(int i=0;i<k;i++)
-//			a[i]=temp[i];
+/**		for(int i=n-k;i<n;i++) //right rotation
+			temp[i-(n-k)]=a[i];
+		for(int i=n-k-1;i>=0;i--)
+			a[i+k]=a[i];
+		for(int i=0;i<k;i++)
+			a[i]=temp[i];  */
 		
 		reverse(a,0,k-1);
 		reverse(a, k, n-1);
@@ -1435,13 +1435,13 @@ public class ArrayTakeYou {
 	}
 
 	private static int removeDuplicate(int[] a) {
-//		HashSet<Integer> hs=new HashSet<>();
-//		for(int i:a)
-//			hs.add(i);
-//		int index=0;
-//		for(int i:hs)
-//			a[index++]=i;
-//		return index;
+/**		HashSet<Integer> hs=new HashSet<>();
+		for(int i:a)
+			hs.add(i);
+		int index=0;
+		for(int i:hs)
+			a[index++]=i;
+		return index; */
 		int i=0;
 		for(int j=1;j<a.length;j++) {
 			if(a[i]!=a[j]) {
