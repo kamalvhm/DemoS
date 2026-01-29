@@ -63,34 +63,33 @@ public class BsPractice {
 			else if(a[mid]<i)l=mid+1;
 			else r=mid-1;
 		}
-		
 		return -1;
 	}
 	
 	public static int bsfirst(int [] a,int i) { 
-		int index=-1;
 		int l=0,r=a.length-1;
+		int ans=a.length;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]>=i) {
-				index=mid;
+				ans=mid;
 				r=mid-1;
 			}else l=mid+1;
 		}
-		return index;
+		return ans;
 	}
 	
 	public static int bslast(int [] a,int i) {
-		int index=-1;
 		int l=0,r=a.length-1;
+		int ans=-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]<=i) {
-				index=mid;
+				ans=mid;
 				l=mid+1;
 			}else r=mid-1;
 		}
-		return index;
+		return ans;
 	}
 
 	public static int findPeakElement(int[] a) {
@@ -102,7 +101,7 @@ public class BsPractice {
 				ans=mid;
 				l=mid+1;
 			}else r=mid-1;
-		} 
+		}
 		return ans;
 	}
 	//by Erricto 
@@ -125,9 +124,9 @@ public class BsPractice {
 		int ans=-1;
 		while(l<=r) {
 			int mid=l+(r-l)/2;
-			if(a[mid]>a[a.length-1])
+			if(a[mid]>=a[a.length-1]) {
 				l=mid+1;
-			else {
+			}else {
 				ans=mid;
 				r=mid-1;
 			}
@@ -136,82 +135,44 @@ public class BsPractice {
 	}
 
 	public static int bsInfiniteArray(int[] a, int target) {
-		int end=0,start=0;
 		
 		return -1;
 	}
 	
 	public static int searchBsInDescArray(int [] a,int target) {
-		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]==target)return mid;
-			if(a[mid]<target)r=mid-1;
-			else l=mid+1;
-		}
+		
 		return -1;
 	}
 	
 	public static int findElemntinRotatedArray(int [] a,int target) { // 4 5 6 7 8 1 2 3 | 6
-		int l=0,r=a.length-1;
-		int first=a[0];
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			int val=a[mid];
-			if(val==target)return mid;
-			boolean i_mBig=val>first;
-			boolean targetBig=target>first;
-			if(i_mBig==targetBig) {
-				if(val<target)l=mid+1;
-				else r=mid-1;
-			}else if(i_mBig) {
-				l=mid+1;
-			} else r=mid-1;
-		}
+		
 		return -1;
 	}
 
 	//first element that is greater then or equal to target
 	public static int lowerBound(int [] a,int target) {
-		int l=0,r=a.length-1;
-		int ans=-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]>=target) {
-				ans=a[mid];
-				r=mid-1;
-			}else l=mid+1;
-		}
-		return ans;
+		return -1;
 	}
 	
 	//floor =greatest element less then target if target not present 
 	public static int bsfloorofTarget(int [] a,int target) {
-		int ans=-1;
 		int l=0,r=a.length-1;
-		while(l<=r) {
-			int mid=l+(r-l)/2;
-			if(a[mid]<=target) {
-				ans=a[mid];
-				l=mid+1;
-			}else r=mid-1;
-		}
 		
-		return ans;
+		return -1;
 	}
 	
 	//UPPER BOUND PROBLEM Erricto
 	public static char nextGreaterElement(char[] a, char target) {
 		int l=0,r=a.length-1;
-		char res='#';
+		char ans='#';
 		while(l<=r) {
 			int mid=l+(r-l)/2;
 			if(a[mid]>=target) {
-				res=a[mid];
+				ans=a[mid];
 				r=mid-1;
 			}else l=mid+1;
 		}
-		return res;
+		return ans;
 		
 	} 
 	
@@ -222,9 +183,10 @@ public class BsPractice {
 	      }
 	 //https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20
 	 //74. Search a 2D Matrix
-	 public static String Search2DArray(int[][] a,int target) {   
-		 	int i=0,j=a[0].length-1;
-		 	while(i>=0 && j>=0 && i<a.length && j<a[0].length) {
+	 public static String Search2DArray(int[][] a,int target) {  
+		 	int n=a.length,m=a[0].length;
+		 	int i=0,j=m-1;
+		 	while(i>=0 && j>=0 && i<n && j<m) {
 		 		if(a[i][j]==target)return i+"-"+j;
 		 		else if(a[i][j]<target)i++;
 		 		else j--;

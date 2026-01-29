@@ -10,6 +10,7 @@ import java.util.Stack;
 import com.graph.DisjointSet;
 
 public class GraphQuestions {
+	
 	 private boolean isValid(int adjr, int adjc, int n, int m) {
 	        return adjr >= 0 && adjr < n && adjc >= 0 && adjc < m;
 	    }

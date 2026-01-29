@@ -14,7 +14,7 @@ public class StringProblems {
 		String txt="abaasddgcfsdfasgcfxccggfds"; //7,15
 		String pat="gcf";
   
-        System.out.println("1)  Pattern found at indices: [7, 15]:-"+sol.kmp(txt, pat));
+        System.out.println("1)  Pattern found using KMP at indices: [7, 15]:-"+sol.kmp(txt, pat));
 		
 		
 		//return count of char needed to be inserted to make string palindrom for example in below we need to insert PS
@@ -26,6 +26,8 @@ public class StringProblems {
 		
 		String a="abcd",b="cdabcdab"; //return how many times string a needs to be repeated just so that string b becomes substring of string a;
 		System.out.println("4) Repeated String Match (3): "+sol.repeatStringMatch(a,b));
+		
+
 	}
 	
 	
@@ -95,6 +97,26 @@ public class StringProblems {
         return result;
     }
 
+    public int kmp2(String s,String t){
+        int n=s.length(),m=t.length(); 
+
+        int lps[]=computeLPS(t);
+        int first=0,second=0;
+        while(first<n && second<m){
+            if(s.charAt(first)==t.charAt(second)){
+                first++;
+                second++;
+            }else {
+                if(second==0)
+                    first++;
+                else 
+                    second=lps[second-1];
+            }
+        }
+
+        if(second==m)return first-second;
+        else return -1;
+    }
     
     public  boolean searchInCircular(String a,String b) {
     	String c=a+a;//add twice to make circular
@@ -168,4 +190,10 @@ public class StringProblems {
 		return true;
 	}
 
+	
+	/**
+	 *   ROBIN KARP ALGO 
+	 */
+	
+	
 }

@@ -148,7 +148,7 @@ public class ArrayTakeYou {
 
 
 	}
-	
+	//O(2N)
 	 public static List<Integer> findDisappearedNumbers(int[] nums) {
 		 List<Integer> ans=new ArrayList<>();
 	        for(int i=0;i<nums.length;){
@@ -694,7 +694,26 @@ public class ArrayTakeYou {
 	                }
 	            }
 	        }
-	        return new ArrayList<>(hs);  */
+	        return new ArrayList<>(hs); 
+	        
+	         *Better ------------------------
+	         *HashSet<List<Integer>> ans=new HashSet<>();
+			 	int n=nums.length;
+			 	for(int i=0;i<n;i++) {
+	                HashSet<Integer> hs=new HashSet<>();
+			 		for(int j=i+1;j<n;j++) {
+			 			int delta=nums[i]+nums[j];
+			 			if(hs.contains(-delta)) {
+	                        List<Integer> list=Arrays.asList(new Integer[] {nums[i],nums[j],-delta});
+	                        Collections.sort(list);
+			 				ans.add(list);
+			 			}
+	                    hs.add(nums[j]);//keeping element between i & j (excluding both)
+			 		}
+			 	}
+		        return new ArrayList<>(ans);
+	         
+	         */
 	        List<List<Integer>> ans=new ArrayList<>();
 	        Arrays.sort(nums);
 	        for(int i=0;i<nums.length;i++){
@@ -790,7 +809,7 @@ public class ArrayTakeYou {
 	        } 
 	        return ans;
 	    }
-		
+	 //https://leetcode.com/problems/pascals-triangle/description/
 //	   public List<List<Integer>> generate(int numRows) {
 //	        List<List<Integer>> ans=new ArrayList<>();
 //	        for(int row=1;row<=numRows;row++){

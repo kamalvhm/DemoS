@@ -45,11 +45,25 @@ public class BitManipulation {
 		System.out.println("17) Xor for Range 4 to 7 & (0):- "+xorRange(4,7));
 
 		System.out.println("18) Divide two No (3):- "+divide(13,4));
+		
+		String a19="abdc" ,b19 ="bcfda"; //string b contains one extra charater find extra in b
+		System.out.println("19) Find Extra character in string b [f]:- "+uniqueChar(a19,b19));
+
 
 	}
 	
 
 	
+	private static char  uniqueChar(String a, String b) {
+		int xor=0;
+		for(char ch:(a+b).toCharArray()) {
+			xor^=ch;
+		}
+		return (char)xor;
+	}
+
+
+
 	public static int divide(int dividend, int divisor) {
 	  if(dividend==Integer.MIN_VALUE && divisor==-1)return Integer.MAX_VALUE;
 	  if(dividend==Integer.MIN_VALUE && divisor==1)return Integer.MIN_VALUE;
